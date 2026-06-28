@@ -359,19 +359,105 @@ button:not(:disabled):active,.pill:active,.add-pill-btn:active,.zone-search-btn:
 .calc-header{display:flex;align-items:center;gap:10px;padding:15px 18px;border-bottom:1px solid rgba(80,40,10,.12)}
 .calc-header h2{flex:1;margin:0;font-size:21px;color:#573722}
 .calc-close{width:36px;height:36px;border:none;border-radius:10px;background:#f0e5da;color:#573722;font-size:18px;font-weight:900;cursor:pointer}
-.calculator-shell{--calc-accent:#D98463;--calc-accent-dark:#B96546;--calc-shell-top:#F8F3EA;--calc-shell-bottom:#E5DED0;--calc-display:#B8DDE6;--calc-display-text:#10222B;--calc-num-top:#F2F1EC;--calc-num-bottom:#C9C9BD;--calc-num-shadow:#7E8177;--calc-op-top:#EFF4FA;--calc-op-bottom:#CAD2DD;--calc-op-shadow:#8490A0;--calc-clear-top:#FFD8D5;--calc-clear-bottom:#F2A6A0;--calc-clear-shadow:#D3665E;background:linear-gradient(180deg,var(--calc-shell-top),var(--calc-shell-bottom));margin:16px;border-radius:18px;padding:16px;border:1.5px solid rgba(120,85,55,.2);box-shadow:inset 0 1px 0 rgba(255,255,255,.8)}
-.calculator-display{min-height:108px;padding:14px 16px;border-radius:14px;background:var(--calc-display);border:2px solid rgba(52,35,28,.35);box-shadow:inset 0 2px 5px rgba(0,0,0,.18);text-align:right;color:var(--calc-display-text)}
-.calculator-expression{min-height:24px;font-size:18px;color:color-mix(in srgb,var(--calc-display-text) 48%,transparent);overflow-wrap:anywhere}
-.calculator-value{font-size:clamp(42px,11vw,72px);line-height:1.05;font-weight:300;overflow-wrap:anywhere}
+.calculator-shell{
+  --calc-accent:#D98463;--calc-accent-dark:#B96546;--calc-shell-top:#F8F3EA;--calc-shell-bottom:#E5DED0;
+  --calc-display:#B8DDE6;--calc-display-text:#10222B;--calc-num-top:#F2F1EC;--calc-num-bottom:#C9C9BD;
+  --calc-num-shadow:#7E8177;--calc-op-top:#EFF4FA;--calc-op-bottom:#CAD2DD;--calc-op-shadow:#8490A0;
+  --calc-clear-top:#FFD8D5;--calc-clear-bottom:#F2A6A0;--calc-clear-shadow:#D3665E;
+  width:100%; height:100dvh; min-height:100vh; overflow-y:auto; overflow-x:hidden; -webkit-overflow-scrolling:touch; padding:env(safe-area-inset-top, 40px) 20px env(safe-area-inset-bottom, 40px) 20px; box-sizing:border-box;
+  display:flex; flex-direction:column; position:relative;
+  background:linear-gradient(180deg,var(--calc-shell-top),var(--calc-shell-bottom));}body.edit-mode .calculator-shell { box-shadow: inset 0 0 0 4px #4A90E2; }
+body.edit-mode .calc-key::after, body.edit-mode .calc-mini-key::after, body.edit-mode .calculator-display::after, body.edit-mode .calc-tool-panel::after, body.edit-mode .calc-tool-button::after, body.edit-mode #easter-egg-text::after {
+  content:''; position:absolute; inset:0; border:3px solid #4A90E2; border-radius:inherit; opacity:0; pointer-events:none; z-index:99; transition:opacity .1s;
+}
+body.edit-mode .calc-key:active::after, body.edit-mode .calc-mini-key:active::after, body.edit-mode .calculator-display:active::after, body.edit-mode .calc-tool-panel:active::after, body.edit-mode .calc-tool-button:active::after, body.edit-mode #easter-egg-text:active::after { opacity:1; }
+.calc-top-bar { display:flex; align-items:center; justify-content:space-between; margin-top:16px; margin-bottom:16px; padding:0 4px; }
+.calc-top-bar h1 { font-size:16px; font-weight:800; color:#573722; text-transform:uppercase; letter-spacing:1px; }
+.calc-close-btn{display:inline-flex;align-items:center;justify-content:center;padding:2px 10px;min-height:22px;line-height:1;background:linear-gradient(180deg,var(--calc-op-top),var(--calc-op-bottom));border:1px solid rgba(255,255,255,.5);border-radius:14px;font-size:12px;font-weight:800;color:#151515;box-shadow:0 3px 0 var(--calc-op-shadow),0 4px 6px rgba(0,0,0,.15);cursor:pointer;transition:all .1s}
+.calc-close-btn:active{transform:translateY(3px);box-shadow:0 0 0 var(--calc-op-shadow),inset 0 2px 4px rgba(0,0,0,.1)}
+
+.calculator-display{flex-shrink:0;min-height:124px;padding:14px 16px;border-radius:14px;background:var(--calc-display);border:4px solid color-mix(in srgb,var(--calc-shell-top) 80%,#000);border-bottom-color:color-mix(in srgb,var(--calc-shell-bottom) 60%,#fff);border-right-color:color-mix(in srgb,var(--calc-shell-bottom) 60%,#fff);box-shadow:inset 2px 4px 10px rgba(0,0,0,.3),inset -2px -2px 5px rgba(255,255,255,.4),0 2px 0 rgba(255,255,255,.6);text-align:right;color:var(--calc-display-text);cursor:pointer;position:relative;z-index:10;}
+.calculator-expression{min-height:24px;font-family:ui-rounded, 'SF Pro Rounded', 'Helvetica Rounded', Arial, sans-serif;font-size:20px;font-weight:600;letter-spacing:1px;color:color-mix(in srgb,var(--calc-display-text) 55%,transparent);overflow-wrap:anywhere}
+.calculator-value{margin-top:15px;font-family:ui-rounded, 'SF Pro Rounded', 'Helvetica Rounded', Arial, sans-serif;font-size:clamp(48px,12vw,80px);line-height:1.05;font-weight:600;letter-spacing:1.5px;overflow-wrap:anywhere;transform:scaleY(1.35);transform-origin:right bottom}
+
 .calculator-display-actions{display:flex;align-items:center;justify-content:flex-end;gap:10px;margin:12px 2px 4px}
-.calculator-signature{width:104px;height:46px;margin-right:auto;object-fit:contain;mix-blend-mode:multiply}
-.calc-mini-key{min-height:42px;min-width:72px;padding:0 16px;border:none;border-radius:12px;font-size:20px;font-weight:900;color:#151515;background:linear-gradient(180deg,var(--calc-op-top),var(--calc-op-bottom));box-shadow:0 4px 0 var(--calc-op-shadow),0 6px 10px rgba(0,0,0,.16),inset 0 1px 0 rgba(255,255,255,.9);cursor:pointer}
+.calculator-signature-btn { margin-right:auto; padding: 0 10px; display: flex; align-items: center; justify-content: center; } .calculator-signature{width:70px;height:24px;object-fit:contain;mix-blend-mode:multiply;pointer-events:none;}
+
+.calc-mini-key{min-height:42px;min-width:72px;padding:0 16px;border:none;border-radius:12px;font-size:20px;font-weight:600;color:#151515;background:linear-gradient(180deg,var(--calc-op-top),var(--calc-op-bottom));box-shadow:0 4px 0 var(--calc-op-shadow),0 6px 10px rgba(0,0,0,.16),inset 0 1px 0 rgba(255,255,255,.9);cursor:pointer}
 .calc-mini-key.copy{font-size:13px}.calc-mini-key.sound{min-width:48px;padding:0 12px;font-size:19px}.calc-mini-key:active{transform:translateY(5px);box-shadow:0 0 0 var(--calc-op-shadow),inset 0 3px 5px rgba(0,0,0,.2)}
-.calc-colors-button{margin-top:12px;padding:8px 14px;border:1px solid rgba(80,40,10,.18);border-radius:10px;background:#fffaf4;color:#573722;font-size:12px;font-weight:900;cursor:pointer}
-.calculator-palette{display:none;gap:8px;flex-wrap:wrap;margin:12px 0 2px}.calculator-palette.open{display:flex}.calc-color{width:30px;height:30px;border-radius:50%;border:2px solid rgba(255,255,255,.9);box-shadow:0 2px 0 rgba(0,0,0,.16);cursor:pointer}
-.calculator-percent-tools{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-top:12px}.calc-tool-button{min-height:44px;border:1px solid rgba(255,255,255,.72);border-radius:12px;color:#151515;font-size:13px;font-weight:900;background:linear-gradient(180deg,var(--calc-op-top),var(--calc-op-bottom));box-shadow:0 4px 0 var(--calc-op-shadow),0 6px 9px rgba(0,0,0,.16);cursor:pointer}.calc-tool-button:active,.calc-tool-button.active{transform:translateY(4px);box-shadow:inset 0 2px 4px rgba(0,0,0,.18)}
-.calc-tool-panel{display:none;margin-top:10px;padding:12px;border:1px solid rgba(52,35,28,.18);border-radius:12px;background:rgba(255,255,255,.42)}.calc-tool-panel.open{display:block}.calc-tool-fields{display:grid;grid-template-columns:minmax(0,1fr) 92px;gap:9px}.calc-tool-field label{display:block;margin-bottom:4px;color:var(--calc-display-text);font-size:11px;font-weight:800}.calc-tool-field input{width:100%;min-height:42px;padding:8px 10px;border:1.5px solid rgba(52,35,28,.28);border-radius:9px;background:rgba(255,255,255,.82);color:#151515;font-size:18px;text-align:right}.calc-tool-calculate{width:100%;min-height:42px;margin-top:9px;border:1px solid rgba(255,255,255,.7);border-radius:10px;color:#151515;font-weight:900;background:linear-gradient(180deg,color-mix(in srgb,var(--calc-accent) 55%,#fff 45%),var(--calc-accent));box-shadow:0 4px 0 var(--calc-accent-dark),0 6px 8px rgba(0,0,0,.16);cursor:pointer}.calc-tool-result{min-height:42px;margin-top:10px;padding:9px 11px;border-radius:9px;background:var(--calc-display);color:var(--calc-display-text);font-size:13px;line-height:1.45}
-.calculator-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:14px}.calc-key{min-height:62px;border:1px solid rgba(255,255,255,.72);border-radius:10px;font-size:30px;font-weight:400;color:#151515;background:linear-gradient(180deg,var(--calc-num-top),var(--calc-num-bottom));box-shadow:0 8px 0 var(--calc-num-shadow),0 11px 15px rgba(0,0,0,.26),inset 0 2px 1px rgba(255,255,255,.95);cursor:pointer}.calc-key:active{transform:translateY(8px);box-shadow:0 0 0 var(--calc-num-shadow),inset 0 3px 5px rgba(0,0,0,.2)}.calc-key.op{background:linear-gradient(180deg,var(--calc-op-top),var(--calc-op-bottom));box-shadow:0 5px 0 var(--calc-op-shadow),0 7px 10px rgba(0,0,0,.18)}.calc-key.clear{background:linear-gradient(180deg,var(--calc-clear-top),var(--calc-clear-bottom));box-shadow:0 5px 0 var(--calc-clear-shadow),0 7px 10px rgba(0,0,0,.18)}.calc-key.equals{background:linear-gradient(180deg,color-mix(in srgb,var(--calc-accent) 55%,#fff 45%),var(--calc-accent));box-shadow:0 5px 0 var(--calc-accent-dark),0 7px 10px rgba(0,0,0,.2)}
+
+.calc-colors-overlay {
+  position:absolute; top:auto; left:16px; right:16px; bottom:calc(env(safe-area-inset-bottom, 20px) + 20px); max-height:400px;
+  background:var(--calc-display);
+  border:1px solid rgba(52,35,28,.35); border-radius:14px;
+  display:none; flex-direction:column; z-index:9; z-index:9;
+  box-shadow:0 10px 30px rgba(0,0,0,.15);
+  overflow:hidden;
+}
+.calc-colors-overlay.open { display:flex; }
+.calc-colors-container {
+  flex:1; padding:20px; display:flex; flex-wrap:wrap; gap:12px; align-content:flex-start; justify-content:center; overflow-y:auto;
+}
+.calc-color { width:44px; height:44px; border-radius:12px; border:2px solid rgba(255,255,255,.5); box-shadow:0 3px 6px rgba(0,0,0,.2); cursor:pointer; }
+.calc-color:active { transform:translateY(2px); }
+.calc-color-tooltip { position:absolute; bottom:115%; left:50%; transform:translateX(-50%); background:rgba(0,0,0,0.7); color:#fff; padding:4px 8px; border-radius:6px; font-size:11px; font-weight:600; white-space:nowrap; pointer-events:none; opacity:0; transition:opacity 0.2s; z-index:100; box-shadow:0 2px 6px rgba(0,0,0,0.2); }
+.calc-color-custom:hover .calc-color-tooltip, .calc-color-custom:active .calc-color-tooltip { opacity:1; }
+.calc-colors-actions { padding:12px; background:rgba(0,0,0,.05); border-top:1px solid rgba(0,0,0,.1); display:flex; justify-content:center; gap: 10px; }
+.calc-colors-actions button { padding:10px 20px; border-radius:10px; border:none; background:#7A736B; color:#FFF; font-weight:bold; cursor:pointer; }
+.calc-colors-actions button:active { opacity: 0.8; }
+
+.calc-copy-overlay { position:absolute; inset:0; z-index:100; background:rgba(0,0,0,0.5); display:none; align-items:center; justify-content:center; }
+.calc-copy-overlay.open { display:flex; }
+.calc-copy-menu { background:var(--calc-display); padding:20px; border-radius:16px; display:flex; flex-direction:column; gap:10px; min-width:240px; text-align:center;}
+.calc-copy-menu h3 { margin-bottom:10px; font-size:18px; color:var(--calc-display-text);}
+.calc-copy-menu button { padding:14px; border-radius:10px; border:none; background:var(--calc-op-bottom); font-size:16px; font-weight:bold; cursor:pointer;}
+.calc-copy-menu button:active { opacity:0.8; }
+
+.calculator-percent-tools{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-top:12px;background:var(--calc-tool-panel,var(--calc-shell-top));padding:10px;border-radius:12px;box-shadow:inset 0 2px 4px rgba(0,0,0,.05);position:relative}
+.calc-tool-button{position:relative;overflow:hidden;flex:1;padding:12px 6px;font-size:clamp(10px,3vw,13px);font-weight:800;color:#151515;background:linear-gradient(180deg,var(--calc-tool-btn-top,rgba(255,255,255,.8)),var(--calc-tool-btn-bottom,rgba(255,255,255,.5)));border:1px solid rgba(0,0,0,.2);border-radius:10px;cursor:pointer;box-shadow:0 8px 0 var(--calc-tool-btn-shadow,rgba(0,0,0,.1)),0 11px 15px rgba(0,0,0,.26),inset 0 0 0 1px rgba(255,255,255,.6),inset 0 2px 1px rgba(255,255,255,.95)}.calc-tool-button::before{content:'';position:absolute;top:16%;left:16%;right:16%;bottom:8%;border-radius:40%;box-shadow:inset 0 4px 6px rgba(0,0,0,.08),inset 0 -4px 6px rgba(255,255,255,.3);background:radial-gradient(ellipse at center,rgba(0,0,0,.04) 0%,transparent 70%);pointer-events:none;transition:opacity .15s}.calc-tool-button:active, .calc-tool-button.active{transform:translateY(8px);box-shadow:0 0 0 var(--calc-tool-btn-shadow,rgba(0,0,0,.1)),inset 0 3px 5px rgba(0,0,0,.2)}.calc-tool-button:active::before, .calc-tool-button.active::before{opacity:0.4}
+#calc-discount-button{--calc-tool-btn-top:color-mix(in srgb,var(--calc-tool-btn-discount,#FFF) 80%,#FFF);--calc-tool-btn-bottom:var(--calc-tool-btn-discount,rgba(255,255,255,.5));--calc-tool-btn-shadow:color-mix(in srgb,var(--calc-tool-btn-discount,rgba(0,0,0,.1)) 75%,#000);}
+#calc-increase-button{--calc-tool-btn-top:color-mix(in srgb,var(--calc-tool-btn-increase,#FFF) 80%,#FFF);--calc-tool-btn-bottom:var(--calc-tool-btn-increase,rgba(255,255,255,.5));--calc-tool-btn-shadow:color-mix(in srgb,var(--calc-tool-btn-increase,rgba(0,0,0,.1)) 75%,#000);}
+#calc-vat-button{--calc-tool-btn-top:color-mix(in srgb,var(--calc-tool-btn-vat,#FFF) 80%,#FFF);--calc-tool-btn-bottom:var(--calc-tool-btn-vat,rgba(255,255,255,.5));--calc-tool-btn-shadow:color-mix(in srgb,var(--calc-tool-btn-vat,rgba(0,0,0,.1)) 75%,#000);}
+.calc-tool-panel{display:none;margin-top:10px;padding:12px;border:1px solid rgba(52,35,28,.18);border-radius:12px;background:var(--calc-percent-panel-bg, rgba(255,255,255,.42))}.calc-tool-panel.open{display:block}.calc-tool-fields{display:grid;grid-template-columns:minmax(0,1fr) 92px;gap:9px}.calc-tool-field label{display:block;margin-bottom:4px;color:var(--calc-display-text);font-size:11px;font-weight:600}.calc-tool-field input{width:100%;min-height:42px;padding:8px 10px;border:1.5px solid rgba(52,35,28,.28);border-radius:9px;background:var(--calc-tool-inputs, rgba(255,255,255,.82));color:#151515;font-size:18px;text-align:right; cursor:pointer}.calc-tool-calculate{position:relative;overflow:hidden;width:100%;min-height:42px;margin-top:9px;border:1px solid rgba(255,255,255,.7);border-radius:10px;color:#151515;font-weight:600;background:linear-gradient(180deg,var(--calc-tool-calc-top,color-mix(in srgb,var(--calc-tool-calc-btn,var(--calc-accent)) 55%,#fff 45%)),var(--calc-tool-calc-bottom,var(--calc-tool-calc-btn,var(--calc-accent))));box-shadow:0 8px 0 var(--calc-tool-calc-shadow,var(--calc-accent-dark)),0 11px 15px rgba(0,0,0,.26),inset 0 2px 1px rgba(255,255,255,.95);cursor:pointer;--calc-tool-calc-top:color-mix(in srgb,var(--calc-tool-calc-btn,var(--calc-accent)) 80%,#FFF);--calc-tool-calc-bottom:var(--calc-tool-calc-btn,var(--calc-accent));--calc-tool-calc-shadow:color-mix(in srgb,var(--calc-tool-calc-btn,var(--calc-accent-dark)) 75%,#000);}.calc-tool-calculate:active{transform:translateY(8px);box-shadow:0 0 0 var(--calc-tool-calc-shadow,var(--calc-accent-dark)),inset 0 3px 5px rgba(0,0,0,.2)}.calc-tool-calculate::before{content:'';position:absolute;top:12%;left:16%;right:16%;bottom:12%;border-radius:40%;box-shadow:inset 0 4px 6px rgba(0,0,0,.08),inset 0 -4px 6px rgba(255,255,255,.3);background:radial-gradient(ellipse at center,rgba(0,0,0,.04) 0%,transparent 70%);pointer-events:none;transition:opacity .15s}.calc-tool-calculate:active::before{opacity:0.4}.calc-tool-result{min-height:0;margin-top:10px;padding:9px 11px;border-radius:9px;background:var(--calc-display);color:var(--calc-display-text);font-size:13px;line-height:1.45}
+
+.calculator-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px; padding-top: 10px;}
+.calc-key{position:relative;overflow:hidden;min-height:clamp(58px, 15vh, 80px);border:1px solid rgba(255,255,255,.72);border-radius:10px;font-size:30px;font-weight:400;color:#151515;background:linear-gradient(180deg,var(--calc-num-top),var(--calc-num-bottom));box-shadow:0 8px 0 var(--calc-num-shadow),0 11px 15px rgba(0,0,0,.26),inset 0 2px 1px rgba(255,255,255,.95);cursor:pointer}.calc-key::before{content:'';position:absolute;top:12%;left:16%;right:16%;bottom:12%;border-radius:40%;box-shadow:inset 0 4px 6px rgba(0,0,0,.08),inset 0 -4px 6px rgba(255,255,255,.3);background:radial-gradient(ellipse at center,rgba(0,0,0,.04) 0%,transparent 70%);pointer-events:none;transition:opacity .15s}.calc-key:active{transform:translateY(8px);box-shadow:0 0 0 var(--calc-num-shadow),inset 0 3px 5px rgba(0,0,0,.2)}.calc-key:active::before{opacity:0.4}.calc-key.op{background:linear-gradient(180deg,var(--calc-op-top),var(--calc-op-bottom));box-shadow:0 8px 0 var(--calc-op-shadow),0 11px 15px rgba(0,0,0,.26),inset 0 2px 1px rgba(255,255,255,.95)}.calc-key.op:active{box-shadow:0 0 0 var(--calc-op-shadow),inset 0 3px 5px rgba(0,0,0,.2)}.calc-key.clear{background:linear-gradient(180deg,var(--calc-clear-top),var(--calc-clear-bottom));box-shadow:0 8px 0 var(--calc-clear-shadow),0 11px 15px rgba(0,0,0,.26),inset 0 2px 1px rgba(255,255,255,.95)}.calc-key.clear:active{box-shadow:0 0 0 var(--calc-clear-shadow),inset 0 3px 5px rgba(0,0,0,.2)}.calc-key.top-op{background:linear-gradient(180deg,var(--calc-top-op-top, var(--calc-clear-top)),var(--calc-top-op-bottom, var(--calc-clear-bottom)));box-shadow:0 8px 0 var(--calc-top-op-shadow, var(--calc-clear-shadow)),0 11px 15px rgba(0,0,0,.26),inset 0 2px 1px rgba(255,255,255,.95)}.calc-key.top-op:active{box-shadow:0 0 0 var(--calc-top-op-shadow, var(--calc-clear-shadow)),inset 0 3px 5px rgba(0,0,0,.2)}.calc-key.equals{background:linear-gradient(180deg,var(--calc-accent-top, color-mix(in srgb,var(--calc-accent) 55%,#fff 45%)),var(--calc-accent-bottom, var(--calc-accent)));box-shadow:0 8px 0 var(--calc-accent-dark),0 11px 15px rgba(0,0,0,.26),inset 0 2px 1px rgba(255,255,255,.95)}.calc-key.equals:active{box-shadow:0 0 0 var(--calc-accent-dark),inset 0 3px 5px rgba(0,0,0,.2)}
+
+/* History Overlay Styles */
+.calc-history-overlay {
+  position:absolute; top:calc(env(safe-area-inset-top, 20px) + 160px); left:16px; right:16px; bottom:env(safe-area-inset-bottom, 20px);
+  background:var(--calc-display);
+  border:1px solid rgba(52,35,28,.35); border-radius:14px;
+  display:none; flex-direction:column; z-index:9;
+  box-shadow:0 10px 30px rgba(0,0,0,.15);
+  overflow:hidden;
+}
+.calc-history-overlay.open { display:flex; }
+.calc-history-list {
+  flex:1; overflow-y:auto; padding:10px; display:flex; flex-direction:column; gap:8px;
+}
+.calc-history-item {
+  border-bottom:1px solid rgba(52,35,28,.15); padding:12px; text-align:right;
+  color:var(--calc-display-text); font-size:24px; position:relative;
+}
+.calc-history-item:last-child { border-bottom:none; }
+.calc-history-item .hist-expr { font-size:18px; color:color-mix(in srgb,var(--calc-display-text) 60%,transparent); border-bottom:1px solid rgba(52,35,28,.3); display:inline-block; padding-bottom:4px; margin-bottom:4px;}
+.calc-history-item .hist-date { position:absolute; top:12px; left:12px; font-size:10px; color:color-mix(in srgb,var(--calc-display-text) 50%,transparent); }
+.calc-history-item .hist-icon { position:absolute; top:12px; right:12px; font-size:14px; opacity:0.5; }
+
+.calc-history-actions {
+  display:grid; grid-template-columns:1fr 1fr; gap:1px; background:rgba(52,35,28,.3);
+}
+.calc-history-actions button {
+  background:#6b645b; color:white; border:none; padding:16px; font-size:15px; font-weight:800; cursor:pointer;
+}
+.calc-history-actions button:active { background:#555049; }
+
+@media(max-width:430px){
+  .calculator-signature{width:60px; height:20px;}.calculator-display-actions{gap:7px}
+  .calc-mini-key{min-width:58px;padding:0 11px}.calc-mini-key.sound{min-width:44px;padding:0 9px}
+  .calculator-grid{gap:8px}
+}
 @media(max-width:430px){.calculator-shell{margin:10px;padding:13px}.calculator-signature{width:82px}.calculator-display-actions{gap:7px}.calc-mini-key{min-width:58px;padding:0 11px}.calc-mini-key.sound{min-width:44px;padding:0 9px}.calculator-percent-tools{gap:6px}.calc-tool-button{font-size:11px}.calculator-grid{gap:8px}.calc-key{min-height:58px}}
 @media (max-width:560px){
   .cal-card{padding:10px;border-radius:14px}
@@ -627,37 +713,96 @@ button:not(:disabled):active,.pill:active,.add-pill-btn:active,.zone-search-btn:
 <div class="calc-ov" id="calc-ov" onclick="if(event.target.id==='calc-ov')closeCalc()">
   <div class="calc-dialog">
     <div class="calc-header"><h2>🧮 Calculadora</h2><button class="calc-close" onclick="closeCalc()">✕</button></div>
-    <div class="calculator-shell" id="calculator-shell">
-      <div class="calculator-display"><div class="calculator-expression" id="calc-expression"></div><div class="calculator-value" id="calc-value">0</div></div>
-      <div class="calculator-display-actions">
-        <img class="calculator-signature" src="logo_elibi.jpg" alt="EliBi">
-        <button class="calc-mini-key sound" data-calc="sound" id="calc-sound" title="Activar sonido">🔇</button>
-        <button class="calc-mini-key" data-calc="back" title="Borrar último número">⌫</button>
-        <button class="calc-mini-key copy" data-calc="copy" title="Copiar número">Copiar</button>
-      </div>
-      <button class="calc-colors-button" onclick="toggleCalculatorPalette()">🎨 Colores</button>
-      <div class="calculator-palette" id="calculator-palette"></div>
-      <div class="calculator-percent-tools">
-        <button class="calc-tool-button" id="calc-discount-button" onclick="toggleCalcPercentTool('discount')">− % Descuento</button>
-        <button class="calc-tool-button" id="calc-increase-button" onclick="toggleCalcPercentTool('increase')">+ % Aumento</button>
-        <button class="calc-tool-button" id="calc-vat-button" onclick="toggleCalcPercentTool('vat')">Precio sin IVA</button>
-      </div>
-      <div class="calc-tool-panel" id="calc-percent-panel">
-        <div class="calc-tool-fields">
-          <div class="calc-tool-field"><label for="calc-tool-amount">Importe</label><input type="text" inputmode="decimal" id="calc-tool-amount" placeholder="100,00"></div>
-          <div class="calc-tool-field"><label for="calc-tool-percent" id="calc-tool-percent-label">Porcentaje %</label><input type="text" inputmode="decimal" id="calc-tool-percent" placeholder="20"></div>
-        </div>
-        <button class="calc-tool-calculate" onclick="calculateCalcPercentTool()">Calcular</button>
-        <div class="calc-tool-result" id="calc-tool-result">Escribe el importe y el porcentaje.</div>
-      </div>
-      <div class="calculator-grid" id="calculator-grid">
-        <button class="calc-key clear" data-calc="C">C</button><button class="calc-key" data-calc="%">%</button><button class="calc-key" data-calc="+/-">+/−</button><button class="calc-key op" data-calc="/">÷</button>
-        <button class="calc-key" data-calc="7">7</button><button class="calc-key" data-calc="8">8</button><button class="calc-key" data-calc="9">9</button><button class="calc-key op" data-calc="*">×</button>
-        <button class="calc-key" data-calc="4">4</button><button class="calc-key" data-calc="5">5</button><button class="calc-key" data-calc="6">6</button><button class="calc-key op" data-calc="-">−</button>
-        <button class="calc-key" data-calc="1">1</button><button class="calc-key" data-calc="2">2</button><button class="calc-key" data-calc="3">3</button><button class="calc-key op" data-calc="+">＋</button>
-        <button class="calc-key" data-calc="0">0</button><button class="calc-key" data-calc=".">,</button><button class="calc-key" data-calc="back">⌫</button><button class="calc-key equals" data-calc="=">=</button>
+    <div class="calculator-shell" id="calculator-shell" onclick="if(typeof isEditMode!=='undefined' && isEditMode) handleEditModeSelect('shell')">
+  <div class="calc-top-bar">
+    <button class="calc-close-btn" onclick="alert('Para salir de la calculadora, desliza la pantalla hacia arriba desde la parte inferior de tu iPhone.')">Salir</button>
+  </div>
+  
+  <div id="edit-top-bar" style="display:none; background:#4A90E2; color:white; padding:10px 14px; border-radius:14px; margin-top:10px; margin-bottom:12px; align-items:center; justify-content:space-between;">
+    <div>
+      <div style="font-size:12px; font-weight:800; text-transform:uppercase; opacity:0.9;">🎨 Editando:</div>
+      <div id="edit-mode-target" style="font-size:16px; font-weight:900;">Fondo</div>
+    </div>
+    <div style="display:flex; align-items:center; gap:6px;"><button onclick="deleteCurrentCustomTheme()" title="Borrar diseño" style="background:#ff4d4d; color:white; border:none; padding:8px 10px; border-radius:10px; font-weight:bold; cursor:pointer; font-size:14px; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">🗑️</button><button onclick="renameCurrentCustomTheme()" title="Renombrar diseño" style="background:#fff; color:#4A90E2; border:none; padding:8px 10px; border-radius:10px; font-weight:bold; cursor:pointer; font-size:14px; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">✏️</button><button onclick="saveAsNewTheme()" style="background:#fff; color:#4A90E2; border:none; padding:8px 8px; border-radius:10px; font-weight:bold; cursor:pointer; font-size:14px; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">➕ Nuevo</button><button onclick="saveCustomTheme()" style="background:#fff; color:#4A90E2; border:none; padding:8px 8px; border-radius:10px; font-weight:bold; cursor:pointer; font-size:14px; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">💾 Guardar</button><input type="color" id="edit-color-picker" oninput="if(isEditMode) applyCustomColor(currentEditType, this.value)" style="width:48px; height:48px; border:3px solid white; border-radius:10px; background:white; cursor:pointer; padding:0;"></div>
+  </div>
+
+  <div class="calculator-display" onclick="handleDisplayClick()">
+    <div class="calculator-expression" id="calc-expression"></div>
+    <div class="calculator-value" id="calc-value">0</div>
+  </div>
+
+  <div class="calc-history-overlay" id="calc-history-overlay">
+    <div class="calc-history-list" id="calc-history-list">
+      <!-- History items will be injected here -->
+    </div>
+    <div class="calc-history-actions">
+      <button onclick="clearHistory()">Borrar historial</button>
+      <button onclick="toggleHistory()">Cerrar</button>
+    </div>
+  </div>
+
+  <div class="calculator-display-actions">
+    <button class="calc-mini-key calculator-signature-btn" data-calc="elibi"><img class="calculator-signature" src="logo_elibi.jpg" alt="EliBi"></button>
+    <button class="calc-mini-key" data-calc="colors" title="Colores">🎨</button>
+    <button class="calc-mini-key sound" data-calc="sound" id="calc-sound" title="Activar sonido">🔇</button>
+    <button class="calc-mini-key" data-calc="back_top" title="Borrar último número">⌫</button>
+    <button class="calc-mini-key copy" data-calc="copy" title="Copiar número">Copiar</button>
+  </div>
+  
+  <div id="colors-edit-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:1000; align-items:center; justify-content:center;">
+  <div style="background:white; padding:20px; border-radius:16px; width:80%; max-width:320px; box-shadow:0 10px 25px rgba(0,0,0,0.2);">
+    <button onclick="handleColorsEditModal(1)" style="width:100%; padding:14px; margin-bottom:10px; background:#f0f0f0; border:none; border-radius:10px; font-weight:bold; font-size:15px; color:#151515; cursor:pointer;">1. Cambiar color del botón Temas</button>
+    <button onclick="handleColorsEditModal(2)" style="width:100%; padding:14px; margin-bottom:16px; background:#f0f0f0; border:none; border-radius:10px; font-weight:bold; font-size:15px; color:#151515; cursor:pointer;">2. Abrir Temas</button>
+    <button onclick="handleColorsEditModal(0)" style="width:100%; padding:14px; background:#ff4d4d; color:white; border:none; border-radius:10px; font-weight:bold; font-size:15px; cursor:pointer;">Cancelar</button>
+  </div>
+</div>
+  <div class="calc-colors-overlay" id="calc-colors-overlay">
+    <div class="calc-colors-container" id="calculator-palette">
+      <!-- Colors injected here -->
+    </div>
+    <div class="calc-colors-actions">
+      <button onclick="toggleCalculatorPalette()">Cerrar</button>
+      <button onclick="toggleEditMode()" id="edit-mode-btn" style="background:#1ABC9C;">🖌️ Modo Diseño</button>
+    </div>
+  </div>
+  
+  <div class="calc-copy-overlay" id="calc-copy-overlay">
+    <div class="calc-copy-menu">
+      <h3>Formato de copia</h3>
+      <button onclick="executeCopy('')">Solo número</button>
+      <button onclick="executeCopy(' €')">Número + €</button>
+      <button onclick="executeCopy(' $')">Número + $</button>
+      <button onclick="toggleCopyMenu()">Cancelar</button>
+    </div>
+  </div>
+
+  <div class="calculator-percent-tools" id="calc-tool-panel" onclick="if(typeof isEditMode!=='undefined' && isEditMode) handleEditModeSelect('toolpanel')">
+    <button class="calc-tool-button" id="calc-discount-button" onclick="if(typeof isEditMode!=='undefined' && isEditMode) { if(typeof event!=='undefined' && event) event.stopPropagation(); handleEditModeSelect('toolbtn_discount'); } toggleCalcPercentTool('discount')">- % Descuento</button>
+    <button class="calc-tool-button" id="calc-increase-button" onclick="if(typeof isEditMode!=='undefined' && isEditMode) { if(typeof event!=='undefined' && event) event.stopPropagation(); handleEditModeSelect('toolbtn_increase'); } toggleCalcPercentTool('increase')">+ % Aumento</button>
+    <button class="calc-tool-button" id="calc-vat-button" onclick="if(typeof isEditMode!=='undefined' && isEditMode) { if(typeof event!=='undefined' && event) event.stopPropagation(); handleEditModeSelect('toolbtn_vat'); } toggleCalcPercentTool('vat')">Precio sin IVA</button>
+  </div>
+  
+  <div class="calc-tool-panel" id="calc-percent-panel" onclick="if(typeof isEditMode!=='undefined' && isEditMode) { if(typeof event!=='undefined' && event) event.stopPropagation(); handleEditModeSelect('toolpanel_bg'); }">
+    <div style="display:flex; gap:8px; align-items:flex-end; margin-bottom:10px;">
+      <button class="calc-tool-calculate" style="margin-top:0; width:80px; flex-shrink:0; height:42px; margin-bottom:8px; font-size:13px; padding: 0;" onclick="if(typeof isEditMode!=='undefined' && isEditMode) { if(typeof event!=='undefined' && event) event.stopPropagation(); handleEditModeSelect('toolpanel_calc_btn'); } else calculateCalcPercentTool()">Calcular</button>
+      <div class="calc-tool-fields" style="flex-grow:1; display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+        <div class="calc-tool-field"><label for="calc-tool-amount">Importe</label><input type="text" readonly id="calc-tool-amount" placeholder="100,00" onclick="if(typeof isEditMode!=='undefined' && isEditMode) { if(typeof event!=='undefined' && event) event.stopPropagation(); handleEditModeSelect('toolpanel_inputs'); } else { setActiveToolInput('amount'); }"></div>
+        <div class="calc-tool-field"><label for="calc-tool-percent" id="calc-tool-percent-label">Porcentaje %</label><input type="text" readonly id="calc-tool-percent" placeholder="20" onclick="if(typeof isEditMode!=='undefined' && isEditMode) { if(typeof event!=='undefined' && event) event.stopPropagation(); handleEditModeSelect('toolpanel_inputs'); } else { setActiveToolInput('percent'); }"></div>
       </div>
     </div>
+    <div class="calc-tool-result" id="calc-tool-result" style="margin-top:0; font-size:11px; padding:6px 11px; line-height:1.2; text-align:center;">Escribe el importe y el porcentaje.</div>
+  </div>
+
+  <div class="calculator-grid" id="calculator-grid">
+    <button class="calc-key clear" data-calc="C">C</button><button class="calc-key top-op" data-calc="%">%</button><button class="calc-key top-op" data-calc="+/-">+/−</button><button class="calc-key op" data-calc="/">÷</button>
+    <button class="calc-key" data-calc="7">7</button><button class="calc-key" data-calc="8">8</button><button class="calc-key" data-calc="9">9</button><button class="calc-key op" data-calc="*">×</button>
+    <button class="calc-key" data-calc="4">4</button><button class="calc-key" data-calc="5">5</button><button class="calc-key" data-calc="6">6</button><button class="calc-key op" data-calc="-">−</button>
+    <button class="calc-key" data-calc="1">1</button><button class="calc-key" data-calc="2">2</button><button class="calc-key" data-calc="3">3</button><button class="calc-key op" data-calc="+">＋</button>
+    <button class="calc-key" data-calc="0">0</button><button class="calc-key" data-calc=".">,</button><button class="calc-key" data-calc="back">⌫</button><button class="calc-key equals" data-calc="=">=</button>
+  </div>
+  <div class="app-version" style="position:absolute; bottom:16px; right:16px; font-size:14px; font-weight:900; color:var(--calc-display-text); opacity:0.35; pointer-events:none;">v61</div>
+</div>
+  
   </div>
 </div>
 
@@ -1000,1600 +1145,10 @@ let ROOM_EDIT_ID=null, ROOM_ICON_IMAGE=null, EMOJI_MANUAL=false, TASK_COLORS_OPE
 let PHOTO_TARGET=null;
 let SHOW_ATTACH=true, DRAG_HOUSE_ID=null, DRAG_TASK_ID=null, POINTER_DRAG=null;
 let CAL_DATE=new Date(), CAL_MODE='month', CAL_NOTE_DAY=null;
-let CALC_CURRENT='0', CALC_PREVIOUS=null, CALC_OPERATOR='', CALC_JUST_EVALUATED=false;
-let CALC_SOUND=false, CALC_AUDIO=null, CALC_PERCENT_TOOL='';
-let TASK_COLOR='tema';
-let TASK_PENDING_PHOTOS=[];
-let ICON_IMAGE_TARGET=null;
-let CLOUD=null, CLOUD_DB=null, CLOUD_UNSUB=null, CLOUD_TIMER=null, APPLYING_REMOTE=false, FB_LOADING=null;
-let UNLOCK_RESOLVE=null;
-let LOCAL_WAS_EMPTY=false;
-let CLOUD_FAILED=false;
-let CAL_NOTE_COLOR='none';
-let CAL_NOTE_ITEMS=[];
-let CAL_SHOW_DONE=false;
-let CAL_ORIGINAL_PHOTO_IDS=[];
-let CAL_LINE_COLOR_ID=null, CAL_SEARCH_COLOR=null;
-const COLLAPSED_ROOM_LISTS=new Set();
-const CAL_COLORS={
-  none:{name:'Sin color',bg:'rgba(255,255,255,.55)',border:'rgba(255,255,255,.36)',dot:'#d05828'},
-  rosa:{name:'Rosa',bg:'#ffdce8',border:'#e84898',dot:'#e84898'},
-  coral:{name:'Coral',bg:'#ffe0d8',border:'#f06050',dot:'#f06050'},
-  naranja:{name:'Naranja',bg:'#ffe5c4',border:'#f09030',dot:'#f09030'},
-  amarillo:{name:'Amarillo',bg:'#fff0b8',border:'#d6a900',dot:'#d6a900'},
-  verde:{name:'Verde',bg:'#d9f3d8',border:'#35a85a',dot:'#35a85a'},
-  menta:{name:'Menta',bg:'#d7f4ea',border:'#30b898',dot:'#30b898'},
-  azul:{name:'Azul',bg:'#d8eaff',border:'#2f80ed',dot:'#2f80ed'},
-  lila:{name:'Lila',bg:'#eadcff',border:'#8b5adf',dot:'#8b5adf'}
-};
-const CAL_COLOR_KEYS=Object.keys(CAL_COLORS);
+// LocalStorage helpers
+function lsGet(k){try{return localStorage.getItem(k)}catch(e){return null}}
+function lsSet(k,v){try{localStorage.setItem(k,v)}catch(e){}}
 
-// ── UTILS ──
-function gid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,6);}
-function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
-function escPdfText(s){return String(s||'').replace(/[^\x20-\x7EÀ-ÿ]/g,'').replace(/\\/g,'\\\\').replace(/\(/g,'\\(').replace(/\)/g,'\\)');}
-const MEM_STORE={};
-function lsGet(k){try{return window.localStorage.getItem(k);}catch(e){return Object.prototype.hasOwnProperty.call(MEM_STORE,k)?MEM_STORE[k]:null;}}
-function lsSet(k,v){try{window.localStorage.setItem(k,v);}catch(e){MEM_STORE[k]=String(v);}}
-function lsRemove(k){try{window.localStorage.removeItem(k);}catch(e){delete MEM_STORE[k];}}
-function lsKeys(){
-  try{
-    const keys=[];
-    for(let i=0;i<window.localStorage.length;i++)keys.push(window.localStorage.key(i));
-    return keys.filter(Boolean);
-  }catch(e){return Object.keys(MEM_STORE);}
-}
-function showAppError(msg,detail){
-  const box=document.getElementById('app-error');
-  if(!box)return;
-  const clean=String(msg||'Ha ocurrido un error.');
-  box.textContent=detail?`${clean} ${detail}`:clean;
-  box.classList.add('show');
-}
-function bootStep(id,ok=true,detail=''){
-  const el=document.getElementById(id);
-  if(!el)return;
-  el.classList.remove('ok','err');
-  el.classList.add(ok?'ok':'err');
-  if(detail)el.textContent=el.textContent.split(' · ')[0]+' · '+detail;
-}
-function clearAppError(){
-  const box=document.getElementById('app-error');
-  if(box){box.textContent='';box.classList.remove('show');}
-}
-function logApp(...args){console.log('[Hogar]',...args);}
-function logAppError(msg,err){
-  console.error(msg,err);
-  showAppError(msg,err?.message||'');
-}
-window.addEventListener('error',e=>logAppError('Error de la app:',e.error||e.message));
-window.addEventListener('unhandledrejection',e=>logAppError('Error no controlado:',e.reason));
-function appState(){return JSON.stringify({DATA,HOUSES});}
-function restoreState(raw){
-  const state=JSON.parse(raw);
-  DATA=state.DATA||{};
-  HOUSES=Array.isArray(state.HOUSES)?state.HOUSES:[];
-}
-function snap(){HIST.push(appState());if(HIST.length>20)HIST.shift();REDO=[];}
-function getPhoto(k){try{return lsGet('ph_'+k)||null;}catch(e){return null;}}
-function setPhoto(k,b64){try{lsSet('ph_'+k,b64);lsSet('h_updated',String(Date.now()));scheduleCloudSave();}catch(e){alert('Foto muy grande, prueba con una más pequeña.');}}
-function sibs(houseId,parentId){return Object.entries(DATA).filter(([,r])=>r.houseId===houseId&&(r.parentId||null)===parentId).sort((a,b)=>(a[1].order||0)-(b[1].order||0));}
-
-// ── PALETTE UTILS ──
-// Each room inside a house uses shades of the house's palette
-// Level 0 rooms use shade[1], level 1 rooms use shade[2], etc.
-function roomColors(roomId){
-  const r=DATA[roomId];if(!r)return {bg:'#f0e8e0',ac:'#a08060',text:'#503020'};
-  const house=HOUSES.find(h=>h.id===r.houseId);
-  const palKey=house?.color||'verde';
-  const pal=PALETTES[palKey]||PALETTES.verde;
-  // root rooms get their shade based on their index among siblings
-  let cur=r,curId=roomId;
-  while(cur.parentId&&DATA[cur.parentId]){curId=cur.parentId;cur=DATA[cur.parentId];}
-  const roots=sibs(cur.houseId,null);
-  const rootIdx=roots.findIndex(([x])=>x===curId);
-  const shadeIdx=Math.min(rootIdx+1,pal.shades.length-2);
-  return {bg:pal.shades[shadeIdx],ac:pal.ac,text:pal.text,soft:pal.shades[0]};
-}
-function housePal(hid){
-  const house=HOUSES.find(h=>h.id===hid);
-  return PALETTES[house?.color||'verde']||PALETTES.verde;
-}
-function darkenHex(hex,amount=.28){
-  const h=String(hex||'#5a3a24').replace('#','');
-  const n=parseInt(h.length===3?h.split('').map(c=>c+c).join(''):h,16);
-  const r=Math.max(0,Math.round(((n>>16)&255)*(1-amount)));
-  const g=Math.max(0,Math.round(((n>>8)&255)*(1-amount)));
-  const b=Math.max(0,Math.round((n&255)*(1-amount)));
-  return '#'+[r,g,b].map(v=>v.toString(16).padStart(2,'0')).join('');
-}
-function themeDark(hid=CURRENT_HOUSE){return darkenHex(housePal(hid).text,.12);}
-function taskColorHex(k,hid=CURRENT_HOUSE){
-  if(k==='negro'||k==='tema'||!TASK_COLORS[k]?.hex)return themeDark(hid);
-  return TASK_COLORS[k].hex;
-}
-function taskColorName(k){
-  if(k==='negro'||k==='tema'||!TASK_COLORS[k]?.hex)return 'tema';
-  return TASK_COLORS[k].name;
-}
-
-// ── PERSONAL PASSWORD LOCK (DESACTIVADO) ──
-async function unlockPersonalFirebase(){
-  return true;
-}
-
-// ── INIT ──
-async function init(){
-  bootStep('debug-start',true);
-  logApp('APP STARTED',{href:location.href,protocol:location.protocol,userAgent:navigator.userAgent,secureContext:window.isSecureContext});
-  const unlocked=await unlockPersonalFirebase();
-  if(!unlocked){
-    bootStep('debug-start',false,'bloqueado');
-    document.getElementById('loading').innerHTML='<div class="li">🔒</div><div class="lt">Hogar bloqueado</div>';
-    return;
-  }
-  loadLocal();
-  CURRENT_HOUSE=null;SEL_LEVELS=[];saveSel();
-  document.getElementById('loading').style.display='none';
-  document.getElementById('app').style.display='flex';
-  document.getElementById('photo-input').addEventListener('change',handlePhotoUpload);
-  document.getElementById('sync-input').addEventListener('change',handleImport);
-  loadAppTitle();
-  await loadCloudSettings();
-  if(!HOUSES.length)ensureDefaultHouse(true);
-  bootStep('debug-houses',true,String(HOUSES.length));
-  showHomeScreen();
-  bootStep('debug-ui',true);
-  logApp('UI RENDERED',{houses:HOUSES.length,houseCards:document.querySelectorAll('.hcard').length,gridSize:(()=>{const g=document.getElementById('houses-grid');return g?`${g.offsetWidth}x${g.offsetHeight}`:'sin grid';})()});
-  logApp('Casas cargadas:',HOUSES.length);
-  registerOfflineCache();
-}
-function ensureDefaultHouse(save){
-  if(HOUSES.length)return;
-  HOUSES=[{id:'h1',name:'MI CASA',emoji:'🏠',color:'verde'}];
-  DATA={};
-  if(save)saveLoc();
-}
-function saveLoc(){
-  lsSet('h_h',JSON.stringify(HOUSES));
-  lsSet('h_d',JSON.stringify(DATA));
-  if(!APPLYING_REMOTE){
-    lsSet('h_updated',String(Date.now()));
-    scheduleCloudSave();
-  }
-}
-function loadLocal(){
-  logApp('LOAD LOCAL start');
-  const storedH=lsGet('h_h');
-  const storedD=lsGet('h_d');
-  logApp('LOCAL STORAGE read',{hasHouses:!!storedH,hasRooms:!!storedD});
-  try{if(storedH)HOUSES=JSON.parse(storedH);}catch(e){}
-  try{if(storedD)DATA=JSON.parse(storedD);}catch(e){}
-  if(!Array.isArray(HOUSES))HOUSES=[];
-  if(!DATA||typeof DATA!=='object'||Array.isArray(DATA))DATA={};
-  HOUSES=HOUSES.filter(h=>h&&h.id&&h.name);
-  const defaultOnly=HOUSES.length===1&&HOUSES[0].id==='h1'&&HOUSES[0].name==='MI CASA'&&!Object.keys(DATA).length;
-  LOCAL_WAS_EMPTY=(!storedH&&!storedD)||defaultOnly;
-  logApp('Casas cargadas:',HOUSES.length);
-  bootStep('debug-houses',true,String(HOUSES.length));
-  if(!LOCAL_WAS_EMPTY){
-    lsSet('h_h',JSON.stringify(HOUSES));
-    lsSet('h_d',JSON.stringify(DATA));
-    if(!lsGet('h_updated'))lsSet('h_updated',String(Date.now()));
-  }
-}
-function loadSel(){
-  try{const s=lsGet('h_sel');if(s){const p=JSON.parse(s);CURRENT_HOUSE=p.h||null;SEL_LEVELS=p.l||[];}}catch(e){}
-}
-function saveSel(){lsSet('h_sel',JSON.stringify({h:CURRENT_HOUSE,l:SEL_LEVELS}));}
-
-// ── MANUAL SYNC ──
-function collectLocalKeys(prefix){
-  const out={};
-  for(const k of lsKeys()){
-    if(k&&k.startsWith(prefix))out[k]=lsGet(k);
-  }
-  return out;
-}
-function exportSync(){
-  saveLoc();saveSel();saveAppTitle(document.getElementById('app-title')?.textContent?.trim()||'Mis Casas');
-  const payload={
-    app:'Hogar',
-    version:1,
-    exportedAt:new Date().toISOString(),
-    houses:HOUSES,
-    rooms:DATA,
-    title:lsGet('app_title')||'Mis Casas',
-    selection:lsGet('h_sel')||'',
-    photos:collectLocalKeys('ph_'),
-    pans:collectLocalKeys('pan_'),
-    calendar:collectLocalKeys('cal_')
-  };
-  const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});
-  const a=document.createElement('a');
-  a.href=URL.createObjectURL(blob);
-  a.download='hogar-copia-'+new Date().toISOString().slice(0,10)+'.json';
-  document.body.appendChild(a);a.click();a.remove();
-  setTimeout(()=>URL.revokeObjectURL(a.href),1000);
-}
-function triggerImport(){
-  const input=document.getElementById('sync-input');
-  input.value='';
-  input.click();
-}
-function handleImport(e){
-  const file=e.target.files[0];if(!file)return;
-  const reader=new FileReader();
-  reader.onload=ev=>{
-    let payload;
-    try{payload=JSON.parse(ev.target.result);}catch(err){alert('No parece una copia válida de Hogar.');return;}
-    if(!payload||!Array.isArray(payload.houses)||typeof payload.rooms!=='object'){
-      alert('No parece una copia válida de Hogar.');
-      return;
-    }
-    showConf('Importar copia','Esto sustituirá los datos de este dispositivo por los de la copia seleccionada.',()=>{
-      HOUSES=payload.houses;
-      DATA=payload.rooms||{};
-      lsSet('h_h',JSON.stringify(HOUSES));
-      lsSet('h_d',JSON.stringify(DATA));
-      if(payload.title)lsSet('app_title',payload.title);
-      if(payload.selection)lsSet('h_sel',payload.selection);
-      lsKeys().filter(k=>k.startsWith('ph_')||k.startsWith('pan_')||k.startsWith('cal_')).forEach(k=>lsRemove(k));
-      Object.entries(payload.photos||{}).forEach(([k,v])=>lsSet(k,v));
-      Object.entries(payload.pans||{}).forEach(([k,v])=>lsSet(k,v));
-      Object.entries(payload.calendar||{}).forEach(([k,v])=>lsSet(k,v));
-      lsSet('h_updated',String(Date.now()));
-      scheduleCloudSave();
-      loadSel();loadAppTitle();
-      updateStorageInfo();
-      if(CURRENT_HOUSE&&HOUSES.find(h=>h.id===CURRENT_HOUSE)){showHouseScreen(CURRENT_HOUSE);}else{showHomeScreen();}
-    });
-  };
-  reader.readAsText(file);
-}
-function registerOfflineCache(){
-  // Single-file edition: no external service worker is required.
-}
-
-// ── STORAGE AND TOAST NOTIFICATIONS ──
-function loadScriptOnce(src){
-  return new Promise((resolve,reject)=>{
-    if(document.querySelector(`script[src="${src}"]`)){resolve();return;}
-    const s=document.createElement('script');s.src=src;s.onload=resolve;s.onerror=reject;document.head.appendChild(s);
-  });
-}
-function scheduleCloudSave(){}
-async function loadCloudSettings(){
-  updateStorageInfo();
-}
-function updateStorageInfo(){
-  let bytes=0;
-  try {
-    for(let i=0;i<window.localStorage.length;i++){
-      const key=window.localStorage.key(i);
-      if(key&&key.startsWith('ph_')){
-        const val=window.localStorage.getItem(key);
-        if(val)bytes+=val.length;
-      }
-    }
-  } catch(e) {}
-  const kb=Math.round(bytes/1024);
-  const el=document.getElementById('storage-info');
-  if(el){
-    el.textContent=`Fotos: máx. 900 × 900 px · ${kb} KB / 4000 KB`;
-    if(kb>3500){
-      el.style.color='#c03030';
-      el.style.background='rgba(220,50,50,.18)';
-    }else if(kb>2500){
-      el.style.color='#d8a020';
-      el.style.background='rgba(220,160,20,.18)';
-    }else{
-      el.style.color='';
-      el.style.background='rgba(255,255,255,.38)';
-    }
-  }
-}
-function showToast(msg){
-  const existing=document.getElementById('app-toast');
-  if(existing)existing.remove();
-  const toast=document.createElement('div');
-  toast.id='app-toast';
-  toast.style.position='fixed';
-  toast.style.bottom='90px';
-  toast.style.left='50%';
-  toast.style.transform='translateX(-50%)';
-  toast.style.background='rgba(74,48,32,0.92)';
-  toast.style.color='#fffcf7';
-  toast.style.padding='10px 18px';
-  toast.style.borderRadius='20px';
-  toast.style.fontSize='12px';
-  toast.style.fontWeight='900';
-  toast.style.boxShadow='0 8px 24px rgba(0,0,0,0.24)';
-  toast.style.zIndex='2000';
-  toast.style.pointerEvents='none';
-  toast.style.whiteSpace='normal';
-  toast.style.width='max-content';
-  toast.style.maxWidth='calc(100vw - 32px)';
-  toast.style.textAlign='center';
-  toast.style.animation='popIn 0.22s ease both';
-  toast.textContent=msg;
-  document.body.appendChild(toast);
-  setTimeout(()=>{
-    toast.style.transition='opacity 0.4s ease, transform 0.4s ease';
-    toast.style.opacity='0';
-    toast.style.transform='translateX(-50%) translateY(10px)';
-    setTimeout(()=>toast.remove(),400);
-  },4000);
-}
-
-// ── PHOTO ──
-function triggerPhoto(target){PHOTO_TARGET=target;const input=document.getElementById('photo-input');input.value='';input.multiple=String(target||'').startsWith('task|');input.click();}
-function removePhoto(key){
-  try{lsRemove('ph_'+key);}catch(e){}
-  lsSet('h_updated',String(Date.now()));scheduleCloudSave();
-  updateStorageInfo();
-  if(CURRENT_HOUSE)renderHouseMain();else renderHomeGrid();
-}
-function handlePhotoUpload(e){
-  const files=[...e.target.files];if(!files.length)return;
-  if(String(PHOTO_TARGET||'').startsWith('task|')){
-    const taskPhotoTarget=PHOTO_TARGET;
-    Promise.all(files.map(compressTaskPhoto)).then(async photos=>{
-      const parts=taskPhotoTarget.split('|');
-      if(parts[1]==='new'){
-        const inp=document.getElementById('task-inp');
-        const text=(inp?.value||'').trim();
-        await addTaskText(text,photos);
-        TASK_PENDING_PHOTOS=[];
-        if(inp)inp.value='';
-        renderTasks(true);
-      }else{
-        const task=DATA[parts[1]]?.tasks?.[parts[2]];if(!task)return;
-        task.photoIds=taskPhotoIds(task);delete task.photoId;
-        photos.forEach(data=>{const photoId=gid();task.photoIds.push(photoId);lsSet('ph_task_'+photoId,data);});
-        saveLoc();updateStorageInfo();renderTasks();
-      }
-    }).catch(()=>alert('No se ha podido añadir esta imagen.'));
-    return;
-  }
-  const file=files[0];
-  const originalSize=file.size;
-  const reader=new FileReader();
-  reader.onload=ev=>{
-    const img=new Image();
-    img.onload=()=>{
-      const canvas=document.createElement('canvas');
-      const isAttach=String(PHOTO_TARGET||'').startsWith('attach_');
-      const isCalendar=String(PHOTO_TARGET||'').startsWith('calendar_');
-      // Todas las fotos se reducen antes de guardarse para que quepan muchas.
-      const max=900;
-      let w=img.width,h=img.height;
-      if(w>max){h=Math.round(h*max/w);w=max;}
-      if(h>max){w=Math.round(w*max/h);h=max;}
-      canvas.width=w;canvas.height=h;
-      canvas.getContext('2d').drawImage(img,0,0,w,h);
-      
-      const dataUrl=canvas.toDataURL('image/jpeg',0.76);
-      const compressedSize=dataUrl.length;
-      
-      if(isCalendar){
-        addCalendarPhoto(dataUrl);
-      }else if(isAttach){
-        addRoomPhoto(PHOTO_TARGET.replace('attach_',''),dataUrl);
-      }else{
-        setPhoto(PHOTO_TARGET,dataUrl);
-      }
-      
-      updateStorageInfo();
-      
-      const pct=Math.round(((originalSize - compressedSize)/originalSize)*100);
-      const origKB=Math.round(originalSize/1024);
-      const compKB=Math.round(compressedSize/1024);
-      showToast(`📸 Foto: ${origKB}KB ➔ ${compKB}KB (Ahorro del ${pct >= 0 ? pct : 0}%)`);
-      
-      if(isCalendar){
-        renderCalList();
-      }else if(CURRENT_HOUSE)renderHouseMain();else renderHomeGrid();
-    };
-    img.src=ev.target.result;
-  };
-  reader.readAsDataURL(file);
-}
-
-document.addEventListener('pointerup',e=>{
-  if(!POINTER_DRAG)return;
-  const drag=POINTER_DRAG;POINTER_DRAG=null;
-  const target=document.elementFromPoint(e.clientX,e.clientY);
-  if(drag.type==='house'){
-    const card=target&&target.closest&&target.closest('.hcard');
-    const toId=card&&card.dataset.houseId;
-    if(toId){
-      if(e.altKey)reorderHouses(drag.id,toId);
-      else moveHouseIntoHouse(drag.id,toId);
-    }
-  }else if(drag.type==='task'){
-    const row=target&&target.closest&&target.closest('.trow');
-    const toId=row&&row.dataset.taskId;
-    if(toId)reorderTask(drag.roomId,drag.id,toId);
-  }
-});
-function startHousePointerDrag(id,e){POINTER_DRAG={type:'house',id};e.stopPropagation();e.preventDefault();}
-function startTaskPointerDrag(roomId,id,e){POINTER_DRAG={type:'task',roomId,id};e.stopPropagation();e.preventDefault();}
-
-// ── CONFIRM ──
-function showConf(title,msg,cb){
-  CONF_CB=cb;
-  document.getElementById('conf-title').textContent=title;
-  document.getElementById('conf-msg').textContent=msg;
-  document.getElementById('cyes').onclick=()=>{closeConf();cb&&cb();};
-  document.getElementById('conf-ov').classList.add('open');
-}
-function closeConf(){document.getElementById('conf-ov').classList.remove('open');CONF_CB=null;}
-
-// ── NAVIGATION BETWEEN SCREENS ──
-function showHomeScreen(){
-  CURRENT_HOUSE=null;SEL_LEVELS=[];saveSel();
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  document.getElementById('s-home').classList.add('active');
-  document.body.style.background='#f5ead8';
-  renderHomeGrid();
-}
-function showHousesListScreen(){
-  CURRENT_HOUSE=null;SEL_LEVELS=[];saveSel();
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  document.getElementById('s-houses-list').classList.add('active');
-  document.body.style.background='#f5ead8';
-  renderHousesList();
-}
-
-function houseIconHtml(house){return house?.iconImage?`<img src="${house.iconImage}" alt="">`:esc(house?.emoji||'🏠');}
-function showHouseScreen(hid){
-  if(!hid)return;
-  CURRENT_HOUSE=hid;SEL_LEVELS=[];saveSel();
-  const pal=housePal(hid);
-  document.body.style.background=pal.bg;
-  document.getElementById('s-house').style.background=pal.bg;
-  document.documentElement.style.setProperty('--house-dark',themeDark(hid));
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  document.getElementById('s-house').classList.add('active');
-  const house=HOUSES.find(h=>h.id===hid);
-  document.getElementById('house-hname').innerHTML=houseIconHtml(house)+' <span>'+esc(house?.name||'Casa')+'</span>';
-  renderHouseMain();
-}
-function goHome(){showHomeScreen();}
-function editCurrentHouse(){if(CURRENT_HOUSE)openHouseModal(CURRENT_HOUSE);}
-
-// ── HOME GRID ──
-function reorderHouses(fromId,toId){
-  if(!fromId||!toId||fromId===toId)return;
-  const from=HOUSES.findIndex(h=>h.id===fromId);
-  const to=HOUSES.findIndex(h=>h.id===toId);
-  if(from<0||to<0)return;
-  snap();
-  const [moved]=HOUSES.splice(from,1);
-  HOUSES.splice(to,0,moved);
-  saveLoc();renderHousesList();
-}
-function moveHouseIntoHouse(fromId,toId){
-  if(!fromId||!toId||fromId===toId)return;
-  const fromHouse=HOUSES.find(h=>h.id===fromId);
-  const toHouse=HOUSES.find(h=>h.id===toId);
-  if(!fromHouse||!toHouse)return;
-  showConf('Crear zona desde casa',`¿Convertir "${fromHouse.name}" en una zona dentro de "${toHouse.name}" con todo su contenido?`,()=>{
-    snap();
-    const rootId=gid();
-    const map={};
-    const sourceRooms=Object.entries(DATA)
-      .filter(([,r])=>r.houseId===fromId)
-      .sort((a,b)=>(a[1].level||0)-(b[1].level||0)||(a[1].order||0)-(b[1].order||0));
-    DATA[rootId]={
-      name:fromHouse.name,
-      emoji:fromHouse.emoji||'🏠',
-      houseId:toId,
-      parentId:null,
-      level:0,
-      order:sibs(toId,null).length,
-      tasks:{}
-    };
-    const housePhoto=getPhoto('house_'+fromId);
-    if(housePhoto)addRoomPhoto(rootId,housePhoto);
-    sourceRooms.forEach(([oldId])=>{map[oldId]=gid();});
-    sourceRooms.forEach(([oldId,room])=>{
-      const newId=map[oldId];
-      const parentId=room.parentId?map[room.parentId]:rootId;
-      DATA[newId]={
-        ...JSON.parse(JSON.stringify(room)),
-        houseId:toId,
-        parentId,
-        level:(room.level||0)+1
-      };
-      const photos=getRoomPhotos(oldId);
-      if(photos.length){
-        setRoomPhotos(newId,photos);
-        lsRemove(roomPhotoListKey(oldId));
-      }
-      delete DATA[oldId];
-    });
-    lsRemove('ph_house_'+fromId);
-    lsRemove(panKey('house_'+fromId));
-    HOUSES=HOUSES.filter(h=>h.id!==fromId);
-    if(CURRENT_HOUSE===fromId){CURRENT_HOUSE=null;SEL_LEVELS=[];saveSel();}
-    saveLoc();
-    showHousesListScreen();
-  });
-}
-
-function renderHomeGrid(){
-  logApp('RENDER HOME GRID start',{houses:HOUSES.length});
-  const container=document.getElementById('home-calendar-container');
-  if(container) {
-    container.innerHTML = renderCalendar();
-  }
-  if(!HOUSES.length){
-    showAppError('No hay casas cargadas todavía. Crea una casa desde la pestaña CASAS.');
-  }else{
-    clearAppError();
-  }
-  logApp('RENDER HOME GRID done',{});
-}
-
-function renderHousesList(){
-  const grid=document.getElementById('houses-grid');
-  if(!grid) return;
-  const fab=document.getElementById('houses-fab');
-  if(!Array.isArray(HOUSES))HOUSES=[];
-  if(fab)fab.style.display=HOUSES.length<5?'flex':'none';
-  let html='';
-  if(!HOUSES.length){
-    html=`<div class="empty" style="grid-column:1/-1">
-      <div class="ei">🏡</div>
-      <h2>Aún no hay casas</h2>
-      <p>Crea una casa para empezar.</p>
-      <button class="bok" style="margin-top:12px;width:100%" onclick="openHouseModal()">Nueva casa</button>
-    </div>`;
-  }
-  HOUSES.forEach((h,i)=>{
-    const pal=PALETTES[h.color||'verde']||PALETTES.verde;
-    const photo=getPhoto('house_'+h.id);
-    const photoCount=countHousePhotos(h.id);
-    html+=`<div class="hcard" data-house-id="${h.id}" draggable="true" ondragstart="DRAG_HOUSE_ID='${h.id}';this.classList.add('dragging')" ondragend="this.classList.remove('dragging');DRAG_HOUSE_ID=null" ondragover="event.preventDefault()" ondrop="event.preventDefault();moveHouseIntoHouse(DRAG_HOUSE_ID,'${h.id}')" style="animation-delay:${i*.06}s;background:${pal.bg}">
-      <div class="hcard-photo-count" title="Fotos incrustadas en esta casa">📷 ${photoCount}</div>
-      <div class="hcard-title" style="background:${pal.shades[1]}"><div class="hcard-name" style="color:${pal.text}" contenteditable="true"
-        onblur="renameHouse('${h.id}',this.textContent.trim())"
-        onkeydown="if(event.key==='Enter'){event.preventDefault();this.blur()}"
-        onclick="event.stopPropagation()">${esc(h.name)}</div></div>`;
-    if(photo){
-      html+=`<div class="hcard-photo-fixed" onclick="showHouseScreen('${h.id}')">
-        <img class="hcard-photo" src="${photo}" alt="">
-        <button class="hcard-photo-remove" onclick="event.stopPropagation();removePhoto('house_${h.id}')" title="Quitar foto">✕</button>
-      </div>`;
-    } else {
-      html+=`<div class="hcard-placeholder" style="background:${pal.shades[1]};cursor:pointer" onclick="showHouseScreen('${h.id}')">${houseIconHtml(h)}</div>`;
-    }
-    html+=`<div class="hcard-footer" style="background:${pal.shades[1]}">
-      <div class="hcard-actions">
-        <button class="hcard-btn" onclick="showHouseScreen('${h.id}')" title="Entrar" style="font-size:14px">›</button>
-        <button class="hcard-btn edit" onclick="openHouseModal('${h.id}')" title="Color e icono">
-          <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" fill="${pal.ac}" opacity=".8"/><circle cx="7" cy="7" r="2.5" fill="white"/></svg>
-        </button>
-        <button class="hcard-btn edit" onclick="triggerPhoto('house_${h.id}')" title="Foto">
-          <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><rect x="1" y="3" width="12" height="9" rx="2" stroke="${pal.text}" stroke-width="1.3" fill="none"/><circle cx="7" cy="7.5" r="2.2" stroke="${pal.text}" stroke-width="1.3" fill="none"/><rect x="4.5" y="1.5" width="5" height="2" rx="1" fill="${pal.text}" opacity=".5"/></svg>
-        </button>
-        <button class="hcard-btn del" onclick="delHouse('${h.id}')" title="Borrar">
-          <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2 3.5h10M5.5 6v4M8.5 6v4" stroke="#c03030" stroke-width="1.3" stroke-linecap="round"/><rect x="3" y="3.5" width="8" height="8" rx="1" stroke="#c03030" stroke-width="1.3" fill="none"/><path d="M5 3.5V2.5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v1" stroke="#c03030" stroke-width="1.3"/></svg>
-        </button>
-      </div>
-    </div></div>`;
-  });
-  grid.innerHTML=html;
-}
-
-function countHousePhotos(houseId){
-  let total=getPhoto('house_'+houseId)?1:0;
-  Object.entries(DATA).forEach(([rid,r])=>{
-    if(r.houseId===houseId){
-      total+=getRoomPhotos(rid).filter(pid=>!!lsGet('ph_attach_'+pid)).length;
-      Object.values(r.tasks||{}).forEach(task=>{total+=taskPhotoIds(task).filter(pid=>!!lsGet('ph_task_'+pid)).length;});
-    }
-  });
-  return total;
-}
-
-// ── CALENDAR ──
-function calMonthName(y,m){return new Date(y,m,1).toLocaleDateString('es-ES',{month:'long',year:'numeric'});}
-function calMonthOnly(y,m){return new Date(y,m,1).toLocaleDateString('es-ES',{month:'long'});}
-function calMondayOffset(date){return (date.getDay()+6)%7;}
-function sameDay(a,b){return a.getFullYear()===b.getFullYear()&&a.getMonth()===b.getMonth()&&a.getDate()===b.getDate();}
-function calDateKey(date){
-  const y=date.getFullYear(),m=String(date.getMonth()+1).padStart(2,'0'),d=String(date.getDate()).padStart(2,'0');
-  return `${y}-${m}-${d}`;
-}
-function calColorFor(key){
-  const c=lsGet('cal_color_'+key)||'none';
-  return CAL_COLORS[c]?c:'none';
-}
-function calItemsKey(key){return 'cal_items_'+key;}
-function calLineId(){return 'cl_'+Date.now().toString(36)+Math.random().toString(36).slice(2,5);}
-function calItemPhotoIds(item){return item?[...(Array.isArray(item.photoIds)?item.photoIds:[]),...(item.photoId?[item.photoId]:[])].filter((id,i,all)=>id&&all.indexOf(id)===i):[];}
-function getCalItems(key){
-  try{
-    const raw=lsGet(calItemsKey(key));
-    if(raw){
-      const items=JSON.parse(raw);
-      if(Array.isArray(items))return items.map(it=>({id:it.id||calLineId(),type:'text',text:it.type==='photo'?'':String(it.text||''),done:it.type==='photo'?false:!!it.done,color:CAL_COLORS[it.color]?it.color:'none',photoIds:calItemPhotoIds(it)}));
-    }
-  }catch(e){}
-  const legacy=(lsGet('cal_'+key)||'').split(/\n+/).map(s=>s.trim()).filter(Boolean);
-  return legacy.map(text=>({id:calLineId(),type:'text',text,done:false,color:'none'}));
-}
-function calVisibleItems(key){
-  const items=getCalItems(key);
-  const active=items.filter(it=>(it.text.trim()||calItemPhotoIds(it).length)&&!it.done);
-  return active.length?active:items.filter(it=>it.text.trim()||calItemPhotoIds(it).length);
-}
-function getCalNote(key){return calVisibleItems(key).map(it=>(it.done?'✓ ':'')+(it.text.trim()||`📷 ${calItemPhotoIds(it).length} foto${calItemPhotoIds(it).length===1?'':'s'}`)).join('\n');}
-function renderCalDayItems(key,mini){
-  const items=calVisibleItems(key).slice(0,mini?2:3);
-  if(!items.length)return '';
-  return `<div class="cal-note">${items.map(it=>{const color=CAL_COLORS[it.color]||CAL_COLORS.none;const photos=calItemPhotoIds(it).length;return `<div class="cal-note-line ${it.done?'done':''}"><span class="cal-note-box" style="background:${color.bg};border-color:${color.dot}"></span><span class="cal-note-text">${esc(it.text)||(photos?`📷 ${photos} foto${photos===1?'':'s'}`:'')}</span></div>`;}).join('')}</div>`;
-}
-function renderCalColorPicker(){
-  const row=document.getElementById('cal-color-row');if(!row)return;
-  row.innerHTML=CAL_COLOR_KEYS.map(k=>`<button class="cal-color-btn ${k===CAL_NOTE_COLOR?'sel':''}" style="background:${CAL_COLORS[k].bg}" onclick="selectCalColor('${k}')" title="${CAL_COLORS[k].name}"></button>`).join('');
-}
-function selectCalColor(k){
-  CAL_NOTE_COLOR=CAL_COLORS[k]?k:'none';
-  renderCalColorPicker();
-}
-function renderCalList(focusId){
-  const box=document.getElementById('cal-list-editor');if(!box)return;
-  const visible=CAL_NOTE_ITEMS.filter(it=>CAL_SHOW_DONE||!it.done);
-  box.innerHTML=(visible.length?visible:[{id:'empty',text:'',done:false}]).map(it=>{
-    const real=it.id!=='empty';
-    const lineColor=CAL_COLORS[it.color]||CAL_COLORS.none;
-    const photos=calItemPhotoIds(it).map(photoId=>({photoId,src:lsGet('ph_cal_'+photoId)})).filter(photo=>photo.src);
-    return `<div class="cal-line ${it.done?'done':''}" data-id="${it.id}">
-      <button class="cal-check ${it.done?'on':''}" style="--line-color:${lineColor.dot};--line-bg:${lineColor.bg}" onclick="${real?`toggleCalLine('${it.id}')`:'addCalLine()'}" title="Marcar"></button>
-      <button class="cal-line-color" style="background:${lineColor.bg};border-color:${lineColor.dot}" onclick="${real?`toggleCalLinePalette('${it.id}')`:'addCalLine()'}" title="Color de esta línea"></button>
-      <input value="${esc(it.text)}" placeholder="Escribe una línea..." ${real?`oninput="editCalLine('${it.id}',this.value)" onkeydown="calLineKey(event,'${it.id}')"`:`onfocus="addCalLine()"`}>
-      <button class="cal-line-photo-btn" onclick="${real?`chooseCalLinePhotos('${it.id}')`:'addCalLine()'}" title="Insertar una o varias fotos">📷</button>
-      <button class="cal-line-del" onclick="${real?`deleteCalLine('${it.id}')`:'addCalLine()'}" title="Borrar">×</button>
-      ${photos.length?`<div class="cal-line-photos">${photos.map(photo=>`<div class="cal-line-photo-wrap"><img class="cal-photo-thumb" src="${photo.src}" alt="Foto de la línea" onclick="openImagePop(this.src)"><button class="cal-line-photo-del" onclick="deleteCalLinePhoto('${it.id}','${photo.photoId}')" title="Borrar esta foto">×</button></div>`).join('')}</div>`:''}
-      ${real&&CAL_LINE_COLOR_ID===it.id?`<div class="cal-line-palette">${CAL_COLOR_KEYS.map(k=>`<button style="background:${CAL_COLORS[k].bg};border-color:${CAL_COLORS[k].dot}" onclick="setCalLineColor('${it.id}','${k}')" title="${CAL_COLORS[k].name}"></button>`).join('')}</div>`:''}
-    </div>`;
-  }).join('');
-  const toggle=document.getElementById('cal-done-toggle');
-  const doneCount=CAL_NOTE_ITEMS.filter(it=>it.done&&(it.text.trim()||calItemPhotoIds(it).length)).length;
-  if(toggle)toggle.textContent=CAL_SHOW_DONE?`Ocultar hechas (${doneCount})`:`Ver hechas (${doneCount})`;
-  if(focusId)setTimeout(()=>{
-    const row=box.querySelector(`[data-id="${focusId}"] input`);
-    if(row){row.focus();row.setSelectionRange(row.value.length,row.value.length);}
-  },0);
-}
-function addCalLine(afterId){
-  const idx=afterId?CAL_NOTE_ITEMS.findIndex(it=>it.id===afterId):-1;
-  const item={id:calLineId(),type:'text',text:'',done:false,color:'none'};
-  if(idx>=0)CAL_NOTE_ITEMS.splice(idx+1,0,item);else CAL_NOTE_ITEMS.push(item);
-  renderCalList(item.id);
-}
-function addCalPhoto(){
-  if(!CAL_NOTE_DAY)return;
-  const item={id:calLineId(),type:'text',text:'',done:false,color:'none',photoIds:[]};
-  CAL_NOTE_ITEMS.push(item);renderCalList(item.id);setTimeout(()=>chooseCalLinePhotos(item.id),0);
-}
-function chooseCalLinePhotos(id){
-  const item=CAL_NOTE_ITEMS.find(it=>it.id===id);if(!item)return;
-  const input=document.createElement('input');input.type='file';input.accept='image/*';input.multiple=true;input.style.display='none';document.body.appendChild(input);
-  input.onchange=async()=>{try{const files=[...input.files];if(!files.length)return;const photos=await Promise.all(files.map(compressTaskPhoto));item.photoIds=calItemPhotoIds(item);delete item.photoId;photos.forEach(data=>{const photoId=calLineId();item.photoIds.push(photoId);lsSet('ph_cal_'+photoId,data);});lsSet('h_updated',String(Date.now()));scheduleCloudSave();updateStorageInfo();renderCalList(id);}catch(e){alert('No se ha podido añadir esta imagen.');}finally{input.remove();}};
-  input.oncancel=()=>input.remove();input.click();
-}
-function deleteCalLinePhoto(lineId,photoId){
-  const item=CAL_NOTE_ITEMS.find(it=>it.id===lineId);if(!item)return;
-  item.photoIds=calItemPhotoIds(item).filter(id=>id!==photoId);delete item.photoId;
-  lsRemove('ph_cal_'+photoId);updateStorageInfo();renderCalList(lineId);
-}
-function editCalLine(id,text){
-  const it=CAL_NOTE_ITEMS.find(x=>x.id===id);if(it)it.text=text;
-}
-function toggleCalLinePalette(id){
-  CAL_LINE_COLOR_ID=CAL_LINE_COLOR_ID===id?null:id;
-  renderCalList();
-  if(CAL_LINE_COLOR_ID)setTimeout(()=>{
-    const row=document.querySelector(`#cal-list-editor [data-id="${id}"]`);
-    const palette=row?.querySelector('.cal-line-palette');
-    if(palette)palette.scrollIntoView({block:'nearest',behavior:'smooth'});
-  },0);
-}
-function setCalLineColor(id,color){
-  const item=CAL_NOTE_ITEMS.find(it=>it.id===id);if(!item)return;
-  item.color=CAL_COLORS[color]?color:'none';CAL_LINE_COLOR_ID=null;renderCalList(id);
-}
-function toggleCalLine(id){
-  const it=CAL_NOTE_ITEMS.find(x=>x.id===id);if(!it)return;
-  it.done=!it.done;
-  renderCalList(id);
-}
-function deleteCalLine(id){
-  const removed=CAL_NOTE_ITEMS.find(it=>it.id===id);
-  calItemPhotoIds(removed).filter(photoId=>!CAL_ORIGINAL_PHOTO_IDS.includes(photoId)).forEach(photoId=>lsRemove('ph_cal_'+photoId));
-  CAL_NOTE_ITEMS=CAL_NOTE_ITEMS.filter(it=>it.id!==id);
-  if(!CAL_NOTE_ITEMS.length)CAL_NOTE_ITEMS=[{id:calLineId(),type:'text',text:'',done:false,color:'none'}];
-  updateStorageInfo();
-  renderCalList();
-}
-function calLineKey(e,id){
-  if(e.key==='Enter'){
-    e.preventDefault();
-    addCalLine(id);
-  }
-}
-function toggleCalDoneVisible(){
-  CAL_SHOW_DONE=!CAL_SHOW_DONE;
-  renderCalList();
-}
-function calendarItemDates(){
-  return lsKeys().filter(k=>k.startsWith('cal_items_')).map(k=>k.slice('cal_items_'.length)).filter(k=>/^\d{4}-\d{2}-\d{2}$/.test(k)).sort();
-}
-function calendarSearchDates(){
-  const dates=calendarItemDates();
-  if(CAL_MODE==='year'){
-    const year=String(new Date().getFullYear());
-    return dates.filter(key=>key.startsWith(year+'-'));
-  }
-  const year=CAL_DATE.getFullYear();
-  const month=String(CAL_DATE.getMonth()+1).padStart(2,'0');
-  return dates.filter(key=>key.startsWith(`${year}-${month}-`));
-}
-function openCalColorSearch(){
-  CAL_SEARCH_COLOR=null;
-  document.getElementById('cal-search-colors').innerHTML=CAL_COLOR_KEYS.filter(k=>k!=='none').map(k=>`<button class="cal-search-color" data-color="${k}" style="background:${CAL_COLORS[k].bg};border-color:${CAL_COLORS[k].dot}" onclick="searchCalendarColor('${k}')" title="${CAL_COLORS[k].name}"></button>`).join('');
-  document.getElementById('cal-search-results').innerHTML='<div class="cal-search-empty">Elige un color.</div>';
-  document.getElementById('cal-search-overlay').classList.add('open');
-}
-function closeCalColorSearch(){document.getElementById('cal-search-overlay').classList.remove('open');}
-function calendarColorResults(color){
-  const results=[];
-  calendarSearchDates().forEach(key=>getCalItems(key).forEach(item=>{
-    if(item.color===color&&(item.text.trim()||calItemPhotoIds(item).length))results.push({key,item});
-  }));
-  return results;
-}
-function searchCalendarColor(color){
-  CAL_SEARCH_COLOR=color;
-  document.querySelectorAll('.cal-search-color').forEach(el=>el.classList.toggle('sel',el.dataset.color===color));
-  const results=calendarColorResults(color);
-  const box=document.getElementById('cal-search-results');
-  if(!results.length){box.innerHTML=`<div class="cal-search-empty">No hay líneas de color ${esc(CAL_COLORS[color].name.toLowerCase())}.</div>`;return;}
-  box.innerHTML=`<button class="cal-search-pdf" onclick="exportCalendarColorPDF('${color}',this)">PDF de estos resultados</button>`+results.map(({key,item})=>{
-    const date=new Date(key+'T12:00:00').toLocaleDateString('es-ES',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
-    const label=item.text.trim()||`📷 ${calItemPhotoIds(item).length} foto${calItemPhotoIds(item).length===1?'':'s'}`;
-    return `<button class="cal-search-result" onclick="openCalendarSearchResult('${key}')"><span class="cal-search-result-dot" style="background:${CAL_COLORS[color].dot}"></span><span><span class="cal-search-result-date">${date}</span><span class="cal-search-result-text">${esc(label)}${item.done?' ✓':''}</span></span></button>`;
-  }).join('');
-}
-function openCalendarSearchResult(key){closeCalColorSearch();openCalNote(key);}
-function renderMonthGrid(year,month,mini){
-  const today=new Date();
-  const first=new Date(year,month,1);
-  const start=calMondayOffset(first);
-  const days=new Date(year,month+1,0).getDate();
-  const prevDays=new Date(year,month,0).getDate();
-  let h=`<div class="cal-week"><div>L</div><div>M</div><div>X</div><div>J</div><div>V</div><div>S</div><div>D</div></div><div class="cal-grid">`;
-  const total=mini?42:42;
-  for(let i=0;i<total;i++){
-    const cell=i-start+1;
-    let d=cell, muted=false, realMonth=month, realYear=year;
-    if(cell<1){d=prevDays+cell;muted=true;realMonth=month-1;if(realMonth<0){realMonth=11;realYear--;}}
-    else if(cell>days){d=cell-days;muted=true;realMonth=month+1;if(realMonth>11){realMonth=0;realYear++;}}
-    const date=new Date(realYear,realMonth,d);
-    const weekend=calMondayOffset(date)>=5;
-    const key=calDateKey(date);
-    const showCellData=!mini||!muted;
-    const note=showCellData?getCalNote(key):'';
-    const colorKey=showCellData?calColorFor(key):'none';
-    const color=CAL_COLORS[colorKey]||CAL_COLORS.none;
-    const hasColor=colorKey!=='none';
-    const style=hasColor?`style="--cal-bg:${color.bg};--cal-border:${color.border};"`:'';
-    const click=(!mini||!muted)?`onclick="openCalNote('${key}')"`:'';
-    h+=`<div class="cal-day${weekend?' weekend':''}${muted?' muted':''}${sameDay(date,today)?' today':''}${hasColor?' has-color':''}" ${style} ${click}><div>${d}</div>${note?`${renderCalDayItems(key,mini)}<div class="cal-dot" style="background:${color.dot}"></div>`:''}</div>`;
-  }
-  return h+`</div>`;
-}
-let CAL_FULLSCREEN = false;
-function toggleCalendarFullscreen(){
-  CAL_FULLSCREEN = !CAL_FULLSCREEN;
-  const container = document.getElementById('home-calendar-container');
-  if(container) {
-    if(CAL_FULLSCREEN) {
-      container.style.position = 'fixed';
-      container.style.inset = '0';
-      container.style.zIndex = '9999';
-      container.style.background = '#f5ead8';
-      container.style.padding = '20px';
-      container.style.paddingTop = 'calc(20px + env(safe-area-inset-top))';
-    } else {
-      container.style.position = 'relative';
-      container.style.inset = 'auto';
-      container.style.zIndex = 'auto';
-      container.style.background = 'transparent';
-      container.style.padding = '0';
-    }
-  }
-}
-
-function renderCalendar(){
-  const y=CAL_DATE.getFullYear(),m=CAL_DATE.getMonth();
-  let body='';
-  if(CAL_MODE==='year'){
-    const yy=new Date().getFullYear();
-    body=`<div class="year-grid">`;
-    for(let mm=0;mm<12;mm++){
-      const count=monthCalendarPhotos(yy,mm).length;
-      body+=`<div class="mini-month"><div class="mini-title">${calMonthOnly(yy,mm)}</div>${renderMonthGrid(yy,mm,true)}<div class="cal-photo-count" title="Fotos de este mes">📷 ${count}</div></div>`;
-    }
-    body+=`</div>`;
-    return `<div class="cal-card">
-      <div class="cal-head"><div class="cal-title">Año ${yy}</div><button class="cal-btn" onclick="toggleCalendarFullscreen()" title="Pantalla completa">⛶</button><button class="cal-btn" onclick="openCalColorSearch()">🔎 Colores</button><button class="cal-btn" onclick="CAL_MODE='month';renderHomeGrid()">Mes</button></div>
-      ${body}
-    </div>`;
-  }
-  body=renderMonthGrid(y,m,false);
-  return `<div class="cal-card">
-    <div class="cal-head">
-      <button class="cal-btn" onclick="changeCalMonth(-1)">‹</button>
-      <button class="cal-title cal-title-btn" onclick="exportMonthPhotosPDF(${y},${m},this)" title="Crear PDF con las fotos del mes">${calMonthName(y,m)}</button>
-      <button class="cal-btn" onclick="changeCalMonth(1)">›</button>
-      <button class="cal-btn" onclick="toggleCalendarFullscreen()" title="Pantalla completa">⛶</button>
-      <button class="cal-btn" onclick="openCalColorSearch()">🔎 Colores</button>
-      <button class="cal-btn" onclick="CAL_MODE='year';renderHomeGrid()">Año</button>
-    </div>
-    ${body}
-    <div class="cal-photo-count" title="Fotos de este mes">📷 ${monthCalendarPhotos(y,m).length}</div>
-  </div>`;
-}
-function changeCalMonth(delta){
-  CAL_DATE=new Date(CAL_DATE.getFullYear(),CAL_DATE.getMonth()+delta,1);
-  renderHomeGrid();
-}
-function openCalNote(key){
-  CAL_NOTE_DAY=key;
-  CAL_NOTE_COLOR=calColorFor(key);
-  CAL_SHOW_DONE=false;
-  CAL_NOTE_ITEMS=getCalItems(key);
-  if(!CAL_NOTE_ITEMS.length)CAL_NOTE_ITEMS=[{id:calLineId(),type:'text',text:'',done:false,color:'none'}];
-  CAL_LINE_COLOR_ID=null;
-  CAL_ORIGINAL_PHOTO_IDS=CAL_NOTE_ITEMS.flatMap(calItemPhotoIds);
-  const date=new Date(key+'T12:00:00');
-  document.getElementById('cal-note-title').textContent=date.toLocaleDateString('es-ES',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
-  renderCalList(CAL_NOTE_ITEMS[0]?.id);
-  renderCalColorPicker();
-  document.getElementById('cal-note-ov').classList.add('open');
-}
-function closeCalNote(saved=false){
-  if(!saved){
-    const currentIds=CAL_NOTE_ITEMS.flatMap(calItemPhotoIds);
-    currentIds.filter(id=>!CAL_ORIGINAL_PHOTO_IDS.includes(id)).forEach(id=>lsRemove('ph_cal_'+id));
-    updateStorageInfo();
-  }
-  document.getElementById('cal-note-ov').classList.remove('open');
-  CAL_NOTE_DAY=null;
-  CAL_ORIGINAL_PHOTO_IDS=[];
-}
-function saveCalNote(){
-  if(!CAL_NOTE_DAY)return;
-  const items=CAL_NOTE_ITEMS.map(it=>({...it,type:'text',text:(it.text||'').trim(),photoIds:calItemPhotoIds(it)})).filter(it=>it.text||it.photoIds.length);
-  const textItems=items;
-  const savedPhotoIds=items.flatMap(calItemPhotoIds);
-  CAL_ORIGINAL_PHOTO_IDS.filter(id=>!savedPhotoIds.includes(id)).forEach(id=>lsRemove('ph_cal_'+id));
-  const activeText=textItems.filter(it=>!it.done).map(it=>it.text).join('\n');
-  const allText=textItems.map(it=>(it.done?'✓ ':'')+it.text).join('\n');
-  if(items.length)lsSet(calItemsKey(CAL_NOTE_DAY),JSON.stringify(items));else lsRemove(calItemsKey(CAL_NOTE_DAY));
-  if(allText)lsSet('cal_'+CAL_NOTE_DAY,activeText||allText);else lsRemove('cal_'+CAL_NOTE_DAY);
-  if(CAL_NOTE_COLOR&&CAL_NOTE_COLOR!=='none')lsSet('cal_color_'+CAL_NOTE_DAY,CAL_NOTE_COLOR);else lsRemove('cal_color_'+CAL_NOTE_DAY);
-  lsSet('h_updated',String(Date.now()));
-  scheduleCloudSave();
-  CAL_ORIGINAL_PHOTO_IDS=savedPhotoIds;
-  updateStorageInfo();
-  closeCalNote(true);
-  renderHomeGrid();
-}
-function deleteCalNote(){
-  getCalItems(CAL_NOTE_DAY).flatMap(calItemPhotoIds).forEach(photoId=>lsRemove('ph_cal_'+photoId));
-  CAL_NOTE_ITEMS.flatMap(calItemPhotoIds).forEach(photoId=>lsRemove('ph_cal_'+photoId));
-  if(CAL_NOTE_DAY)lsRemove('cal_'+CAL_NOTE_DAY);
-  if(CAL_NOTE_DAY)lsRemove(calItemsKey(CAL_NOTE_DAY));
-  if(CAL_NOTE_DAY)lsRemove('cal_color_'+CAL_NOTE_DAY);
-  lsSet('h_updated',String(Date.now()));
-  scheduleCloudSave();
-  updateStorageInfo();
-  CAL_ORIGINAL_PHOTO_IDS=[];
-  closeCalNote(true);
-  renderHomeGrid();
-}
-
-// ── HOUSES ──
-function openHouseModal(eid){
-  SEL_COLOR='verde';SEL_HEMO='🏠';HOUSE_ICON_IMAGE=null;
-  const existing=eid?HOUSES.find(h=>h.id===eid):null;
-  if(existing){SEL_COLOR=existing.color||'verde';SEL_HEMO=existing.emoji||'🏠';HOUSE_ICON_IMAGE=existing.iconImage||null;}
-  document.getElementById('hmod-title').textContent=eid?'Editar casa':'Nueva casa';
-  document.getElementById('hminp').value=existing?.name||'';
-  // Color picker
-  document.getElementById('color-picker').innerHTML=PAL_KEYS.map(k=>`
-    <div class="cpopt ${k===SEL_COLOR?'sel':''}" onclick="selColor('${k}')"
-      style="background:${PALETTES[k].ac}" title="${PALETTES[k].name}"></div>`).join('');
-  // House emojis
-  document.getElementById('house-emi-row').innerHTML=HOUSE_EMOJIS.map(e=>
-    `<div style="font-size:24px;width:36px;height:36px;background:${SEL_COLOR&&PALETTES[SEL_COLOR]?PALETTES[SEL_COLOR].shades[1]:'#f0e8d8'};border:2px solid ${e===SEL_HEMO?'#d03880':'transparent'};border-radius:9px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .13s" onclick="selHEmo('${e}')">${e}</div>`
-  ).join('');
-  document.getElementById('house-icon-paste-input').value='';
-  updateHouseIconPreview();
-  document.getElementById('hmov').dataset.eid=eid||'';
-  document.getElementById('hmov').classList.add('open');
-  setTimeout(()=>document.getElementById('hminp').focus(),240);
-}
-function selColor(k){
-  SEL_COLOR=k;
-  document.querySelectorAll('.cpopt').forEach((el,i)=>el.classList.toggle('sel',PAL_KEYS[i]===k));
-  // update emoji row bg
-  document.querySelectorAll('#house-emi-row div').forEach(el=>{el.style.background=PALETTES[k].shades[1];});
-}
-function updateHouseIconPreview(){
-  const preview=document.getElementById('house-icon-paste-preview');if(!preview)return;
-  preview.innerHTML=HOUSE_ICON_IMAGE?`<img src="${HOUSE_ICON_IMAGE}" alt="">`:esc(SEL_HEMO);
-}
-function selHEmo(e){HOUSE_ICON_IMAGE=null;SEL_HEMO=e;updateHouseIconPreview();document.querySelectorAll('#house-emi-row div').forEach(el=>{el.style.borderColor=el.textContent===e?'#d03880':'transparent';});}
-function handleHouseIconText(value){
-  const text=String(value||'').trim();if(!text)return;
-  HOUSE_ICON_IMAGE=null;SEL_HEMO=Array.from(text).slice(0,4).join('');updateHouseIconPreview();
-}
-function chooseIconImage(target){ICON_IMAGE_TARGET=target;const input=document.getElementById('icon-image-input');input.value='';input.click();}
-function makeIconImage(file,size,done){
-  const reader=new FileReader();
-  reader.onload=ev=>{
-    const img=new Image();
-    img.onload=()=>{
-      const canvas=document.createElement('canvas');canvas.width=size;canvas.height=size;
-      const ctx=canvas.getContext('2d');ctx.clearRect(0,0,size,size);
-      const scale=Math.min(size/img.width,size/img.height),w=img.width*scale,h=img.height*scale;
-      ctx.drawImage(img,(size-w)/2,(size-h)/2,w,h);done(canvas.toDataURL('image/png'));
-    };
-    img.src=ev.target.result;
-  };
-  reader.readAsDataURL(file);
-}
-function handleIconImageFile(e){
-  const file=e.target.files[0];if(!file)return;
-  if(ICON_IMAGE_TARGET==='house')makeIconImage(file,128,data=>{HOUSE_ICON_IMAGE=data;updateHouseIconPreview();});
-  else makeIconImage(file,96,data=>{ROOM_ICON_IMAGE=data;EMOJI_MANUAL=true;updateEmojiPreview();});
-}
-function handleHouseIconPaste(e){
-  const items=[...(e.clipboardData?.items||[])];
-  const imageItem=items.find(item=>item.type.startsWith('image/'));
-  if(!imageItem)return;
-  e.preventDefault();
-  const file=imageItem.getAsFile();if(!file)return;
-  makeIconImage(file,128,data=>{HOUSE_ICON_IMAGE=data;updateHouseIconPreview();});
-}
-async function saveHouse(){
-  const name=document.getElementById('hminp').value.trim().toUpperCase();
-  if(!name){document.getElementById('hminp').focus();return;}
-  const eid=document.getElementById('hmov').dataset.eid;
-  document.getElementById('hmov').classList.remove('open');
-  if(!Array.isArray(HOUSES))HOUSES=[];
-  if(!DATA||typeof DATA!=='object'||Array.isArray(DATA))DATA={};
-  snap();
-  if(eid){
-    const h=HOUSES.find(x=>x.id===eid);
-    if(h){h.name=name;h.emoji=SEL_HEMO;h.color=SEL_COLOR;if(HOUSE_ICON_IMAGE)h.iconImage=HOUSE_ICON_IMAGE;else delete h.iconImage;
-      if(db)await db.collection('houses').doc(eid).set(h);}
-  } else {
-    if(HOUSES.length>=5){alert('Máximo 5 casas.');return;}
-    const id=gid();const h={id,name,emoji:SEL_HEMO,color:SEL_COLOR};if(HOUSE_ICON_IMAGE)h.iconImage=HOUSE_ICON_IMAGE;HOUSES.push(h);
-    if(db)await db.collection('houses').doc(id).set(h);
-  }
-  saveLoc();
-  if(CURRENT_HOUSE){showHouseScreen(CURRENT_HOUSE,false);}else{renderHomeGrid();}
-}
-async function delHouse(id){
-  showConf('Borrar casa','¿Eliminar esta casa y todo su contenido?',async()=>{
-    snap();
-    const ids=Object.entries(DATA).filter(([,r])=>r.houseId===id).map(([i])=>i);
-    for(const rid of ids){
-      if(db){const ts=await db.collection('rooms').doc(rid).collection('tasks').get();for(const t of ts.docs)await t.ref.delete();await db.collection('rooms').doc(rid).delete();}
-      delete DATA[rid];
-    }
-    if(db)await db.collection('houses').doc(id).delete();
-    HOUSES=HOUSES.filter(h=>h.id!==id);
-    if(CURRENT_HOUSE===id){CURRENT_HOUSE=null;SEL_LEVELS=[];}
-    saveLoc();saveSel();
-    showHomeScreen();
-  });
-}
-
-// ── ROOMS ──
-async function addRoom(name,emoji,level){
-  snap();
-  const id=gid(),houseId=CURRENT_HOUSE;
-  const parentId=level===0?null:(SEL_LEVELS[level-1]||null);
-  const order=sibs(houseId,parentId).length;
-  const room={name,emoji,houseId,parentId,level,order,tasks:{}};
-  DATA[id]=room;
-  if(db){const{tasks,...rd}=room;await db.collection('rooms').doc(id).set(rd);}
-  saveLoc();
-  SEL_LEVELS=SEL_LEVELS.slice(0,level);SEL_LEVELS[level]=id;
-  saveSel();renderHouseMain();
-}
-async function updateRoom(id,name,emoji,iconImage){
-  const room=DATA[id];if(!room)return;
-  snap();
-  room.name=name;room.emoji=emoji;
-  if(iconImage)room.iconImage=iconImage;else delete room.iconImage;
-  if(db){const{tasks,...rd}=room;await db.collection('rooms').doc(id).set(rd);}
-  saveLoc();renderHouseMain();
-}
-async function doDelRoom(id){
-  function col(rid){return[rid,...Object.entries(DATA).filter(([,r])=>r.parentId===rid).flatMap(([i])=>col(i))];}
-  for(const rid of col(id)){Object.values(DATA[rid]?.tasks||{}).forEach(t=>taskPhotoIds(t).forEach(photoId=>lsRemove('ph_task_'+photoId)));if(db){const ts=await db.collection('rooms').doc(rid).collection('tasks').get();for(const t of ts.docs)await t.ref.delete();await db.collection('rooms').doc(rid).delete();}delete DATA[rid];}
-}
-function roomHasWrittenRows(id){
-  const room=DATA[id];if(!room)return false;
-  if(Object.values(room.tasks||{}).some(task=>String(task.text||'').trim()))return true;
-  return Object.entries(DATA).some(([childId,child])=>child.parentId===id&&roomHasWrittenRows(childId));
-}
-function blockRoomDeleteIfProtected(id){
-  if(Object.values(DATA).some(room=>room.parentId===id)){
-    showToast('No es pot eliminar aquesta zona o subzona perquè conté subzones. Esborra primer les subzones.');
-    return true;
-  }
-  if(!roomHasWrittenRows(id))return false;
-  showToast('No es pot eliminar aquesta zona o subzona perquè conté files escrites. Esborra primer les files.');
-  return true;
-}
-function askDelete(){
-  if(!SEL_LEVELS.length)return;
-  const id=SEL_LEVELS[SEL_LEVELS.length-1];
-  const r=DATA[id];if(!r)return;
-  if(blockRoomDeleteIfProtected(id))return;
-  showConf('Borrar',`¿Eliminar "${r.emoji} ${r.name}"?`,async()=>{
-    snap();await doDelRoom(id);SEL_LEVELS=SEL_LEVELS.slice(0,-1);saveLoc();saveSel();renderHouseMain();
-  });
-}
-function delPill(id,e){
-  e&&e.stopPropagation();
-  const r=DATA[id];if(!r)return;
-  if(blockRoomDeleteIfProtected(id))return;
-  showConf('Borrar',`¿Eliminar "${r.emoji} ${r.name}"?`,async()=>{
-    snap();await doDelRoom(id);SEL_LEVELS=SEL_LEVELS.filter(s=>s!==id);saveLoc();saveSel();renderHouseMain();
-  });
-}
-function editPill(id,e){
-  e&&e.stopPropagation();
-  const room=DATA[id];if(!room)return;
-  openRoomModal(room.level||0,id);
-}
-
-// ── TASKS ──
-async function addTask(){
-  const inp=document.getElementById('task-inp');
-  const text=(inp.value||'').trim();if(!text&&!TASK_PENDING_PHOTOS.length)return;
-  await addTaskText(text,TASK_PENDING_PHOTOS);
-  TASK_PENDING_PHOTOS=[];
-  inp.value='';renderTasks(true);
-}
-async function addTaskText(text,photoData=[]){
-  const rid=SEL_LEVELS[SEL_LEVELS.length-1];if(!rid)return;
-  snap();const id=gid();
-  if(!DATA[rid].tasks)DATA[rid].tasks={};
-  const task={text,done:false,order:Object.keys(DATA[rid].tasks).length,color:TASK_COLOR||'tema'};
-  if(photoData.length){task.photoIds=photoData.map(data=>{const photoId=gid();lsSet('ph_task_'+photoId,data);return photoId;});updateStorageInfo();}
-  DATA[rid].tasks[id]=task;
-  if(db)await db.collection('rooms').doc(rid).collection('tasks').doc(id).set(task);
-  saveLoc();
-}
-async function addDateTimeTask(){
-  const text=new Date().toLocaleString('es-ES',{weekday:'short',day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});
-  await addTaskText(text);
-  renderTasks(true);
-}
-async function toggleTask(rId,tId){
-  const t=DATA[rId]?.tasks?.[tId];if(!t)return;
-  t.done=!t.done;
-  saveLoc();
-  renderTasks();
-  if(db)db.collection('rooms').doc(rId).collection('tasks').doc(tId).update({done:t.done}).catch(console.error);
-}
-function rowTaskTap(e,rId,tId){
-  if(e.target.closest('button,.tdrag,.chk'))return;
-  const t=DATA[rId]?.tasks?.[tId];
-  if(e.target.closest('.ttxt')&&!t?.done)return;
-  toggleTask(rId,tId);
-}
-async function delTask(rId,tId){
-  snap();const el=document.getElementById('tk-'+tId);
-  if(el){el.style.opacity='0';el.style.transition='opacity .15s';}
-  setTimeout(async()=>{taskPhotoIds(DATA[rId]?.tasks?.[tId]).forEach(photoId=>lsRemove('ph_task_'+photoId));delete DATA[rId].tasks[tId];if(db)await db.collection('rooms').doc(rId).collection('tasks').doc(tId).delete();saveLoc();updateStorageInfo();renderTasks();},150);
-}
-async function renTask(rId,tId,text){
-  const task=DATA[rId]?.tasks?.[tId];if(!task||(!text&&!taskPhotoIds(task).length))return;task.text=text;
-  if(db)await db.collection('rooms').doc(rId).collection('tasks').doc(tId).update({text});saveLoc();
-}
-function setNewTaskColor(k){
-  TASK_COLOR=TASK_COLORS[k]?k:'tema';
-  document.querySelectorAll('.task-swatch').forEach(el=>el.classList.toggle('sel',el.dataset.color===TASK_COLOR));
-  const inp=document.getElementById('task-inp');if(inp)inp.focus({preventScroll:true});
-}
-function toggleTaskColors(){
-  TASK_COLORS_OPEN=!TASK_COLORS_OPEN;
-  document.querySelector('.task-colors')?.classList.toggle('hidden',!TASK_COLORS_OPEN);
-  const inp=document.getElementById('task-inp');if(inp)inp.focus({preventScroll:true});
-}
-function taskPhotoIds(task){return task?[...(Array.isArray(task.photoIds)?task.photoIds:[]),...(task.photoId?[task.photoId]:[])].filter((id,i,all)=>id&&all.indexOf(id)===i):[];}
-function clipboardPhotoFiles(e){return [...(e.clipboardData?.items||[])].filter(item=>item.type.startsWith('image/')).map(item=>item.getAsFile()).filter(Boolean);}
-function compressTaskPhoto(file){
-  return new Promise((resolve,reject)=>{
-    const reader=new FileReader();
-    reader.onerror=reject;
-    reader.onload=ev=>{
-      const img=new Image();
-      img.onerror=reject;
-      img.onload=()=>{
-        const canvas=document.createElement('canvas');
-        const max=1600;let w=img.width,h=img.height;
-        if(w>max){h=Math.round(h*max/w);w=max;}
-        if(h>max){w=Math.round(w*max/h);h=max;}
-        canvas.width=w;canvas.height=h;canvas.getContext('2d').drawImage(img,0,0,w,h);
-        resolve(canvas.toDataURL('image/jpeg',.86));
-      };
-      img.src=ev.target.result;
-    };
-    reader.readAsDataURL(file);
-  });
-}
-async function pasteTaskPhoto(e,rId=null,tId=null){
-  const files=clipboardPhotoFiles(e);if(!files.length)return;
-  e.preventDefault();
-  const currentText=rId&&tId?e.currentTarget.textContent.trim():null;
-  try{
-    const photos=await Promise.all(files.map(compressTaskPhoto));
-    if(rId&&tId){
-      const task=DATA[rId]?.tasks?.[tId];if(!task)return;
-      task.text=currentText;task.photoIds=taskPhotoIds(task);delete task.photoId;
-      photos.forEach(data=>{const photoId=gid();task.photoIds.push(photoId);lsSet('ph_task_'+photoId,data);});
-      saveLoc();updateStorageInfo();renderTasks();
-    }else{
-      TASK_PENDING_PHOTOS.push(...photos);renderPendingTaskPhotos();
-    }
-  }catch(err){alert('No se ha podido pegar esta imagen.');}
-}
-function renderPendingTaskPhotos(){const box=document.getElementById('task-paste-previews');if(box)box.innerHTML=TASK_PENDING_PHOTOS.map((src,i)=>`<div class="task-paste-preview"><img src="${src}" onclick="openImagePop(this.src)" alt="Foto pegada"><button class="task-paste-remove" onclick="clearPendingTaskPhoto(${i})" title="Quitar foto">✕</button></div>`).join('');}
-function clearPendingTaskPhoto(index){TASK_PENDING_PHOTOS.splice(index,1);renderPendingTaskPhotos();const inp=document.getElementById('task-inp');if(inp)inp.focus();}
-function chooseTaskPhotos(rId=null,tId=null){
-  const input=document.createElement('input');input.type='file';input.accept='image/*';input.multiple=true;input.style.display='none';document.body.appendChild(input);
-  input.onchange=async()=>{
-    const files=[...input.files];if(!files.length)return;
-    try{
-      const photos=await Promise.all(files.map(compressTaskPhoto));
-      if(rId&&tId){
-        const task=DATA[rId]?.tasks?.[tId];if(!task)return;
-        task.photoIds=taskPhotoIds(task);delete task.photoId;
-        photos.forEach(data=>{const photoId=gid();task.photoIds.push(photoId);lsSet('ph_task_'+photoId,data);});
-        saveLoc();updateStorageInfo();renderTasks();
-      }else{
-        TASK_PENDING_PHOTOS.push(...photos);renderPendingTaskPhotos();
-        const inp=document.getElementById('task-inp');if(inp)inp.focus();
-      }
-    }catch(err){alert('No se ha podido añadir esta imagen.');}
-    finally{input.remove();}
-  };
-  input.oncancel=()=>input.remove();
-  input.click();
-}
-function deleteTaskPhoto(rId,tId,photoId){
-  const task=DATA[rId]?.tasks?.[tId];if(!task)return;
-  task.photoIds=taskPhotoIds(task).filter(id=>id!==photoId);delete task.photoId;
-  lsRemove('ph_task_'+photoId);saveLoc();updateStorageInfo();renderTasks();
-}
-async function cycleTaskColor(rId,tId){
-  const t=DATA[rId]?.tasks?.[tId];if(!t)return;
-  const cur=TASK_COLOR_KEYS.indexOf(t.color||'tema');
-  t.color=TASK_COLOR_KEYS[(cur+1)%TASK_COLOR_KEYS.length];
-  if(db)await db.collection('rooms').doc(rId).collection('tasks').doc(tId).update({color:t.color});
-  saveLoc();renderTasks();
-}
-function reorderTask(rId,fromId,toId){
-  if(!fromId||!toId||fromId===toId||!DATA[rId]?.tasks)return;
-  const entries=Object.entries(DATA[rId].tasks).sort((a,b)=>(a[1].order||0)-(b[1].order||0));
-  const active=entries.filter(([,t])=>!t.done).map(([id])=>id);
-  const done=entries.filter(([,t])=>t.done).map(([id])=>id);
-  const list=DATA[rId].tasks[fromId]?.done?done:active;
-  const from=list.indexOf(fromId),to=list.indexOf(toId);
-  if(from<0||to<0)return;
-  snap();
-  list.splice(from,1);
-  list.splice(to,0,fromId);
-  [...active,...done].forEach((id,i)=>{DATA[rId].tasks[id].order=i;});
-  saveLoc();renderTasks();
-}
-// ── UNDO / REDO ──
-async function syncDbFromState(){
-  if(db){
-    const s=await db.collection('rooms').get();
-    for(const d of s.docs){const ts=await db.collection('rooms').doc(d.id).collection('tasks').get();for(const t of ts.docs)await t.ref.delete();await d.ref.delete();}
-    for(const[id,r]of Object.entries(DATA)){const{tasks,...rd}=r;await db.collection('rooms').doc(id).set(rd);for(const[tid,t]of Object.entries(tasks||{}))await db.collection('rooms').doc(id).collection('tasks').doc(tid).set(t);}
-  }
-}
-function renderAfterHistory(){
-  if(CURRENT_HOUSE&&HOUSES.find(h=>h.id===CURRENT_HOUSE))showHouseScreen(CURRENT_HOUSE);
-  else showHomeScreen();
-}
-async function undo(){
-  if(!HIST.length)return;
-  showConf('Deshacer','¿Quieres deshacer el último cambio?',async()=>{
-    REDO.push(appState());
-    restoreState(HIST.pop());
-    await syncDbFromState();
-    saveLoc();renderAfterHistory();
-  });
-}
-async function redo(){
-  if(!REDO.length)return;
-  showConf('Rehacer','¿Quieres rehacer el cambio deshecho?',async()=>{
-    HIST.push(appState());
-    restoreState(REDO.pop());
-    await syncDbFromState();
-    saveLoc();renderAfterHistory();
-  });
-}
-
-// ── NAV ──
-function navPrev(){
-  const lvl=SEL_LEVELS.length-1;if(lvl<0)return;
-  const par=lvl===0?null:SEL_LEVELS[lvl-1];
-  const s=sibs(CURRENT_HOUSE,par);const i=s.findIndex(([x])=>x===SEL_LEVELS[lvl]);
-  if(i>0){SEL_LEVELS[lvl]=s[i-1][0];saveSel();renderHouseMain();}
-}
-function navNext(){
-  const lvl=SEL_LEVELS.length-1;if(lvl<0)return;
-  const par=lvl===0?null:SEL_LEVELS[lvl-1];
-  const s=sibs(CURRENT_HOUSE,par);const i=s.findIndex(([x])=>x===SEL_LEVELS[lvl]);
-  if(i<s.length-1){SEL_LEVELS[lvl]=s[i+1][0];saveSel();renderHouseMain();}
-}
-function selectAt(lvl,id){
-  if(SEL_LEVELS[lvl]===id){
-    SEL_LEVELS=SEL_LEVELS.slice(0,lvl+1);
-    if(COLLAPSED_ROOM_LISTS.has(id))COLLAPSED_ROOM_LISTS.delete(id);else COLLAPSED_ROOM_LISTS.add(id);
-    saveSel();renderHouseMain();
-    return;
-  }
-  SEL_LEVELS=SEL_LEVELS.slice(0,lvl);SEL_LEVELS[lvl]=id;
-  COLLAPSED_ROOM_LISTS.delete(id);
-  saveSel();renderHouseMain();
-}
-
-// ── HOUSE SEARCH ──
-function normSearch(s){return String(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim();}
-function roomPathIds(roomId){
-  const ids=[];let cur=roomId;
-  while(cur&&DATA[cur]){ids.unshift(cur);cur=DATA[cur].parentId||null;}
-  return ids;
-}
-function roomPathText(roomId){
-  const house=HOUSES.find(h=>h.id===CURRENT_HOUSE);
-  const parts=[house?.name||'Casa'];
-  roomPathIds(roomId).forEach(id=>{const r=DATA[id];parts.push((r.emoji||'📦')+' '+r.name);});
-  return parts.join(' › ');
-}
-function openHouseSearch(){
-  const panel=document.getElementById('search-panel');
-  const house=HOUSES.find(h=>h.id===CURRENT_HOUSE);
-  document.getElementById('search-title').textContent='Buscar en '+((house?.emoji||'🏠')+' '+(house?.name||'Casa'));
-  const colors=document.getElementById('search-colors');
-  if(colors)colors.innerHTML=TASK_COLOR_KEYS.map(k=>`
-    <button class="search-color-btn" onclick="searchByColor('${k}')">
-      <span class="search-color-dot" style="background:${taskColorHex(k)}"></span>${taskColorName(k)}
-    </button>
-  `).join('');
-  panel.classList.add('open');
-  setTimeout(()=>document.getElementById('house-search').focus(),60);
-}
-function closeHouseSearch(){
-  document.getElementById('search-panel').classList.remove('open');
-  document.getElementById('house-search').value='';
-  document.getElementById('search-results').innerHTML='';
-}
-function searchByColor(k){
-  const inp=document.getElementById('house-search');
-  inp.value=TASK_COLORS[k]?.name||k;
-  runHouseSearch(inp.value);
-}
-function runHouseSearch(q){
-  const box=document.getElementById('search-results');
-  const nq=normSearch(q);
-  if(nq.length<2){box.innerHTML='';return;}
-  const results=[];
-  Object.entries(DATA).forEach(([rid,r])=>{
-    if(r.houseId!==CURRENT_HOUSE)return;
-    if(normSearch(r.name).includes(nq)){
-      results.push({type:'zona',rid,title:(r.emoji||'📦')+' '+r.name,path:roomPathText(rid)});
-    }
-    Object.entries(r.tasks||{}).forEach(([tid,t])=>{
-      const ck=t.color||'tema';
-      const colorName=taskColorName(ck);
-      if(normSearch(t.text).includes(nq)||normSearch(colorName).includes(nq)||normSearch('color '+colorName).includes(nq)){
-        results.push({type:'tarea',rid,tid,title:'● '+t.text,path:roomPathText(rid)+' · '+colorName,color:taskColorHex(ck)});
-      }
-    });
-  });
-  if(!results.length){box.innerHTML='<div class="sres-empty">Sin resultados</div>';return;}
-  box.innerHTML=results.slice(0,60).map(res=>`
-    <div class="sres" onclick="goSearchResult('${res.rid}')">
-      <div class="sres-title" style="${res.color?'color:'+res.color:''}">${esc(res.title)}</div>
-      <div class="sres-path">${esc(res.path)}</div>
-    </div>
-  `).join('');
-}
-function goSearchResult(roomId){
-  SEL_LEVELS=roomPathIds(roomId);
-  saveSel();
-  closeHouseSearch();
-  renderHouseMain();
-}
-function roomIconHtml(room){
-  return room?.iconImage?`<img src="${room.iconImage}" alt="">`:esc(room?.emoji||'📦');
-}
-function pillStyle(pal,lvl,delay){
-  const strong=pal.shades[Math.min(2,pal.shades.length-1)];
-  const mid=pal.shades[1]||strong;
-  const soft=pal.shades[0]||mid;
-  return `--pc:${pal.ac};--pill-strong:${strong};--pill-mid:${mid};--pill-soft:${soft};--pill-fade:rgba(255,255,255,.72);animation-delay:${delay}s`;
-}
-
-// ── RENDER HOUSE ──
-function renderHouseMain(){
-  const hid=CURRENT_HOUSE;
-  const pal=housePal(hid);
-  document.body.style.background=pal.bg;
-  document.getElementById('s-house').style.background=pal.bg;
-
-  // toolbar
-  const deepId=SEL_LEVELS[SEL_LEVELS.length-1];
-  const deepR=deepId&&DATA[deepId];
-  const whereEl=document.getElementById('where');
-  if(whereEl)whereEl.textContent=deepR?(deepR.emoji+' '+deepR.name.toUpperCase()):'INICIO';
-  const bdelEl=document.getElementById('bdel');
-  if(bdelEl)bdelEl.disabled=!SEL_LEVELS.length;
-  const bundoEl=document.getElementById('bundo');
-  if(bundoEl)bundoEl.disabled=!HIST.length;
-  const bredoEl=document.getElementById('bredo');
-  if(bredoEl)bredoEl.disabled=!REDO.length;
-  const lvl=SEL_LEVELS.length-1;
-  const bprev=document.getElementById('bprev');
-  const bnext=document.getElementById('bnext');
-  if(lvl>=0){
-    const par=lvl===0?null:SEL_LEVELS[lvl-1];
-    const s=sibs(hid,par);const i=s.findIndex(([x])=>x===SEL_LEVELS[lvl]);
-    if(bprev)bprev.disabled=i<=0;
-    if(bnext)bnext.disabled=i>=s.length-1;
-  } else {if(bprev)bprev.disabled=true;if(bnext)bnext.disabled=true;}
-
-  const main=document.getElementById('main');
-
-  if(!SEL_LEVELS.length){
-    // Show house cover + room pills
-    const photo=getPhoto('house_'+hid);
-    const houseRooms=sibs(hid,null);
-    const house=HOUSES.find(h=>h.id===hid);
-
-    let html=`<div class="house-cover">`;
-    if(photo&&SHOW_PHOTO){
-      const pan=getPan('house_'+hid);
-      html+=`<div style="position:relative;max-width:260px;width:100%">
-        <div class="photo-pan-wrap" id="cover-pan-wrap" style="border-radius:18px;box-shadow:0 6px 24px rgba(0,0,0,.18);border:3px solid rgba(255,255,255,.6)">
-          <img src="${photo}" id="cover-pan-img" data-photo-key="house_${hid}" style="--px:${pan.x}px;--py:${pan.y}px;--pz:${pan.z}" alt="">
-          <div class="photo-tools cover-photo-tools">
-            <button class="photo-tool" onclick="zoomPhoto('house_${hid}',-.12,event)" title="Alejar">−</button>
-            <button class="photo-tool" onclick="resetPhotoView('house_${hid}',event)" title="Centrar">⌖</button>
-            <button class="photo-tool" onclick="zoomPhoto('house_${hid}',.12,event)" title="Acercar">＋</button>
-          </div>
-        </div>
-        <div style="position:absolute;bottom:10px;right:10px;display:flex;gap:6px">
-          <button onclick="triggerPhoto('house_${hid}')" style="height:28px;padding:0 10px;background:rgba(255,255,255,.85);border:none;border-radius:8px;font-size:12px;font-weight:700;color:rgba(60,30,10,.7);cursor:pointer">📷 Cambiar</button>
-          <button onclick="removePhoto('house_${hid}')" style="height:28px;padding:0 10px;background:rgba(255,100,100,.75);border:none;border-radius:8px;font-size:12px;font-weight:700;color:white;cursor:pointer">✕</button>
-        </div>
-      </div>`;
-    } else if(photo&&!SHOW_PHOTO){
-      html+=`<div onclick="toggleCoverPhoto()" style="opacity:.45;font-size:12px;font-weight:700;color:rgba(60,30,10,.4);cursor:pointer;padding:4px 12px;background:rgba(255,255,255,.3);border-radius:20px">🙈 Foto oculta · toca para mostrar</div>`;
-    } else {
-      html+=`<div class="cover-placeholder" onclick="triggerPhoto('house_${hid}')"><div class="cpi">📷</div><p>Toca para añadir foto</p></div>`;
-    }
-
-    html+=`<div class="zone-panel">
-      <div class="shdr">
-        <div class="slvl" style="background:rgba(255,255,255,.4);color:${pal.text}">1</div>
-        <div class="slbl" style="color:${pal.text}">Zonas</div>
-      </div>
-      <div class="zone-grid">`;
-    html+=`<button class="zone-search-btn" onclick="openHouseSearch()">🔎 Buscar</button>`;
-    houseRooms.forEach(([id,r],idx)=>{
-      html+=`<div class="pill zone-pill" onclick="selectAt(0,'${id}')" style="${pillStyle(pal,0,idx*.03)}">
-        <div class="pemi">${roomIconHtml(r)}</div>
-        <div class="pname" style="color:${pal.text}">${esc(r.name)}</div>
-        <div class="pill-actions"><button class="pedit" onclick="editPill('${id}',event)" title="Editar nombre e icono">✎</button><button class="px" onclick="delPill('${id}',event)" title="Borrar">✕</button></div>
-      </div>`;
-    });
-    html+=`<div class="add-pill-btn" style="--pc:${pal.ac};color:${pal.text}" onclick="openRoomModal(0)">＋ Zona</div>`;
-    html+=`</div></div>`;
-    main.innerHTML=html;
-    if(getPhoto('house_'+hid))attachCoverPan('house_'+hid);
-    return;
-  }
-
-  // Strips
-  let html='<div style="padding:3px 0 20px">';
-  for(let lvl=0;lvl<MAX_LVL;lvl++){
-    const par=lvl===0?null:(SEL_LEVELS[lvl-1]||null);
-    if(lvl>0&&!SEL_LEVELS[lvl-1])break;
-    const rooms=sibs(hid,par);
-    html+=`<div class="strip" style="animation-delay:${lvl*.05}s">
-      <div class="shdr">
-        <div class="slvl" style="background:rgba(255,255,255,.4);color:${pal.text}">${lvl+1}</div>
-        <div class="slbl" style="color:${pal.text}">${LVL_LABELS[lvl]}</div>
-      </div>
-      <div class="pill-row">`;
-    rooms.forEach(([id,r],idx)=>{
-      const on=SEL_LEVELS[lvl]===id;
-      html+=`<div class="pill ${lvl===0?'zone-pill':'subzone-pill'} ${on?'active':''}" onclick="selectAt(${lvl},'${id}')" style="${pillStyle(pal,lvl,idx*.03)}">
-        <div class="pemi">${roomIconHtml(r)}</div>
-        <div class="pname" style="color:${pal.text}">${esc(r.name)}</div>
-        <div class="pill-actions"><button class="pedit" onclick="editPill('${id}',event)" title="Editar nombre e icono">✎</button><button class="px" onclick="delPill('${id}',event)" title="Borrar">✕</button></div>
-      </div>`;
-    });
-    const lblAdd=lvl===0?'＋ Zona':'＋ Subzona';
-    html+=`<div class="add-pill-btn" style="--pc:${pal.ac};color:${pal.text}" onclick="openRoomModal(${lvl})">${lblAdd}</div>`;
-    html+=`</div></div>`;
-    if(lvl<MAX_LVL-1)html+=`<div class="ssep"></div>`;
-    if(SEL_LEVELS[lvl]&&!COLLAPSED_ROOM_LISTS.has(SEL_LEVELS[lvl]))html+=`<div id="tw${lvl}"></div>`;
-    if(!SEL_LEVELS[lvl])break;
-  }
-  html+='</div>';
-  main.innerHTML=html;
-  if(SEL_LEVELS.length&&!COLLAPSED_ROOM_LISTS.has(SEL_LEVELS[SEL_LEVELS.length-1]))renderTasksAt(SEL_LEVELS.length-1);
-}
-
-function renderTasks(refocus){if(SEL_LEVELS.length)renderTasksAt(SEL_LEVELS.length-1,refocus);}
-function roomPhotoListKey(rid){return 'ph_list_'+rid;}
-function getRoomPhotos(rid){try{return JSON.parse(lsGet(roomPhotoListKey(rid))||'[]');}catch(e){return[];}}
-function setRoomPhotos(rid,ids){lsSet(roomPhotoListKey(rid),JSON.stringify(ids));lsSet('h_updated',String(Date.now()));scheduleCloudSave();updateStorageInfo();}
-function addRoomPhoto(rid,b64){
-  const id=gid();
-  lsSet('ph_attach_'+id,b64);
-  const ids=getRoomPhotos(rid);ids.push(id);setRoomPhotos(rid,ids);
-}
-function delRoomPhoto(rid,pid){
-  showConf('Borrar foto','¿Eliminar esta foto de la lista?',()=>{
-    lsRemove('ph_attach_'+pid);
-    setRoomPhotos(rid,getRoomPhotos(rid).filter(id=>id!==pid));
-    renderTasks();
-  });
-}
-function openImagePop(src){
-  const pop=document.getElementById('img-pop');
-  document.getElementById('img-pop-img').src=src;
-  pop.classList.add('open');
-}
-function closeImagePop(){document.getElementById('img-pop').classList.remove('open');document.getElementById('img-pop-img').src='';}
-function toggleAttachPhotos(){
-  SHOW_ATTACH=!SHOW_ATTACH;
-  const btn=document.getElementById('battach');
-  if(btn){btn.style.opacity=SHOW_ATTACH?'1':'.45';}
-  renderTasks();
-}
-function renderAttachments(rid){
-  if(!SHOW_ATTACH)return '';
-  const ids=getRoomPhotos(rid);
-  let h=`<div class="attach-area"><div class="attach-head"><div class="attach-title">Fotos</div><button class="attach-add" onclick="triggerPhoto('attach_${rid}')">＋ Foto</button></div>`;
-  if(!ids.length)h+=`<div class="attach-empty">Sin fotos adjuntas</div>`;
-  else{
-    h+=`<div class="attach-row">`;
-    ids.forEach(pid=>{
-      const src=lsGet('ph_attach_'+pid);
-      if(!src)return;
-      h+=`<div class="attach-thumb"><img src="${src}" onclick="openImagePop('${src}')"><button class="attach-del" onclick="delRoomPhoto('${rid}','${pid}')">✕</button></div>`;
-    });
-    h+=`</div>`;
-  }
-  return h+`</div>`;
-}
-function renderTasksAt(lvl,refocus){
-  const wrap=document.getElementById('tw'+lvl);if(!wrap)return;
-  const rid=SEL_LEVELS[lvl];if(!rid||!DATA[rid]){wrap.innerHTML='';return;}
-  const r=DATA[rid];
-  const pal=housePal(CURRENT_HOUSE);
-  const tasks=Object.entries(r.tasks||{}).sort((a,b)=>(a[1].order||0)-(b[1].order||0));
-  const active=tasks.filter(([,t])=>!t.done);
-  const done=tasks.filter(([,t])=>t.done);
-
-  let h=`<div class="tarea" style="border-top:3px solid ${pal.ac}">
-    <div class="tahdr" style="color:${pal.text}">
-      <div class="tatitle" style="flex:1">${roomIconHtml(r)} ${esc(r.name)}</div>
-      <button class="pdf-btn" onclick="exportZonePDF('${rid}',this)" title="Guardar esta zona como PDF">PDF</button>
-    </div>
-    <div class="tlist">`;
-
-  // Always show active tasks
-  active.forEach(([id,t],idx)=>h+=tRow(id,t,rid,pal.text,idx+1));
-
-  if(!active.length&&!done.length){
-    h+=`<div style="padding:11px 12px;opacity:.35;font-size:13px;font-weight:600;text-align:center;color:${pal.text}">Sin tareas ✨</div>`;
-  }
-  h+=`</div>`;
-
-  // Completadas — only shown when eye (SHOW_DONE) is ON
-  if(done.length){
-    if(SHOW_DONE){
-      h+=`<div style="padding:5px 12px 3px;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;opacity:.4;color:${pal.text}">Completadas (${done.length})</div>`;
-      h+=`<div class="tlist" style="opacity:.5">`;
-      done.forEach(([id,t])=>h+=tRow(id,t,rid,pal.text,''));
-      h+=`</div>`;
-    } else {
-      h+=`<div style="padding:7px 12px;font-size:11px;font-weight:700;opacity:.35;color:${pal.text}">
-        ${done.length} completada${done.length>1?'s':''} oculta${done.length>1?'s':''} · activa 👁 para verlas
-      </div>`;
-    }
-  }
-
-  h+=`<div class="atrow">
-    <div class="task-colors ${TASK_COLORS_OPEN?'':'hidden'}">${TASK_COLOR_KEYS.map(k=>`<button class="task-swatch ${k===TASK_COLOR?'sel':''}" data-color="${k}" style="background:${taskColorHex(k)}" onclick="setNewTaskColor('${k}')" title="${taskColorName(k)}"></button>`).join('')}</div>
-    <div class="task-input-row">
-      <div class="task-paste-previews" id="task-paste-previews">${TASK_PENDING_PHOTOS.map((src,i)=>`<div class="task-paste-preview"><img src="${src}" onclick="openImagePop(this.src)" alt="Foto pegada"><button class="task-paste-remove" onclick="clearPendingTaskPhoto(${i})" title="Quitar foto">✕</button></div>`).join('')}</div>
-      <input id="task-inp" placeholder="Añadir ítem o pegar foto con Ctrl/⌘+V..." onpaste="pasteTaskPhoto(event)" onkeydown="if(event.key==='Enter')addTask()">
-      <button class="task-colors-toggle" id="task-colors-toggle" onclick="toggleTaskColors()" title="Mostrar u ocultar colores">Color</button>
-      <button class="task-photo-btn" onclick="chooseTaskPhotos()" title="Insertar una o varias fotos">📷</button>
-      <button class="task-date-btn" onclick="addTask()" title="Añadir ítem">↵</button>
-    </div>
-  </div>${renderAttachments(rid)}</div>`;
-  wrap.innerHTML=h;
-  if(refocus)setTimeout(()=>{
-    const next=document.getElementById('task-inp');
-    const list=wrap.querySelector('.tlist');
-    if(list)list.scrollTop=list.scrollHeight;
-    if(next)next.focus({preventScroll:true});
-  },0);
-}
-
-function tRow(id,t,rId,color,idx){
-  const tColor={name:taskColorName(t.color),hex:taskColorHex(t.color)};
-  const txtStyle=t.done?'text-decoration:line-through;opacity:.5;color:#111':'color:#111';
-  const num=idx||'';
-  const photos=taskPhotoIds(t).map(photoId=>({photoId,src:lsGet('ph_task_'+photoId)})).filter(photo=>photo.src);
-  return`<div class="trow" id="tk-${id}" data-task-id="${id}" draggable="true" onclick="rowTaskTap(event,'${rId}','${id}')" ondragstart="DRAG_TASK_ID='${id}';this.classList.add('dragging')" ondragend="this.classList.remove('dragging');DRAG_TASK_ID=null" ondragover="event.preventDefault()" ondrop="event.preventDefault();reorderTask('${rId}',DRAG_TASK_ID,'${id}')">
-    <div class="tdrag" onpointerdown="startTaskPointerDrag('${rId}','${id}',event)">⋮</div>
-    <button class="task-chip" style="background:${tColor.hex}" onclick="event.stopPropagation();cycleTaskColor('${rId}','${id}')" title="Color: ${tColor.name}"></button>
-    <div class="chk ${t.done?'on':''}" onclick="event.stopPropagation();toggleTask('${rId}','${id}')">${t.done?'':num}</div>
-    ${photos.length?`<div class="task-inline-photos" onclick="event.stopPropagation()">${photos.map(photo=>`<div class="task-inline-photo-wrap"><img class="task-inline-photo" src="${photo.src}" alt="Foto del ítem" onclick="openImagePop(this.src)"><button class="task-inline-photo-del" onclick="deleteTaskPhoto('${rId}','${id}','${photo.photoId}')" title="Borrar esta foto">✕</button></div>`).join('')}</div>`:''}
-    <div class="ttxt" style="${txtStyle}" contenteditable="${t.done?'false':'true'}"
-      onblur="renTask('${rId}','${id}',this.textContent.trim())"
-      onpaste="pasteTaskPhoto(event,'${rId}','${id}')"
-      onkeydown="if(event.key==='Enter'){event.preventDefault();this.blur()}">${esc(t.text)}</div>
-    <button class="task-photo-btn" onclick="event.stopPropagation();chooseTaskPhotos('${rId}','${id}')" title="Insertar una o varias fotos">📷</button>
-    <button class="tdel" onclick="event.stopPropagation();delTask('${rId}','${id}')">✕</button>
-  </div>`;
-}
-
-function toggleDone(){
-  SHOW_DONE=!SHOW_DONE;
-  const eye=document.getElementById('beye');
-  if(eye){eye.style.opacity=SHOW_DONE?'1':'.45';}
-  renderTasks();
-}
-function toggleCoverPhoto(){
-  SHOW_PHOTO=!SHOW_PHOTO;
-  const btn=document.getElementById('bphoto');
-  if(btn){btn.style.opacity=SHOW_PHOTO?'1':'.45';btn.textContent=SHOW_PHOTO?'🖼️':'🙈';}
-  renderHouseMain();
-}
-
-// ── CALCULATOR ──
 const CALCULATOR_THEMES=[
   {name:'Marrón pastel',accent:'#D98463',dark:'#B96546',shellTop:'#F8F3EA',shellBottom:'#E5DED0',display:'#B8DDE6',displayText:'#10222B',numTop:'#F2F1EC',numBottom:'#C9C9BD',numShadow:'#7E8177',opTop:'#EFF4FA',opBottom:'#CAD2DD',opShadow:'#8490A0',clearTop:'#FFE9E5',clearBottom:'#F2C0B7',clearShadow:'#D28D80'},
   {name:'Rosa luminoso',accent:'#E7A1B3',dark:'#C8758A',shellTop:'#FFF3F7',shellBottom:'#F2DDE6',display:'#FFD7E5',displayText:'#4D2635',numTop:'#FFF8FA',numBottom:'#EFD9E1',numShadow:'#C7A9B4',opTop:'#F7ECFF',opBottom:'#D9C8F0',opShadow:'#A58BC3',clearTop:'#FFF1DD',clearBottom:'#F3C692',clearShadow:'#D59755'},
@@ -2603,30 +1158,145 @@ const CALCULATOR_THEMES=[
   {name:'Limón claro',accent:'#F3D266',dark:'#C7A326',shellTop:'#FFFBEA',shellBottom:'#EEE4BA',display:'#FFF1A9',displayText:'#493D10',numTop:'#FFFDF2',numBottom:'#E8E1C9',numShadow:'#A89B78',opTop:'#EFF8DD',opBottom:'#D0E2A5',opShadow:'#91A35F',clearTop:'#FFDCD2',clearBottom:'#EEAA95',clearShadow:'#C97860'},
   {name:'Marrón oscuro',accent:'#76513E',dark:'#3F2A21',shellTop:'#5B4338',shellBottom:'#2E211C',display:'#C9B39F',displayText:'#251811',numTop:'#A9856F',numBottom:'#6D4E3E',numShadow:'#2B1C16',opTop:'#8A6B59',opBottom:'#563C30',opShadow:'#241711',clearTop:'#C78E72',clearBottom:'#8F5943',clearShadow:'#4A2A20'},
   {name:'Marrón claro',accent:'#C9966B',dark:'#946442',shellTop:'#FFF4E8',shellBottom:'#DEC4AA',display:'#F2D7BC',displayText:'#4A2E1F',numTop:'#FFF9F1',numBottom:'#D9BFA6',numShadow:'#9B785C',opTop:'#F3E3D2',opBottom:'#C9A98A',opShadow:'#87664D',clearTop:'#FFE1CF',clearBottom:'#DCA889',clearShadow:'#A36E50'},
-  {name:'Blanco',accent:'#D8D8D8',dark:'#9B9B9B',shellTop:'#FFFFFF',shellBottom:'#EAEAEA',display:'#F7F7F7',displayText:'#181818',numTop:'#FFFFFF',numBottom:'#E8E8E8',numShadow:'#A6A6A6',opTop:'#F8F8F8',opBottom:'#DADADA',opShadow:'#999999',clearTop:'#FFFFFF',clearBottom:'#E3E3E3',clearShadow:'#A0A0A0'}
+  {name:'Blanco',accent:'#D8D8D8',dark:'#9B9B9B',shellTop:'#FFFFFF',shellBottom:'#EAEAEA',display:'#F7F7F7',displayText:'#181818',numTop:'#FFFFFF',numBottom:'#E8E8E8',numShadow:'#A6A6A6',opTop:'#F8F8F8',opBottom:'#DADADA',opShadow:'#999999',clearTop:'#FFFFFF',clearBottom:'#E3E3E3',clearShadow:'#A0A0A0'},
+  {name:'Violeta',accent:'#9B59B6',dark:'#8E44AD',shellTop:'#F9F2FB',shellBottom:'#E5D5E8',display:'#F5EEF8',displayText:'#311B38',numTop:'#FFFFFF',numBottom:'#D8C8DB',numShadow:'#938297',opTop:'#F1E7F2',opBottom:'#CBB6CE',opShadow:'#87728A',clearTop:'#FFE1DF',clearBottom:'#F0B1AA',clearShadow:'#C77670'},
+  {name:'Naranja',accent:'#F39C12',dark:'#E67E22',shellTop:'#FFF7EC',shellBottom:'#F5E1C8',display:'#FEF5E7',displayText:'#452A06',numTop:'#FFFFFF',numBottom:'#E3D1B9',numShadow:'#A1927F',opTop:'#FAEBDD',opBottom:'#D5C1AA',opShadow:'#948574',clearTop:'#FFDEE2',clearBottom:'#F2AAB4',clearShadow:'#C46E79'},
+  {name:'Turquesa',accent:'#1ABC9C',dark:'#16A085',shellTop:'#E9F7F5',shellBottom:'#C9E8E1',display:'#E8F8F5',displayText:'#063A2E',numTop:'#F8FCFB',numBottom:'#BBD9D3',numShadow:'#7C9791',opTop:'#E0F0EC',opBottom:'#B1CBC5',opShadow:'#6E8580',clearTop:'#FFE3CD',clearBottom:'#F5BB90',clearShadow:'#CA8B5D'},
+  {name:'Cereza',accent:'#E74C3C',dark:'#C0392B',shellTop:'#FDF0EF',shellBottom:'#F1CDCA',display:'#FDEDEC',displayText:'#380B07',numTop:'#FFFFFF',numBottom:'#DDBFBC',numShadow:'#9C817F',opTop:'#F6E5E3',opBottom:'#D4B8B6',opShadow:'#957B7A',clearTop:'#FDF2E2',clearBottom:'#EFD5AD',clearShadow:'#B9A07D'},
+  {name:'Medianoche',accent:'#34495E',dark:'#2C3E50',shellTop:'#445362',shellBottom:'#1C2732',display:'#BDC3C7',displayText:'#10171D',numTop:'#A0AEB8',numBottom:'#596C7D',numShadow:'#182129',opTop:'#7B8996',opBottom:'#415161',opShadow:'#0D141B',clearTop:'#BAA79B',clearBottom:'#78675C',clearShadow:'#362C25'},
+  {name:'Oro Rosa',accent:'#E5989B',dark:'#B5838D',shellTop:'#FFEDEB',shellBottom:'#E8D5D4',display:'#FFEDEB',displayText:'#4A3537',numTop:'#FFF9F8',numBottom:'#DBBFC2',numShadow:'#9E8387',opTop:'#F8EAE9',opBottom:'#D3BCBE',opShadow:'#917D80',clearTop:'#EAE7ED',clearBottom:'#A8A3B2',clearShadow:'#686373'},
+  {name:'Lima',accent:'#B4D330',dark:'#94AE25',shellTop:'#FAFDED',shellBottom:'#E3ECBE',display:'#FAFDED',displayText:'#2E3807',numTop:'#FFFFFF',numBottom:'#D1DBAC',numShadow:'#8E996B',opTop:'#F0F6D5',opBottom:'#C9D3A0',opShadow:'#848F5D',clearTop:'#FEEAE5',clearBottom:'#F2BBAE',clearShadow:'#C1887B'},
+  {name:'Cielo Nocturno',accent:'#2980B9',dark:'#2471A3',shellTop:'#EAF2F8',shellBottom:'#B3D0E5',display:'#EAF2F8',displayText:'#0B2135',numTop:'#F8FAFC',numBottom:'#A1B8CA',numShadow:'#60778C',opTop:'#D9E6F0',opBottom:'#9CAEC0',opShadow:'#5B6F82',clearTop:'#FEEAE5',clearBottom:'#F2BBAE',clearShadow:'#C1887B'},
+  {name:'Frambuesa',accent:'#C71585',dark:'#9E106A',shellTop:'#FDF0F7',shellBottom:'#F1C2DF',display:'#FDF0F7',displayText:'#360423',numTop:'#FFFFFF',numBottom:'#DCACC8',numShadow:'#9D738A',opTop:'#F6DFED',opBottom:'#D5AED0',opShadow:'#977793',clearTop:'#FEEAE5',clearBottom:'#F2BBAE',clearShadow:'#C1887B'},
+  {name:'Gris',accent:'#7F8C8D',dark:'#707B7C',shellTop:'#F2F4F4',shellBottom:'#D4D7D7',display:'#F2F4F4',displayText:'#1F2424',numTop:'#FFFFFF',numBottom:'#C2C7C7',numShadow:'#868E8E',opTop:'#E7EAEB',opBottom:'#B7BCBC',opShadow:'#7A8181',clearTop:'#FEEAE5',clearBottom:'#F2BBAE',clearShadow:'#C1887B'},
+  {name:'Mandarina',accent:'#E67E22',dark:'#D35400',shellTop:'#FDEBD0',shellBottom:'#F5CBA7',display:'#FAE5D3',displayText:'#6E2C00',numTop:'#FEF9E7',numBottom:'#FAD7A1',numShadow:'#D68910',opTop:'#FADBD8',opBottom:'#E6B0AA',opShadow:'#A93226',clearTop:'#FDF2E9',clearBottom:'#EDBB99',clearShadow:'#BA4A00'},
+  {name:'Otoño',accent:'#D35400',dark:'#A04000',shellTop:'#FCF3CF',shellBottom:'#F5B041',display:'#F9E79F',displayText:'#784212',numTop:'#FEF9E7',numBottom:'#F8C471',numShadow:'#B9770E',opTop:'#FDEBD0',opBottom:'#F5CBA7',opShadow:'#BA4A00',clearTop:'#FADBD8',clearBottom:'#E6B0AA',clearShadow:'#922B21'},
+  {name:'Melocotón',accent:'#F5B041',dark:'#E67E22',shellTop:'#FDF2E9',shellBottom:'#FAE5D3',display:'#FDF2E9',displayText:'#512E05',numTop:'#FFFFFF',numBottom:'#F5D9C4',numShadow:'#CD9D7F',opTop:'#FADBD8',opBottom:'#E8AFA7',opShadow:'#B26458',clearTop:'#FCF3CF',clearBottom:'#F4D03F',clearShadow:'#C39F24',topOpTop:'#FADBD8',topOpBottom:'#E8AFA7',topOpShadow:'#B26458'},
+  {name:'Pastel Sorpresa',accent:'#FFB347',dark:'#E69622',shellTop:'#F4F5F7',shellBottom:'#E0E4E8',display:'#FFF1E0',displayText:'#362C22',numTop:'#FFFFE0',numBottom:'#F8EEB2',numShadow:'#C9C289',opTop:'#EBECEF',opBottom:'#C9CED6',opShadow:'#919AA6',clearTop:'#DEDFE3',clearBottom:'#B0B6C2',clearShadow:'#7A8291',topOpTop:'#EBECEF',topOpBottom:'#C9CED6',topOpShadow:'#919AA6'}
 ];
+
+try {
+  const modDefs = JSON.parse(localStorage.getItem('hogar_calc_modified_defaults') || '{}');
+  Object.keys(modDefs).forEach(k => {
+    if (CALCULATOR_THEMES[k]) Object.assign(CALCULATOR_THEMES[k], modDefs[k]);
+  });
+} catch(e) {}
+
+let CALC_CURRENT='0', CALC_PREVIOUS=null, CALC_OPERATOR='', CALC_JUST_EVALUATED=false;
+let CALC_SOUND=true, CALC_AUDIO=null;
+let CALC_PERCENT_TOOL='';
+document.addEventListener('visibilitychange', () => { if(document.visibilityState === 'hidden' && CALC_PERCENT_TOOL) toggleCalcPercentTool(CALC_PERCENT_TOOL); });
+let ACTIVE_TOOL_INPUT=null;
+let CALC_HISTORY = [];
+
 function formatCalcValue(value){const n=Number(value);return Number.isFinite(n)?String(Math.round(n*100000000)/100000000).replace('.',','):'Error';}
+
+let showingEasterEgg = false;
+const easterEggQuotes = [
+  "✨ ¡Tú puedes con todo! ✨", "🌟 ¡Hoy es un gran día! 🌟", "💫 ¡Sonríe, estás genial! 💫", 
+  "✨ ¡Eres imparable! ✨", "🌟 ¡Confía en tu magia! 🌟", "✨ ¡Sigue brillando! ✨",
+  "🌟 ¡No te rindas nunca! 🌟", "💫 ¡Cree en ti siempre! 💫", "✨ ¡Todo es posible! ✨",
+  "🌟 ¡Haz que suceda! 🌟", "✨ ¡Atrévete a soñar! ✨", "💫 ¡Eres pura energía! 💫",
+  "🌟 ¡Lo vas a lograr! 🌟", "✨ ¡Supera tus límites! ✨", "💫 ¡Disfruta el momento! 💫",
+  "🌟 ¡Vuela muy alto! 🌟", "✨ ¡Magia en cada paso! ✨", "💫 ¡Eres luz y fuerza! 💫",
+  "🌟 ¡Nunca dejes de reír! 🌟", "✨ ¡Celebra tus éxitos! ✨", "💫 ¡El éxito te espera! 💫",
+  "🌟 ¡Siente tu poder! 🌟", "✨ ¡Eres inspiración! ✨", "💫 ¡Brilla con fuerza! 💫",
+  "🌟 ¡Hazlo con pasión! 🌟", "✨ ¡Sigue tu corazón! ✨", "💫 ¡Despierta tu genio! 💫",
+  "🌟 ¡Tu esfuerzo vale oro! 🌟", "✨ ¡Persigue tus metas! ✨", "💫 ¡Crea tu propio destino! 💫",
+  "✨ ¡El límite es el cielo! ✨", "🌟 ¡Saca tu mejor versión! 🌟", "💫 ¡Toma las riendas! 💫",
+  "✨ ¡Respira y confía! ✨", "🌟 ¡Hoy es tu momento! 🌟", "💫 ¡Deja huella! 💫",
+  "✨ ¡Avanza sin miedo! ✨", "🌟 ¡Tu luz ilumina! 🌟", "💫 ¡Piensa en grande! 💫",
+  "✨ ¡Sueña sin límites! ✨", "🌟 ¡Tus ideas valen! 🌟", "💫 ¡Actitud positiva! 💫",
+  "✨ ¡Hazte escuchar! ✨", "🌟 ¡Rompe los moldes! 🌟", "💫 ¡Vales oro! 💫",
+  "✨ ¡El futuro es tuyo! ✨", "🌟 ¡Paso a paso, siempre! 🌟", "💫 ¡Crea magia! 💫",
+  "✨ ¡Tú eres la chispa! ✨", "🌟 ¡Sorprende al mundo! 🌟", "💫 ¡Sé tu propia musa! 💫",
+  "✨ ¡Levántate y brilla! ✨", "🌟 ¡Escribe tu historia! 🌟", "💫 ¡No hay imposibles! 💫",
+  "✨ ¡Vive tu aventura! ✨", "🌟 ¡Atrévete a ser tú! 🌟", "💫 ¡El éxito te abraza! 💫",
+  "✨ ¡Fluye con la vida! ✨", "🌟 ¡Todo a tu favor! 🌟", "💫 ¡Imagina y crea! 💫"
+];
+function showEasterEgg() {
+  showingEasterEgg = true;
+  const quote = easterEggQuotes[Math.floor(Math.random() * easterEggQuotes.length)];
+  document.getElementById('calc-expression').innerHTML = '';
+  document.getElementById('calc-value').innerHTML = `<span id="easter-egg-text" onclick="if(typeof isEditMode!=='undefined' && isEditMode) { if(typeof event!=='undefined' && event) event.stopPropagation(); handleEditModeSelect('easteregg'); }" style="font-size:clamp(16px,5vw,26px);color:var(--calc-easter-egg, var(--calc-accent));font-weight:900;font-family:ui-rounded,'SF Pro Rounded',Arial,sans-serif;letter-spacing:0;text-align:center;display:block;padding:10px 0;position:relative;">${quote}</span>`;
+}
+function handleDisplayClick() {
+  if (typeof isEditMode!=='undefined' && isEditMode) { handleEditModeSelect('display'); return; }
+  if (showingEasterEgg) {
+    showingEasterEgg = false;
+    updateCalc();
+  } else {
+    toggleHistory();
+  }
+}
+
 function updateCalc(){
+  showingEasterEgg = false;
   const value=document.getElementById('calc-value'),expression=document.getElementById('calc-expression'),sound=document.getElementById('calc-sound');
   if(value)value.textContent=CALC_CURRENT.replace('.',',');
   if(expression)expression.textContent=CALC_PREVIOUS!==null&&CALC_OPERATOR?`${formatCalcValue(CALC_PREVIOUS)} ${CALC_OPERATOR.replace('*','×').replace('/','÷')}`:'';
   if(sound){sound.textContent=CALC_SOUND?'🔊':'🔇';sound.title=CALC_SOUND?'Desactivar sonido':'Activar sonido';}
 }
+
 function calculateCalcValues(){
   const a=Number(CALC_PREVIOUS),b=Number(CALC_CURRENT);let result=b;
-  if(CALC_OPERATOR==='+')result=a+b;if(CALC_OPERATOR==='-')result=a-b;if(CALC_OPERATOR==='*')result=a*b;if(CALC_OPERATOR==='/')result=b===0?NaN:a/b;
+  let opSymbol = CALC_OPERATOR;
+  if(CALC_OPERATOR==='+')result=a+b;if(CALC_OPERATOR==='-')result=a-b;
+  if(CALC_OPERATOR==='*'){result=a*b; opSymbol = '×';}
+  if(CALC_OPERATOR==='/'){result=b===0?NaN:a/b; opSymbol = '÷';}
+  
+  // Save to history
+  if (CALC_PREVIOUS !== null && CALC_OPERATOR) {
+    saveToHistory(formatCalcValue(a), opSymbol, formatCalcValue(b), formatCalcValue(result));
+  }
+  
   CALC_CURRENT=formatCalcValue(result).replace(',','.');CALC_PREVIOUS=null;CALC_OPERATOR='';CALC_JUST_EVALUATED=true;
 }
-function openCalc(){
-  const palette=document.getElementById('calculator-palette');
-  CALC_SOUND=lsGet('hogar_calc_sound')==='1';
-  if(palette&&!palette.innerHTML)palette.innerHTML=CALCULATOR_THEMES.map((theme,index)=>`<button class="calc-color" title="${theme.name}" style="background:linear-gradient(135deg,${theme.accent},${theme.display},${theme.opBottom})" onclick="setCalculatorTheme(CALCULATOR_THEMES[${index}])"></button>`).join('');
-  try{const saved=JSON.parse(lsGet('hogar_calc_theme')||'null');if(saved)setCalculatorTheme(saved);}catch(e){}
-  document.querySelectorAll('#calculator-grid .calc-key,.calculator-display-actions .calc-mini-key').forEach(button=>button.onclick=()=>handleCalcKey(button.dataset.calc));
-  updateCalc();
-  document.getElementById('calc-ov').classList.add('open');
+
+function saveToHistory(a, op, b, res) {
+  const date = new Date().toLocaleDateString('es-ES', {day: 'numeric', month: 'short', hour:'2-digit', minute:'2-digit'}).toUpperCase();
+  CALC_HISTORY.unshift({ a, op, b, res, date });
+  if (CALC_HISTORY.length > 50) CALC_HISTORY.pop();
+  lsSet('hogar_calc_history', JSON.stringify(CALC_HISTORY));
+  renderHistory();
 }
-function closeCalc(){document.getElementById('calc-ov').classList.remove('open');}
+
+function loadHistory() {
+  try {
+    CALC_HISTORY = JSON.parse(lsGet('hogar_calc_history')) || [];
+  } catch(e) { CALC_HISTORY = []; }
+  renderHistory();
+}
+
+function renderHistory() {
+  const list = document.getElementById('calc-history-list');
+  if (!list) return;
+  if (CALC_HISTORY.length === 0) {
+    list.innerHTML = '<div style="text-align:center; padding: 20px; color:rgba(0,0,0,0.4); font-weight:800; font-size:14px;">No hay operaciones guardadas</div>';
+    return;
+  }
+  list.innerHTML = CALC_HISTORY.map(h => `
+    <div class="calc-history-item">
+      <div class="hist-date">${h.date}</div>
+      <div class="hist-icon">💬</div>
+      <div class="hist-expr">${h.a} ${h.op} ${h.b}</div>
+      <div>= ${h.res}</div>
+    </div>
+  `).join('');
+}
+
+function toggleHistory() {
+  const ov = document.getElementById('calc-history-overlay');
+  ov.classList.toggle('open');
+}
+
+function clearHistory() {
+  CALC_HISTORY = [];
+  lsSet('hogar_calc_history', '[]');
+  renderHistory();
+  toggleHistory();
+}
+
 function calcBeep(){
   if(!CALC_SOUND)return;
   try{
@@ -2640,32 +1310,523 @@ function calcBeep(){
   }catch(e){}
 }
 function toggleCalculatorSound(){CALC_SOUND=!CALC_SOUND;lsSet('hogar_calc_sound',CALC_SOUND?'1':'0');updateCalc();calcBeep();}
+
+function handleColorsEditModal(action) {
+  document.getElementById('colors-edit-modal').style.display = 'none';
+  if (action === 1) {
+    handleEditModeSelect('key', 'colors');
+  } else if (action === 2) {
+    toggleCalculatorPalette();
+  }
+}
 function handleCalcKey(v){
+  if (v === 'colors' && typeof isEditMode !== 'undefined' && isEditMode) {
+     document.getElementById('colors-edit-modal').style.display = 'flex';
+     return;
+  }
+  if (typeof isEditMode!=='undefined' && isEditMode) { handleEditModeSelect('key', v); return; }
+  if(v==='colors'){toggleCalculatorPalette();return;}
   if(v==='sound'){toggleCalculatorSound();return;}
+  if(v==='elibi'){showEasterEgg();return;}
   calcBeep();
-  if(v==='copy'){navigator.clipboard?.writeText(CALC_CURRENT.replace('.',','));return;}
+  if(v==='copy'){toggleCopyMenu();return;}
+  if(ACTIVE_TOOL_INPUT) {
+    const el = document.getElementById(`calc-tool-${ACTIVE_TOOL_INPUT}`);
+    if(el) {
+      let val = el.value || '';
+      if(v==='C') { 
+        val = '';
+        CALC_CURRENT='0'; CALC_PREVIOUS=null; CALC_OPERATOR=''; CALC_JUST_EVALUATED=false;
+        const resEl = document.getElementById('calc-tool-result');
+        if(resEl) {
+          if(CALC_PERCENT_TOOL==='vat') resEl.textContent='Escribe el precio con IVA y el porcentaje de IVA.';
+          else if(CALC_PERCENT_TOOL==='increase') resEl.textContent='Escribe el importe y el porcentaje que quieres sumar.';
+          else resEl.textContent='Escribe el importe y el porcentaje que quieres quitar.';
+        }
+        updateCalc();
+      }
+      else if(v==='back' || v==='back_top') val = val.length > 1 ? val.slice(0,-1) : '';
+      else if(/^\d$/.test(v)) val += v;
+      else if(v==='.' || v===',') { if(!val.includes(',') && !val.includes('.')) val += ','; }
+      el.value = val;
+    }
+    calcBeep();
+    return;
+  }
   if(/^\d$/.test(v)){CALC_CURRENT=CALC_CURRENT==='0'||CALC_JUST_EVALUATED?v:CALC_CURRENT+v;CALC_JUST_EVALUATED=false;}
-  else if(v==='.'){if(CALC_JUST_EVALUATED)CALC_CURRENT='0';if(!CALC_CURRENT.includes('.'))CALC_CURRENT+='.';CALC_JUST_EVALUATED=false;}
+  else if(v==='.' || v===','){if(CALC_JUST_EVALUATED)CALC_CURRENT='0';if(!CALC_CURRENT.includes('.'))CALC_CURRENT+='.';CALC_JUST_EVALUATED=false;}
   else if(v==='C'){CALC_CURRENT='0';CALC_PREVIOUS=null;CALC_OPERATOR='';CALC_JUST_EVALUATED=false;}
-  else if(v==='back')CALC_CURRENT=CALC_CURRENT.length>1?CALC_CURRENT.slice(0,-1):'0';
+  else if(v==='back' || v==='back_top')CALC_CURRENT=CALC_CURRENT.length>1?CALC_CURRENT.slice(0,-1):'0';
   else if(v==='+/-')CALC_CURRENT=String((Number(CALC_CURRENT)||0)*-1);
   else if(v==='%'){const p=(Number(CALC_CURRENT)||0)/100;CALC_CURRENT=String(CALC_PREVIOUS!==null&&['+','-'].includes(CALC_OPERATOR)?Number(CALC_PREVIOUS)*p:p);}
   else if(['+','-','*','/'].includes(v)){if(CALC_PREVIOUS!==null&&CALC_OPERATOR&&!CALC_JUST_EVALUATED)calculateCalcValues();CALC_PREVIOUS=Number(CALC_CURRENT);CALC_OPERATOR=v;CALC_JUST_EVALUATED=true;}
   else if(v==='='&&CALC_PREVIOUS!==null&&CALC_OPERATOR)calculateCalcValues();
   updateCalc();
 }
-function toggleCalculatorPalette(){document.getElementById('calculator-palette')?.classList.toggle('open');}
-function setCalculatorTheme(theme){
-  const shell=document.getElementById('calculator-shell');if(!shell||!theme)return;
-  [['accent','--calc-accent'],['dark','--calc-accent-dark'],['shellTop','--calc-shell-top'],['shellBottom','--calc-shell-bottom'],['display','--calc-display'],['displayText','--calc-display-text'],['numTop','--calc-num-top'],['numBottom','--calc-num-bottom'],['numShadow','--calc-num-shadow'],['opTop','--calc-op-top'],['opBottom','--calc-op-bottom'],['opShadow','--calc-op-shadow'],['clearTop','--calc-clear-top'],['clearBottom','--calc-clear-bottom'],['clearShadow','--calc-clear-shadow']].forEach(([key,prop])=>shell.style.setProperty(prop,theme[key]));
-  lsSet('hogar_calc_theme',JSON.stringify(theme));
+
+function toggleCalculatorPalette(){
+  const p=document.getElementById('calc-colors-overlay');
+  if(p){p.classList.toggle('open');}
 }
+function toggleCopyMenu() {
+  document.getElementById('calc-copy-overlay').classList.toggle('open');
+}
+function executeCopy(suffix) {
+  const num = CALC_CURRENT.replace('.', ',');
+  navigator.clipboard?.writeText(num + suffix);
+  toggleCopyMenu();
+}
+function setCalculatorTheme(theme){
+  const root=document.getElementById('calculator-shell');if(!root||!theme)return;
+  [['accent','--calc-accent'],['dark','--calc-accent-dark'],['shellTop','--calc-shell-top'],['shellBottom','--calc-shell-bottom'],['display','--calc-display'],['displayText','--calc-display-text'],['numTop','--calc-num-top'],['numBottom','--calc-num-bottom'],['numShadow','--calc-num-shadow'],['opTop','--calc-op-top'],['opBottom','--calc-op-bottom'],['opShadow','--calc-op-shadow'],['clearTop','--calc-clear-top'],['clearBottom','--calc-clear-bottom'],['clearShadow','--calc-clear-shadow']].forEach(([key,prop])=>{
+    if(theme[key]) root.style.setProperty(prop,theme[key]);
+    else root.style.removeProperty(prop);
+  });
+  if(theme.topOpTop){
+    root.style.setProperty('--calc-top-op-top',theme.topOpTop);
+    root.style.setProperty('--calc-top-op-bottom',theme.topOpBottom);
+    root.style.setProperty('--calc-top-op-shadow',theme.topOpShadow);
+  } else {
+    root.style.setProperty('--calc-top-op-top',theme.clearTop);
+    root.style.setProperty('--calc-top-op-bottom',theme.clearBottom);
+    root.style.setProperty('--calc-top-op-shadow',theme.clearShadow);
+  }
+
+  if (theme.toolPanel) root.style.setProperty('--calc-tool-panel', theme.toolPanel);
+  else root.style.removeProperty('--calc-tool-panel');
+  if (theme.toolPanelBg) root.style.setProperty('--calc-percent-panel-bg', theme.toolPanelBg);
+  else root.style.removeProperty('--calc-percent-panel-bg');
+  if (theme.toolInputs) root.style.setProperty('--calc-tool-inputs', theme.toolInputs);
+  else root.style.removeProperty('--calc-tool-inputs');
+  if (theme.toolCalcBtn) root.style.setProperty('--calc-tool-calc-btn', theme.toolCalcBtn);
+  else root.style.removeProperty('--calc-tool-calc-btn');
+
+  if (theme.toolBtnDiscount) root.style.setProperty('--calc-tool-btn-discount', theme.toolBtnDiscount); else root.style.removeProperty('--calc-tool-btn-discount');
+  if (theme.toolBtnIncrease) root.style.setProperty('--calc-tool-btn-increase', theme.toolBtnIncrease); else root.style.removeProperty('--calc-tool-btn-increase');
+  if (theme.toolBtnVat) root.style.setProperty('--calc-tool-btn-vat', theme.toolBtnVat); else root.style.removeProperty('--calc-tool-btn-vat');
+
+  if (theme.easterEgg) root.style.setProperty('--calc-easter-egg', theme.easterEgg);
+  else root.style.removeProperty('--calc-easter-egg');
+
+  document.querySelectorAll('.calc-key, .calc-mini-key').forEach(btn => {
+    btn.style.removeProperty('--calc-num-top');
+    btn.style.removeProperty('--calc-num-bottom');
+    btn.style.removeProperty('--calc-num-shadow');
+    btn.style.removeProperty('--calc-op-top');
+    btn.style.removeProperty('--calc-op-bottom');
+    btn.style.removeProperty('--calc-op-shadow');
+    btn.style.removeProperty('--calc-clear-top');
+    btn.style.removeProperty('--calc-clear-bottom');
+    btn.style.removeProperty('--calc-clear-shadow');
+    btn.style.removeProperty('--calc-top-op-top');
+    btn.style.removeProperty('--calc-top-op-bottom');
+    btn.style.removeProperty('--calc-top-op-shadow');
+    btn.style.removeProperty('--calc-accent');
+    btn.style.removeProperty('--calc-accent-dark');
+  });
+
+  if (theme.keys) {
+    for (let key in theme.keys) {
+      let btn = document.querySelector(`[data-calc="${key}"]`);
+      if (btn) {
+         let colors = theme.keys[key];
+         if (btn.classList.contains('op') || btn.classList.contains('calc-mini-key')) {
+           btn.style.setProperty('--calc-op-top', colors.top);
+           btn.style.setProperty('--calc-op-bottom', colors.bottom);
+           btn.style.setProperty('--calc-op-shadow', colors.shadow);
+         } else if (btn.classList.contains('clear')) {
+           btn.style.setProperty('--calc-clear-top', colors.top);
+           btn.style.setProperty('--calc-clear-bottom', colors.bottom);
+           btn.style.setProperty('--calc-clear-shadow', colors.shadow);
+         } else if (btn.classList.contains('top-op')) {
+           btn.style.setProperty('--calc-top-op-top', colors.top);
+           btn.style.setProperty('--calc-top-op-bottom', colors.bottom);
+           btn.style.setProperty('--calc-top-op-shadow', colors.shadow);
+         } else if (btn.classList.contains('equals')) {
+           btn.style.setProperty('--calc-accent-top', colors.top);
+           btn.style.setProperty('--calc-accent-bottom', colors.bottom);
+           btn.style.setProperty('--calc-accent-dark', colors.shadow);
+         } else {
+           btn.style.setProperty('--calc-num-top', colors.top);
+           btn.style.setProperty('--calc-num-bottom', colors.bottom);
+           btn.style.setProperty('--calc-num-shadow', colors.shadow);
+         }
+      }
+    }
+  }
+  
+  lsSet('hogar_calc_theme', JSON.stringify(theme));
+  document.querySelector('meta[name="theme-color"]').setAttribute('content', theme.shellBottom);
+}
+
 function toggleCalcPercentTool(tool){
   const panel=document.getElementById('calc-percent-panel'),result=document.getElementById('calc-tool-result'),label=document.getElementById('calc-tool-percent-label');
   CALC_PERCENT_TOOL=panel.classList.contains('open')&&CALC_PERCENT_TOOL===tool?'':tool;panel.classList.toggle('open',Boolean(CALC_PERCENT_TOOL));
   ['discount','increase','vat'].forEach(k=>document.getElementById(`calc-${k}-button`)?.classList.toggle('active',CALC_PERCENT_TOOL===k));
   if(label)label.textContent=CALC_PERCENT_TOOL==='vat'?'IVA %':'Porcentaje %';
   if(result)result.textContent=CALC_PERCENT_TOOL==='vat'?'Escribe el precio con IVA y el porcentaje de IVA.':CALC_PERCENT_TOOL==='increase'?'Escribe el importe y el porcentaje que quieres sumar.':'Escribe el importe y el porcentaje que quieres quitar.';
+  if(CALC_PERCENT_TOOL) setActiveToolInput('amount');
+  else setActiveToolInput(null);
+}
+function setActiveToolInput(inputId) {
+  ACTIVE_TOOL_INPUT = inputId;
+  const amt = document.getElementById('calc-tool-amount');
+  const pct = document.getElementById('calc-tool-percent');
+  if(amt) amt.style.boxShadow = inputId === 'amount' ? '0 0 0 3px #4A90E2' : 'none';
+  if(pct) pct.style.boxShadow = inputId === 'percent' ? '0 0 0 3px #4A90E2' : 'none';
+}
+function calcToolNumber(value){const n=Number(String(value||'').trim().replace(/\s/g,'').replace(',','.'));return Number.isFinite(n)?n:NaN;}
+function calcMoney(value){return Number(value).toLocaleString('es-ES',{minimumFractionDigits:2,maximumFractionDigits:2});}
+function calculateCalcPercentTool(){
+  const amount=calcToolNumber(document.getElementById('calc-tool-amount')?.value),percent=calcToolNumber(document.getElementById('calc-tool-percent')?.value),result=document.getElementById('calc-tool-result');
+  if(!result||!CALC_PERCENT_TOOL)return;if(!Number.isFinite(amount)||!Number.isFinite(percent)||amount<0||percent<0){result.textContent='Introduce un importe y un porcentaje válidos.';return;}calcBeep();
+  let finalAmount = 0; let explanation = ''; let historyExpr = '';
+  if(CALC_PERCENT_TOOL==='discount'){
+    const removed=amount*percent/100; finalAmount=amount-removed;
+    explanation=`Se han quitado ${calcMoney(removed)} € (${formatCalcValue(percent)} %).`;
+    historyExpr = `${formatCalcValue(amount)} - ${formatCalcValue(percent)}%`;
+  }
+  else if(CALC_PERCENT_TOOL==='increase'){
+    const added=amount*percent/100; finalAmount=amount+added;
+    explanation=`Se han sumado ${calcMoney(added)} € (${formatCalcValue(percent)} %).`;
+    historyExpr = `${formatCalcValue(amount)} + ${formatCalcValue(percent)}%`;
+  }
+  else {
+    finalAmount=amount/(1+percent/100);
+    explanation=`IVA incluido extraído: ${calcMoney(amount-finalAmount)} € (${formatCalcValue(percent)} %).`;
+    historyExpr = `Sin IVA (${formatCalcValue(percent)}%) de ${formatCalcValue(amount)}`;
+  }
+  result.innerHTML = explanation;
+  CALC_CURRENT = String(finalAmount); CALC_PREVIOUS = null; CALC_OPERATOR = ''; CALC_JUST_EVALUATED = true;
+  updateCalc();
+  if (typeof saveToHistory === 'function') saveToHistory(historyExpr, '', '', calcMoney(finalAmount));
+}
+
+
+function getCustomThemes() { try { return JSON.parse(localStorage.getItem('hogar_calc_custom_themes') || '[]'); } catch(e) { return []; } }
+function setCustomThemes(themes) { localStorage.setItem('hogar_calc_custom_themes', JSON.stringify(themes)); }
+function saveCustomTheme() {
+  if (!currentCustomTheme) return;
+  
+  if (typeof currentCustomTheme.defaultIndex === 'number') {
+    if (confirm('¿Quieres SOBREESCRIBIR el tema de fábrica "' + currentCustomTheme.name + '" con tus cambios?')) {
+       let modified = {};
+       try { modified = JSON.parse(localStorage.getItem('hogar_calc_modified_defaults') || '{}'); } catch(e){}
+       modified[currentCustomTheme.defaultIndex] = JSON.parse(JSON.stringify(currentCustomTheme));
+       localStorage.setItem('hogar_calc_modified_defaults', JSON.stringify(modified));
+       Object.assign(CALCULATOR_THEMES[currentCustomTheme.defaultIndex], currentCustomTheme);
+       renderThemes();
+       setCalculatorTheme(currentCustomTheme);
+       alert('Tema de fábrica actualizado correctamente.');
+    }
+    return;
+  }
+  
+  const themes = getCustomThemes();
+  
+  if (currentCustomTheme.id) {
+    if (confirm('¿Estás seguro de que quieres SOBREESCRIBIR el diseño "' + currentCustomTheme.name + '"?')) {
+      const idx = themes.findIndex(t => t.id === currentCustomTheme.id);
+      if (idx !== -1) {
+        themes[idx] = JSON.parse(JSON.stringify(currentCustomTheme));
+        setCustomThemes(themes);
+        renderThemes();
+        setCalculatorTheme(currentCustomTheme);
+        alert('Diseño actualizado correctamente.');
+        return;
+      }
+    }
+  } else {
+    saveAsNewTheme();
+  }
+}
+
+function saveAsNewTheme() {
+  if (!currentCustomTheme) return;
+  const themes = getCustomThemes();
+  
+  const name = prompt('Nombre para tu NUEVO diseño:', currentCustomTheme.name ? currentCustomTheme.name : 'Mi Diseño');
+  if (!name) return;
+  
+  const existingIdx = themes.findIndex(t => t.name === name);
+  if (existingIdx !== -1) {
+    if (confirm(`Ya existe un diseño con el nombre "${name}". ¿Quieres SOBREESCRIBIRLO?`)) {
+      currentCustomTheme.id = themes[existingIdx].id;
+      currentCustomTheme.name = name;
+      themes[existingIdx] = JSON.parse(JSON.stringify(currentCustomTheme));
+      setCustomThemes(themes);
+      renderThemes();
+      setCalculatorTheme(currentCustomTheme);
+      alert('Diseño actualizado correctamente.');
+      return;
+    } else {
+      return;
+    }
+  }
+  
+  currentCustomTheme.name = name;
+  currentCustomTheme.id = Date.now().toString();
+  themes.push(JSON.parse(JSON.stringify(currentCustomTheme)));
+  setCustomThemes(themes);
+  renderThemes();
+  setCalculatorTheme(currentCustomTheme);
+  alert('Diseño "' + name + '" guardado correctamente.');
+}
+
+function renameCurrentCustomTheme() {
+  if (!currentCustomTheme) return;
+  const newName = prompt('Nombre para tu diseño:', currentCustomTheme.name || 'Mi Diseño');
+  if (!newName || newName === currentCustomTheme.name) return;
+  
+  const themes = getCustomThemes();
+  if (themes.some(t => t.name === newName)) {
+     alert('Ya existe un diseño con ese nombre.');
+     return;
+  }
+  
+  currentCustomTheme.name = newName;
+  if (currentCustomTheme.id) {
+     const idx = themes.findIndex(t => t.id === currentCustomTheme.id);
+     if (idx !== -1) {
+        themes[idx].name = newName;
+        setCustomThemes(themes);
+        renderThemes();
+     }
+  }
+  
+  // Show the new name in the edit bar immediately
+  document.getElementById('edit-mode-target').innerText = newName;
+  
+  if (currentCustomTheme.id) {
+      alert('Diseño renombrado a: ' + newName);
+  } else {
+      alert('Nombre establecido. Recuerda Guardar para no perder los cambios.');
+  }
+}
+
+function deleteCurrentCustomTheme() {
+  if (!currentCustomTheme || !currentCustomTheme.id) {
+    alert('Este diseño aún no está guardado, no se puede borrar.');
+    return;
+  }
+  if(confirm('¿Estás seguro de que quieres borrar este diseño guardado?')) {
+    const themes = getCustomThemes();
+    const idx = themes.findIndex(t => t.id === currentCustomTheme.id);
+    if (idx !== -1) {
+      themes.splice(idx, 1);
+      setCustomThemes(themes);
+      renderThemes();
+      toggleEditMode();
+    }
+  }
+}
+function deleteCustomTheme(index) {
+  if(confirm('¿Estás seguro de que quieres borrar este diseño guardado?')) {
+    const themes = getCustomThemes();
+    themes.splice(index, 1);
+    setCustomThemes(themes);
+    renderThemes();
+  }
+}
+function renderThemes() {
+  const palette=document.getElementById('calculator-palette');
+  if(!palette) return;
+  let html = CALCULATOR_THEMES.map((theme,index)=>`<div class="calc-color-custom" style="position:relative; display:inline-block;"><button class="calc-color" title="${theme.name}" style="background:linear-gradient(135deg,${theme.accent},${theme.display},${theme.opBottom})" onclick="setCalculatorTheme(CALCULATOR_THEMES[${index}]); toggleCalculatorPalette()"></button><span class="calc-color-tooltip">${theme.name}</span></div>`).join('');
+  const custom = getCustomThemes();
+  if (custom.length > 0) {
+    html += '<div style="width:100%; height:1px; background:rgba(0,0,0,0.1); margin:4px 0;"></div>';
+    html += custom.map((theme,index)=>`<div class="calc-color-custom" style="position:relative; display:inline-block;"><button class="calc-color" style="background:linear-gradient(135deg,${theme.accent||'#ccc'},${theme.display||'#eee'},${theme.opBottom||'#ddd'})" onclick="setCalculatorTheme(getCustomThemes()[${index}]); toggleCalculatorPalette()"></button><span class="calc-color-tooltip">${theme.name}</span></div>`).join('');
+  }
+  palette.innerHTML = html;
+}
+
+// Init
+window.onload = () => {
+  CALC_SOUND=lsGet('hogar_calc_sound')==='1';
+  const palette=document.getElementById('calculator-palette');
+  renderThemes();
+  try{const saved=JSON.parse(lsGet('hogar_calc_theme')||'null');if(saved)setCalculatorTheme(saved);}catch(e){}
+  document.querySelectorAll('#calculator-grid .calc-key,.calculator-display-actions .calc-mini-key[data-calc]').forEach(button=>button.onclick=()=>handleCalcKey(button.dataset.calc));
+  loadHistory();
+  updateCalc();
+};
+
+let isEditMode = false;
+let currentCustomTheme = null;
+let currentEditType = 'shell';
+
+function toggleEditMode() {
+  isEditMode = !isEditMode;
+  const btn = document.getElementById('edit-mode-btn');
+  const topBar = document.querySelector('.calc-top-bar');
+  const editBar = document.getElementById('edit-top-bar');
+  
+  if (isEditMode) {
+    document.body.classList.add('edit-mode');
+    btn.innerHTML = '🛑 Salir Diseño';
+    btn.style.background = '#4A90E2';
+    topBar.style.display = 'none';
+    editBar.style.display = 'flex';
+    
+    currentEditType = 'shell';
+    document.getElementById('edit-mode-target').innerText = 'Fondo';
+    document.getElementById('edit-color-picker').value = '#ffffff';
+
+    if (!currentCustomTheme) {
+      let active = JSON.parse(localStorage.getItem('hogar_calc_theme'));
+      currentCustomTheme = { name: 'Mi Diseño' };
+      if (typeof active === 'object' && active !== null) {
+         Object.assign(currentCustomTheme, active);
+      } else if (typeof active === 'number' && CALCULATOR_THEMES[active]) {
+         Object.assign(currentCustomTheme, CALCULATOR_THEMES[active]);
+         currentCustomTheme.defaultIndex = active;
+      }
+    }
+    setTimeout(() => {
+      alert('🎨 MODO DISEÑO INICIADO\n\n1. Toca cualquier botón o parte de la calculadora para seleccionarlo.\n2. Arriba verás lo que has seleccionado debajo de EDITANDO:\n3. Toca el cuadradito de color de arriba para elegir el color.');
+    }, 150);
+  } else {
+    document.body.classList.remove('edit-mode');
+    btn.innerHTML = '🖌️ Modo Diseño';
+    btn.style.background = '#1ABC9C';
+    topBar.style.display = 'flex';
+    editBar.style.display = 'none';
+  }
+}
+
+function handleEditModeSelect(type, val) {
+  if (typeof event !== 'undefined' && event) {
+    if (event.target.closest('.calc-colors-actions') || event.target.closest('#calc-colors-overlay') || event.target.closest('#edit-top-bar')) return;
+    event.stopPropagation();
+  }
+
+  let editType = '';
+  let name = '';
+  if (type === 'display') { editType = 'display'; name = 'Pantalla'; }
+  else if (type === 'shell') { editType = 'shell'; name = 'Fondo'; }
+  else if (type === 'toolpanel') { editType = 'toolpanel'; name = 'Fondo Panel Descuento'; }
+  else if (type === 'toolpanel_inputs') { editType = 'toolpanel_inputs'; name = 'Cajas de Texto'; }
+  else if (type === 'toolpanel_calc_btn') { editType = 'toolpanel_calc_btn'; name = 'Botón Calcular'; }
+  else if (type === 'toolbtn_discount') { editType = 'toolbtn_discount'; name = 'Botón Descuento'; }
+  else if (type === 'toolbtn_increase') { editType = 'toolbtn_increase'; name = 'Botón Aumento'; }
+  else if (type === 'toolbtn_vat') { editType = 'toolbtn_vat'; name = 'Botón IVA'; }
+  else if (type === 'easteregg') { editType = 'easteregg'; name = 'Frase Motivadora'; }
+  else if (type === 'key') {
+     editType = 'key_' + val;
+     name = 'Botón ' + val;
+  }
+  
+  if (editType) {
+    currentEditType = editType;
+    document.getElementById('edit-mode-target').innerText = name;
+    
+    let hex = '#ffffff';
+    let defT = typeof CALCULATOR_THEMES !== 'undefined' ? CALCULATOR_THEMES[0] : {};
+    if (currentCustomTheme) {
+      if (editType === 'display') hex = currentCustomTheme.display || defT.display || hex;
+      else if (editType === 'shell') hex = currentCustomTheme.shellTop || defT.shellTop || hex;
+      else if (editType === 'toolpanel') hex = currentCustomTheme.toolPanel || currentCustomTheme.shellTop || defT.shellTop || hex;
+      else if (editType === 'toolpanel_bg') hex = currentCustomTheme.toolPanelBg || '#ffffff';
+      else if (editType === 'toolpanel_inputs') hex = currentCustomTheme.toolInputs || '#ffffff';
+      else if (editType === 'toolpanel_calc_btn') hex = currentCustomTheme.toolCalcBtn || currentCustomTheme.accent || defT.accent || hex;
+      else if (editType === 'toolbtn_discount') hex = currentCustomTheme.toolBtnDiscount || '#ffffff';
+      else if (editType === 'toolbtn_increase') hex = currentCustomTheme.toolBtnIncrease || '#ffffff';
+      else if (editType === 'toolbtn_vat') hex = currentCustomTheme.toolBtnVat || '#ffffff';
+      else if (editType === 'easteregg') hex = currentCustomTheme.easterEgg || '#2ECC71';
+      else if (editType.startsWith('key_')) {
+         let k = editType.substring(4);
+         if (currentCustomTheme.keys && currentCustomTheme.keys[k] && currentCustomTheme.keys[k].top) {
+           hex = currentCustomTheme.keys[k].top;
+         } else {
+           let btn = document.querySelector(`[data-calc="${k}"]`);
+           if (btn) {
+              if (btn.classList.contains('op') || btn.classList.contains('calc-mini-key')) {
+                 hex = currentCustomTheme.opTop || defT.opTop || hex;
+              } else if (btn.classList.contains('top-op')) {
+                 hex = currentCustomTheme.clearTop || defT.clearTop || hex;
+              } else if (btn.classList.contains('equals')) {
+                 let baseAccent = currentCustomTheme.accent || defT.accent || hex;
+                 // Compute a 55% mix of baseAccent and 45% white to match CSS color-mix exactly
+                 hex = mixHexWithWhite(baseAccent, 0.45);
+              } else if (btn.classList.contains('clear')) {
+                 hex = currentCustomTheme.clearTop || defT.clearTop || hex;
+              } else {
+                 hex = currentCustomTheme.numTop || defT.numTop || hex;
+              }
+           }
+         }
+      }
+    }
+    
+    if (/^#[0-9A-F]{6}$/i.test(hex)) {
+      document.getElementById('edit-color-picker').value = hex;
+    } else {
+      document.getElementById('edit-color-picker').value = '#ffffff';
+    }
+  }
+}
+
+function hexToRgb(hex) {
+  let c = hex.substring(1);
+  if(c.length === 3) c = c.split('').map(x=>x+x).join('');
+  return [parseInt(c.substr(0,2),16), parseInt(c.substr(2,2),16), parseInt(c.substr(4,2),16)];
+}
+
+function rgbToHex(r,g,b) {
+  return "#" + ((1<<24)+(r<<16)+(g<<8)+b).toString(16).slice(1);
+}
+
+function adjustBrightness(hex, factor) {
+  let [r,g,b] = hexToRgb(hex);
+  r = Math.max(0, Math.min(255, r * factor));
+  g = Math.max(0, Math.min(255, g * factor));
+  b = Math.max(0, Math.min(255, b * factor));
+  return rgbToHex(Math.round(r), Math.round(g), Math.round(b));
+}
+
+function mixHexWithWhite(hex, whiteRatio) {
+  let [r,g,b] = hexToRgb(hex);
+  r = Math.round(r * (1 - whiteRatio) + 255 * whiteRatio);
+  g = Math.round(g * (1 - whiteRatio) + 255 * whiteRatio);
+  b = Math.round(b * (1 - whiteRatio) + 255 * whiteRatio);
+  return rgbToHex(r, g, b);
+}
+
+function applyCustomColor(type, baseHex) {
+  if(!currentCustomTheme) currentCustomTheme = {name:'Mi Diseño'};
+  
+  if (type === 'display') {
+    currentCustomTheme.display = baseHex;
+    currentCustomTheme.displayText = adjustBrightness(baseHex, 0.2);
+  } else if (type === 'shell') {
+    currentCustomTheme.shellTop = baseHex;
+    currentCustomTheme.shellBottom = adjustBrightness(baseHex, 0.9);
+  } else if (type === 'toolpanel_bg') { currentCustomTheme.toolPanelBg = baseHex; } else if (type === 'toolpanel') {
+    currentCustomTheme.toolPanel = baseHex;
+  } else if (type === 'toolpanel_inputs') {
+    currentCustomTheme.toolInputs = baseHex;
+  } else if (type === 'toolpanel_calc_btn') {
+    currentCustomTheme.toolCalcBtn = baseHex;
+  } else if (type === 'toolbtn_discount') {
+    currentCustomTheme.toolBtnDiscount = baseHex;
+  } else if (type === 'toolbtn_increase') {
+    currentCustomTheme.toolBtnIncrease = baseHex;
+  } else if (type === 'toolbtn_vat') {
+    currentCustomTheme.toolBtnVat = baseHex;
+  } else if (type === 'easteregg') {
+    currentCustomTheme.easterEgg = baseHex;
+  } else if (type.startsWith('key_')) {
+    let keyVal = type.substring(4);
+    if (!currentCustomTheme.keys) currentCustomTheme.keys = {};
+    currentCustomTheme.keys[keyVal] = {
+      top: baseHex,
+      bottom: adjustBrightness(baseHex, 0.85),
+      shadow: adjustBrightness(baseHex, 0.65)
+    };
+  }
+  
+  setCalculatorTheme(currentCustomTheme);
+  lsSet('hogar_calc_theme', JSON.stringify(currentCustomTheme));
 }
 function calcToolNumber(value){const n=Number(String(value||'').trim().replace(/\s/g,'').replace(',','.'));return Number.isFinite(n)?n:NaN;}
 function calcMoney(value){return Number(value).toLocaleString('es-ES',{minimumFractionDigits:2,maximumFractionDigits:2});}
@@ -3368,6 +2529,5 @@ init().catch(err=>{
   showHomeScreen();
 });
 </script>
-<div style="position:fixed; bottom:12px; left:0; width:100%; text-align:center; font-size:11px; font-weight:800; color:rgba(80,40,10,0.35); pointer-events:none; z-index:9000;">v1.0</div>
 </body>
 </html>
