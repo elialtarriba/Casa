@@ -354,13 +354,13 @@ button:not(:disabled):active,.pill:active,.add-pill-btn:active,.zone-search-btn:
 .pdf-exit{background:linear-gradient(180deg,#f4b18d,#d76d52);color:white}
 .pdf-frame{width:100%;flex:1;min-height:0;border:0;border-radius:12px;background:white;box-shadow:0 8px 28px rgba(0,0,0,.28);overflow:hidden}
 @media (max-width:480px){.pdf-toolbar{flex-wrap:wrap}.pdf-toolbar-title{flex-basis:100%;text-align:center}.pdf-action{flex:1;padding:0 7px}}
-.calc-ov{position:fixed;inset:0;background:rgba(45,24,10,.34);backdrop-filter:blur(14px);z-index:530;display:none;align-items:flex-start;justify-content:center;padding:18px;overflow-y:auto}
+.calc-ov{position:fixed;inset:0;background:#fffaf4;z-index:530;display:none;align-items:stretch;justify-content:center;padding:0;overflow:hidden}
 .calc-ov.open{display:flex}
-.calc-dialog{width:min(460px,100%);margin:auto 0;background:#fffaf4;border-radius:20px;box-shadow:0 24px 60px rgba(40,20,8,.36);overflow:hidden}
+.calc-dialog{width:100%;height:100%;margin:0;background:#fffaf4;border-radius:0;box-shadow:none;display:flex;flex-direction:column;overflow:hidden}
 .calc-header{display:flex;align-items:center;gap:10px;padding:15px 18px;border-bottom:1px solid rgba(80,40,10,.12)}
 .calc-header h2{flex:1;margin:0;font-size:21px;color:#573722}
 .calc-close{width:36px;height:36px;border:none;border-radius:10px;background:#f0e5da;color:#573722;font-size:18px;font-weight:900;cursor:pointer}
-.calculator-shell{
+.calculator-shell{flex:1;display:flex;flex-direction:column;
   --calc-accent:#D98463;--calc-accent-dark:#B96546;--calc-shell-top:#F8F3EA;--calc-shell-bottom:#E5DED0;
   --calc-display:#B8DDE6;--calc-display-text:#10222B;--calc-num-top:#F2F1EC;--calc-num-bottom:#C9C9BD;
   --calc-num-shadow:#7E8177;--calc-op-top:#EFF4FA;--calc-op-bottom:#CAD2DD;--calc-op-shadow:#8490A0;
@@ -459,7 +459,7 @@ body.edit-mode .calc-key:active::after, body.edit-mode .calc-mini-key:active::af
   .calc-mini-key{min-width:58px;padding:0 11px}.calc-mini-key.sound{min-width:44px;padding:0 9px}
   .calculator-grid{gap:8px}
 }
-@media(max-width:430px){.calculator-shell{margin:10px;padding:13px}.calculator-signature{width:82px}.calculator-display-actions{gap:7px}.calc-mini-key{min-width:58px;padding:0 11px}.calc-mini-key.sound{min-width:44px;padding:0 9px}.calculator-percent-tools{gap:6px}.calc-tool-button{font-size:11px}.calculator-grid{gap:8px}.calc-key{min-height:58px}}
+@media(max-width:430px){.calculator-shell{flex:1;display:flex;flex-direction:column;margin:10px;padding:13px}.calculator-signature{width:82px}.calculator-display-actions{gap:7px}.calc-mini-key{min-width:58px;padding:0 11px}.calc-mini-key.sound{min-width:44px;padding:0 9px}.calculator-percent-tools{gap:6px}.calc-tool-button{font-size:11px}.calculator-grid{gap:8px}.calc-key{min-height:58px}}
 @media (max-width:560px){
   .cal-card{padding:10px;border-radius:14px}
   .cal-week,.cal-grid{gap:3px}
@@ -567,6 +567,45 @@ body.edit-mode .calc-key:active::after, body.edit-mode .calc-mini-key:active::af
   .houses-grid{padding-bottom:calc(80px + env(safe-area-inset-bottom))}
   .home-top,.house-header{padding-top:calc(52px + env(safe-area-inset-top,0px))}
 }
+
+#home-calendar-container {
+  flex: 1;
+  min-height: 0;
+  margin: 12px 20px 80px 20px;
+  padding: 16px;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.8), rgba(245, 235, 220, 0.65));
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: 26px;
+  border-top: 2px solid rgba(255, 255, 255, 0.95);
+  border-left: 2px solid rgba(255, 255, 255, 0.8);
+  border-right: 2px solid rgba(200, 180, 150, 0.3);
+  border-bottom: 6px solid rgba(190, 160, 120, 0.4);
+  box-shadow: 
+    0 8px 0 rgba(170, 130, 90, 0.25),
+    0 16px 35px rgba(80, 40, 10, 0.15),
+    inset 0 3px 5px rgba(255, 255, 255, 1);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+.cal-item-clone {
+  position: fixed;
+  z-index: 99999;
+  pointer-events: none;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 8px 24px rgba(80, 40, 10, 0.2);
+  border-radius: 6px;
+  padding: 4px;
+  transform: scale(1.1);
+  opacity: 0.95;
+}
+.cal-day.drag-over {
+  background: rgba(255, 200, 150, 0.6) !important;
+  box-shadow: inset 0 0 0 2px #d05828 !important;
+  transform: scale(1.02);
+}
+
 </style>
 </head>
 <body>
@@ -711,7 +750,7 @@ body.edit-mode .calc-key:active::after, body.edit-mode .calc-mini-key:active::af
 
 <div class="calc-ov" id="calc-ov" onclick="if(event.target.id==='calc-ov')closeCalc()">
   <div class="calc-dialog">
-    <div class="calc-header"><h2>🧮 Calculadora</h2><button class="calc-close" onclick="closeCalc()">✕</button></div>
+    <div class="calc-header"><h2>🧮 Calculadora</h2><button class="calc-close" style="width:auto; padding:0 14px; font-size:15px;" onclick="closeCalc()">Salir</button></div>
     <div class="calculator-shell" id="calculator-shell" onclick="if(typeof isEditMode!=='undefined' && isEditMode) handleEditModeSelect('shell')">
   
   
@@ -3460,11 +3499,12 @@ function startCalItemDrag(e) {
   clone.style.height = rect.height + 'px';
   clone.style.left = rect.left + 'px';
   clone.style.top = rect.top + 'px';
+  clone.style.display = 'none';
   document.body.appendChild(clone);
   
   el.style.opacity = '0.2';
   
-  DRAG_CAL_ITEM = { sourceKey: key, itemId: id, originalEl: el, clone: clone, offsetX: e.clientX - rect.left, offsetY: e.clientY - rect.top, lastHover: null, isDragging: false, fromModal: false };
+  DRAG_CAL_ITEM = { sourceKey: key, itemId: id, originalEl: el, clone: clone, startX: e.clientX, startY: e.clientY, offsetX: e.clientX - rect.left, offsetY: e.clientY - rect.top, lastHover: null, isDragging: false, fromModal: false, modalClosed: false };
   
   document.addEventListener('pointermove', moveCalItemDrag, {passive: false});
   document.addEventListener('pointerup', endCalItemDrag);
@@ -3476,19 +3516,40 @@ function startModalItemDrag(e, id) {
   const el = e.currentTarget.closest('.cal-line');
   if(!el) return;
   
-  const rect = el.getBoundingClientRect();
-  const clone = el.cloneNode(true);
+  const input = el.querySelector('input');
+  const text = input ? input.value : 'Tarea';
+  
+  const clone = document.createElement('div');
   clone.classList.add('cal-item-clone');
-  clone.style.width = rect.width + 'px';
-  clone.style.height = rect.height + 'px';
-  clone.style.left = rect.left + 'px';
-  clone.style.top = rect.top + 'px';
+  clone.textContent = text;
+  clone.style.width = '220px';
+  clone.style.padding = '12px 16px';
+  clone.style.background = 'rgba(255, 255, 255, 0.95)';
+  clone.style.boxShadow = '0 12px 32px rgba(80, 40, 10, 0.2)';
+  clone.style.borderRadius = '14px';
+  clone.style.fontSize = '14px';
+  clone.style.fontWeight = '800';
+  clone.style.color = '#50280a';
+  clone.style.left = e.clientX + 'px';
+  clone.style.top = e.clientY + 'px';
+  clone.style.transform = 'translate(-50%, -50%) scale(1.05)';
+  clone.style.display = 'none'; // Hidden until drag threshold is met
   document.body.appendChild(clone);
   
-  // Close the modal visually without wiping memory
-  document.getElementById('cal-note-ov').classList.remove('open');
-  
-  DRAG_CAL_ITEM = { sourceKey: CAL_NOTE_DAY, itemId: id, originalEl: el, clone: clone, offsetX: e.clientX - rect.left, offsetY: e.clientY - rect.top, lastHover: null, isDragging: true, fromModal: true };
+  DRAG_CAL_ITEM = { 
+    sourceKey: CAL_NOTE_DAY, 
+    itemId: id, 
+    originalEl: el, 
+    clone: clone, 
+    startX: e.clientX,
+    startY: e.clientY,
+    offsetX: 0, 
+    offsetY: 0, 
+    lastHover: null, 
+    isDragging: false, 
+    fromModal: true,
+    modalClosed: false
+  };
   
   document.addEventListener('pointermove', moveCalItemDrag, {passive: false});
   document.addEventListener('pointerup', endCalItemDrag);
@@ -3497,10 +3558,36 @@ function startModalItemDrag(e, id) {
 function moveCalItemDrag(e) {
   if(!DRAG_CAL_ITEM) return;
   e.preventDefault();
-  DRAG_CAL_ITEM.isDragging = true;
   
-  DRAG_CAL_ITEM.clone.style.left = (e.clientX - DRAG_CAL_ITEM.offsetX) + 'px';
-  DRAG_CAL_ITEM.clone.style.top = (e.clientY - DRAG_CAL_ITEM.offsetY) + 'px';
+  const dx = e.clientX - DRAG_CAL_ITEM.startX;
+  const dy = e.clientY - DRAG_CAL_ITEM.startY;
+  
+  if(!DRAG_CAL_ITEM.isDragging && Math.sqrt(dx*dx + dy*dy) > 10) {
+    DRAG_CAL_ITEM.isDragging = true;
+    DRAG_CAL_ITEM.clone.style.display = '';
+  }
+  
+  if(!DRAG_CAL_ITEM.isDragging) return;
+  
+  if(DRAG_CAL_ITEM.fromModal && !DRAG_CAL_ITEM.modalClosed) {
+    const modalWindow = document.querySelector('#cal-note-ov .mod');
+    if(modalWindow) {
+      const r = modalWindow.getBoundingClientRect();
+      const b = 20; // 20px de margen de gracia
+      if(e.clientX < r.left - b || e.clientX > r.right + b || e.clientY < r.top - b || e.clientY > r.bottom + b) {
+        document.getElementById('cal-note-ov').classList.remove('open');
+        DRAG_CAL_ITEM.modalClosed = true;
+      }
+    }
+  }
+  
+  if(DRAG_CAL_ITEM.fromModal) {
+    DRAG_CAL_ITEM.clone.style.left = e.clientX + 'px';
+    DRAG_CAL_ITEM.clone.style.top = e.clientY + 'px';
+  } else {
+    DRAG_CAL_ITEM.clone.style.left = (e.clientX - DRAG_CAL_ITEM.offsetX) + 'px';
+    DRAG_CAL_ITEM.clone.style.top = (e.clientY - DRAG_CAL_ITEM.offsetY) + 'px';
+  }
   
   DRAG_CAL_ITEM.clone.style.display = 'none';
   const target = document.elementFromPoint(e.clientX, e.clientY);
@@ -3525,15 +3612,15 @@ function endCalItemDrag(e) {
   document.removeEventListener('pointermove', moveCalItemDrag);
   document.removeEventListener('pointerup', endCalItemDrag);
   
-  const { sourceKey, itemId, originalEl, clone, lastHover, isDragging, fromModal } = DRAG_CAL_ITEM;
+  const { sourceKey, itemId, originalEl, clone, lastHover, isDragging, fromModal, modalClosed } = DRAG_CAL_ITEM;
   DRAG_CAL_ITEM = null;
   
   clone.remove();
   if(originalEl) originalEl.style.opacity = '';
   if(lastHover) lastHover.classList.remove('drag-over');
   
-  if(!isDragging && !fromModal) {
-    openCalNote(sourceKey);
+  if(!isDragging) {
+    if(!fromModal) openCalNote(sourceKey);
     return;
   }
   
@@ -4266,6 +4353,6 @@ init().catch(err=>{
   showHomeScreen();
 });
 </script>
-<div style="position:fixed; bottom:12px; right:12px; text-align:right; font-size:11px; font-weight:800; color:rgba(80,40,10,0.35); pointer-events:none; z-index:9000;">V2</div>
+<div style="position:fixed; bottom:12px; right:12px; text-align:right; font-size:11px; font-weight:800; color:rgba(80,40,10,0.35); pointer-events:none; z-index:9000;">V3</div>
 </body>
 </html>
