@@ -8,6 +8,19 @@ Este archivo mantiene un registro de todas las modificaciones y tareas pendiente
 
 ## Cambios Realizados
 
+- **(2026-06-28) [V2-V7] Mejoras UX/UI Calculadora:**
+  - Calculadora a pantalla completa nativa sin márgenes de popup.
+  - Reemplazado título y botón 'X' por un botón 'Salir' minimalista, moviendo el teclado hacia arriba.
+  - El interior de la calculadora ahora hace scroll, permitiendo pulsar el '0' al abrir los paneles de Descuento/Aumento.
+- **(2026-06-28) [V2-V7] Mejoras Drag & Drop del Calendario:**
+  - El globo flotante ahora se sitúa 25px por debajo del dedo para no tapar la visión.
+  - El objetivo de destino (día) se calcula 45px por encima del dedo, permitiendo ver qué día se va a seleccionar.
+  - Implementado Auto-Scroll: arrastrar hacia los bordes superior/inferior hace scroll continuo (ideal para vista anual).
+- **(2026-06-28) [V2-V7] Arreglos de Layout del Calendario:**
+  - Reparado bug de Safari: las cuadrículas (días) ahora se estiran uniformemente para rellenar todo el espacio (`grid-template-rows: repeat(6, 1fr)`).
+  - Altura mínima de los días reducida a 28px para que la cuadrícula se comprima correctamente en pantallas pequeñas y no oculte el botón inferior de la cámara (fotos).
+  - El modo Pantalla Completa (`⛶`) usa ahora `100dvh` y salva la safe-area de iOS, arreglando el colapso visual y superposiciones.
+- **(2026-06-28) Frases Motivadoras:** Añadidas "Lo hice porque nadie me dijo que era imposible" y "Quien la sigue la consigue" en ambas versiones de la app.
 - **(2026-06-28) Calculadora Independiente:** Se extrajo la lógica JS, HTML y CSS de la calculadora hacia `calculadora/calculadora.html`.
 - **(2026-06-28) Calculadora a Pantalla Completa:** La calculadora ahora ocupa 100vw y 100vh.
 - **(2026-06-28) Historial de la Calculadora:** Se añadió un desplegable al pulsar el resultado, mostrando un historial tipo ticket con botones de borrar historial y cerrar.
