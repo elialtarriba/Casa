@@ -86,12 +86,12 @@ button:not(:disabled):active,.pill:active,.add-pill-btn:active,.zone-search-btn:
 .app-error.show{display:block}
 .houses-grid{flex:1;min-height:0;overflow-y:auto;padding:8px 14px 100px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;scrollbar-width:thin;align-content:start}
 .houses-grid::-webkit-scrollbar{display:none}
-.cal-card{grid-column:1/-1;background:rgba(255,255,255,.64);border:1.5px solid rgba(160,100,50,.12);border-radius:16px;padding:12px;box-shadow:0 4px 16px rgba(0,0,0,.08); display:flex; flex-direction:column; flex:1; min-height:0; height:100%;}
+.cal-card{grid-column:1/-1;background:rgba(255,255,255,.64);border:1.5px solid rgba(160,100,50,.12);border-radius:16px;padding:12px;box-shadow:0 4px 16px rgba(0,0,0,.08); display:flex; flex-direction:column; flex:1; height:100%; min-height:100%;}
 .cal-head{display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap}
 .cal-title{flex:1;font-size:16px;font-weight:950;color:rgba(70,35,10,.72);text-transform:capitalize}
 .cal-btn{height:32px;min-width:34px;padding:0 10px;border:none;border-radius:10px;background:rgba(255,255,255,.78);color:rgba(70,35,10,.58);font-size:13px;font-weight:950;cursor:pointer;box-shadow:0 2px 8px rgba(110,70,30,.08)}
 .cal-btn:hover{background:white;color:rgba(70,35,10,.8)}
-.cal-week{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px; flex-shrink: 0;} .cal-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px; flex:1; grid-auto-rows: 1fr;}
+.cal-week{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px; flex-shrink: 0;} .cal-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));grid-template-rows:repeat(6,minmax(0,1fr));gap:5px;flex:1;height:100%;}
 .cal-week div{height:22px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:950;color:rgba(70,35,10,.38)}
 .cal-day{min-height:clamp(54px,8.5vw,82px);height:auto;border-radius:10px;background:rgba(255,255,255,.55);display:flex;flex-direction:column;align-items:flex-end;justify-content:flex-start;padding:7px;font-size:12px;font-weight:850;color:rgba(50,25,8,.62);cursor:pointer;overflow:hidden;box-shadow:inset 0 0 0 1px rgba(255,255,255,.36)}
 .cal-day:hover{background:rgba(255,255,255,.86);transform:translateY(-1px)}
@@ -570,7 +570,7 @@ body.edit-mode .calc-key:active::after, body.edit-mode .calc-mini-key:active::af
 
 #home-calendar-container {
   flex: 1;
-  min-height: 0;
+  height: 0;
   margin: 12px 20px 80px 20px;
   padding: 16px;
   background: linear-gradient(145deg, rgba(255, 255, 255, 0.8), rgba(245, 235, 220, 0.65));
@@ -3590,7 +3590,9 @@ function moveCalItemDrag(e) {
   }
   
   DRAG_CAL_ITEM.clone.style.display = 'none';
-  const target = document.elementFromPoint(e.clientX, e.clientY);
+  // Offset Y by 45px upwards so the target is ABOVE the user's finger
+  const targetY = Math.max(0, e.clientY - 45);
+  const target = document.elementFromPoint(e.clientX, targetY);
   DRAG_CAL_ITEM.clone.style.display = '';
   
   const container = document.getElementById('home-calendar-container');
@@ -4382,6 +4384,6 @@ init().catch(err=>{
   showHomeScreen();
 });
 </script>
-<div style="position:fixed; bottom:12px; right:12px; text-align:right; font-size:11px; font-weight:800; color:rgba(80,40,10,0.35); pointer-events:none; z-index:9000;">V4</div>
+<div style="position:fixed; bottom:12px; right:12px; text-align:right; font-size:11px; font-weight:800; color:rgba(80,40,10,0.35); pointer-events:none; z-index:9000;">V5</div>
 </body>
 </html>
