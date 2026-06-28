@@ -1,0 +1,71 @@
+{
+  "app": "Hogar",
+  "version": 1,
+  "exportedAt": "2026-06-11T19:33:33.159Z",
+  "houses": [
+    {
+      "id": "h1",
+      "name": "STA JULITA",
+      "emoji": "🏠",
+      "color": "arcilla"
+    },
+    {
+      "id": "mq9w21gqr4e7",
+      "name": "FABARA",
+      "emoji": "🏡",
+      "color": "pastelRosa"
+    }
+  ],
+  "rooms": {
+    "mq9w5fvvyysc": {
+      "name": "Quarto Gran",
+      "emoji": "🛏️",
+      "houseId": "h1",
+      "parentId": null,
+      "level": 0,
+      "order": 0,
+      "tasks": {}
+    },
+    "mq9w6q6i80q6": {
+      "name": "Habitació Yan",
+      "emoji": "🛏️",
+      "houseId": "h1",
+      "parentId": null,
+      "level": 0,
+      "order": 1,
+      "tasks": {}
+    },
+    "mq9w78p6zm9n": {
+      "name": "Habitació Raimon",
+      "emoji": "🛏️",
+      "houseId": "h1",
+      "parentId": null,
+      "level": 0,
+      "order": 2,
+      "tasks": {}
+    },
+    "mq9w8bki87d3": {
+      "name": "Armari darrera porta",
+      "emoji": "🚪",
+      "houseId": "h1",
+      "parentId": "mq9w5fvvyysc",
+      "level": 1,
+      "order": 0,
+      "tasks": {}
+    },
+    "mq9w8y81cibz": {
+      "name": "Sota llit",
+      "emoji": "🛌",
+      "houseId": "h1",
+      "parentId": "mq9w5fvvyysc",
+      "level": 1,
+      "order": 1,
+      "tasks": {}
+    }
+  },
+  "title": "Home",
+  "selection": "{\"h\":null,\"l\":[]}",
+  "photos": {},
+  "pans": {},
+  "calendar": {}
+}
