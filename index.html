@@ -91,9 +91,9 @@ button:not(:disabled):active,.pill:active,.add-pill-btn:active,.zone-search-btn:
 .cal-title{flex:1;font-size:16px;font-weight:950;color:rgba(70,35,10,.72);text-transform:capitalize}
 .cal-btn{height:32px;min-width:34px;padding:0 10px;border:none;border-radius:10px;background:rgba(255,255,255,.78);color:rgba(70,35,10,.58);font-size:13px;font-weight:950;cursor:pointer;box-shadow:0 2px 8px rgba(110,70,30,.08)}
 .cal-btn:hover{background:white;color:rgba(70,35,10,.8)}
-.cal-week{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px; flex-shrink: 0;} .cal-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px; flex:1;}
+.cal-week{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px; flex-shrink: 0;} .cal-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px; flex:1; grid-auto-rows: 1fr;}
 .cal-week div{height:22px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:950;color:rgba(70,35,10,.38)}
-.cal-day{height:clamp(54px,8.5vw,82px);border-radius:10px;background:rgba(255,255,255,.55);display:flex;flex-direction:column;align-items:flex-end;justify-content:flex-start;padding:7px;font-size:12px;font-weight:850;color:rgba(50,25,8,.62);cursor:pointer;overflow:hidden;box-shadow:inset 0 0 0 1px rgba(255,255,255,.36)}
+.cal-day{min-height:clamp(54px,8.5vw,82px);height:auto;border-radius:10px;background:rgba(255,255,255,.55);display:flex;flex-direction:column;align-items:flex-end;justify-content:flex-start;padding:7px;font-size:12px;font-weight:850;color:rgba(50,25,8,.62);cursor:pointer;overflow:hidden;box-shadow:inset 0 0 0 1px rgba(255,255,255,.36)}
 .cal-day:hover{background:rgba(255,255,255,.86);transform:translateY(-1px)}
 .cal-day.weekend{background:rgba(90,90,90,.12);color:rgba(50,50,50,.46)}
 .cal-day.muted{opacity:.35}
@@ -360,7 +360,7 @@ button:not(:disabled):active,.pill:active,.add-pill-btn:active,.zone-search-btn:
 .calc-header{display:flex;align-items:center;gap:10px;padding:15px 18px;border-bottom:1px solid rgba(80,40,10,.12)}
 .calc-header h2{flex:1;margin:0;font-size:21px;color:#573722}
 .calc-close{width:36px;height:36px;border:none;border-radius:10px;background:#f0e5da;color:#573722;font-size:18px;font-weight:900;cursor:pointer}
-.calculator-shell{flex:1;display:flex;flex-direction:column;
+.calculator-shell{flex:1;display:flex;flex-direction:column;overflow-y:auto;
   --calc-accent:#D98463;--calc-accent-dark:#B96546;--calc-shell-top:#F8F3EA;--calc-shell-bottom:#E5DED0;
   --calc-display:#B8DDE6;--calc-display-text:#10222B;--calc-num-top:#F2F1EC;--calc-num-bottom:#C9C9BD;
   --calc-num-shadow:#7E8177;--calc-op-top:#EFF4FA;--calc-op-bottom:#CAD2DD;--calc-op-shadow:#8490A0;
@@ -459,11 +459,11 @@ body.edit-mode .calc-key:active::after, body.edit-mode .calc-mini-key:active::af
   .calc-mini-key{min-width:58px;padding:0 11px}.calc-mini-key.sound{min-width:44px;padding:0 9px}
   .calculator-grid{gap:8px}
 }
-@media(max-width:430px){.calculator-shell{flex:1;display:flex;flex-direction:column;margin:10px;padding:13px}.calculator-signature{width:82px}.calculator-display-actions{gap:7px}.calc-mini-key{min-width:58px;padding:0 11px}.calc-mini-key.sound{min-width:44px;padding:0 9px}.calculator-percent-tools{gap:6px}.calc-tool-button{font-size:11px}.calculator-grid{gap:8px}.calc-key{min-height:58px}}
+@media(max-width:430px){.calculator-shell{flex:1;display:flex;flex-direction:column;overflow-y:auto;margin:10px;padding:13px}.calculator-signature{width:82px}.calculator-display-actions{gap:7px}.calc-mini-key{min-width:58px;padding:0 11px}.calc-mini-key.sound{min-width:44px;padding:0 9px}.calculator-percent-tools{gap:6px}.calc-tool-button{font-size:11px}.calculator-grid{gap:8px}.calc-key{min-height:58px}}
 @media (max-width:560px){
   .cal-card{padding:10px;border-radius:14px}
   .cal-week,.cal-grid{gap:3px}
-  .cal-day{height:48px;border-radius:8px;padding:5px;font-size:11px}
+  .cal-day{min-height:48px;height:auto;border-radius:8px;padding:5px;font-size:11px}
   .cal-note{font-size:9px;-webkit-line-clamp:1}
   .year-grid{grid-template-columns:1fr; flex:1;}
   .home-title-row{grid-template-columns:62px minmax(0,1fr) 62px;gap:9px}
@@ -604,6 +604,18 @@ body.edit-mode .calc-key:active::after, body.edit-mode .calc-mini-key:active::af
   background: rgba(255, 200, 150, 0.6) !important;
   box-shadow: inset 0 0 0 2px #d05828 !important;
   transform: scale(1.02);
+}
+
+
+#home-calendar-container.cal-fullscreen-active {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 9999 !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+  border: none !important;
+  background: #f5ead8 !important;
+  padding: calc(16px + env(safe-area-inset-top)) 16px 16px 16px !important;
 }
 
 </style>
@@ -750,7 +762,7 @@ body.edit-mode .calc-key:active::after, body.edit-mode .calc-mini-key:active::af
 
 <div class="calc-ov" id="calc-ov" onclick="if(event.target.id==='calc-ov')closeCalc()">
   <div class="calc-dialog">
-    <div class="calc-header"><h2>🧮 Calculadora</h2><button class="calc-close" style="width:auto; padding:0 14px; font-size:15px;" onclick="closeCalc()">Salir</button></div>
+    <div class="calc-header" style="justify-content: flex-end; padding: 10px 15px 5px; border-bottom: none;"><button class="calc-close" style="width:auto; padding:6px 12px; font-size:12px; height:auto; line-height:1; border-radius:6px; box-shadow:0 2px 4px rgba(0,0,0,0.1);" onclick="closeCalc()">Salir</button></div>
     <div class="calculator-shell" id="calculator-shell" onclick="if(typeof isEditMode!=='undefined' && isEditMode) handleEditModeSelect('shell')">
   
   
@@ -1989,20 +2001,7 @@ function toggleCalendarFullscreen(){
   CAL_FULLSCREEN = !CAL_FULLSCREEN;
   const container = document.getElementById('home-calendar-container');
   if(container) {
-    if(CAL_FULLSCREEN) {
-      container.style.position = 'fixed';
-      container.style.inset = '0';
-      container.style.zIndex = '9999';
-      container.style.background = '#f5ead8';
-      container.style.padding = '20px';
-      container.style.paddingTop = 'calc(20px + env(safe-area-inset-top))';
-    } else {
-      container.style.position = 'relative';
-      container.style.inset = 'auto';
-      container.style.zIndex = 'auto';
-      container.style.background = 'transparent';
-      container.style.padding = '0';
-    }
+    container.classList.toggle('cal-fullscreen-active', CAL_FULLSCREEN);
   }
 }
 
@@ -3483,6 +3482,7 @@ function closeCalc(){document.getElementById('calc-ov').classList.remove('open')
 
 // ── CALENDAR DRAG & DROP ──
 let DRAG_CAL_ITEM = null;
+let DRAG_SCROLL_INTERVAL = null;
 function startCalItemDrag(e) {
   if(e.button !== 0 && e.pointerType === 'mouse') return;
   e.stopPropagation();
@@ -3532,7 +3532,7 @@ function startModalItemDrag(e, id) {
   clone.style.color = '#50280a';
   clone.style.left = e.clientX + 'px';
   clone.style.top = e.clientY + 'px';
-  clone.style.transform = 'translate(-50%, -50%) scale(1.05)';
+  clone.style.transform = 'translate(-50%, 25px) scale(1.05)';
   clone.style.display = 'none'; // Hidden until drag threshold is met
   document.body.appendChild(clone);
   
@@ -3593,6 +3593,34 @@ function moveCalItemDrag(e) {
   const target = document.elementFromPoint(e.clientX, e.clientY);
   DRAG_CAL_ITEM.clone.style.display = '';
   
+  const container = document.getElementById('home-calendar-container');
+  if(container && DRAG_CAL_ITEM.isDragging) {
+    const rect = container.getBoundingClientRect();
+    const threshold = 60;
+    let scrollSpeed = 0;
+    if(e.clientY < rect.top + threshold) {
+      scrollSpeed = -15;
+    } else if(e.clientY > rect.bottom - threshold) {
+      scrollSpeed = 15;
+    }
+    
+    if(scrollSpeed !== 0) {
+      if(!DRAG_SCROLL_INTERVAL) {
+        const scrollLoop = () => {
+          if(!DRAG_CAL_ITEM || !DRAG_SCROLL_INTERVAL) return;
+          container.scrollTop += DRAG_SCROLL_INTERVAL;
+          requestAnimationFrame(scrollLoop);
+        };
+        DRAG_SCROLL_INTERVAL = scrollSpeed;
+        requestAnimationFrame(scrollLoop);
+      } else {
+        DRAG_SCROLL_INTERVAL = scrollSpeed;
+      }
+    } else {
+      DRAG_SCROLL_INTERVAL = null;
+    }
+  }
+  
   const calDay = target ? target.closest('.cal-day') : null;
   const targetKey = calDay ? calDay.getAttribute('data-cal-key') : null;
   
@@ -3614,6 +3642,7 @@ function endCalItemDrag(e) {
   
   const { sourceKey, itemId, originalEl, clone, lastHover, isDragging, fromModal, modalClosed } = DRAG_CAL_ITEM;
   DRAG_CAL_ITEM = null;
+  DRAG_SCROLL_INTERVAL = null;
   
   clone.remove();
   if(originalEl) originalEl.style.opacity = '';
@@ -4353,6 +4382,6 @@ init().catch(err=>{
   showHomeScreen();
 });
 </script>
-<div style="position:fixed; bottom:12px; right:12px; text-align:right; font-size:11px; font-weight:800; color:rgba(80,40,10,0.35); pointer-events:none; z-index:9000;">V3</div>
+<div style="position:fixed; bottom:12px; right:12px; text-align:right; font-size:11px; font-weight:800; color:rgba(80,40,10,0.35); pointer-events:none; z-index:9000;">V4</div>
 </body>
 </html>
