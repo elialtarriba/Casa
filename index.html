@@ -55,9 +55,9 @@ button:not(:disabled):active,.pill:active,.add-pill-btn:active,.zone-search-btn:
   background:radial-gradient(ellipse at 15% 10%,rgba(220,160,100,.22) 0%,transparent 45%),
              radial-gradient(ellipse at 85% 90%,rgba(200,130,80,.14) 0%,transparent 40%)}
 .home-top{padding:56px 20px 8px;flex-shrink:0}
-.home-title-row{display:grid;grid-template-columns:76px minmax(0,1fr) auto;align-items:center;gap:12px}
+.home-title-row{display:grid;grid-template-columns:76px minmax(0,1fr) 76px;align-items:center;gap:12px}
 .home-title-row>div:first-of-type{display:flex;align-items:center;min-width:0}
-.home-title-row .home-calc-btn{width:auto;min-width:112px;flex-shrink:0}
+
 .brand-flip{width:76px;height:76px;perspective:700px;flex-shrink:0;cursor:pointer;border:0;background:transparent;padding:0;overflow:visible}
 .brand-flip-inner{display:block;position:relative;width:100%;height:100%;transition:transform .65s cubic-bezier(.2,.75,.25,1);transform-style:preserve-3d}
 .brand-flip.flipped .brand-flip-inner{transform:rotateY(180deg)}
@@ -68,6 +68,7 @@ button:not(:disabled):active,.pill:active,.add-pill-btn:active,.zone-search-btn:
 .brand-email{font-size:11px;line-height:1.15;font-weight:900;color:#573722;white-space:nowrap;letter-spacing:0}
 .brand-flip:active .brand-flip-inner{transform:scale(.95)}
 .brand-flip.flipped:active .brand-flip-inner{transform:rotateY(180deg) scale(.95)}
+.brand-flip:active .brand-flip-inner{transform:scale(.95)}
 .home-title{font-size:32px;font-weight:900;background:linear-gradient(135deg,#c85828,#b03070);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .home-sub{font-size:13px;font-weight:600;color:rgba(80,40,10,.45);margin-top:2px}
 .sync-row{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;align-items:center}
@@ -465,9 +466,9 @@ body.edit-mode .calc-key:active::after, body.edit-mode .calc-mini-key:active::af
   .cal-day{height:48px;border-radius:8px;padding:5px;font-size:11px}
   .cal-note{font-size:9px;-webkit-line-clamp:1}
   .year-grid{grid-template-columns:1fr}
-  .home-title-row{grid-template-columns:62px minmax(0,1fr) 44px;gap:9px}
-  .home-title-row .home-calc-btn{grid-column:3;width:44px;min-width:44px;height:36px;padding:0;font-size:0}
-  .home-title-row .home-calc-btn::before{content:'🧮';font-size:18px}
+  .home-title-row{grid-template-columns:62px minmax(0,1fr) 62px;gap:9px}
+  
+  
   .brand-flip{width:62px;height:62px;grid-row:1/3}
   .brand-face{border-radius:15px}
   .brand-back{width:176px;padding:9px 10px}
@@ -598,26 +599,24 @@ body.edit-mode .calc-key:active::after, body.edit-mode .calc-mini-key:active::af
             onkeydown="if(event.key==='Enter'){event.preventDefault();this.blur()}"
             title="Toca para editar el título">Home</div>
         </div>
-        <button class="home-calc-btn" onclick="openCalc()" title="Calculadora">🧮 Calculadora</button>
+        <button class="brand-flip" style="perspective:none;" type="button" onclick="openCalc()" title="Calculadora">
+          <span class="brand-flip-inner" style="transition: transform 0.1s;">
+            <span class="brand-face" style="position:relative;"><img src="iconocalcu.png" alt="Calculadora" style="width:100%;height:100%;object-fit:cover;display:block;"></span>
+          </span>
+        </button>
       </div>
       <div class="app-error" id="app-error"></div>
     </div>
-    <div class="houses-grid" id="home-calendar-container" style="display:flex; flex-direction:column; padding:0; height:100%;"></div>
+    <div class="houses-grid" id="home-calendar-container"></div>
     <button class="home-fab" id="home-fab" onclick="showHousesListScreen()" style="bottom: 30px;">CASAS</button>
   </div>
 
   <!-- SCREEN 1.5: HOUSES LIST -->
   <div class="screen" id="s-houses-list">
     <div class="home-top">
-      <div class="home-title-row">
-        <button class="brand-flip" type="button" onclick="showHomeScreen()" aria-label="Volver">
-          <span class="brand-flip-inner" style="transform:none; border:none; box-shadow:none; background:transparent;">
-            <span class="brand-face brand-front" style="font-size:32px; font-weight:bold; display:flex; align-items:center; justify-content:center; color:#573722; background:transparent; border:none; box-shadow:none;">‹</span>
-          </span>
-        </button>
-        <div>
-          <div class="home-title">Mis Casas</div>
-        </div>
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <button onclick="showHomeScreen()" style="height:44px; padding:0 20px; background:rgba(255,255,255,0.7); border:1.5px solid rgba(160,100,50,0.2); border-radius:22px; font-size:14px; font-weight:800; color:rgba(80,40,10,0.6); box-shadow:0 4px 14px rgba(160,90,40,0.14); backdrop-filter:blur(8px); cursor:pointer; display:flex; align-items:center; justify-content:center; white-space:nowrap;">INICIO</button>
+        <div class="home-title" style="margin:0; text-align:right; font-size:28px; line-height:44px; height:44px;">Mis Casas</div>
       </div>
     </div>
     <div class="houses-grid" id="houses-grid"></div>
@@ -798,7 +797,7 @@ body.edit-mode .calc-key:active::after, body.edit-mode .calc-mini-key:active::af
     <button class="calc-key" data-calc="1">1</button><button class="calc-key" data-calc="2">2</button><button class="calc-key" data-calc="3">3</button><button class="calc-key op" data-calc="+">＋</button>
     <button class="calc-key" data-calc="0">0</button><button class="calc-key" data-calc=".">,</button><button class="calc-key" data-calc="back">⌫</button><button class="calc-key equals" data-calc="=">=</button>
   </div>
-  <div class="app-version" style="position:absolute; bottom:16px; right:16px; font-size:14px; font-weight:900; color:var(--calc-display-text); opacity:0.35; pointer-events:none;">v61</div>
+  <div class="app-version" style="position:absolute; bottom:16px; right:16px; font-size:14px; font-weight:900; color:var(--calc-display-text); opacity:0.35; pointer-events:none;"></div>
 </div>
   </div>
 </div>
@@ -1778,7 +1777,11 @@ function getCalNote(key){return calVisibleItems(key).map(it=>(it.done?'✓ ':'')
 function renderCalDayItems(key,mini){
   const items=calVisibleItems(key).slice(0,mini?2:3);
   if(!items.length)return '';
-  return `<div class="cal-note">${items.map(it=>{const color=CAL_COLORS[it.color]||CAL_COLORS.none;const photos=calItemPhotoIds(it).length;return `<div class="cal-note-line ${it.done?'done':''}"><span class="cal-note-box" style="background:${color.bg};border-color:${color.dot}"></span><span class="cal-note-text">${esc(it.text)||(photos?`📷 ${photos} foto${photos===1?'':'s'}`:'')}</span></div>`;}).join('')}</div>`;
+  return `<div class="cal-note">${items.map(it=>{
+    const color=CAL_COLORS[it.color]||CAL_COLORS.none;
+    const photos=calItemPhotoIds(it).length;
+    return `<div class="cal-note-line ${it.done?'done':''}" data-cal-key="${key}" data-item-id="${it.id}" style="touch-action:none; cursor:grab;" onpointerdown="startCalItemDrag(event)"><span class="cal-note-box" style="background:${color.bg};border-color:${color.dot}"></span><span class="cal-note-text">${esc(it.text)||(photos?`📷 ${photos} foto${photos===1?'':'s'}`:'')}</span></div>`;
+  }).join('')}</div>`;
 }
 function renderCalColorPicker(){
   const row=document.getElementById('cal-color-row');if(!row)return;
@@ -1937,7 +1940,7 @@ function renderMonthGrid(year,month,mini){
     const hasColor=colorKey!=='none';
     const style=hasColor?`style="--cal-bg:${color.bg};--cal-border:${color.border};"`:'';
     const click=(!mini||!muted)?`onclick="openCalNote('${key}')"`:'';
-    h+=`<div class="cal-day${weekend?' weekend':''}${muted?' muted':''}${sameDay(date,today)?' today':''}${hasColor?' has-color':''}" ${style} ${click}><div>${d}</div>${note?`${renderCalDayItems(key,mini)}<div class="cal-dot" style="background:${color.dot}"></div>`:''}</div>`;
+    h+=`<div class="cal-day${weekend?' weekend':''}${muted?' muted':''}${sameDay(date,today)?' today':''}${hasColor?' has-color':''}" data-cal-key="${key}" ${style} ${click}><div>${d}</div>${note?`${renderCalDayItems(key,mini)}<div class="cal-dot" style="background:${color.dot}"></div>`:''}</div>`;
   }
   return h+`</div>`;
 }
@@ -4128,6 +4131,6 @@ init().catch(err=>{
   showHomeScreen();
 });
 </script>
-<div style="position:fixed; bottom:12px; right:12px; text-align:right; font-size:11px; font-weight:800; color:rgba(80,40,10,0.35); pointer-events:none; z-index:9000;">v1.0</div>
+<div style="position:fixed; bottom:12px; right:12px; text-align:right; font-size:11px; font-weight:800; color:rgba(80,40,10,0.35); pointer-events:none; z-index:9000;">v1.1</div>
 </body>
 </html>
