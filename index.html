@@ -801,7 +801,6 @@ body.edit-mode .calc-key:active::after, body.edit-mode .calc-mini-key:active::af
   <div class="app-version" style="position:absolute; bottom:16px; right:16px; font-size:14px; font-weight:900; color:var(--calc-display-text); opacity:0.35; pointer-events:none;">v61</div>
 </div>
   </div>
-  </div>
 </div>
 
 <!-- Firebase modal removido para funcionamiento local offline -->
@@ -1144,7 +1143,8 @@ let PHOTO_TARGET=null;
 let SHOW_ATTACH=true, DRAG_HOUSE_ID=null, DRAG_TASK_ID=null, POINTER_DRAG=null;
 let CAL_DATE=new Date(), CAL_MODE='month', CAL_NOTE_DAY=null;
 let CALC_CURRENT='0', CALC_PREVIOUS=null, CALC_OPERATOR='', CALC_JUST_EVALUATED=false;
-let CALC_SOUND=false, CALC_AUDIO=null, CALC_PERCENT_TOOL='';
+let CALC_SOUND=true, CALC_AUDIO=null, CALC_PERCENT_TOOL='';
+let CALC_HISTORY = [];
 let TASK_COLOR='tema';
 let TASK_PENDING_PHOTOS=[];
 let ICON_IMAGE_TARGET=null;
@@ -2774,12 +2774,8 @@ try {
   });
 } catch(e) {}
 
-let CALC_CURRENT='0', CALC_PREVIOUS=null, CALC_OPERATOR='', CALC_JUST_EVALUATED=false;
-let CALC_SOUND=true, CALC_AUDIO=null;
-let CALC_PERCENT_TOOL='';
 document.addEventListener('visibilitychange', () => { if(document.visibilityState === 'hidden' && CALC_PERCENT_TOOL) toggleCalcPercentTool(CALC_PERCENT_TOOL); });
 let ACTIVE_TOOL_INPUT=null;
-let CALC_HISTORY = [];
 
 function formatCalcValue(value){const n=Number(value);return Number.isFinite(n)?String(Math.round(n*100000000)/100000000).replace('.',','):'Error';}
 
