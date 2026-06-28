@@ -86,12 +86,12 @@ button:not(:disabled):active,.pill:active,.add-pill-btn:active,.zone-search-btn:
 .app-error.show{display:block}
 .houses-grid{flex:1;min-height:0;overflow-y:auto;padding:8px 14px 100px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;scrollbar-width:thin;align-content:start}
 .houses-grid::-webkit-scrollbar{display:none}
-.cal-card{grid-column:1/-1;background:rgba(255,255,255,.64);border:1.5px solid rgba(160,100,50,.12);border-radius:16px;padding:12px;box-shadow:0 4px 16px rgba(0,0,0,.08)}
+.cal-card{grid-column:1/-1;background:rgba(255,255,255,.64);border:1.5px solid rgba(160,100,50,.12);border-radius:16px;padding:12px;box-shadow:0 4px 16px rgba(0,0,0,.08); display:flex; flex-direction:column; flex:1; min-height:0; height:100%;}
 .cal-head{display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap}
 .cal-title{flex:1;font-size:16px;font-weight:950;color:rgba(70,35,10,.72);text-transform:capitalize}
 .cal-btn{height:32px;min-width:34px;padding:0 10px;border:none;border-radius:10px;background:rgba(255,255,255,.78);color:rgba(70,35,10,.58);font-size:13px;font-weight:950;cursor:pointer;box-shadow:0 2px 8px rgba(110,70,30,.08)}
 .cal-btn:hover{background:white;color:rgba(70,35,10,.8)}
-.cal-week,.cal-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px}
+.cal-week{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px; flex-shrink: 0;} .cal-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px; flex:1;}
 .cal-week div{height:22px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:950;color:rgba(70,35,10,.38)}
 .cal-day{height:clamp(54px,8.5vw,82px);border-radius:10px;background:rgba(255,255,255,.55);display:flex;flex-direction:column;align-items:flex-end;justify-content:flex-start;padding:7px;font-size:12px;font-weight:850;color:rgba(50,25,8,.62);cursor:pointer;overflow:hidden;box-shadow:inset 0 0 0 1px rgba(255,255,255,.36)}
 .cal-day:hover{background:rgba(255,255,255,.86);transform:translateY(-1px)}
@@ -113,7 +113,7 @@ button:not(:disabled):active,.pill:active,.add-pill-btn:active,.zone-search-btn:
 .cal-color-btn{width:30px;height:30px;border:none;border-radius:10px;cursor:pointer;box-shadow:inset 0 0 0 2px rgba(255,255,255,.75),0 3px 0 rgba(80,40,10,.12),0 6px 12px rgba(80,40,10,.08);transition:transform .08s,box-shadow .08s}
 .cal-color-btn.sel{transform:translateY(-2px) scale(1.08);box-shadow:inset 0 0 0 2px #fff,0 0 0 3px rgba(80,40,10,.18),0 5px 0 rgba(80,40,10,.14),0 9px 16px rgba(80,40,10,.1)}
 .cal-list-editor{min-height:160px;max-height:min(43dvh,390px);overflow-y:auto;background:#f5ead8;border:3px solid #ee6899;border-radius:14px;padding:10px;display:flex;flex-direction:column;gap:7px;overscroll-behavior:contain}
-.cal-line{display:grid;grid-template-columns:32px 26px minmax(0,1fr) 32px 30px;gap:7px;align-items:center}
+.cal-line{display:grid;grid-template-columns:24px 32px 26px minmax(0,1fr) 32px 30px;gap:7px;align-items:center}
 .cal-line-color{width:24px;height:24px;border:2px solid rgba(255,255,255,.82);border-radius:8px;cursor:pointer;box-shadow:0 3px 0 rgba(80,40,10,.14),0 5px 9px rgba(80,40,10,.08)}
 .cal-line-palette{grid-column:1/-1;display:flex;gap:6px;flex-wrap:wrap;padding:7px 8px;background:rgba(255,255,255,.42);border-radius:10px}
 .cal-line-palette button{width:25px;height:25px;border:2px solid rgba(255,255,255,.8);border-radius:8px;cursor:pointer;box-shadow:0 3px 0 rgba(80,40,10,.12)}
@@ -465,7 +465,7 @@ body.edit-mode .calc-key:active::after, body.edit-mode .calc-mini-key:active::af
   .cal-week,.cal-grid{gap:3px}
   .cal-day{height:48px;border-radius:8px;padding:5px;font-size:11px}
   .cal-note{font-size:9px;-webkit-line-clamp:1}
-  .year-grid{grid-template-columns:1fr}
+  .year-grid{grid-template-columns:1fr; flex:1;}
   .home-title-row{grid-template-columns:62px minmax(0,1fr) 62px;gap:9px}
   
   
@@ -599,7 +599,7 @@ body.edit-mode .calc-key:active::after, body.edit-mode .calc-mini-key:active::af
             onkeydown="if(event.key==='Enter'){event.preventDefault();this.blur()}"
             title="Toca para editar el título">Home</div>
         </div>
-        <button class="brand-flip" style="perspective:none;" type="button" onclick="openCalc()" title="Calculadora">
+        <button class="brand-flip" style="perspective:none; grid-column: 3; align-self: center;" type="button" onclick="openCalc()" title="Calculadora">
           <span class="brand-flip-inner" style="transition: transform 0.1s;">
             <span class="brand-face" style="position:relative;"><img src="iconocalcu.png" alt="Calculadora" style="width:100%;height:100%;object-fit:cover;display:block;"></span>
           </span>
@@ -1799,6 +1799,7 @@ function renderCalList(focusId){
     const lineColor=CAL_COLORS[it.color]||CAL_COLORS.none;
     const photos=calItemPhotoIds(it).map(photoId=>({photoId,src:lsGet('ph_cal_'+photoId)})).filter(photo=>photo.src);
     return `<div class="cal-line ${it.done?'done':''}" data-id="${it.id}">
+      <button class="cal-drag-handle" style="cursor:grab; background:transparent; border:none; padding:0; display:flex; align-items:center; justify-content:center; color:rgba(80,40,10,0.4); touch-action:none; font-size:24px;" onpointerdown="${real?`startModalItemDrag(event, '${it.id}')`:'addCalLine()'}" title="Arrastrar para mover de día">≡</button>
       <button class="cal-check ${it.done?'on':''}" style="--line-color:${lineColor.dot};--line-bg:${lineColor.bg}" onclick="${real?`toggleCalLine('${it.id}')`:'addCalLine()'}" title="Marcar"></button>
       <button class="cal-line-color" style="background:${lineColor.bg};border-color:${lineColor.dot}" onclick="${real?`toggleCalLinePalette('${it.id}')`:'addCalLine()'}" title="Color de esta línea"></button>
       <input value="${esc(it.text)}" placeholder="Escribe una línea..." ${real?`oninput="editCalLine('${it.id}',this.value)" onkeydown="calLineKey(event,'${it.id}')"`:`onfocus="addCalLine()"`}>
@@ -3440,6 +3441,140 @@ function openCalc(){
 function closeCalc(){document.getElementById('calc-ov').classList.remove('open');}
 
 
+
+// ── CALENDAR DRAG & DROP ──
+let DRAG_CAL_ITEM = null;
+function startCalItemDrag(e) {
+  if(e.button !== 0 && e.pointerType === 'mouse') return;
+  e.stopPropagation();
+  
+  const el = e.currentTarget;
+  const key = el.getAttribute('data-cal-key');
+  const id = el.getAttribute('data-item-id');
+  if(!key || !id) return;
+  
+  const rect = el.getBoundingClientRect();
+  const clone = el.cloneNode(true);
+  clone.classList.add('cal-item-clone');
+  clone.style.width = rect.width + 'px';
+  clone.style.height = rect.height + 'px';
+  clone.style.left = rect.left + 'px';
+  clone.style.top = rect.top + 'px';
+  document.body.appendChild(clone);
+  
+  el.style.opacity = '0.2';
+  
+  DRAG_CAL_ITEM = { sourceKey: key, itemId: id, originalEl: el, clone: clone, offsetX: e.clientX - rect.left, offsetY: e.clientY - rect.top, lastHover: null, isDragging: false, fromModal: false };
+  
+  document.addEventListener('pointermove', moveCalItemDrag, {passive: false});
+  document.addEventListener('pointerup', endCalItemDrag);
+}
+
+function startModalItemDrag(e, id) {
+  if(e.button !== 0 && e.pointerType === 'mouse') return;
+  e.stopPropagation();
+  const el = e.currentTarget.closest('.cal-line');
+  if(!el) return;
+  
+  const rect = el.getBoundingClientRect();
+  const clone = el.cloneNode(true);
+  clone.classList.add('cal-item-clone');
+  clone.style.width = rect.width + 'px';
+  clone.style.height = rect.height + 'px';
+  clone.style.left = rect.left + 'px';
+  clone.style.top = rect.top + 'px';
+  document.body.appendChild(clone);
+  
+  // Close the modal visually without wiping memory
+  document.getElementById('cal-note-ov').classList.remove('open');
+  
+  DRAG_CAL_ITEM = { sourceKey: CAL_NOTE_DAY, itemId: id, originalEl: el, clone: clone, offsetX: e.clientX - rect.left, offsetY: e.clientY - rect.top, lastHover: null, isDragging: true, fromModal: true };
+  
+  document.addEventListener('pointermove', moveCalItemDrag, {passive: false});
+  document.addEventListener('pointerup', endCalItemDrag);
+}
+
+function moveCalItemDrag(e) {
+  if(!DRAG_CAL_ITEM) return;
+  e.preventDefault();
+  DRAG_CAL_ITEM.isDragging = true;
+  
+  DRAG_CAL_ITEM.clone.style.left = (e.clientX - DRAG_CAL_ITEM.offsetX) + 'px';
+  DRAG_CAL_ITEM.clone.style.top = (e.clientY - DRAG_CAL_ITEM.offsetY) + 'px';
+  
+  DRAG_CAL_ITEM.clone.style.display = 'none';
+  const target = document.elementFromPoint(e.clientX, e.clientY);
+  DRAG_CAL_ITEM.clone.style.display = '';
+  
+  const calDay = target ? target.closest('.cal-day') : null;
+  const targetKey = calDay ? calDay.getAttribute('data-cal-key') : null;
+  
+  if(DRAG_CAL_ITEM.lastHover && DRAG_CAL_ITEM.lastHover !== calDay) {
+    DRAG_CAL_ITEM.lastHover.classList.remove('drag-over');
+  }
+  if(calDay && targetKey !== DRAG_CAL_ITEM.sourceKey) {
+    calDay.classList.add('drag-over');
+    DRAG_CAL_ITEM.lastHover = calDay;
+  } else {
+    DRAG_CAL_ITEM.lastHover = null;
+  }
+}
+
+function endCalItemDrag(e) {
+  if(!DRAG_CAL_ITEM) return;
+  document.removeEventListener('pointermove', moveCalItemDrag);
+  document.removeEventListener('pointerup', endCalItemDrag);
+  
+  const { sourceKey, itemId, originalEl, clone, lastHover, isDragging, fromModal } = DRAG_CAL_ITEM;
+  DRAG_CAL_ITEM = null;
+  
+  clone.remove();
+  if(originalEl) originalEl.style.opacity = '';
+  if(lastHover) lastHover.classList.remove('drag-over');
+  
+  if(!isDragging && !fromModal) {
+    openCalNote(sourceKey);
+    return;
+  }
+  
+  const targetKey = lastHover ? lastHover.getAttribute('data-cal-key') : null;
+  
+  if(targetKey && targetKey !== sourceKey) {
+    // Valid drop on a different day!
+    // Since fromModal modifies current editing, we use getCalItems to pull fresh from storage if not from modal, or we use CAL_NOTE_ITEMS if from modal?
+    // Wait, if we are fromModal, CAL_NOTE_ITEMS was already saved on every edit! So getCalItems(sourceKey) is fresh.
+    const sourceItems = getCalItems(sourceKey);
+    const targetItems = getCalItems(targetKey);
+    const idx = sourceItems.findIndex(it => it.id === itemId);
+    if(idx !== -1) {
+      const itemToMove = sourceItems.splice(idx, 1)[0];
+      targetItems.push(itemToMove);
+      
+      const saveItems = (k, list) => {
+        const textItems = list;
+        const activeText = textItems.filter(it=>!it.done).map(it=>it.text).join('\n');
+        const allText = textItems.map(it=>(it.done?'✓ ':'')+it.text).join('\n');
+        if(list.length) lsSet(calItemsKey(k), JSON.stringify(list)); else lsRemove(calItemsKey(k));
+        if(allText) lsSet('cal_'+k, activeText||allText); else lsRemove('cal_'+k);
+      };
+      
+      saveItems(sourceKey, sourceItems);
+      saveItems(targetKey, targetItems);
+      lsSet('h_updated', String(Date.now()));
+      scheduleCloudSave();
+      
+      // If we moved it, we don't reopen the modal. 
+      renderHomeGrid();
+      return;
+    }
+  }
+  
+  // If we didn't drop it on a new day AND it came from the modal, reopen the modal!
+  if(fromModal) {
+    document.getElementById('cal-note-ov').classList.add('open');
+  }
+}
+
 // ── PDF EXPORT ──
 function roomPath(rid){
   const arr=[];let cur=DATA[rid];
@@ -4131,6 +4266,6 @@ init().catch(err=>{
   showHomeScreen();
 });
 </script>
-<div style="position:fixed; bottom:12px; right:12px; text-align:right; font-size:11px; font-weight:800; color:rgba(80,40,10,0.35); pointer-events:none; z-index:9000;">v1.1</div>
+<div style="position:fixed; bottom:12px; right:12px; text-align:right; font-size:11px; font-weight:800; color:rgba(80,40,10,0.35); pointer-events:none; z-index:9000;">V2</div>
 </body>
 </html>
