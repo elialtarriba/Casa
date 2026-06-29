@@ -8,6 +8,14 @@ Este archivo mantiene un registro de todas las modificaciones y tareas pendiente
 
 ## Cambios Realizados
 
+- **(2026-06-29) [V9] Mejoras de UI Calendario y Deshacer/Rehacer:**
+  - Añadidas flechas (`‹` y `›`) en la vista anual para navegar de 1969 a 2060.
+  - Añadido botón "Fecha actual" (Hoy) en la esquina inferior izquierda.
+  - Movido el botón "🔎 Colores" a la esquina inferior derecha.
+  - Añadida propiedad `user-select: none` para prevenir sombreado azul al arrastrar en el calendario.
+  - Implementado sistema de historial (Deshacer/Rehacer) con botones `↶` y `↷`. Se guarda el estado automáticamente al mover, editar o borrar líneas de calendario. El límite es de 5 acciones hacia atrás/adelante.
+  - Actualizada la versión inferior derecha a "V9".
+
 - **(2026-06-28) [V2-V7] Mejoras UX/UI Calculadora:**
   - Calculadora a pantalla completa nativa sin márgenes de popup.
   - Reemplazado título y botón 'X' por un botón 'Salir' minimalista, moviendo el teclado hacia arriba.

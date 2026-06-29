@@ -87,9 +87,10 @@ button:not(:disabled):active,.pill:active,.add-pill-btn:active,.zone-search-btn:
 .app-error.show{display:block}
 .houses-grid{flex:1;min-height:0;overflow-y:auto;padding:8px 14px 100px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;scrollbar-width:thin;align-content:start}
 .houses-grid::-webkit-scrollbar{display:none}
-.cal-card{grid-column:1/-1;background:rgba(255,255,255,.64);border:1.5px solid rgba(160,100,50,.12);border-radius:16px;padding:12px;box-shadow:0 4px 16px rgba(0,0,0,.08); display:flex; flex-direction:column; flex:1; min-height:0;}
+.cal-card{grid-column:1/-1;background:rgba(255,255,255,.64);border:1.5px solid rgba(160,100,50,.12);border-radius:16px;padding:12px;box-shadow:0 4px 16px rgba(0,0,0,.08); display:flex; flex-direction:column; flex:1; min-height:0; user-select:none; -webkit-user-select:none;}
 .cal-head{display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap}
-.cal-title{flex:1;font-size:16px;font-weight:950;color:rgba(70,35,10,.72);text-transform:capitalize}
+.cal-footer{display:flex;justify-content:space-between;align-items:center;margin-top:10px;gap:8px;flex-wrap:wrap}
+.cal-title{flex:1;font-size:16px;font-weight:950;color:rgba(70,35,10,.72);text-transform:capitalize;text-align:center}
 .cal-btn{height:32px;min-width:34px;padding:0 10px;border:none;border-radius:10px;background:rgba(255,255,255,.78);color:rgba(70,35,10,.58);font-size:13px;font-weight:950;cursor:pointer;box-shadow:0 2px 8px rgba(110,70,30,.08)}
 .cal-btn:hover{background:white;color:rgba(70,35,10,.8)}
 .cal-week{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px; flex-shrink: 0;} .cal-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));grid-template-rows:repeat(6,minmax(0,1fr));gap:5px;flex:1;min-height:0;}
@@ -1195,6 +1196,75 @@ let HIST=[], REDO=[], CONF_CB=null, MODAL_LVL=0, MODAL_LVL_VAL=0;
 let ROOM_EDIT_ID=null, ROOM_ICON_IMAGE=null, EMOJI_MANUAL=false, TASK_COLORS_OPEN=false;
 let PHOTO_TARGET=null;
 let SHOW_ATTACH=true, DRAG_HOUSE_ID=null, DRAG_TASK_ID=null, POINTER_DRAG=null;
+
+let HISTORY_STACK = [];
+let HISTORY_INDEX = -1;
+
+function captureCalState() {
+  const state = {};
+  for(let i=0; i<localStorage.length; i++){
+    const k = localStorage.key(i);
+    if(k && k.startsWith('cal_')) state[k] = localStorage.getItem(k);
+  }
+  return state;
+}
+
+function initHistory() {
+  HISTORY_STACK = [captureCalState()];
+  HISTORY_INDEX = 0;
+}
+
+function saveStateToHistory() {
+  if(HISTORY_INDEX < HISTORY_STACK.length - 1) {
+    HISTORY_STACK = HISTORY_STACK.slice(0, HISTORY_INDEX + 1);
+  }
+  HISTORY_STACK.push(captureCalState());
+  if(HISTORY_STACK.length > 6) { 
+    HISTORY_STACK.shift();
+  } else {
+    HISTORY_INDEX++;
+  }
+  const undoYr = document.getElementById('btn-undo-yr');
+  const redoYr = document.getElementById('btn-redo-yr');
+  const undoMo = document.getElementById('btn-undo-mo');
+  const redoMo = document.getElementById('btn-redo-mo');
+  if(undoYr) undoYr.disabled = HISTORY_INDEX <= 0;
+  if(redoYr) redoYr.disabled = HISTORY_INDEX >= HISTORY_STACK.length - 1;
+  if(undoMo) undoMo.disabled = HISTORY_INDEX <= 0;
+  if(redoMo) redoMo.disabled = HISTORY_INDEX >= HISTORY_STACK.length - 1;
+}
+
+function undoAction() {
+  if (HISTORY_INDEX > 0) {
+    HISTORY_INDEX--;
+    restoreStateFromHistory(HISTORY_STACK[HISTORY_INDEX]);
+  }
+}
+
+function redoAction() {
+  if (HISTORY_INDEX < HISTORY_STACK.length - 1) {
+    HISTORY_INDEX++;
+    restoreStateFromHistory(HISTORY_STACK[HISTORY_INDEX]);
+  }
+}
+
+function restoreStateFromHistory(state) {
+  const keysToRemove = [];
+  for(let i=0; i<localStorage.length; i++){
+    const k = localStorage.key(i);
+    if(k && k.startsWith('cal_')) keysToRemove.push(k);
+  }
+  keysToRemove.forEach(k => lsRemove(k));
+  
+  Object.keys(state).forEach(k => lsSet(k, state[k]));
+  
+  if(CAL_NOTE_DAY) {
+      CAL_NOTE_ITEMS = getCalItems(CAL_NOTE_DAY);
+      renderCalList(CAL_NOTE_ITEMS[0]?.id);
+      renderCalColorPicker();
+  }
+  renderHomeGrid();
+}
 let CAL_DATE=new Date(), CAL_MODE='month', CAL_NOTE_DAY=null;
 let CALC_CURRENT='0', CALC_PREVIOUS=null, CALC_OPERATOR='', CALC_JUST_EVALUATED=false;
 let CALC_SOUND=true, CALC_AUDIO=null, CALC_PERCENT_TOOL='';
@@ -1330,6 +1400,7 @@ async function init(){
     return;
   }
   loadLocal();
+  initHistory();
   CURRENT_HOUSE=null;SEL_LEVELS=[];saveSel();
   document.getElementById('loading').style.display='none';
   document.getElementById('app').style.display='flex';
@@ -2013,7 +2084,7 @@ function renderCalendar(){
   const y=CAL_DATE.getFullYear(),m=CAL_DATE.getMonth();
   let body='';
   if(CAL_MODE==='year'){
-    const yy=new Date().getFullYear();
+    const yy=CAL_DATE.getFullYear();
     body=`<div class="year-grid">`;
     for(let mm=0;mm<12;mm++){
       const count=monthCalendarPhotos(yy,mm).length;
@@ -2021,8 +2092,17 @@ function renderCalendar(){
     }
     body+=`</div>`;
     return `<div class="cal-card">
-      <div class="cal-head"><div class="cal-title">Año ${yy}</div><button class="cal-btn" onclick="toggleCalendarFullscreen()" title="Pantalla completa">⛶</button><button class="cal-btn" onclick="openCalColorSearch()">🔎 Colores</button><button class="cal-btn" onclick="CAL_MODE='month';renderHomeGrid()">Mes</button></div>
+      <div class="cal-head"><button class="cal-btn" onclick="changeCalYear(-1)">‹</button><div class="cal-title">Año ${yy}</div><button class="cal-btn" onclick="changeCalYear(1)">›</button><button class="cal-btn" onclick="toggleCalendarFullscreen()" title="Pantalla completa">⛶</button><button class="cal-btn" onclick="CAL_MODE='month';renderHomeGrid()">Mes</button></div>
       ${body}
+      <div class="cal-footer">
+        <div style="display:flex;gap:5px;">
+          <button class="cal-btn" onclick="goToToday()">Fecha actual</button>
+          <button class="cal-btn" onclick="undoAction()" title="Deshacer" id="btn-undo-yr" ${HISTORY_INDEX > 0 ? '' : 'disabled'}>↶</button>
+          <button class="cal-btn" onclick="redoAction()" title="Rehacer" id="btn-redo-yr" ${HISTORY_INDEX < HISTORY_STACK.length - 1 ? '' : 'disabled'}>↷</button>
+        </div>
+        <div></div>
+        <button class="cal-btn" onclick="openCalColorSearch()">🔎 Colores</button>
+      </div>
     </div>`;
   }
   body=renderMonthGrid(y,m,false);
@@ -2032,12 +2112,30 @@ function renderCalendar(){
       <button class="cal-title cal-title-btn" onclick="exportMonthPhotosPDF(${y},${m},this)" title="Crear PDF con las fotos del mes">${calMonthName(y,m)}</button>
       <button class="cal-btn" onclick="changeCalMonth(1)">›</button>
       <button class="cal-btn" onclick="toggleCalendarFullscreen()" title="Pantalla completa">⛶</button>
-      <button class="cal-btn" onclick="openCalColorSearch()">🔎 Colores</button>
       <button class="cal-btn" onclick="CAL_MODE='year';renderHomeGrid()">Año</button>
     </div>
     ${body}
-    <div class="cal-photo-count" title="Fotos de este mes">📷 ${monthCalendarPhotos(y,m).length}</div>
+    <div class="cal-footer">
+      <div style="display:flex;gap:5px;">
+        <button class="cal-btn" onclick="goToToday()">Fecha actual</button>
+        <button class="cal-btn" onclick="undoAction()" title="Deshacer" id="btn-undo-mo" ${HISTORY_INDEX > 0 ? '' : 'disabled'}>↶</button>
+        <button class="cal-btn" onclick="redoAction()" title="Rehacer" id="btn-redo-mo" ${HISTORY_INDEX < HISTORY_STACK.length - 1 ? '' : 'disabled'}>↷</button>
+      </div>
+      <div class="cal-photo-count" style="margin-top:0" title="Fotos de este mes">📷 ${monthCalendarPhotos(y,m).length}</div>
+      <button class="cal-btn" onclick="openCalColorSearch()">🔎 Colores</button>
+    </div>
   </div>`;
+}
+function changeCalYear(delta){
+  let newYear = CAL_DATE.getFullYear() + delta;
+  if(newYear < 1969) newYear = 1969;
+  if(newYear > 2060) newYear = 2060;
+  CAL_DATE=new Date(newYear,CAL_DATE.getMonth(),1);
+  renderHomeGrid();
+}
+function goToToday(){
+  CAL_DATE=new Date();
+  renderHomeGrid();
 }
 function changeCalMonth(delta){
   CAL_DATE=new Date(CAL_DATE.getFullYear(),CAL_DATE.getMonth()+delta,1);
@@ -2083,6 +2181,7 @@ function saveCalNote(){
   CAL_ORIGINAL_PHOTO_IDS=savedPhotoIds;
   updateStorageInfo();
   closeCalNote(true);
+  saveStateToHistory();
   renderHomeGrid();
 }
 function deleteCalNote(){
@@ -2096,6 +2195,7 @@ function deleteCalNote(){
   updateStorageInfo();
   CAL_ORIGINAL_PHOTO_IDS=[];
   closeCalNote(true);
+  saveStateToHistory();
   renderHomeGrid();
 }
 
@@ -3685,6 +3785,7 @@ function endCalItemDrag(e) {
       saveItems(targetKey, targetItems);
       lsSet('h_updated', String(Date.now()));
       scheduleCloudSave();
+      saveStateToHistory();
       
       // If we moved it, we don't reopen the modal. 
       renderHomeGrid();
@@ -4389,6 +4490,6 @@ init().catch(err=>{
   showHomeScreen();
 });
 </script>
-<div style="position:fixed; bottom:12px; right:12px; text-align:right; font-size:11px; font-weight:800; color:rgba(80,40,10,0.35); pointer-events:none; z-index:9000;">V8</div>
+<div style="position:fixed; bottom:12px; right:12px; text-align:right; font-size:11px; font-weight:800; color:rgba(80,40,10,0.35); pointer-events:none; z-index:9000;">V9</div>
 </body>
 </html>
