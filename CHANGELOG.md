@@ -8,6 +8,10 @@ Este archivo mantiene un registro de todas las modificaciones y tareas pendiente
 
 ## Cambios Realizados
 
+- **(2026-06-29) [V10] Ajustes Visuales Drag & Drop:**
+  - Ajustado el globo visual al arrastrar una línea del calendario. Cuando se arrastra dentro de su mismo día, el globo se mantiene cerca del dedo; al salir hacia un día diferente, el globo salta por encima del dedo para no tapar la visión del día de destino.
+  - Actualizada la versión a V10.
+
 - **(2026-06-29) [V9] Mejoras de UI Calendario y Deshacer/Rehacer:**
   - Añadidas flechas (`‹` y `›`) en la vista anual para navegar de 1969 a 2060.
   - Añadido botón "Fecha actual" (Hoy) en la esquina inferior izquierda.

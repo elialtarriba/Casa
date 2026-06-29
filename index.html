@@ -3686,19 +3686,34 @@ function moveCalItemDrag(e) {
     }
   }
   
-  if(DRAG_CAL_ITEM.fromModal) {
-    DRAG_CAL_ITEM.clone.style.left = e.clientX + 'px';
-    DRAG_CAL_ITEM.clone.style.top = e.clientY + 'px';
-  } else {
-    DRAG_CAL_ITEM.clone.style.left = (e.clientX - DRAG_CAL_ITEM.offsetX) + 'px';
-    DRAG_CAL_ITEM.clone.style.top = (e.clientY - DRAG_CAL_ITEM.offsetY) + 'px';
-  }
-  
   DRAG_CAL_ITEM.clone.style.display = 'none';
   // Offset Y by 45px upwards so the target is ABOVE the user's finger
   const targetY = Math.max(0, e.clientY - 45);
   const target = document.elementFromPoint(e.clientX, targetY);
+  const calDay = target ? target.closest('.cal-day') : null;
+  const targetKey = calDay ? calDay.getAttribute('data-cal-key') : null;
   DRAG_CAL_ITEM.clone.style.display = '';
+
+  if(DRAG_CAL_ITEM.fromModal) {
+    if (DRAG_CAL_ITEM.modalClosed || (targetKey && targetKey !== DRAG_CAL_ITEM.sourceKey)) {
+      DRAG_CAL_ITEM.clone.style.left = e.clientX + 'px';
+      DRAG_CAL_ITEM.clone.style.top = targetY + 'px';
+      DRAG_CAL_ITEM.clone.style.transform = 'translate(-50%, -50%) scale(1.05)';
+    } else {
+      DRAG_CAL_ITEM.clone.style.left = e.clientX + 'px';
+      DRAG_CAL_ITEM.clone.style.top = e.clientY + 'px';
+    }
+  } else {
+    if (targetKey && targetKey !== DRAG_CAL_ITEM.sourceKey) {
+      DRAG_CAL_ITEM.clone.style.left = e.clientX + 'px';
+      DRAG_CAL_ITEM.clone.style.top = targetY + 'px';
+      DRAG_CAL_ITEM.clone.style.transform = 'translate(-50%, -50%) scale(1.05)';
+    } else {
+      DRAG_CAL_ITEM.clone.style.left = (e.clientX - DRAG_CAL_ITEM.offsetX) + 'px';
+      DRAG_CAL_ITEM.clone.style.top = (e.clientY - DRAG_CAL_ITEM.offsetY) + 'px';
+      DRAG_CAL_ITEM.clone.style.transform = 'none';
+    }
+  }
   
   const container = document.getElementById('home-calendar-container');
   if(container && DRAG_CAL_ITEM.isDragging) {
@@ -3728,8 +3743,7 @@ function moveCalItemDrag(e) {
     }
   }
   
-  const calDay = target ? target.closest('.cal-day') : null;
-  const targetKey = calDay ? calDay.getAttribute('data-cal-key') : null;
+  // calDay and targetKey ya definidos arriba
   
   if(DRAG_CAL_ITEM.lastHover && DRAG_CAL_ITEM.lastHover !== calDay) {
     DRAG_CAL_ITEM.lastHover.classList.remove('drag-over');
@@ -4490,6 +4504,6 @@ init().catch(err=>{
   showHomeScreen();
 });
 </script>
-<div style="position:fixed; bottom:12px; right:12px; text-align:right; font-size:11px; font-weight:800; color:rgba(80,40,10,0.35); pointer-events:none; z-index:9000;">V9</div>
+<div style="position:fixed; bottom:12px; right:12px; text-align:right; font-size:11px; font-weight:800; color:rgba(80,40,10,0.35); pointer-events:none; z-index:9000;">V10</div>
 </body>
 </html>
