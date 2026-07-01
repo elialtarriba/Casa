@@ -8,6 +8,10 @@ Este archivo mantiene un registro de todas las modificaciones y tareas pendiente
 
 ## Cambios Realizados
 
+- **(2026-07-01) [V12] Mejoras UX/UI Calculadora:**
+  - Añadidas las propiedades CSS `touch-action: manipulation` y `user-select: none` a los botones de la calculadora (`.calc-key` y `.calc-mini-key`) para prevenir el zoom automático no deseado al pulsar rápidamente (doble toque) en dispositivos iOS.
+  - Actualizada la versión a V12.
+
 - **(2026-07-01) [V11] Soporte Offline:**
   - Se ha creado el archivo `manifest.json` y `sw.js` para habilitar el uso de la aplicación HOME sin conexión a internet.
   - Implementada estrategia *Network First* para garantizar que siempre se obtiene la versión más reciente al haber internet, o usar la memoria en modo avión.
