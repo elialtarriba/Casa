@@ -624,6 +624,7 @@ body.edit-mode .calc-key:active::after, body.edit-mode .calc-mini-key:active::af
 }
 
 </style>
+  <link rel="manifest" href="manifest.json">
 </head>
 <body>
 
@@ -4504,6 +4505,20 @@ init().catch(err=>{
   showHomeScreen();
 });
 </script>
-<div style="position:fixed; bottom:12px; right:12px; text-align:right; font-size:11px; font-weight:800; color:rgba(80,40,10,0.35); pointer-events:none; z-index:9000;">V10</div>
+
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    if (location.protocol !== 'file:') {
+      navigator.serviceWorker.register('sw.js').then((reg) => {
+        console.log('ServiceWorker registered:', reg.scope);
+      }).catch((err) => {
+        console.log('ServiceWorker registration failed:', err);
+      });
+    }
+  });
+}
+</script>
+<div style="position:fixed; bottom:12px; right:12px; text-align:right; font-size:11px; font-weight:800; color:rgba(80,40,10,0.35); pointer-events:none; z-index:9000;">V11</div>
 </body>
 </html>

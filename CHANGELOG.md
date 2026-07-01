@@ -8,6 +8,11 @@ Este archivo mantiene un registro de todas las modificaciones y tareas pendiente
 
 ## Cambios Realizados
 
+- **(2026-07-01) [V11] Soporte Offline:**
+  - Se ha creado el archivo `manifest.json` y `sw.js` para habilitar el uso de la aplicación HOME sin conexión a internet.
+  - Implementada estrategia *Network First* para garantizar que siempre se obtiene la versión más reciente al haber internet, o usar la memoria en modo avión.
+  - Actualizada la versión a V11.
+
 - **(2026-06-29) [V10] Ajustes Visuales Drag & Drop:**
   - Ajustado el globo visual al arrastrar una línea del calendario. Cuando se arrastra dentro de su mismo día, el globo se mantiene cerca del dedo; al salir hacia un día diferente, el globo salta por encima del dedo para no tapar la visión del día de destino.
   - Actualizada la versión a V10.
