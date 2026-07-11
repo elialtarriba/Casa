@@ -680,6 +680,7 @@ body.edit-mode .calc-key:active::after, body.edit-mode .calc-mini-key:active::af
     <button class="home-fab" id="houses-fab" onclick="openHouseModal()" style="bottom: 80px;">＋ Nueva casa</button>
     <div class="home-bottom-tools" style="position:fixed; bottom:20px; left:0; right:0; padding-bottom:env(safe-area-inset-bottom, 20px);">
       <button class="sync-btn" onclick="exportSync()">⬇ Exportar copia</button>
+      <button class="sync-btn" onclick="openCopyright(event)"><span style="margin-right:8px;">©</span> Copyright y Licencia</button>
       <button class="sync-btn" onclick="triggerImport()">⬆ Importar copia</button>
     </div>
   </div>
@@ -4520,5 +4521,64 @@ if ('serviceWorker' in navigator) {
 }
 </script>
 <div style="position:fixed; bottom:12px; right:12px; text-align:right; font-size:11px; font-weight:800; color:rgba(80,40,10,0.35); pointer-events:none; z-index:9000;">V12</div>
+
+<div id="copyrightModal" class="modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:99999; justify-content:center; align-items:center; opacity:0; transition:opacity 0.2s;">
+  <div class="modal-content" style="background:var(--bg, #fdfbf7); padding:30px; border-radius:12px; max-width:600px; width:90%; max-height:85vh; overflow-y:auto; color:var(--text, #5d4037); font-family:inherit; box-shadow:0 10px 30px rgba(0,0,0,0.2); position:relative; transform:translateY(20px); transition:transform 0.2s;">
+    <div style="font-size:22px; font-weight:bold; margin-bottom:20px; text-align:center; color:var(--bark, #5d4037);">Copyright y Licencia de Uso</div>
+    <div style="font-size:14px; line-height:1.6;">
+      <p style="text-align:center; font-weight:bold; margin-bottom:25px; font-size:16px;">© 2025–Present Elisabeth Altarriba<br>Todos los derechos reservados.</p>
+      
+      <p>Esta aplicación, incluyendo su código fuente, diseño, estructura, interfaz de usuario, imágenes, iconos, animaciones, documentación y cualquier otro elemento que forme parte de ella, es propiedad intelectual de Elisabeth Altarriba y está protegida por la legislación vigente sobre derechos de autor y propiedad intelectual.</p>
+
+      <div style="font-weight:bold; margin-top:25px; margin-bottom:12px; font-size:16px; border-bottom:1px solid rgba(0,0,0,0.1); padding-bottom:5px;">LICENCIA DE USO</div>
+      
+      <p style="font-weight:bold; margin-bottom:8px;">✅ Se permite:</p>
+      <ul style="margin-top:0; margin-bottom:20px; padding-left:25px;">
+        <li style="margin-bottom:4px;">Utilizar la aplicación para uso personal.</li>
+        <li style="margin-bottom:4px;">Utilizarla con fines educativos.</li>
+        <li style="margin-bottom:4px;">Compartir únicamente el enlace oficial de la aplicación.</li>
+      </ul>
+
+      <p style="font-weight:bold; margin-bottom:8px;">❌ No se permite:</p>
+      <ul style="margin-top:0; margin-bottom:20px; padding-left:25px;">
+        <li style="margin-bottom:4px;">Utilizar la aplicación con fines comerciales.</li>
+        <li style="margin-bottom:4px;">Venderla.</li>
+        <li style="margin-bottom:4px;">Redistribuirla como propia.</li>
+        <li style="margin-bottom:4px;">Copiar total o parcialmente su código fuente.</li>
+        <li style="margin-bottom:4px;">Reutilizar total o parcialmente su diseño, interfaz, imágenes, iconos, animaciones o documentación sin autorización expresa.</li>
+        <li style="margin-bottom:4px;">Eliminar o modificar este aviso de copyright.</li>
+      </ul>
+
+      <p>Si esta aplicación, o cualquier parte de ella, es utilizada, modificada o incorporada en otro proyecto, tanto total como parcialmente, deberá citarse expresamente la autoría de Elisabeth Altarriba.</p>
+
+      <p>Para cualquier uso distinto del permitido anteriormente, será necesaria autorización previa por escrito.</p>
+
+      <div style="margin-top:30px; text-align:center; background:rgba(0,0,0,0.03); padding:15px; border-radius:8px;">
+        <p style="font-weight:bold; margin-bottom:5px;">Autora</p>
+        <p style="margin-top:0; margin-bottom:15px; font-size:16px;">Elisabeth Altarriba</p>
+        <p style="font-weight:bold; margin-bottom:5px;">Contacto:</p>
+        <p style="margin-top:0;">lisaltarriba@gmail.com</p>
+      </div>
+    </div>
+    <div style="text-align:center; margin-top:25px;">
+      <button onclick="document.getElementById('copyrightModal').style.opacity='0'; document.getElementById('copyrightModal').firstElementChild.style.transform='translateY(20px)'; setTimeout(function(){document.getElementById('copyrightModal').style.display='none'}, 200);" style="background:var(--btn, #e0d4c3); color:var(--btn-text, #5d4037); border:none; padding:10px 24px; border-radius:20px; font-weight:bold; font-size:15px; cursor:pointer; font-family:inherit;">Cerrar</button>
+    </div>
+  </div>
+</div>
+
+<div style="text-align:center; padding: 20px 10px; font-size:12px; opacity:0.6; cursor:pointer; color:inherit; font-family:inherit; clear:both; margin-top:auto;" onclick="openCopyright(event)">
+  © 2025–Present Elisabeth Altarriba
+</div>
+
+<script>
+function openCopyright(e) {
+  if (e) e.stopPropagation();
+  var m = document.getElementById('copyrightModal');
+  m.style.display = 'flex';
+  m.offsetWidth;
+  m.style.opacity = '1';
+  m.firstElementChild.style.transform = 'translateY(0)';
+}
+</script>
 </body>
 </html>
