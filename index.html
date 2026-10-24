@@ -985,6 +985,35 @@ html,body{background:var(--app-bg)}
 .cal-card:has(.year-grid){overflow:hidden}
 .cal-card .year-grid{flex:1 1 auto;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;padding-right:2px;align-content:start}
 .cal-card:has(.year-grid) .cal-head,.cal-card:has(.year-grid) .cal-footer{flex-shrink:0}
+
+/* V8 · selector Día / Mes / Año y vista de día */
+.cal-modes{display:flex;align-self:center;gap:3px;padding:3px;margin:0 auto 8px;border-radius:13px;background:color-mix(in srgb,var(--agenda),#fff 35%);flex-shrink:0}
+.cal-mode{height:30px;min-width:62px;padding:0 12px;border:none;border-radius:10px;background:transparent;font:inherit;font-size:13px;font-weight:850;color:color-mix(in srgb,var(--agenda),#000 60%);cursor:pointer;box-shadow:none!important}
+.cal-mode.on{background:#fff;color:var(--ink);box-shadow:0 1px 4px rgba(0,0,0,.1)!important}
+.dv-card{gap:10px}
+.dv-card .cal-head{margin-bottom:0}
+.dv-title{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;text-transform:none;cursor:pointer;line-height:1.15}
+.dv-title::first-letter{text-transform:uppercase}
+.dv-title small{font-size:12px;font-weight:800;opacity:.55}
+.dv-title input{position:absolute;inset:0;opacity:0;width:100%;height:100%;cursor:pointer;border:none;padding:0}
+.dv-week{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;flex-shrink:0}
+.dv-wd{position:relative;display:flex;flex-direction:column;align-items:center;gap:1px;padding:6px 0 8px;border:none;border-radius:12px;background:var(--dc,#fff);font:inherit;color:var(--ink);cursor:pointer;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--agenda),#fff 35%)!important}
+.dv-wd.we{background:var(--dc,color-mix(in srgb,var(--agenda),#fff 50%))}
+.dv-wd span{font-size:10px;font-weight:800;opacity:.55}
+.dv-wd b{font-size:16px;font-weight:900}
+.dv-wd i{position:absolute;bottom:4px;width:5px;height:5px;border-radius:50%;background:color-mix(in srgb,var(--agenda),#000 40%)}
+.dv-wd.today{box-shadow:inset 0 0 0 2px color-mix(in srgb,var(--agenda),#000 35%)!important}
+.dv-wd.sel{background:color-mix(in srgb,var(--agenda),#000 30%);color:#fff}
+.dv-wd.sel i{background:#fff}
+.dv-body{flex:1 1 auto;min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:8px;padding:10px;border-radius:16px;background:rgba(255,255,255,.7)}
+.dv-item{display:flex;align-items:flex-start;gap:10px;padding:12px;border-radius:14px;background:#fff;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.05)}
+.dv-dot{width:12px;height:12px;border-radius:4px;margin-top:4px;flex-shrink:0}
+.dv-txt{flex:1;min-width:0;font-size:16px;font-weight:750;color:var(--ink);overflow-wrap:anywhere}
+.dv-item.done .dv-txt{text-decoration:line-through;opacity:.5}
+.dv-photos{display:flex;gap:6px;margin-top:8px;overflow-x:auto}
+.dv-photos img{width:64px;height:64px;border-radius:10px;object-fit:cover}
+.dv-empty{margin:auto;padding:20px;text-align:center;font-size:15px;font-weight:700;color:var(--ink);opacity:.5}
+.dv-edit{flex-shrink:0;height:48px;border:none;border-radius:14px;background:var(--agenda);color:color-mix(in srgb,var(--agenda),#000 62%);font:inherit;font-size:16px;font-weight:900;cursor:pointer}
 </style>
   <link rel="manifest" href="manifest.json">
 </head>
@@ -1017,7 +1046,7 @@ html,body{background:var(--app-bg)}
             onblur="saveAppTitle(this.textContent.trim())"
             onkeydown="if(event.key==='Enter'){event.preventDefault();this.blur()}"
             title="Toca para editar el título">Home</div>
-          <span class="ver-badge">V7</span>
+          <span class="ver-badge">V8</span>
         </div>
         <button class="brand-flip" style="perspective:none; grid-column: 3; align-self: center;" type="button" onclick="openCalc()" title="Calculadora">
           <span class="brand-flip-inner" style="transition: transform 0.1s;">
@@ -2402,8 +2431,8 @@ function renderCalendar(){
       body+=`<div class="mini-month ${isNow?'mini-now':''}" id="mini-month-${mm}"><div class="mini-title">${calMonthOnly(yy,mm)} <span class="mini-year">${yy}</span></div>${renderMonthGrid(yy,mm,true)}<div class="cal-photo-count" title="Fotos de este mes">📷 ${count}</div></div>`;
     }
     body+=`</div>`;
-    return `<div class="cal-card">
-      <div class="cal-head"><button class="cal-btn" onclick="changeCalYear(-1)">‹</button><div class="cal-title">Año ${yy}</div><button class="cal-btn" onclick="changeCalYear(1)">›</button><button class="cal-btn" onclick="toggleCalendarFullscreen()" title="Pantalla completa">⛶</button><button class="cal-btn" onclick="CAL_MODE='month';renderHomeGrid()">Mes</button></div>
+    return `<div class="cal-card">${calModesHtml()}
+      <div class="cal-head"><button class="cal-btn" onclick="changeCalYear(-1)">‹</button><div class="cal-title">Año ${yy}</div><button class="cal-btn" onclick="changeCalYear(1)">›</button><button class="cal-btn" onclick="toggleCalendarFullscreen()" title="Pantalla completa">⛶</button></div>
       ${body}
       <div class="cal-footer">
         <div style="display:flex;gap:5px;">
@@ -2416,14 +2445,14 @@ function renderCalendar(){
       </div>
     </div>`;
   }
+  if(CAL_MODE==='day')return renderCalDayView();
   body=renderMonthGrid(y,m,false);
-  return `<div class="cal-card">
+  return `<div class="cal-card">${calModesHtml()}
     <div class="cal-head">
       <button class="cal-btn" onclick="changeCalMonth(-1)">‹</button>
       <button class="cal-title cal-title-btn" onclick="exportMonthPhotosPDF(${y},${m},this)" title="Crear PDF con las fotos del mes">${calMonthName(y,m)}</button>
       <button class="cal-btn" onclick="changeCalMonth(1)">›</button>
       <button class="cal-btn" onclick="toggleCalendarFullscreen()" title="Pantalla completa">⛶</button>
-      <button class="cal-btn" onclick="CAL_MODE='year';renderHomeGrid();scrollYearToMonth(CAL_DATE.getMonth())">Año</button>
     </div>
     ${body}
     <div class="cal-footer">
@@ -2437,6 +2466,76 @@ function renderCalendar(){
     </div>
   </div>`;
 }
+
+// ── V8 · VISTA DE DÍA ──
+let CAL_DAY=new Date();
+function calModesHtml(){
+  const b=(m,l)=>`<button class="cal-mode ${CAL_MODE===m?'on':''}" onclick="setCalMode('${m}')">${l}</button>`;
+  return `<div class="cal-modes">${b('day','Día')}${b('month','Mes')}${b('year','Año')}</div>`;
+}
+function setCalMode(mode){
+  const prev=CAL_MODE;
+  if(mode==='day'){
+    const t=new Date();
+    if(prev!=='day'){
+      const sameMonth=CAL_DATE.getFullYear()===t.getFullYear()&&CAL_DATE.getMonth()===t.getMonth();
+      const daySame=CAL_DAY.getFullYear()===CAL_DATE.getFullYear()&&CAL_DAY.getMonth()===CAL_DATE.getMonth();
+      CAL_DAY=sameMonth?t:(daySame?CAL_DAY:new Date(CAL_DATE.getFullYear(),CAL_DATE.getMonth(),1));
+    }
+  }else if(prev==='day'){
+    CAL_DATE=new Date(CAL_DAY.getFullYear(),CAL_DAY.getMonth(),1);
+  }
+  CAL_MODE=mode;renderHomeGrid();
+  if(mode==='year')scrollYearToMonth(CAL_DATE.getMonth());
+}
+function changeCalDay(delta){CAL_DAY=new Date(CAL_DAY.getFullYear(),CAL_DAY.getMonth(),CAL_DAY.getDate()+delta);renderHomeGrid();}
+function pickCalDay(v){
+  if(!v)return;const [y,m,d]=v.split('-').map(Number);
+  CAL_DAY=new Date(y,m-1,d);if(CAL_MODE!=='day')CAL_MODE='day';renderHomeGrid();
+}
+function openDayView(key){const [y,m,d]=key.split('-').map(Number);CAL_DAY=new Date(y,m-1,d);CAL_MODE='day';renderHomeGrid();}
+function renderCalDayView(){
+  const d=CAL_DAY,key=calDateKey(d),today=new Date();
+  const items=getCalItems(key);
+  const dayCol=CAL_COLORS[calColorFor(key)]||CAL_COLORS.none;
+  const title=d.toLocaleDateString('es-ES',{weekday:'long',day:'numeric',month:'long'});
+  const titleC=title.charAt(0).toUpperCase()+title.slice(1);
+  // semana (lunes a domingo)
+  const mon=new Date(d.getFullYear(),d.getMonth(),d.getDate()-calMondayOffset(d));
+  let week='';
+  for(let i=0;i<7;i++){
+    const wd=new Date(mon.getFullYear(),mon.getMonth(),mon.getDate()+i),wk=calDateKey(wd);
+    const has=getCalItems(wk).length>0,col=calColorFor(wk);
+    week+=`<button class="dv-wd ${wk===key?'sel':''} ${sameDay(wd,today)?'today':''} ${i>4?'we':''}" onclick="pickCalDay('${wk}')" ${col!=='none'?`style="--dc:${CAL_COLORS[col].bg}"`:''}>
+      <span>${'LMXJVSD'[i]}</span><b>${wd.getDate()}</b>${has?'<i></i>':''}</button>`;
+  }
+  const list=items.length?items.map(it=>{
+    const c=CAL_COLORS[it.color]||CAL_COLORS.none;
+    const ph=calItemPhotoIds(it).map(id=>lsGet('ph_cal_'+id)).filter(Boolean);
+    return `<div class="dv-item ${it.done?'done':''}" onclick="openCalNote('${key}')">
+      <span class="dv-dot" style="background:${it.color&&it.color!=='none'?c.dot:'color-mix(in srgb,var(--agenda),#000 25%)'}"></span>
+      <div class="dv-txt">${it.text?esc(it.text):'<em>Foto</em>'}${ph.length?`<div class="dv-photos">${ph.map(src=>`<img src="${src}" alt="" onclick="event.stopPropagation();openImagePop(this.src)">`).join('')}</div>`:''}</div>
+    </div>`;}).join(''):`<div class="dv-empty">Nada apuntado este día.</div>`;
+  return `<div class="cal-card dv-card">${calModesHtml()}
+    <div class="cal-head">
+      <button class="cal-btn" onclick="changeCalDay(-1)" aria-label="Día anterior">‹</button>
+      <label class="cal-title dv-title" title="Elegir otro día">${titleC}<small>${d.getFullYear()}${sameDay(d,today)?' · Hoy':''}</small><input type="date" value="${key}" onchange="pickCalDay(this.value)" aria-label="Elegir día"></label>
+      <button class="cal-btn" onclick="changeCalDay(1)" aria-label="Día siguiente">›</button>
+      <button class="cal-btn" onclick="toggleCalendarFullscreen()" title="Pantalla completa">⛶</button>
+    </div>
+    <div class="dv-week">${week}</div>
+    <div class="dv-body" ${calColorFor(key)!=='none'?`style="background:${dayCol.bg}"`:''}>${list}</div>
+    <button class="dv-edit" onclick="openCalNote('${key}')">✏️ ${items.length?'Editar este día':'Escribir en este día'}</button>
+    <div class="cal-footer">
+      <div style="display:flex;gap:5px;">
+        <button class="cal-btn" onclick="goToToday()">Fecha actual</button>
+        <button class="cal-btn" onclick="undoAction()" title="Deshacer" ${HISTORY_INDEX > 0 ? '' : 'disabled'}>↶</button>
+        <button class="cal-btn" onclick="redoAction()" title="Rehacer" ${HISTORY_INDEX < HISTORY_STACK.length - 1 ? '' : 'disabled'}>↷</button>
+      </div>
+      <button class="cal-btn" onclick="openCalColorSearch()">🔎 Colores</button>
+    </div>
+  </div>`;
+}
 function changeCalYear(delta){
   let newYear = CAL_DATE.getFullYear() + delta;
   if(newYear < 1969) newYear = 1969;
@@ -2445,7 +2544,7 @@ function changeCalYear(delta){
   renderHomeGrid();
 }
 function goToToday(){
-  CAL_DATE=new Date();
+  CAL_DATE=new Date();CAL_DAY=new Date();
   renderHomeGrid();
   if(CAL_MODE==='year')scrollYearToMonth(new Date().getMonth());
 }
@@ -5526,7 +5625,7 @@ if ('serviceWorker' in navigator) {
 </div>
 
 <div class="app-footer" onclick="openCopyright(event)">
-  <span class="ft-copy">© 2025–Present Elisabeth Altarriba</span><span class="ft-ver">V7</span>
+  <span class="ft-copy">© 2025–Present Elisabeth Altarriba</span><span class="ft-ver">V8</span>
 </div>
 
 <script>

@@ -8,6 +8,17 @@ Este archivo mantiene un registro de todas las modificaciones y tareas pendiente
 
 ## Cambios Realizados
 
+- **(2026-10-24) [V8] Vista de día en la agenda:**
+  - Nuevo selector **Día · Mes · Año** arriba de la agenda (sustituye los botones «Año» y «Mes»).
+  - **Vista de día:**
+    - Arriba, el día en grande («Sábado, 24 de octubre», año y «Hoy»), con flechas ‹ › para pasar al día anterior o siguiente.
+    - Tocando la fecha se abre el selector del iPhone para **ir a cualquier día**.
+    - Una tira con la semana (L a D): el día elegido resaltado, hoy con borde y un puntito en los días que tienen algo apuntado.
+    - Debajo, todo lo apuntado ese día en grande, con su color, tachado si está hecho y con las fotos. Tocar una línea o el botón «✏️ Editar este día» abre la nota del día de siempre.
+  - «Fecha actual» también funciona en la vista de día.
+  - Al cambiar entre Día, Mes y Año se mantiene el mes que estabas mirando.
+  - Versión **V8**. `sw.js`: caché `home-cache-v8-2026-10-24`.
+
 - **(2026-10-24) [V7] Agenda en modo año más clara:**
   - Cada mes muestra su año al lado («Enero 2026»), así se sabe a qué año pertenece aunque bajes mucho. El mes actual sale resaltado.
   - En modo año, la cabecera («‹ Año 2026 › ⛶ Mes») y los botones de abajo («Fecha actual», ↶ ↷, «🔎 Colores») se quedan fijos. Solo se desplazan los meses.

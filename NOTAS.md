@@ -59,3 +59,6 @@ Aquí se apunta todo lo que Elisabeth pide o comenta sobre la app, para no perde
 - En modo año, al ir bajando no sabía a qué año pertenecía cada mes. Poner el **año al lado de cada mes**. → Hecho.
 - En modo año, al pulsar **Fecha actual** estando abajo, que vaya directamente a la fecha actual y se vea. → Hecho.
 - Poner **V7**. → Hecho.
+
+### Peticiones para la V8
+- Además de la vista mensual y la anual, quiere un **botoncito para la vista del día** que quiera ver. → Hecho (selector Día · Mes · Año; en la vista de día se puede elegir cualquier fecha).
