@@ -33,3 +33,19 @@ Aquí se apunta todo lo que Elisabeth pide o comenta sobre la app, para no perde
 5. Poder cambiar el color de los botones «＋ Sitio», «＋ Cosa» y de todos los botones. → Hecho en Ajustes.
 6. Más iconos: faltaban cómoda, armario, mesita de noche… → Hecho (24 iconos de muebles dibujados).
 7. Poner **V2** y decirle qué archivos subir a GitHub. → Hecho.
+
+### Peticiones para la V3
+- Le gustan mucho los iconos dibujados. Pidió más: estantería de pared, estantería de IKEA, sofá dos plazas, sillón, cama de matrimonio, cama individual, cama con mueble, ventana, armario empotrado y sin empotrar, mueble comedor, cama individual con dos cajones debajo, armario grande de tres puertas correderas. → Hecho.
+- Más colores, sobre todo **tonos de marrón** (que se distingan bien entre sí), amarillos y naranjas. Le gustaría todo **«marronoso» pastel**. → Hecho (tema «Marrón pastel» y paletas).
+- Poder cambiar el **color de fondo**: el lila no le gusta. → Hecho.
+- Poder cambiar el color del **botón de configuración**. → Hecho.
+- Tener los **tonos del logo** para ponerlo todo de esos colores. → Hecho (tema y paleta «Tonos del logo»).
+- El botón CASAS estaba demasiado cerca de la línea marrón del pie. → Más espacio y pie sin franja.
+- Con la app en la pantalla de inicio **no se veía la versión**. Quiere que sea bonito y se vea todo. → Versión dentro del pie.
+
+### Peticiones para la V4
+- La ventana de editar casa (51 colores y 70 iconos a la vez) le parece **demasiado «tocha»**: abruma. Quiere en **todos los sitios** un diseño más claro, que no agobie. → Hecho: editor corto, e iconos y colores por pestañas.
+- Pero **con más iconos y más colores**, como se había hablado (marrones, amarillos, naranjas, tonos del logo). → Hecho.
+
+### Peticiones para la V5
+- La calculadora le gusta mucho, pero al pulsar Descuento, Aumento o Precio sin IVA no se veían los botones de abajo. Quiere que quede bien con el panel abierto. → Hecho: el teclado se adapta y cabe todo.

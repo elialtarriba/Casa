@@ -6,7 +6,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="HOME">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="theme-color" content="#f5ead8">
+<meta name="theme-color" content="#fbf7f3">
 <title>Hogar</title>
 <link rel="icon" href="logo.png" type="image/png">
 <link rel="apple-touch-icon" href="logo.png">
@@ -880,6 +880,87 @@ body{color:var(--ink)}
 .icon-file-btn{background:var(--btn-other)!important;color:color-mix(in srgb,var(--btn-other),#000 60%)!important;border:none!important;box-shadow:none!important;border-radius:12px!important}
 .mod h3{color:var(--ink)}
 #auto-emoji-preview{background:#f4f0fb!important}
+
+/* ══════════ HOME V3 · FONDO Y COLORES ══════════ */
+:root{--app-bg:#fbf7f3;--gear-btn:#ffffff}
+html,body{background:var(--app-bg)}
+#s-home,#s-houses-list{background:var(--app-bg)!important}
+#s-home::before{background:radial-gradient(ellipse at 12% 6%,color-mix(in srgb,var(--app-bg),#fff 55%) 0%,transparent 50%),radial-gradient(ellipse at 90% 92%,color-mix(in srgb,var(--app-bg),#000 4%) 0%,transparent 45%)!important}
+.sheet{background:color-mix(in srgb,var(--app-bg),#fff 45%)}
+.home-actions{margin:6px auto 22px!important}
+.home-gear{background:var(--gear-btn);box-shadow:0 5px 0 color-mix(in srgb,var(--gear-btn),#000 12%),0 12px 22px rgba(60,40,30,.12)}
+.home-gear:active{box-shadow:0 1px 0 color-mix(in srgb,var(--gear-btn),#000 12%)!important}
+.app-footer{background:transparent}
+/* Hoja de ajustes */
+.st-sec{font-size:13px;font-weight:900;color:var(--ink);opacity:.65;margin:6px 4px 0}
+.st-themes{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.st-theme{display:flex;flex-direction:column;align-items:flex-start;gap:8px;padding:12px;border:none;border-radius:16px;background:#fff;font:inherit;font-size:14px;font-weight:850;color:var(--ink);cursor:pointer;text-align:left;box-shadow:0 2px 8px rgba(60,40,30,.06)}
+.st-theme-sw{display:flex}
+.st-theme-sw i{width:24px;height:24px;border-radius:50%;border:2px solid #fff;margin-right:-6px;box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.st-lines{display:flex;flex-direction:column;gap:6px}
+.st-line{display:flex;align-items:center;gap:12px;min-height:56px;padding:6px 12px;border:none;border-radius:16px;background:#fff;font:inherit;cursor:pointer;text-align:left;box-shadow:0 2px 8px rgba(60,40,30,.05)}
+.st-chip{width:34px;height:34px;border-radius:50%;flex-shrink:0;border:2px solid rgba(60,40,30,.12);display:block}
+.st-line-txt{flex:1;display:flex;flex-direction:column;min-width:0}
+.st-line-txt b{font-size:15px;font-weight:850;color:var(--ink)}
+.st-line-txt small{font-size:12px;font-weight:700;color:var(--ink);opacity:.55}
+.st-chev{font-size:22px;color:var(--ink);opacity:.4}
+.st-now{font-size:14px;font-weight:700;color:var(--ink);padding:0 4px}
+.st-grp{display:flex;flex-direction:column;gap:8px;padding:12px;background:#fff;border-radius:16px}
+.st-grp-name{font-size:13px;font-weight:900;color:var(--ink);opacity:.7}
+.st-sws{display:flex;flex-wrap:wrap;gap:9px;align-items:center}
+.st-sw{width:40px;height:40px}
+/* Pie con versión visible (también como app en la pantalla de inicio) */
+.ver-corner{display:none!important}
+.app-footer{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;opacity:1!important;padding:6px 10px calc(8px + env(safe-area-inset-bottom,0px))!important;font-size:12px;font-weight:700;color:var(--ink)}
+.app-footer .ft-copy{opacity:.55}
+.app-footer .ft-ver{padding:2px 9px;border-radius:8px;background:color-mix(in srgb,var(--btn-other),#fff 20%);color:color-mix(in srgb,var(--btn-other),#000 60%);font-weight:900;font-size:12px}
+
+/* ══════════ HOME V4 · EDITOR SENCILLO Y PESTAÑAS ══════════ */
+.ed-preview{display:flex;align-items:center;gap:14px;padding:14px;border-radius:20px;background:#fff}
+.ed-tile{width:64px;height:64px;border-radius:18px;background:#f4f0ea;display:flex;align-items:center;justify-content:center;font-size:36px;flex-shrink:0;overflow:hidden}
+.ed-tile img{width:52px;height:52px;object-fit:contain}
+.ed-pname{font-size:20px;font-weight:950;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.ed-pname span{opacity:.35}
+.ed-chip{display:flex!important;align-items:center;justify-content:center;font-size:20px;font-style:normal;background:#f4f0ea;overflow:hidden}
+.ed-chip img{width:26px;height:26px;object-fit:contain}
+.tab-row{display:flex;gap:6px;overflow-x:auto;padding:2px 0 4px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.tab-row::-webkit-scrollbar{display:none}
+.tab-chip{flex-shrink:0;height:38px;padding:0 14px;border:none;border-radius:19px;background:#fff;color:var(--ink);font:inherit;font-size:14px;font-weight:850;cursor:pointer;box-shadow:0 1px 4px rgba(60,40,30,.08)!important}
+.tab-chip.on{background:var(--ink);color:#fff}
+.ic-search{position:static;height:48px}
+.ic-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.ic-opt{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:10px 4px 8px;border:2px solid transparent;border-radius:16px;background:#fff;cursor:pointer;font:inherit;box-shadow:none!important;min-height:86px}
+.ic-opt.sel{border-color:var(--ink)}
+.ic-v{font-size:32px;line-height:1;height:40px;display:flex;align-items:center}
+.ic-v img{width:40px;height:40px;object-fit:contain}
+.ic-l{font-size:11px;font-weight:750;color:var(--ink);opacity:.7;text-align:center;line-height:1.15}
+.col-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.col-opt{display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px 4px 10px;border:2px solid transparent;border-radius:16px;background:#fff;cursor:pointer;font:inherit;box-shadow:none!important;position:relative}
+.col-opt.sel{border-color:var(--ink)}
+.col-opt i{width:46px;height:46px;border-radius:50%;display:block;border:2px solid rgba(60,40,30,.1);position:relative;overflow:hidden}
+.col-opt span{font-size:12px;font-weight:800;color:var(--ink);text-align:center}
+.col-opt .st-custom input{position:absolute;inset:0;opacity:0;width:100%;height:100%;border:none;padding:0;cursor:pointer}
+.mi-img{display:flex;flex-direction:column;gap:10px}
+
+/* V4 · correcciones: nada se aplasta dentro de las hojas; botón principal centrado */
+.sheet>*{flex-shrink:0}
+.sh-btn.main{padding:0 14px!important;overflow:visible!important;flex:1}
+.sheet>.sh-btn.main{flex:0 0 auto}
+
+/* V5 · Calculadora: todo cabe en pantalla, también con Descuento / Aumento / IVA abiertos */
+.calc-dialog{height:100%;height:100dvh;padding-bottom:env(safe-area-inset-bottom,0px)}
+.calculator-shell{min-height:0}
+.calculator-grid{flex:1 1 auto;min-height:0;grid-template-rows:repeat(5,minmax(0,1fr))}
+.calc-key{min-height:46px!important;height:auto}
+.calculator-shell.tool-open .calculator-display{min-height:74px;padding:8px 14px}
+.calculator-shell.tool-open .calculator-value{font-size:clamp(34px,9vw,52px);margin-top:2px;transform:scaleY(1.15)}
+.calculator-shell.tool-open .calculator-display-actions{margin:8px 2px 2px}
+.calculator-shell.tool-open .calc-mini-key{min-height:36px}
+.calculator-shell.tool-open .calculator-percent-tools{margin-top:8px;padding:7px}
+.calculator-shell.tool-open .calc-tool-button{padding:9px 6px}
+.calculator-shell.tool-open .calc-tool-panel{margin-top:8px;padding:9px}
+.calculator-shell.tool-open .calc-key{font-size:24px}
+.calculator-shell.tool-open .calculator-grid{gap:7px;padding-top:8px}
 </style>
   <link rel="manifest" href="manifest.json">
 </head>
@@ -912,7 +993,7 @@ body{color:var(--ink)}
             onblur="saveAppTitle(this.textContent.trim())"
             onkeydown="if(event.key==='Enter'){event.preventDefault();this.blur()}"
             title="Toca para editar el título">Home</div>
-          <span class="ver-badge">V2</span>
+          <span class="ver-badge">V5</span>
         </div>
         <button class="brand-flip" style="perspective:none; grid-column: 3; align-self: center;" type="button" onclick="openCalc()" title="Calculadora">
           <span class="brand-flip-inner" style="transition: transform 0.1s;">
@@ -1952,17 +2033,19 @@ function closeConf(){document.getElementById('conf-ov').classList.remove('open')
 
 // ── NAVIGATION BETWEEN SCREENS ──
 function showHomeScreen(){
+  CURRENT_HOUSE=null;applyUiSettings();
   CURRENT_HOUSE=null;SEL_LEVELS=[];saveSel();
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById('s-home').classList.add('active');
-  document.body.style.background='#f5ead8';
+  document.body.style.background=UI.bg;
   renderHomeGrid();
 }
 function showHousesListScreen(){
+  CURRENT_HOUSE=null;applyUiSettings();
   CURRENT_HOUSE=null;SEL_LEVELS=[];saveSel();
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById('s-houses-list').classList.add('active');
-  document.body.style.background='#f5ead8';
+  document.body.style.background=UI.bg;
   renderHousesList();
 }
 
@@ -1973,6 +2056,7 @@ function showHouseScreen(hid){
   const pal=housePal(hid);
   document.body.style.background=pal.bg;
   document.getElementById('s-house').style.background=pal.bg;
+  document.querySelectorAll('meta[name="theme-color"]').forEach(m=>m.setAttribute('content',pal.bg));
   document.documentElement.style.setProperty('--house-dark',themeDark(hid));
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById('s-house').classList.add('active');
@@ -2868,7 +2952,7 @@ return [
   {l:'Mesita de noche',k:['mesita','mesilla','tauleta','noche','nit'],svg:`<path d="M24 6h14l4 11H20z" fill="${BUT}"/><path d="M31 17v6M26 23h10"/><rect x="15" y="27" width="34" height="25" rx="3" fill="${W}"/><path d="M15 39.5h34"/><path d="M29 33h6M29 45.5h6"/><path d="M19 52v6M45 52v6"/>`},
   {l:'Estantería',k:['estanteria','estantería','prestatgeria','libreria','librería','biblioteca'],svg:`<rect x="12" y="6" width="40" height="52" rx="2" fill="${W}"/><path d="M12 19h40M12 32h40M12 45h40"/><rect x="16" y="10" width="5" height="9" fill="${ROSE}"/><rect x="22" y="11" width="5" height="8" fill="${SKY}"/><rect x="34" y="23" width="5" height="9" fill="${MINT}"/><rect x="40" y="24" width="5" height="8" fill="${LAV}"/><rect x="18" y="36" width="5" height="9" fill="${BUT}"/><rect x="38" y="49" width="9" height="5" rx="1" fill="${ROSE}"/>`},
   {l:'Escritorio',k:['escritorio','escriptori','mesa de estudio','despacho'],svg:`<rect x="6" y="22" width="52" height="6" rx="2" fill="${W}"/><rect x="9" y="28" width="17" height="25" rx="2" fill="${W}"/><path d="M9 40.5h17M15 34h5M15 46.5h5M51 28v25"/><rect x="34" y="11" width="16" height="11" rx="2" fill="${SKY}"/>`},
-  {l:'Mesa',k:['mesa','taula','comedor'],svg:`<rect x="7" y="24" width="50" height="6" rx="2" fill="${W}"/><path d="M12 30v24M52 30v24M20 30v14M44 30v14"/>`},
+  {l:'Mesa',k:['mesa','taula','mesa comedor'],svg:`<rect x="7" y="24" width="50" height="6" rx="2" fill="${W}"/><path d="M12 30v24M52 30v24M20 30v14M44 30v14"/>`},
   {l:'Zapatero',k:['zapatero','sabater','zapatos','sabates','calzado'],svg:`<rect x="10" y="18" width="44" height="36" rx="3" fill="${W}"/><path d="M10 36h44"/><path d="M15 31c0-4 3-5 6-5l4 3h4v2z" fill="${ROSE}"/><path d="M34 31c0-4 3-5 6-5l4 3h4v2z" fill="${SKY}"/><path d="M15 49c0-4 3-5 6-5l4 3h4v2z" fill="${MINT}"/><path d="M34 49c0-4 3-5 6-5l4 3h4v2z" fill="${BUT}"/>`},
   {l:'Mueble TV',k:['tele','tv','television','televisión','mueble tv','moble tv'],svg:`<rect x="15" y="9" width="34" height="22" rx="3" fill="${SKY}"/><path d="M28 31v5h8v-5"/><rect x="6" y="36" width="52" height="16" rx="3" fill="${W}"/><path d="M23.3 36v16M40.6 36v16"/><path d="M12 56v2M52 56v2M12 52v4M52 52v4"/>`},
   {l:'Aparador',k:['aparador','bufe','bufé','buffet','credenza'],svg:`<rect x="7" y="20" width="50" height="30" rx="3" fill="${W}"/><path d="M7 29h50M23.6 29v21M40.3 29v21"/><path d="M28 24.5h8M20 39.5v1M27 39.5v1M37 39.5v1M44 39.5v1"/><path d="M12 50v7M52 50v7"/>`},
@@ -2887,11 +2971,27 @@ return [
   {l:'Cama',k:['cama','llit'],svg:`<rect x="7" y="16" width="10" height="38" rx="2" fill="${W}"/><rect x="17" y="34" width="40" height="12" rx="2" fill="${LAV}"/><rect x="19" y="27" width="12" height="7" rx="3" fill="#fff"/><path d="M17 46h40M54 46v8"/>`},
   {l:'Sofá',k:['sofa','sofá'],svg:`<rect x="12" y="18" width="40" height="18" rx="5" fill="${ROSE}"/><rect x="6" y="28" width="12" height="20" rx="4" fill="${ROSE}"/><rect x="46" y="28" width="12" height="20" rx="4" fill="${ROSE}"/><rect x="18" y="34" width="28" height="14" fill="${ROSE}"/><path d="M10 48v6M54 48v6M32 34v14"/>`},
   {l:'Trastero',k:['trastero','traster','garaje','garatge','sotano','sótano'],svg:`<path d="M6 28L32 10l26 18v28H6z" fill="${W}"/><rect x="16" y="32" width="32" height="24" fill="#fff"/><path d="M16 38h32M16 44h32M16 50h32"/>`},
+
+  {l:'Estantería de pared',k:['estanteria de pared','estantería de pared','estante de pared','prestatgeria de paret','lleixa','flotante','de pared'],svg:`<path d="M6 6h52v52H6z" fill="#fff" stroke-dasharray="2 4" stroke-width="1.6"/><rect x="10" y="22" width="44" height="4" rx="1.5" fill="${W}"/><rect x="10" y="44" width="44" height="4" rx="1.5" fill="${W}"/><rect x="14" y="11" width="5" height="11" fill="${ROSE}"/><rect x="20" y="13" width="5" height="9" fill="${SKY}"/><path d="M40 22l2-7h8l2 7z" fill="${MINT}"/><path d="M46 15c0-4 3-6 5-7M46 15c0-3-2-5-5-6"/><rect x="16" y="34" width="10" height="10" rx="2" fill="${BUT}"/><rect x="33" y="35" width="5" height="9" fill="${LAV}"/><rect x="39" y="33" width="5" height="11" fill="${ROSE}"/>`},
+  {l:'Estantería IKEA',k:['ikea','kallax','estanteria ikea','estantería ikea','prestatgeria ikea','estanteria kallax','cubos','cubs','estanteria cubos','estantería cubos','expedit'],svg:`<rect x="8" y="8" width="48" height="48" rx="2" fill="${W}"/><path d="M20 8v48M32 8v48M44 8v48M8 20h48M8 32h48M8 44h48"/><rect x="21.5" y="9.5" width="9" height="9" rx="1" fill="${ROSE}"/><rect x="45.5" y="21.5" width="9" height="9" rx="1" fill="${MINT}"/><rect x="9.5" y="33.5" width="9" height="9" rx="1" fill="${SKY}"/><rect x="33.5" y="45.5" width="9" height="9" rx="1" fill="${BUT}"/><rect x="33.5" y="21.5" width="9" height="9" rx="1" fill="${LAV}"/><path d="M12 56v3M52 56v3"/>`},
+  {l:'Sofá dos plazas',k:['dos plazas','2 plazas','dues places','2 places','sofa pequeño','sofá pequeño','loveseat'],svg:`<rect x="15" y="18" width="34" height="18" rx="5" fill="${MINT}"/><rect x="9" y="28" width="11" height="20" rx="4" fill="${MINT}"/><rect x="44" y="28" width="11" height="20" rx="4" fill="${MINT}"/><rect x="20" y="34" width="24" height="14" fill="${MINT}"/><path d="M32 34v14M13 48v6M51 48v6"/>`},
+  {l:'Sillón',k:['sillon','sillón','butaca','orejero','balancin','balancín','cadira de braços'],svg:`<path d="M18 14c0-4 3-6 7-6h14c4 0 7 2 7 6v22H18z" fill="${ROSE}"/><rect x="12" y="26" width="10" height="22" rx="4" fill="${ROSE}"/><rect x="42" y="26" width="10" height="22" rx="4" fill="${ROSE}"/><rect x="22" y="34" width="20" height="14" rx="2" fill="${ROSE}"/><path d="M16 48l-2 8M48 48l2 8"/>`},
+  {l:'Cama de matrimonio',k:['matrimonio','matrimoni','cama doble','llit doble','cama grande','cama de 150','cama de 135','cama de 160'],svg:`<rect x="8" y="6" width="48" height="10" rx="3" fill="${W}"/><rect x="10" y="16" width="44" height="40" rx="3" fill="#fff"/><rect x="13" y="19" width="17" height="8" rx="3" fill="${LAV}"/><rect x="34" y="19" width="17" height="8" rx="3" fill="${LAV}"/><path d="M10 32h44v21a3 3 0 0 1-3 3H13a3 3 0 0 1-3-3z" fill="${SKY}"/><path d="M10 36h44"/>`},
+  {l:'Cama individual',k:['individual','cama pequeña','cama de 90','una persona','llit individual','llit senzill'],svg:`<rect x="18" y="6" width="28" height="10" rx="3" fill="${W}"/><rect x="20" y="16" width="24" height="40" rx="3" fill="#fff"/><rect x="24" y="19" width="16" height="8" rx="3" fill="${LAV}"/><path d="M20 32h24v21a3 3 0 0 1-3 3H23a3 3 0 0 1-3-3z" fill="${ROSE}"/><path d="M20 36h24"/>`},
+  {l:'Cama con cajones',k:['cama con cajones','cajones debajo','cajones abajo','canape','canapé','llit amb calaixos','calaixos sota'],svg:`<rect x="6" y="14" width="8" height="30" rx="2" fill="${W}"/><rect x="14" y="27" width="44" height="8" rx="2" fill="${LAV}"/><rect x="16" y="21" width="12" height="6" rx="3" fill="#fff"/><rect x="14" y="35" width="44" height="18" rx="2" fill="${W}"/><path d="M36 35v18"/><path d="M22 44h6M44 44h6"/>`},
+  {l:'Cama con mueble',k:['cama con mueble','cama compacta','cama nido','cama abatible','abatible','llit amb moble','cama tren','cama puente'],svg:`<rect x="6" y="6" width="12" height="50" rx="2" fill="${W}"/><rect x="46" y="6" width="12" height="50" rx="2" fill="${W}"/><rect x="18" y="6" width="28" height="12" rx="2" fill="${W}"/><path d="M6 31h12M46 31h12M12 18v2M52 18v2M32 12h0"/><rect x="18" y="38" width="28" height="7" rx="2" fill="${LAV}"/><rect x="20" y="33" width="9" height="5" rx="2.5" fill="#fff"/><rect x="18" y="45" width="28" height="11" rx="2" fill="${W}"/><path d="M29 50.5h6"/>`},
+  {l:'Ventana',k:['ventana','finestra','ventanal','balcon','balcón','balco'],svg:`<rect x="12" y="8" width="40" height="44" rx="2" fill="${SKY}"/><path d="M32 8v44M12 30h40"/><path d="M8 8h48"/><path d="M10 8c0 14 2 26 8 34l-8 0z" fill="${ROSE}"/><path d="M54 8c0 14-2 26-8 34l8 0z" fill="${ROSE}"/><rect x="8" y="52" width="48" height="5" rx="2" fill="${W}"/>`},
+  {l:'Armario empotrado',k:['empotrado','empotrat','encastat','armario de pared'],svg:`<path d="M4 6h56M4 58h56" stroke-width="2"/><path d="M4 6v52M60 6v52" stroke-width="1.4" stroke-dasharray="3 3"/><rect x="9" y="6" width="46" height="52" fill="${W}"/><path d="M24.3 6v52M39.6 6v52"/><path d="M21 30v5M28 30v5M36 30v5M43 30v5"/>`},
+  {l:'Armario sin empotrar',k:['sin empotrar','armario libre','armario de pie','armario exento','armari lliure','armario antiguo'],svg:`<path d="M10 9h44l-2-4H12z" fill="${W}"/><rect x="12" y="9" width="40" height="38" rx="2" fill="${W}"/><path d="M32 9v38"/><circle cx="28.5" cy="28" r="1.6" ${K}/><circle cx="35.5" cy="28" r="1.6" ${K}/><rect x="12" y="47" width="40" height="8" rx="2" fill="${W}"/><path d="M29 51h6M15 55l-1 4M49 55l1 4"/>`},
+  {l:'Mueble comedor',k:['mueble comedor','mueble del comedor','moble menjador','menjador','composicion','composición','salon','salón'],svg:`<rect x="6" y="34" width="52" height="20" rx="2" fill="${W}"/><path d="M23 34v20M41 34v20M27 44h10M18 44v1M46 44v1"/><rect x="23" y="8" width="18" height="26" rx="2" fill="${SKY}"/><path d="M23 21h18"/><circle cx="32" cy="15" r="3" fill="#fff"/><rect x="8" y="16" width="13" height="4" rx="1.5" fill="${W}"/><rect x="43" y="22" width="13" height="4" rx="1.5" fill="${W}"/><rect x="11" y="10" width="4" height="6" fill="${ROSE}"/><path d="M50 22l1-5h3l1 5z" fill="${MINT}"/><path d="M10 54v4M54 54v4"/>`},
+  {l:'Armario 3 puertas correderas',k:['correderas','corredera','corredisses','tres puertas','3 puertas','armario grande','tres portes'],svg:`<rect x="5" y="8" width="54" height="48" rx="2" fill="${W}"/><path d="M5 12h54M5 52h54"/><rect x="8" y="12" width="17" height="40" fill="${W}"/><rect x="23.5" y="12" width="17" height="40" fill="${SKY}"/><rect x="39" y="12" width="17" height="40" fill="${W}"/><path d="M21 30v6M43 30v6"/><path d="M28 18l8 8M28 24l5 5" stroke-width="1.6" opacity=".6"/>`},
 ];})();
 FURNITURE_ICONS.forEach(f=>{f.src=furnSvg(f.svg);});
 function furnMatchByName(name){
   const q=normSearch(name);if(!q)return null;
-  return FURNITURE_ICONS.find(f=>f.k.some(k=>q.includes(normSearch(k))))||null;
+  let best=null,bestLen=0;
+  FURNITURE_ICONS.forEach(f=>f.k.forEach(k=>{const nk=normSearch(k);if(nk&&q.includes(nk)&&nk.length>bestLen){best=f;bestLen=nk.length;}}));
+  return best;
 }
 function selFurn(i){
   const f=FURNITURE_ICONS[i];if(!f)return;
@@ -2899,19 +2999,36 @@ function selFurn(i){
   document.querySelectorAll('.fopt').forEach((el,j)=>el.classList.toggle('sel',el.dataset.i==String(i)));
 }
 
-// ── AJUSTES DE COLORES (V2) ──
-const UI_DEFAULTS={agenda:'#e1daf5',casas:'#cdebdc',ink:'#4a3f57',title:'grad',btnSitio:'#e1daf5',btnCosa:'#cdebdc',btnMain:'#cdebdc',btnOther:'#efe9f7'};
-const UI_PASTELS=[['#e1daf5','Lavanda'],['#f6d3de','Rosa'],['#cdebdc','Menta'],['#fcdcc9','Melocotón'],['#fbefc4','Mantequilla'],['#d3e6f5','Cielo'],['#d9efc4','Pistacho'],['#f3e1d0','Arena'],['#f5d6f0','Malva'],['#e8e6ea','Perla']];
-const UI_INKS=[['#4a3f57','Ciruela'],['#3b2f2a','Chocolate'],['#2f3a4a','Azul noche'],['#2f4a3d','Verde bosque'],['#6b2f45','Burdeos'],['#333333','Grafito'],['#6f5cb5','Violeta'],['#b0577a','Frambuesa']];
+// ── AJUSTES DE COLORES (V3) ──
+const UI_GROUPS=[
+  {name:'Marrones',c:[['#f7efe6','Crema'],['#f2e6d8','Lino'],['#ead9c6','Arena'],['#e2cbb3','Galleta'],['#d9bfa3','Café con leche'],['#cfb193','Avellana'],['#c4a07f','Caramelo'],['#b08a6a','Canela'],['#9c7656','Nuez'],['#8a6448','Tostado']]},
+  {name:'Amarillos',c:[['#fdf8e4','Vainilla'],['#fbf1c8','Mantequilla'],['#f9e8a8','Limón suave'],['#f5dc8c','Miel clara'],['#eecb6b','Miel'],['#e3b84e','Mostaza']]},
+  {name:'Naranjas',c:[['#fdeee2','Melocotón claro'],['#fbdcc4','Melocotón'],['#f8c9a6','Albaricoque'],['#f4b48a','Mandarina'],['#eb9d6c','Naranja suave'],['#d9814f','Teja']]},
+  {name:'Tonos del logo',c:[['#fcf3cf','Fondo logo claro'],['#fbeeb8','Fondo logo'],['#e8c9a3','Sillón claro'],['#c4935f','Sillón'],['#c9c99e','Oliva claro'],['#8a8a50','Oliva']]},
+  {name:'Pastel',c:[['#e1daf5','Lavanda'],['#f6d3de','Rosa'],['#cdebdc','Menta'],['#d3e6f5','Cielo'],['#d9efc4','Pistacho'],['#f5d6f0','Malva'],['#e8e6ea','Perla'],['#fbf7f3','Blanco roto'],['#ffffff','Blanco']]},
+];
+const UI_INK_GROUPS=[
+  {name:'Marrones',c:[['#3b2f2a','Chocolate'],['#4a3426','Café'],['#5a3e2b','Nogal'],['#6b4a33','Cuero'],['#7a5230','Canela oscura'],['#8a4f2a','Terracota']]},
+  {name:'Otros',c:[['#4f5130','Oliva oscuro'],['#4a3f57','Ciruela'],['#2f3a4a','Azul noche'],['#2f4a3d','Verde bosque'],['#6b2f45','Burdeos'],['#333333','Grafito'],['#6f5cb5','Violeta'],['#b0577a','Frambuesa']]},
+];
+const UI_DEFAULTS={bg:'#fbf7f3',agenda:'#e1daf5',casas:'#cdebdc',gear:'#ffffff',ink:'#4a3f57',title:'grad',btnSitio:'#e1daf5',btnCosa:'#cdebdc',btnMain:'#cdebdc',btnOther:'#efe9f7'};
+const UI_THEMES=[
+  {name:'Tonos del logo',sw:['#fcf3cf','#c4935f','#8a8a50'],v:{bg:'#fcf3cf',agenda:'#e8c9a3',casas:'#c9c99e',gear:'#fbeeb8',ink:'#5a3e2b',title:'#c4935f',btnSitio:'#e8c9a3',btnCosa:'#c9c99e',btnMain:'#c9c99e',btnOther:'#f6e3a3'}},
+  {name:'Marrón pastel',sw:['#f2e6d8','#d9bfa3','#9c7656'],v:{bg:'#f2e6d8',agenda:'#d9bfa3',casas:'#cfb193',gear:'#ead9c6',ink:'#4a3426',title:'#7a5230',btnSitio:'#e2cbb3',btnCosa:'#d9bfa3',btnMain:'#cfb193',btnOther:'#ead9c6'}},
+  {name:'Miel y naranja',sw:['#fdf8e4','#f5dc8c','#f4b48a'],v:{bg:'#fdf8e4',agenda:'#f5dc8c',casas:'#f8c9a6',gear:'#fbf1c8',ink:'#5a3e2b',title:'#d9814f',btnSitio:'#f9e8a8',btnCosa:'#fbdcc4',btnMain:'#f8c9a6',btnOther:'#fbf1c8'}},
+  {name:'Lavanda (original)',sw:['#fbf7f3','#e1daf5','#cdebdc'],v:{...UI_DEFAULTS}},
+];
 const UI_ROWS=[
-  {key:'agenda',label:'Colores de la agenda',list:UI_PASTELS},
-  {key:'casas',label:'Botón CASAS',list:UI_PASTELS},
-  {key:'ink',label:'Color de la letra',list:UI_INKS},
-  {key:'title',label:'Título «Home»',list:UI_INKS,grad:true},
-  {key:'btnSitio',label:'Botón «＋ Sitio»',list:UI_PASTELS},
-  {key:'btnCosa',label:'Botón «＋ Cosa»',list:UI_PASTELS},
-  {key:'btnMain',label:'Botones Guardar / Añadir',list:UI_PASTELS},
-  {key:'btnOther',label:'Otros botones (volver, deshacer, cancelar…)',list:UI_PASTELS},
+  {key:'bg',label:'Fondo de la app'},
+  {key:'agenda',label:'Agenda'},
+  {key:'casas',label:'Botón CASAS'},
+  {key:'gear',label:'Botón ⚙️ Ajustes'},
+  {key:'ink',label:'Color de la letra',ink:true},
+  {key:'title',label:'Título «Home»',ink:true,grad:true},
+  {key:'btnSitio',label:'Botón «＋ Sitio»'},
+  {key:'btnCosa',label:'Botón «＋ Cosa»'},
+  {key:'btnMain',label:'Botones Guardar / Añadir'},
+  {key:'btnOther',label:'Otros botones (volver, deshacer…)'},
 ];
 let UI={...UI_DEFAULTS};
 function loadUiSettings(){
@@ -2920,37 +3037,267 @@ function loadUiSettings(){
 }
 function applyUiSettings(){
   const r=document.documentElement.style;
+  r.setProperty('--app-bg',UI.bg);
   r.setProperty('--agenda',UI.agenda);
   r.setProperty('--casas-btn',UI.casas);
+  r.setProperty('--gear-btn',UI.gear);
   r.setProperty('--ink',UI.ink);
   r.setProperty('--btn-sitio',UI.btnSitio);
   r.setProperty('--btn-cosa',UI.btnCosa);
   r.setProperty('--btn-main',UI.btnMain);
   r.setProperty('--btn-other',UI.btnOther);
   r.setProperty('--title-fill',UI.title==='grad'?'linear-gradient(135deg,#b0577a,#6f5cb5)':`linear-gradient(${UI.title},${UI.title})`);
+  if(!CURRENT_HOUSE)document.body.style.background=UI.bg;
+  document.querySelectorAll('meta[name="theme-color"]').forEach(m=>m.setAttribute('content',CURRENT_HOUSE?housePal(CURRENT_HOUSE).bg:UI.bg));
 }
-function setUi(key,val){
-  UI[key]=val;lsSet('home_ui',JSON.stringify(UI));applyUiSettings();
-  document.querySelectorAll(`.st-sw[data-k="${key}"]`).forEach(el=>el.classList.toggle('sel',el.dataset.v===val));
-}
-function resetUiSettings(){
-  UI={...UI_DEFAULTS};lsSet('home_ui',JSON.stringify(UI));applyUiSettings();openSettings();
+function saveUi(){lsSet('home_ui',JSON.stringify(UI));applyUiSettings();}
+function colorName(hex){
+  for(const g of [...UI_GROUPS,...UI_INK_GROUPS])for(const [h,n] of g.c)if(h.toLowerCase()===String(hex).toLowerCase())return n;
+  return hex==='grad'?'Degradado':'Personalizado';
 }
 function openSettings(){
+  const themes=UI_THEMES.map((t,i)=>`<button class="st-theme" onclick="applyUiTheme(${i})"><span class="st-theme-sw">${t.sw.map(c=>`<i style="background:${c}"></i>`).join('')}</span>${t.name}</button>`).join('');
   const rows=UI_ROWS.map(row=>{
-    const cur=UI[row.key];
-    let sw='';
-    if(row.grad)sw+=`<button class="st-sw st-grad ${cur==='grad'?'sel':''}" data-k="${row.key}" data-v="grad" onclick="setUi('${row.key}','grad')" aria-label="Degradado"></button>`;
-    sw+=row.list.map(([hex,name])=>`<button class="st-sw ${cur===hex?'sel':''}" data-k="${row.key}" data-v="${hex}" style="background:${hex}" onclick="setUi('${row.key}','${hex}')" aria-label="${name}" title="${name}"></button>`).join('');
-    const custom=cur!=='grad'&&!row.list.some(([h])=>h===cur);
-    sw+=`<label class="st-sw st-custom ${custom?'sel':''}" data-k="${row.key}" data-v="${custom?cur:''}" title="Otro color"><input type="color" value="${cur==='grad'?'#6f5cb5':cur}" oninput="setUi('${row.key}',this.value)"></label>`;
-    return `<div class="st-row"><div class="st-lbl">${row.label}</div><div class="st-sws">${sw}</div></div>`;
+    const v=UI[row.key];
+    const chip=v==='grad'?'<i class="st-chip st-grad"></i>':`<i class="st-chip" style="background:${v}"></i>`;
+    return `<button class="st-line" onclick="openColorPicker('${row.key}')">${chip}<span class="st-line-txt"><b>${row.label}</b><small>${colorName(v)}</small></span><span class="st-chev">›</span></button>`;
   }).join('');
   openSheet('⚙️ Ajustes',`
-    <div class="sh-hint">Toca un color y verás el cambio al momento. El círculo de colores te deja elegir cualquier otro.</div>
-    ${rows}
-    <div class="sh-row"><button class="sh-btn" onclick="resetUiSettings()">Volver a los colores originales</button></div>
+    <div class="st-sec">Temas rápidos</div>
+    <div class="st-themes">${themes}</div>
+    <div class="st-sec">Cada color por separado</div>
+    <div class="st-lines">${rows}</div>
     <button class="sh-btn main" onclick="closeSheet()">Listo</button>`);
+}
+function applyUiTheme(i){
+  const t=UI_THEMES[i];if(!t)return;
+  UI={...UI_DEFAULTS,...t.v};saveUi();openSettings();
+  showToast('Tema: '+t.name);
+}
+function openColorPicker(key){
+  const row=UI_ROWS.find(r=>r.key===key);if(!row)return;
+  const groups=row.ink?UI_INK_GROUPS:UI_GROUPS;
+  const cur=UI[key];
+  let h='';
+  if(row.grad)h+=`<div class="st-grp"><div class="st-grp-name">Especial</div><div class="st-sws"><button class="st-sw st-grad ${cur==='grad'?'sel':''}" data-v="grad" onclick="pickUiColor('${key}','grad')" aria-label="Degradado"></button></div></div>`;
+  h+=groups.map(g=>`<div class="st-grp"><div class="st-grp-name">${g.name}</div><div class="st-sws">${g.c.map(([hex,n])=>`<button class="st-sw ${cur===hex?'sel':''}" data-v="${hex}" style="background:${hex}" onclick="pickUiColor('${key}','${hex}')" title="${n}" aria-label="${n}"></button>`).join('')}</div></div>`).join('');
+  h+=`<div class="st-grp"><div class="st-grp-name">Cualquier otro color</div><div class="st-sws"><label class="st-sw st-custom"><input type="color" value="${cur==='grad'?'#6f5cb5':cur}" oninput="pickUiColor('${key}',this.value,true)"></label><span class="sh-hint">Toca el círculo de colores</span></div></div>`;
+  openSheet(row.label,`
+    <div class="st-now">Ahora: <b id="st-now-name">${colorName(cur)}</b></div>
+    ${h}
+    <div class="sh-row"><button class="sh-btn" onclick="openSettings()">‹ Volver</button><button class="sh-btn main" onclick="closeSheet()">Listo</button></div>`);
+}
+function pickUiColor(key,val,live){
+  UI[key]=val;saveUi();
+  document.querySelectorAll('.sheet .st-sw').forEach(el=>el.classList.toggle('sel',el.dataset.v===val));
+  const n=document.getElementById('st-now-name');if(n)n.textContent=colorName(val);
+}
+function resetUiSettings(){applyUiTheme(UI_THEMES.length-1);}
+
+const EMOJI_TABS={"Casa": [{"e": "🛏️", "l": "Cama"}, {"e": "🛋️", "l": "Sofá"}, {"e": "🪑", "l": "Silla"}, {"e": "🚪", "l": "Puerta"}, {"e": "🪞", "l": "Espejo"}, {"e": "🪟", "l": "Ventana"}, {"e": "🖼️", "l": "Cuadro"}, {"e": "🪆", "l": "Decoración"}, {"e": "🕯️", "l": "Vela"}, {"e": "💡", "l": "Luz"}, {"e": "🔆", "l": "Lámpara"}, {"e": "🪔", "l": "Farolillo"}, {"e": "🧸", "l": "Peluche"}, {"e": "🎀", "l": "Lazo"}, {"e": "🏺", "l": "Jarrón"}, {"e": "🪬", "l": "Amuleto"}, {"e": "🧿", "l": "Ojo turco"}, {"e": "🎋", "l": "Bambú"}, {"e": "🪴", "l": "Maceta"}, {"e": "🌺", "l": "Flor"}, {"e": "🌻", "l": "Girasol"}, {"e": "🌹", "l": "Rosa"}, {"e": "💐", "l": "Ramo"}, {"e": "🌿", "l": "Planta"}, {"e": "🌱", "l": "Brote"}, {"e": "🛁", "l": "Bañera"}, {"e": "🚿", "l": "Ducha"}, {"e": "🚽", "l": "WC"}, {"e": "🪥", "l": "Cepillo dientes"}, {"e": "🧴", "l": "Crema"}, {"e": "🧼", "l": "Jabón"}, {"e": "🪒", "l": "Afeitado"}, {"e": "🧻", "l": "Papel"}, {"e": "🪣", "l": "Cubo"}, {"e": "🧽", "l": "Esponja"}, {"e": "🪮", "l": "Cepillo pelo"}, {"e": "💈", "l": "Barbería"}, {"e": "🧖", "l": "Spa"}, {"e": "🪠", "l": "Desatascador"}, {"e": "🚰", "l": "Grifo"}, {"e": "🍳", "l": "Cocinar"}, {"e": "🍽️", "l": "Platos"}, {"e": "🥄", "l": "Cuchara"}, {"e": "🍴", "l": "Cubiertos"}, {"e": "🔪", "l": "Cuchillo"}, {"e": "🫙", "l": "Tarros"}, {"e": "🧃", "l": "Bebidas"}, {"e": "🧊", "l": "Hielo"}, {"e": "🫕", "l": "Olla"}, {"e": "☕", "l": "Café"}, {"e": "🍞", "l": "Pan"}, {"e": "🥗", "l": "Ensalada"}, {"e": "🥤", "l": "Vaso"}, {"e": "🫖", "l": "Tetera"}, {"e": "🍷", "l": "Vino"}, {"e": "🥘", "l": "Cazuela"}, {"e": "🧂", "l": "Sal"}, {"e": "🍰", "l": "Tarta"}, {"e": "🧁", "l": "Cupcake"}, {"e": "🍫", "l": "Chocolate"}, {"e": "🍭", "l": "Chuche"}, {"e": "🧇", "l": "Gofre"}, {"e": "🥞", "l": "Tortitas"}, {"e": "🥚", "l": "Huevo"}, {"e": "🧈", "l": "Mantequilla"}, {"e": "🫓", "l": "Pan pita"}, {"e": "🥐", "l": "Croissant"}, {"e": "🍕", "l": "Pizza"}, {"e": "🍣", "l": "Sushi"}, {"e": "📦", "l": "Caja"}, {"e": "🗃️", "l": "Archivador"}, {"e": "🧺", "l": "Canasta"}, {"e": "🔑", "l": "Llaves"}, {"e": "🗝️", "l": "Llave antigua"}, {"e": "🔒", "l": "Candado"}, {"e": "🪝", "l": "Gancho"}, {"e": "🧲", "l": "Imán"}, {"e": "🔋", "l": "Pilas"}, {"e": "🪜", "l": "Escalera"}, {"e": "🧹", "l": "Escoba"}, {"e": "🫧", "l": "Burbujas"}, {"e": "🏠", "l": "Casa"}, {"e": "🏡", "l": "Hogar"}, {"e": "🏘️", "l": "Urbanización"}, {"e": "🏢", "l": "Edificio"}, {"e": "🏚️", "l": "Casa antigua"}, {"e": "🧱", "l": "Pared"}, {"e": "🧯", "l": "Extintor"}, {"e": "🔔", "l": "Timbre"}, {"e": "🧰", "l": "Mantenimiento"}, {"e": "🛗", "l": "Ascensor"}, {"e": "🏷️", "l": "Etiquetas"}, {"e": "🔐", "l": "Seguridad"}, {"e": "🛌", "l": "Cama hecha"}, {"e": "🔦", "l": "Linterna"}, {"e": "🧦", "l": "Calcetines"}, {"e": "🧥", "l": "Perchero"}, {"e": "👚", "l": "Blusas"}, {"e": "🧣", "l": "Complementos"}, {"e": "👞", "l": "Zapatos vestir"}, {"e": "🥾", "l": "Botas"}, {"e": "🩴", "l": "Chanclas"}, {"e": "🍲", "l": "Sopa"}, {"e": "🥣", "l": "Cuenco"}, {"e": "🥫", "l": "Latas"}, {"e": "🫒", "l": "Aceite oliva"}, {"e": "🥂", "l": "Brindis"}, {"e": "👕", "l": "Ropa limpia"}, {"e": "💻", "l": "Mesa estudio integrada"}, {"e": "📚", "l": "Estantería 4 baldas"}, {"e": "🧭", "l": "Distribución casa"}, {"e": "🔥", "l": "Horno"}, {"e": "🥛", "l": "Vaso leche"}, {"e": "🥪", "l": "Bocadillos"}, {"e": "🥖", "l": "Bocadillo barra"}], "Objetos": [{"e": "💊", "l": "Medicinas"}, {"e": "🩹", "l": "Botiquín"}, {"e": "🩺", "l": "Médico"}, {"e": "🧪", "l": "Botes"}, {"e": "🌡️", "l": "Termómetro"}, {"e": "🩻", "l": "Radiografía"}, {"e": "💉", "l": "Jeringa"}, {"e": "🩸", "l": "Sangre"}, {"e": "🫀", "l": "Corazón"}, {"e": "🧬", "l": "ADN"}, {"e": "📺", "l": "TV"}, {"e": "🎮", "l": "Videojuegos"}, {"e": "🎵", "l": "Música"}, {"e": "🎸", "l": "Guitarra"}, {"e": "🎹", "l": "Piano"}, {"e": "📷", "l": "Fotos"}, {"e": "📚", "l": "Libros"}, {"e": "📖", "l": "Lectura"}, {"e": "🖥️", "l": "PC"}, {"e": "💻", "l": "Portátil"}, {"e": "⌨️", "l": "Teclado"}, {"e": "🖱️", "l": "Ratón"}, {"e": "📱", "l": "Móvil"}, {"e": "🎧", "l": "Auriculares"}, {"e": "📡", "l": "Antena"}, {"e": "🖨️", "l": "Impresora"}, {"e": "💾", "l": "Disco"}, {"e": "📀", "l": "DVD"}, {"e": "📻", "l": "Radio"}, {"e": "🎬", "l": "Películas"}, {"e": "📹", "l": "Vídeo"}, {"e": "🔭", "l": "Telescopio"}, {"e": "🔬", "l": "Microscopio"}, {"e": "🧭", "l": "Brújula"}, {"e": "💼", "l": "Trabajo"}, {"e": "🗂️", "l": "Archivos"}, {"e": "📁", "l": "Carpeta"}, {"e": "✏️", "l": "Lápiz"}, {"e": "📌", "l": "Pin"}, {"e": "📎", "l": "Clip"}, {"e": "📏", "l": "Regla"}, {"e": "📐", "l": "Escuadra"}, {"e": "🗒️", "l": "Bloc"}, {"e": "📓", "l": "Cuaderno"}, {"e": "📋", "l": "Portapapeles"}, {"e": "📊", "l": "Gráfico"}, {"e": "📈", "l": "Subida"}, {"e": "📉", "l": "Bajada"}, {"e": "🗃️", "l": "Archivador"}, {"e": "📬", "l": "Buzón"}, {"e": "📮", "l": "Correos"}, {"e": "🖊️", "l": "Bolígrafo"}, {"e": "✒️", "l": "Pluma"}, {"e": "🗓️", "l": "Agenda"}, {"e": "👕", "l": "Camiseta"}, {"e": "👗", "l": "Vestido"}, {"e": "👟", "l": "Zapatillas"}, {"e": "👠", "l": "Tacones"}, {"e": "👜", "l": "Bolso"}, {"e": "🧣", "l": "Bufanda"}, {"e": "🧥", "l": "Abrigo"}, {"e": "🩱", "l": "Ropa interior"}, {"e": "🧤", "l": "Guantes"}, {"e": "👒", "l": "Sombrero"}, {"e": "🧳", "l": "Maleta"}, {"e": "🎒", "l": "Mochila"}, {"e": "👓", "l": "Gafas"}, {"e": "🕶️", "l": "Gafas de sol"}, {"e": "💍", "l": "Anillo"}, {"e": "👔", "l": "Camisa"}, {"e": "👖", "l": "Pantalón"}, {"e": "🩲", "l": "Bañador"}, {"e": "🩳", "l": "Shorts"}, {"e": "🧢", "l": "Gorra"}, {"e": "👑", "l": "Corona"}, {"e": "👛", "l": "Monedero"}, {"e": "🎩", "l": "Chistera"}, {"e": "🪖", "l": "Casco"}, {"e": "🔧", "l": "Llave inglesa"}, {"e": "🪛", "l": "Destornillador"}, {"e": "🪚", "l": "Sierra"}, {"e": "🔨", "l": "Martillo"}, {"e": "⚙️", "l": "Engranaje"}, {"e": "🪝", "l": "Gancho"}, {"e": "🧱", "l": "Ladrillo"}, {"e": "🪤", "l": "Trampa"}, {"e": "🪣", "l": "Cubo"}, {"e": "⛏️", "l": "Pico"}, {"e": "🔩", "l": "Tornillo"}, {"e": "🪜", "l": "Escalera"}, {"e": "🧰", "l": "Caja herram."}, {"e": "🗜️", "l": "Sargento"}, {"e": "⚒️", "l": "Herramientas"}, {"e": "⭐", "l": "Favorito"}, {"e": "❤️", "l": "Amor"}, {"e": "🌟", "l": "Especial"}, {"e": "🔖", "l": "Marcador"}, {"e": "✨", "l": "Brillante"}, {"e": "💫", "l": "Destello"}, {"e": "🎊", "l": "Fiesta"}, {"e": "🎉", "l": "Celebrar"}, {"e": "🏆", "l": "Trofeo"}, {"e": "🥇", "l": "Primero"}, {"e": "💎", "l": "Diamante"}, {"e": "🌈", "l": "Arcoíris"}, {"e": "🦋", "l": "Mariposa"}, {"e": "🌙", "l": "Luna"}, {"e": "🖋️", "l": "Estilográfica"}, {"e": "🔏", "l": "Sellado"}, {"e": "📝", "l": "Notas"}, {"e": "📍", "l": "Pin"}, {"e": "🖇️", "l": "Clips"}, {"e": "✂️", "l": "Tijeras"}, {"e": "🗄️", "l": "Archivador"}, {"e": "🗑️", "l": "Papelera"}, {"e": "📂", "l": "Carpeta abierta"}, {"e": "📔", "l": "Libreta"}, {"e": "📒", "l": "Diario"}, {"e": "📕", "l": "Libro rojo"}, {"e": "📗", "l": "Libro verde"}, {"e": "📘", "l": "Libro azul"}, {"e": "📙", "l": "Libro naranja"}, {"e": "🏷️", "l": "Etiqueta"}, {"e": "💰", "l": "Dinero"}, {"e": "💳", "l": "Tarjeta"}, {"e": "🧾", "l": "Ticket"}, {"e": "📅", "l": "Calendario"}, {"e": "📆", "l": "Fecha"}, {"e": "⌚", "l": "Smartwatch"}, {"e": "🔌", "l": "Cargadores"}, {"e": "🔋", "l": "Baterías"}, {"e": "⏰", "l": "Reloj alarma"}, {"e": "🕰️", "l": "Reloj pared"}], "Exterior": [{"e": "🌿", "l": "Plantas"}, {"e": "🌸", "l": "Flores"}, {"e": "🌳", "l": "Árbol"}, {"e": "🌱", "l": "Semilla"}, {"e": "☀️", "l": "Sol"}, {"e": "🌦️", "l": "Lluvia"}, {"e": "🌊", "l": "Agua"}, {"e": "🏊", "l": "Piscina"}, {"e": "⛲", "l": "Fuente"}, {"e": "🌵", "l": "Cactus"}, {"e": "🍀", "l": "Trébol"}, {"e": "🌾", "l": "Trigo"}, {"e": "🍁", "l": "Otoño"}, {"e": "🌲", "l": "Pino"}, {"e": "🌴", "l": "Palmera"}, {"e": "🐶", "l": "Perro"}, {"e": "🐱", "l": "Gato"}, {"e": "🐠", "l": "Pez"}, {"e": "🐇", "l": "Conejo"}, {"e": "🐾", "l": "Huellas"}, {"e": "🐦", "l": "Pájaro"}, {"e": "🦜", "l": "Loro"}, {"e": "🐢", "l": "Tortuga"}, {"e": "🦎", "l": "Lagarto"}, {"e": "🐹", "l": "Hámster"}, {"e": "🐈", "l": "Gatito"}, {"e": "🐕", "l": "Perrito"}, {"e": "🐟", "l": "Pececito"}, {"e": "🦊", "l": "Zorro"}, {"e": "🐰", "l": "Conejito"}, {"e": "🚗", "l": "Coche"}, {"e": "🚲", "l": "Bici"}, {"e": "🏍️", "l": "Moto"}, {"e": "🛴", "l": "Patinete"}, {"e": "🚘", "l": "Coche 2"}, {"e": "🛵", "l": "Vespa"}, {"e": "🚐", "l": "Furgoneta"}, {"e": "🚕", "l": "Taxi"}, {"e": "🏎️", "l": "Deportivo"}, {"e": "🚙", "l": "SUV"}, {"e": "🛒", "l": "Compras"}, {"e": "🎁", "l": "Regalos"}, {"e": "🎄", "l": "Navidad"}, {"e": "🏋️", "l": "Gimnasio"}, {"e": "🧘", "l": "Yoga"}, {"e": "🎯", "l": "Dardos"}, {"e": "🎲", "l": "Juegos"}, {"e": "♟️", "l": "Ajedrez"}, {"e": "🃏", "l": "Cartas"}, {"e": "🧩", "l": "Puzzle"}, {"e": "🎻", "l": "Violín"}, {"e": "🥁", "l": "Batería"}, {"e": "🎺", "l": "Trompeta"}, {"e": "🪗", "l": "Acordeón"}, {"e": "🎤", "l": "Karaoke"}, {"e": "🎨", "l": "Pintura"}, {"e": "✂️", "l": "Costura"}, {"e": "🧶", "l": "Lana"}, {"e": "🪡", "l": "Hilo"}, {"e": "🧵", "l": "Tejido"}, {"e": "🌷", "l": "Tulipanes"}, {"e": "🪻", "l": "Lavanda flor"}, {"e": "☂️", "l": "Sombrilla"}, {"e": "🪁", "l": "Patio juegos"}, {"e": "📺", "l": "Televisor"}, {"e": "🎮", "l": "Consola"}, {"e": "📚", "l": "Biblioteca"}, {"e": "🎹", "l": "Piano casa"}, {"e": "🎧", "l": "Auriculares"}, {"e": "🍋", "l": "Limonero"}, {"e": "🪴", "l": "Macetas patio"}, {"e": "🪑", "l": "Banco jardín"}, {"e": "🍽️", "l": "Mesa jardín"}, {"e": "🧱", "l": "Mesa empotrada"}], "Comida": [{"e": "🍎", "l": "Manzana"}, {"e": "🍊", "l": "Naranja"}, {"e": "🍋", "l": "Limón"}, {"e": "🍇", "l": "Uvas"}, {"e": "🍓", "l": "Fresa"}, {"e": "🫐", "l": "Arándanos"}, {"e": "🍑", "l": "Melocotón"}, {"e": "🍒", "l": "Cerezas"}, {"e": "🍌", "l": "Plátano"}, {"e": "🍉", "l": "Sandía"}, {"e": "🍍", "l": "Piña"}, {"e": "🥭", "l": "Mango"}, {"e": "🥝", "l": "Kiwi"}, {"e": "🍈", "l": "Melón"}, {"e": "🍐", "l": "Pera"}, {"e": "🥦", "l": "Brócoli"}, {"e": "🥕", "l": "Zanahoria"}, {"e": "🍅", "l": "Tomate"}, {"e": "🧅", "l": "Cebolla"}, {"e": "🧄", "l": "Ajo"}, {"e": "🥬", "l": "Lechuga"}, {"e": "🌽", "l": "Maíz"}, {"e": "🥒", "l": "Pepino"}, {"e": "🫑", "l": "Pimiento"}, {"e": "🍆", "l": "Berenjena"}, {"e": "🥑", "l": "Aguacate"}, {"e": "🫘", "l": "Legumbres"}, {"e": "🥔", "l": "Patata"}, {"e": "🍠", "l": "Boniato"}, {"e": "🌶️", "l": "Chile"}, {"e": "🍕", "l": "Pizza"}, {"e": "🍔", "l": "Hamburguesa"}, {"e": "🌮", "l": "Taco"}, {"e": "🌯", "l": "Wrap"}, {"e": "🥗", "l": "Ensalada"}, {"e": "🍣", "l": "Sushi"}, {"e": "🍜", "l": "Ramen"}, {"e": "🍝", "l": "Pasta"}, {"e": "🥩", "l": "Carne"}, {"e": "🍗", "l": "Pollo"}, {"e": "🥓", "l": "Bacon"}, {"e": "🌭", "l": "Perrito"}, {"e": "🥪", "l": "Sándwich"}, {"e": "🧀", "l": "Queso"}, {"e": "🥚", "l": "Huevos"}, {"e": "🥞", "l": "Tortitas"}, {"e": "🧇", "l": "Gofre"}, {"e": "🍳", "l": "Fritos"}, {"e": "🥘", "l": "Cazuela"}, {"e": "🍲", "l": "Estofado"}, {"e": "🫕", "l": "Fondue"}, {"e": "🥙", "l": "Kebab"}, {"e": "🍱", "l": "Bento"}, {"e": "🍛", "l": "Curry"}, {"e": "🐟", "l": "Pescado"}, {"e": "🦐", "l": "Gambas"}, {"e": "🦞", "l": "Langosta"}, {"e": "🦑", "l": "Calamar"}, {"e": "🍤", "l": "Langostino"}, {"e": "🥫", "l": "Conserva"}, {"e": "🍞", "l": "Pan"}, {"e": "🥐", "l": "Croissant"}, {"e": "🫓", "l": "Pan pita"}, {"e": "🥖", "l": "Baguette"}, {"e": "🧁", "l": "Cupcake"}, {"e": "🍰", "l": "Tarta"}, {"e": "🎂", "l": "Pastel"}, {"e": "🍫", "l": "Chocolate"}, {"e": "🍭", "l": "Chuche"}, {"e": "🍪", "l": "Galleta"}, {"e": "🍩", "l": "Donut"}, {"e": "🍦", "l": "Helado"}, {"e": "🍮", "l": "Flan"}, {"e": "🧆", "l": "Croqueta"}, {"e": "🥜", "l": "Cacahuetes"}, {"e": "☕", "l": "Café"}, {"e": "🍵", "l": "Té"}, {"e": "🫖", "l": "Tetera"}, {"e": "🧃", "l": "Zumo"}, {"e": "🥤", "l": "Refresco"}, {"e": "🍷", "l": "Vino"}, {"e": "🍺", "l": "Cerveza"}, {"e": "🥂", "l": "Champán"}, {"e": "🍹", "l": "Cóctel"}, {"e": "🧉", "l": "Mate"}, {"e": "🥛", "l": "Leche"}, {"e": "🧋", "l": "Bubble tea"}, {"e": "🫗", "l": "Bebida"}, {"e": "💧", "l": "Agua"}, {"e": "🍶", "l": "Sake"}, {"e": "🛒", "l": "Carrito"}, {"e": "🛍️", "l": "Bolsa"}, {"e": "🧾", "l": "Ticket"}, {"e": "💳", "l": "Tarjeta"}, {"e": "💰", "l": "Dinero"}, {"e": "🏪", "l": "Tienda"}, {"e": "🏬", "l": "Centro comercial"}, {"e": "🧂", "l": "Sal"}, {"e": "🫒", "l": "Aceite"}, {"e": "🧈", "l": "Mantequilla"}, {"e": "🥯", "l": "Bagel"}, {"e": "🍖", "l": "Asado"}, {"e": "🍚", "l": "Arroz"}, {"e": "🍙", "l": "Bola arroz"}, {"e": "🍟", "l": "Patatas fritas"}, {"e": "🥨", "l": "Pretzel"}, {"e": "🍿", "l": "Palomitas"}, {"e": "🥟", "l": "Empanadillas"}, {"e": "🥧", "l": "Empanada pastel"}, {"e": "🍯", "l": "Miel"}, {"e": "🌰", "l": "Castañas"}, {"e": "🍄", "l": "Setas"}, {"e": "🫛", "l": "Guisantes"}, {"e": "🫚", "l": "Jengibre"}]};
+
+// V4 · más iconos útiles para guardar cosas
+[['Objetos',[['⚽','Balón'],['🏀','Pelota'],['🎾','Tenis'],['🧩','Puzzle'],['🎲','Juegos de mesa'],['🧸','Juguetes'],['🪁','Cometa'],['🧶','Lana'],['🪡','Costura'],['🧵','Hilo'],['🎄','Navidad'],['🎃','Halloween'],['🔋','Pilas'],['🔌','Cables'],['💡','Bombillas'],['📸','Cámara'],['🎸','Guitarra'],['🎹','Piano'],['💾','Discos'],['🧯','Extintor'],['🩹','Botiquín'],['💊','Medicinas'],['👓','Gafas'],['💍','Joyas'],['👜','Bolsos'],['👟','Zapatillas'],['🧤','Guantes'],['🧣','Bufandas'],['🎒','Mochila'],['🧥','Abrigos'],['👗','Vestidos'],['🩱','Bañadores'],['🧢','Gorras'],['🧴','Cremas'],['📄','Papeles'],['🧾','Facturas'],['🔑','Llaves'],['🪪','Documentos'],['🕶️','Gafas de sol'],['⌚','Relojes'],['🎁','Regalos'],['📷','Fotos'],['🖼️','Cuadros'],['🕯️','Velas']]],
+ ['Casa',[['🧺','Cesto ropa'],['🛁','Bañera'],['🚿','Ducha'],['🚽','Váter'],['🪞','Espejo'],['🪟','Ventana'],['🚪','Puerta'],['🛏️','Cama'],['🛋️','Sofá'],['🪑','Silla'],['🧹','Escoba'],['🧽','Esponja'],['🧻','Papel'],['🪣','Cubo'],['🧼','Jabón'],['🍳','Sartenes'],['🍽️','Platos'],['🥄','Cubiertos'],['🫖','Tetera'],['☕','Tazas'],['🍷','Copas'],['🫙','Tarros'],['🧊','Congelador'],['🗑️','Basura'],['📦','Caja'],['🗃️','Archivador'],['🗄️','Cajonera'],['🧳','Maleta']]]
+].forEach(([tab,items])=>items.forEach(([e,l])=>{if(!EMOJI_TABS[tab].some(x=>x.e===e))EMOJI_TABS[tab].push({e,l});}));
+// ══════════════════════════════════════════════
+// V4 · EDITOR SENCILLO DE CASAS Y SITIOS
+// Pantalla corta: nombre + Icono › + Color ›. Iconos y colores por pestañas.
+// ══════════════════════════════════════════════
+function _rgb(h){h=String(h).replace('#','');if(h.length===3)h=h.split('').map(c=>c+c).join('');const n=parseInt(h,16);return[(n>>16)&255,(n>>8)&255,n&255];}
+function mixHex(a,b,t){const x=_rgb(a),y=_rgb(b);return '#'+x.map((v,i)=>Math.round(v+(y[i]-v)*t).toString(16).padStart(2,'0')).join('');}
+function makePalette(hex,name){
+  return{name,ac:mixHex(hex,'#000',.35),text:mixHex(hex,'#000',.72),bg:mixHex(hex,'#fff',.45),
+    shades:[mixHex(hex,'#fff',.6),mixHex(hex,'#fff',.35),hex,mixHex(hex,'#000',.08),mixHex(hex,'#000',.16),mixHex(hex,'#000',.28),mixHex(hex,'#000',.4)]};
+}
+// Colores de casa: los mismos grupos que los ajustes + los intensos de antes
+const HOUSE_COLOR_GROUPS=UI_GROUPS.map(g=>({name:g.name,c:g.c.filter(([h])=>h!=='#ffffff').map(([h,n])=>{const k='c_'+h.slice(1);if(!PALETTES[k])PALETTES[k]=makePalette(h,n);return [k,h,n];})}));
+HOUSE_COLOR_GROUPS.push({name:'Intensos',c:PAL_KEYS.map(k=>[k,PALETTES[k].ac,String(PALETTES[k].name||k).replace(/\s*\S+$/u,m=>/\p{Extended_Pictographic}/u.test(m)?'':m)])});
+function houseColorHex(k){for(const g of HOUSE_COLOR_GROUPS)for(const [key,h] of g.c)if(key===k)return h;return (PALETTES[k]||PALETTES.verde).ac;}
+function houseColorName(k){for(const g of HOUSE_COLOR_GROUPS)for(const [key,,n] of g.c)if(key===k)return n;return 'Color';}
+
+// Iconos de casa dibujados
+const HOUSE_SVG_ICONS=(()=>{const W='#f1d6bd',R='#f6d1dc',B='#f8e8b8',S='#d3e6f5',M='#cfe9dc',L='#ddd3f2',G='#c9c99e';return [
+  {l:'Casa',k:['casa','mi casa','hogar','llar'],svg:`<path d="M8 30L32 10l24 20" fill="${R}"/><path d="M13 27v29h38V27" fill="${B}"/><rect x="27" y="40" width="10" height="16" rx="2" fill="${W}"/><rect x="17" y="33" width="7" height="7" rx="1" fill="${S}"/><rect x="40" y="33" width="7" height="7" rx="1" fill="${S}"/>`},
+  {l:'Casa con jardín',k:['jardin','jardín','jardi'],svg:`<path d="M6 32L24 17l18 15" fill="${R}"/><path d="M10 29v25h28V29" fill="${B}"/><rect x="20" y="40" width="8" height="14" rx="2" fill="${W}"/><circle cx="50" cy="30" r="9" fill="${M}"/><path d="M50 39v15M4 56h56"/>`},
+  {l:'Piso',k:['piso','pis','apartamento','edificio','bloque'],svg:`<rect x="14" y="6" width="36" height="50" rx="2" fill="${L}"/><path d="M20 13h6M38 13h6M20 22h6M38 22h6M20 31h6M38 31h6M20 40h6M38 40h6"/><rect x="28" y="45" width="8" height="11" rx="1.5" fill="${W}"/><path d="M8 56h48"/>`},
+  {l:'Ático',k:['atico','ático','atic','duplex','dúplex'],svg:`<rect x="12" y="16" width="40" height="40" rx="2" fill="${S}"/><path d="M8 16h48l-6-8H14z" fill="${W}"/><path d="M18 24h8M38 24h8M18 34h8M38 34h8"/><path d="M14 44h36M18 44v-4M26 44v-4M34 44v-4M42 44v-4M50 44v-4"/><rect x="28" y="46" width="8" height="10" fill="${W}"/>`},
+  {l:'Casa de campo',k:['campo','masia','masía','pueblo','poble','rural','granja'],svg:`<path d="M4 30l14-12h28l14 12" fill="${W}"/><rect x="8" y="30" width="48" height="26" fill="${B}"/><path d="M27 56V44a5 5 0 0 1 10 0v12" fill="${W}"/><rect x="14" y="37" width="7" height="7" fill="${S}"/><rect x="43" y="37" width="7" height="7" fill="${S}"/><path d="M44 18v-8h5v12"/>`},
+  {l:'Cabaña',k:['cabaña','cabana','cabanya','refugio','montaña','muntanya'],svg:`<path d="M32 8L6 50h52z" fill="${W}"/><path d="M14 36h36M10 43h44M18 29h28"/><rect x="27" y="40" width="10" height="16" rx="1.5" fill="${B}"/><path d="M6 56h52"/>`},
+  {l:'Casa de playa',k:['playa','platja','mar','costa','verano','estiu','vacaciones'],svg:`<circle cx="48" cy="14" r="6" fill="${B}"/><path d="M8 32L26 18l18 14" fill="${S}"/><path d="M12 30v18h28V30" fill="#fff"/><rect x="22" y="38" width="8" height="10" rx="1.5" fill="${W}"/><path d="M4 54c5-4 9 4 14 0s9 4 14 0 9 4 14 0 9 4 14 0" stroke-width="2.4"/>`},
+  {l:'Adosado',k:['adosado','adossat','chalet','xalet'],svg:`<path d="M4 30l14-12 14 12 14-12 14 12" fill="${R}"/><path d="M8 27v29h48V27"/><path d="M8 27v29h24V27z" fill="${B}"/><path d="M32 27v29h24V27z" fill="${M}"/><rect x="15" y="42" width="8" height="14" fill="${W}"/><rect x="41" y="42" width="8" height="14" fill="${W}"/>`},
+  {l:'Caravana',k:['caravana','autocaravana','furgo','camper'],svg:`<rect x="6" y="18" width="44" height="28" rx="8" fill="#fff"/><path d="M6 32h44" stroke="${R}" stroke-width="5"/><rect x="12" y="22" width="12" height="7" rx="2" fill="${S}"/><rect x="34" y="24" width="8" height="18" rx="1.5" fill="${W}"/><circle cx="20" cy="48" r="5" fill="${L}"/><path d="M50 40h8"/>`},
+  {l:'Oficina',k:['oficina','despacho','trabajo','feina','local'],svg:`<rect x="10" y="10" width="44" height="46" rx="2" fill="${G}"/><path d="M10 22h44"/><path d="M17 30h8M39 30h8M17 39h8M39 39h8"/><rect x="28" y="44" width="8" height="12" fill="${W}"/><rect x="24" y="4" width="16" height="6" rx="2" fill="${B}"/>`},
+  {l:'Trastero',k:['trastero','traster','garaje','garatge','almacen','almacén'],svg:`<path d="M6 28L32 10l26 18v28H6z" fill="${W}"/><rect x="16" y="32" width="32" height="24" fill="#fff"/><path d="M16 38h32M16 44h32M16 50h32"/>`},
+].map(f=>({...f,src:furnSvg(f.svg)}));})();
+const HOUSE_EMOJI_ICONS=[{e:'🏠',l:'Casa'},{e:'🏡',l:'Casa con jardín'},{e:'🏘️',l:'Casas'},{e:'🏢',l:'Edificio'},{e:'🏬',l:'Bloque'},{e:'🏚️',l:'Casa antigua'},{e:'🏰',l:'Castillo'},{e:'🛖',l:'Cabaña'},{e:'⛺',l:'Tienda'},{e:'🏕️',l:'Camping'},{e:'🏖️',l:'Playa'},{e:'🏔️',l:'Montaña'},{e:'🌳',l:'Campo'},{e:'🏙️',l:'Ciudad'},{e:'🏫',l:'Escuela'},{e:'🏪',l:'Tienda'},{e:'🚐',l:'Furgoneta'},{e:'⛵',l:'Barco'}];
+
+let ED=null,ICON_TAB='',ICON_LIST=[],COLOR_TAB='';
+function attrEsc(v){return esc(v).replace(/"/g,'&quot;');}
+function edIconHtml(){return ED.image?`<img src="${ED.image}" alt="">`:esc(ED.emoji||'📦');}
+function openHouseModal(eid){
+  const h=eid?HOUSES.find(x=>x.id===eid):null;
+  ED={kind:'house',id:eid||null,name:h?.name||'',emoji:h?.emoji||'🏠',image:h?.iconImage||null,color:h?.color||'c_f2e6d8',manual:!!h};
+  if(!h){const casa=HOUSE_SVG_ICONS[0];ED.image=casa.src;}
+  renderEditor(true);
+}
+function openRoomModal(lvl,editId=null){
+  const r=editId?DATA[editId]:null;
+  ED={kind:'room',id:editId||null,level:lvl,name:r?.name||'',emoji:r?.emoji||'📦',image:r?.iconImage||null,manual:!!r};
+  renderEditor(true);
+}
+function renderEditor(focus){
+  if(!ED)return;
+  const isH=ED.kind==='house';
+  const pal=isH?(PALETTES[ED.color]||PALETTES.verde):null;
+  const title=ED.id?(isH?'Editar casa':'Editar sitio'):(isH?'Nueva casa':'Nuevo sitio');
+  const ph=isH?'Ej.: Mi casa, Apartamento playa…':(ED.level?'Ej.: Armario, Cajón de arriba, Caja azul…':'Ej.: Cocina, Habitación, Trastero…');
+  openSheet(title,`
+    <div class="ed-preview" style="${isH?`background:${pal.shades[1]}`:''}">
+      <div class="ed-tile" style="${isH?`background:${pal.shades[0]}`:''}">${edIconHtml()}</div>
+      <div class="ed-pname" id="ed-pname" style="${isH?`color:${pal.text}`:''}">${ED.name?esc(ED.name):'<span>Sin nombre</span>'}</div>
+    </div>
+    <input class="sh-input" id="ed-name" value="${attrEsc(ED.name)}" placeholder="${ph}" oninput="edName(this.value)" enterkeyhint="done" autocomplete="off" onkeydown="if(event.key==='Enter')saveEditor()">
+    <button class="st-line" onclick="openIconPicker()"><i class="st-chip ed-chip">${edIconHtml()}</i><span class="st-line-txt"><b>Icono</b><small id="ed-icon-hint">${ED.manual?'Elegido por ti · toca para cambiar':'Se pone solo según el nombre · toca para elegir'}</small></span><span class="st-chev">›</span></button>
+    ${isH?`<button class="st-line" onclick="openHouseColorPicker()"><i class="st-chip" style="background:${houseColorHex(ED.color)}"></i><span class="st-line-txt"><b>Color</b><small>${esc(houseColorName(ED.color))}</small></span><span class="st-chev">›</span></button>`:''}
+    <div class="sh-row"><button class="sh-btn" onclick="ED=null;closeSheet()">Cancelar</button><button class="sh-btn main" onclick="saveEditor()">${ED.id?'Guardar':'Crear'}</button></div>`);
+  if(focus&&!ED.id)setTimeout(()=>document.getElementById('ed-name')?.focus(),150);
+}
+function autoIconFor(name,kind){
+  const q=normSearch(name);if(q.length<2)return null;
+  if(kind==='house'){
+    let best=null,bl=0;HOUSE_SVG_ICONS.forEach(f=>f.k.forEach(k=>{const nk=normSearch(k);if(q.includes(nk)&&nk.length>bl){best=f;bl=nk.length;}}));
+    return best?{image:best.src}:null;
+  }
+  const furn=furnMatchByName(name);if(furn)return {image:furn.src};
+  const low=name.toLowerCase().trim();
+  for(const {k,e} of EMOJI_MAP){if(k.some(kw=>low.includes(kw)))return {image:null,emoji:e};}
+  const found=ALL_EMOJIS.find(({l})=>normSearch(l).includes(q));
+  return found?{image:null,emoji:found.e}:null;
+}
+function edName(v){
+  ED.name=v;
+  const pn=document.getElementById('ed-pname');if(pn)pn.innerHTML=v?esc(v):'<span>Sin nombre</span>';
+  if(!ED.manual){
+    const a=autoIconFor(v,ED.kind);
+    if(a){ED.image=a.image||null;if(a.emoji)ED.emoji=a.emoji;}
+    document.querySelectorAll('.ed-tile,.ed-chip').forEach(el=>el.innerHTML=edIconHtml());
+  }
+}
+// ── Elegir icono (por pestañas) ──
+function iconTabs(){return ED.kind==='house'?['Casas','Casa','Objetos','Exterior','Mi imagen']:['Muebles','Casa','Objetos','Exterior','Comida','Mi imagen'];}
+function iconsForTab(t){
+  if(t==='Casas')return [...HOUSE_SVG_ICONS.map(f=>({image:f.src,l:f.l})),...HOUSE_EMOJI_ICONS.map(x=>({emoji:x.e,l:x.l}))];
+  if(t==='Muebles')return FURNITURE_ICONS.map(f=>({image:f.src,l:f.l}));
+  return (EMOJI_TABS[t]||[]).map(x=>({emoji:x.e,l:x.l}));
+}
+function openIconPicker(tab){
+  const tabs=iconTabs();
+  ICON_TAB=tab||(tabs.includes(ICON_TAB)?ICON_TAB:tabs[0]);
+  const chips=tabs.map(t=>`<button class="tab-chip ${t===ICON_TAB?'on':''}" onclick="openIconPicker('${t}')">${t}</button>`).join('');
+  let body;
+  if(ICON_TAB==='Mi imagen'){
+    body=`<div class="mi-img">
+      <button class="sh-opt" onclick="chooseIconImage('${ED.kind}')">📷 Elegir una foto o imagen</button>
+      <div class="sh-hint">O escribe o pega aquí un emoji:</div>
+      <input class="sh-input" placeholder="Ej.: 🧸" oninput="pickTypedEmoji(this.value)" autocomplete="off">
+    </div>`;
+  }else{
+    body=`<div class="pl-search ic-search"><span class="pl-search-ico">🔎</span><input id="ic-q" type="search" placeholder="Buscar icono…" oninput="renderIconGrid(this.value)" autocomplete="off"></div><div class="ic-grid" id="ic-grid"></div>`;
+  }
+  openSheet('Elige un icono',`<div class="tab-row">${chips}</div>${body}<button class="sh-btn" onclick="renderEditor(false)">‹ Volver</button>`);
+  if(ICON_TAB!=='Mi imagen')renderIconGrid('');
+}
+function renderIconGrid(q){
+  const nq=normSearch(q||'');
+  let list;
+  if(nq){
+    const all=[...(ED.kind==='house'?iconsForTab('Casas'):[]),...FURNITURE_ICONS.map(f=>({image:f.src,l:f.l,k:f.k})),...['Casa','Objetos','Exterior','Comida'].flatMap(iconsForTab)];
+    list=all.filter(x=>normSearch(x.l).includes(nq)||(x.k||[]).some(k=>normSearch(k).includes(nq)));
+  }else list=iconsForTab(ICON_TAB);
+  ICON_LIST=list.slice(0,150);
+  const g=document.getElementById('ic-grid');if(!g)return;
+  g.innerHTML=ICON_LIST.length?ICON_LIST.map((x,i)=>{
+    const sel=x.image?ED.image===x.image:(!ED.image&&ED.emoji===x.emoji);
+    return `<button class="ic-opt ${sel?'sel':''}" onclick="pickIcon(${i})"><span class="ic-v">${x.image?`<img src="${x.image}" alt="">`:x.emoji}</span><span class="ic-l">${esc(x.l)}</span></button>`;
+  }).join(''):'<div class="sh-hint">No hay iconos con ese nombre. Prueba otra palabra.</div>';
+}
+function pickIcon(i){
+  const x=ICON_LIST[i];if(!x)return;
+  ED.manual=true;
+  if(x.image){ED.image=x.image;}else{ED.image=null;ED.emoji=x.emoji;}
+  renderEditor(false);
+}
+function pickTypedEmoji(v){
+  const t=String(v||'').trim();if(!t)return;
+  ED.manual=true;ED.image=null;ED.emoji=Array.from(t).slice(0,2).join('');
+  renderEditor(false);
+}
+// Foto propia como icono (reutiliza el selector de archivos existente)
+function handleIconImageFile(e){
+  const file=e.target.files[0];if(!file||!ED)return;
+  makeIconImage(file,ED.kind==='house'?128:96,data=>{ED.image=data;ED.manual=true;renderEditor(false);});
+}
+// ── Elegir color de casa (por pestañas) ──
+function openHouseColorPicker(tab){
+  const groups=HOUSE_COLOR_GROUPS;
+  if(!tab){const g=groups.find(g=>g.c.some(([k])=>k===ED.color));tab=g?g.name:groups[0].name;}
+  COLOR_TAB=tab;
+  const g=groups.find(x=>x.name===tab)||groups[0];
+  const chips=groups.map(x=>`<button class="tab-chip ${x.name===tab?'on':''}" onclick="openHouseColorPicker('${x.name}')">${x.name}</button>`).join('');
+  const sw=g.c.map(([k,h,n])=>`<button class="col-opt ${k===ED.color?'sel':''}" onclick="pickHouseColor('${k}')"><i style="background:${h}"></i><span>${esc(n)}</span></button>`).join('');
+  openSheet('Color de la casa',`<div class="tab-row">${chips}</div><div class="col-grid">${sw}</div><button class="sh-btn" onclick="renderEditor(false)">‹ Volver</button>`);
+}
+function pickHouseColor(k){ED.color=k;renderEditor(false);}
+// ── Guardar ──
+async function saveEditor(){
+  if(!ED)return;
+  const name=(document.getElementById('ed-name')?.value||ED.name||'').trim();
+  if(!name){document.getElementById('ed-name')?.focus();showToast('Escribe un nombre');return;}
+  const e=ED;ED=null;closeSheet();
+  if(e.kind==='house'){
+    if(!Array.isArray(HOUSES))HOUSES=[];
+    snap();
+    if(e.id){
+      const h=HOUSES.find(x=>x.id===e.id);
+      if(h){h.name=name.toUpperCase();h.emoji=e.emoji||'🏠';h.color=e.color;if(e.image)h.iconImage=e.image;else delete h.iconImage;}
+    }else{
+      if(HOUSES.length>=10){alert('Máximo 10 casas.');return;}
+      const h={id:gid(),name:name.toUpperCase(),emoji:e.emoji||'🏠',color:e.color};if(e.image)h.iconImage=e.image;HOUSES.push(h);
+    }
+    saveLoc();
+    if(CURRENT_HOUSE){
+      const pal=housePal(CURRENT_HOUSE);
+      document.documentElement.style.setProperty('--house-dark',themeDark(CURRENT_HOUSE));
+      document.querySelectorAll('meta[name="theme-color"]').forEach(m=>m.setAttribute('content',pal.bg));
+      renderHouseMain();
+    }else if(document.getElementById('s-houses-list')?.classList.contains('active'))renderHousesList();
+    else renderHomeGrid();
+    showToast(e.id?'Casa guardada':'Casa creada: '+name.toUpperCase());
+  }else{
+    if(e.id)await updateRoom(e.id,name,e.emoji||'📦',e.image);
+    else await addRoom(name,e.emoji||'📦',e.level,e.image);
+    showToast(e.id?'Sitio guardado':'Sitio creado: '+name);
+  }
+}
+// Ajustes: también por pestañas
+function openColorPicker(key,tab){
+  const row=UI_ROWS.find(r=>r.key===key);if(!row)return;
+  const groups=row.ink?UI_INK_GROUPS:UI_GROUPS;
+  const cur=UI[key];
+  if(!tab){const g=groups.find(g=>g.c.some(([h])=>h===cur));tab=g?g.name:groups[0].name;}
+  const g=groups.find(x=>x.name===tab)||groups[0];
+  const chips=groups.map(x=>`<button class="tab-chip ${x.name===tab?'on':''}" onclick="openColorPicker('${key}','${x.name}')">${x.name}</button>`).join('');
+  let sw='';
+  if(row.grad)sw+=`<button class="col-opt ${cur==='grad'?'sel':''}" data-v="grad" onclick="pickUiColor('${key}','grad')"><i class="st-grad"></i><span>Degradado</span></button>`;
+  sw+=g.c.map(([h,n])=>`<button class="col-opt ${cur===h?'sel':''}" data-v="${h}" onclick="pickUiColor('${key}','${h}')"><i style="background:${h}"></i><span>${n}</span></button>`).join('');
+  sw+=`<label class="col-opt" title="Otro color"><i class="st-custom"><input type="color" value="${cur==='grad'?'#6f5cb5':cur}" oninput="pickUiColor('${key}',this.value)"></i><span>Otro…</span></label>`;
+  openSheet(row.label,`<div class="tab-row">${chips}</div><div class="col-grid">${sw}</div>
+    <div class="sh-row"><button class="sh-btn" onclick="openSettings()">‹ Volver</button><button class="sh-btn main" onclick="closeSheet()">Listo</button></div>`);
+}
+function pickUiColor(key,val){
+  UI[key]=val;saveUi();
+  document.querySelectorAll('.sheet .col-opt').forEach(el=>el.classList.toggle('sel',el.dataset.v===val));
 }
 
 // ══════════════════════════════════════════════
@@ -3724,7 +4071,7 @@ function setCalculatorTheme(theme){
 
 function toggleCalcPercentTool(tool){
   const panel=document.getElementById('calc-percent-panel'),result=document.getElementById('calc-tool-result'),label=document.getElementById('calc-tool-percent-label');
-  CALC_PERCENT_TOOL=panel.classList.contains('open')&&CALC_PERCENT_TOOL===tool?'':tool;panel.classList.toggle('open',Boolean(CALC_PERCENT_TOOL));
+  CALC_PERCENT_TOOL=panel.classList.contains('open')&&CALC_PERCENT_TOOL===tool?'':tool;panel.classList.toggle('open',Boolean(CALC_PERCENT_TOOL));document.getElementById('calculator-shell')?.classList.toggle('tool-open',Boolean(CALC_PERCENT_TOOL));
   ['discount','increase','vat'].forEach(k=>document.getElementById(`calc-${k}-button`)?.classList.toggle('active',CALC_PERCENT_TOOL===k));
   if(label)label.textContent=CALC_PERCENT_TOOL==='vat'?'IVA %':'Porcentaje %';
   if(result)result.textContent=CALC_PERCENT_TOOL==='vat'?'Escribe el precio con IVA y el porcentaje de IVA.':CALC_PERCENT_TOOL==='increase'?'Escribe el importe y el porcentaje que quieres sumar.':'Escribe el importe y el porcentaje que quieres quitar.';
@@ -4867,7 +5214,7 @@ function focusEmojiSearch(){
   if(el)el.focus();
 }
 
-function openRoomModal(lvl,editId=null){
+function openRoomModalOld(lvl,editId=null){
   MODAL_LVL_VAL=lvl;ROOM_EDIT_ID=editId;EMOJI_MANUAL=!!editId;
   const room=editId?DATA[editId]:null;
   SEL_EMO=room?.emoji||'🏷️';ROOM_ICON_IMAGE=room?.iconImage||null;
@@ -5048,7 +5395,7 @@ if ('serviceWorker' in navigator) {
   });
 }
 </script>
-<div class="ver-corner">V2</div>
+<div class="ver-corner">V3</div>
 
 <div id="copyrightModal" class="modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:99999; justify-content:center; align-items:center; opacity:0; transition:opacity 0.2s;">
   <div class="modal-content" style="background:var(--bg, #fdfbf7); padding:30px; border-radius:12px; max-width:600px; width:90%; max-height:85vh; overflow-y:auto; color:var(--text, #5d4037); font-family:inherit; box-shadow:0 10px 30px rgba(0,0,0,0.2); position:relative; transform:translateY(20px); transition:transform 0.2s;">
@@ -5095,7 +5442,7 @@ if ('serviceWorker' in navigator) {
 </div>
 
 <div class="app-footer" onclick="openCopyright(event)">
-  © 2025–Present Elisabeth Altarriba
+  <span class="ft-copy">© 2025–Present Elisabeth Altarriba</span><span class="ft-ver">V5</span>
 </div>
 
 <script>

@@ -8,6 +8,36 @@ Este archivo mantiene un registro de todas las modificaciones y tareas pendiente
 
 ## Cambios Realizados
 
+- **(2026-10-24) [V5] Calculadora: todo cabe en pantalla:**
+  - Al pulsar «- % Descuento», «+ % Aumento» o «Precio sin IVA», el panel empujaba el teclado hacia abajo y la última fila (0 , ⌫ =) quedaba fuera de la pantalla.
+  - Ahora el teclado ocupa siempre el espacio que queda y se encoge un poco cuando el panel está abierto. La pantalla del número y los botones de arriba también se compactan. Todo queda visible sin hacer scroll.
+  - Al cerrar el panel, la calculadora vuelve a su tamaño grande.
+  - Probado en tres tamaños de iPhone (SE, normal y Max), con el cálculo de descuento/IVA funcionando.
+  - Versión **V5**. `sw.js`: caché `home-cache-v5-2026-10-24`.
+
+- **(2026-10-24) [V4] Ventanas más claras, sin agobiar, con más iconos y colores:**
+  - **Nuevo editor sencillo** para crear o editar casas y sitios, en una sola ventana corta: arriba una vista previa (icono y nombre), debajo el nombre, la línea **Icono ›**, la línea **Color ›** (solo en casas) y los botones Cancelar y Crear/Guardar. Sustituye a las ventanas antiguas, que mostraban 51 colores y 70 iconos de golpe.
+  - **Iconos por pestañas**, con un grupo cada vez y buscador:
+    - Para casas: Casas, Casa, Objetos, Exterior y Mi imagen.
+    - Para sitios: Muebles, Casa, Objetos, Exterior, Comida y Mi imagen.
+    - Al tocar un icono se elige y vuelves al editor.
+  - **11 iconos de casa dibujados** (casa, casa con jardín, piso, ático, casa de campo, cabaña, casa de playa, adosado, caravana, oficina, trastero) y una lista de emojis de casa limpia (sin pizzas ni vino).
+  - **Más de 60 emojis nuevos** para guardar cosas: balón, puzzle, juegos de mesa, lana, costura, Navidad, pilas, cables, botiquín, medicinas, gafas, joyas, bolsos, abrigos, bañadores, facturas, documentos, sartenes, tarros, etc.
+  - El icono se sigue poniendo solo según el nombre, también en casas («playa», «piso», «masía», «cabaña»…). En «Mi imagen» puedes usar una foto o pegar un emoji.
+  - **Colores de casa por pestañas:** Marrones, Amarillos, Naranjas, Tonos del logo, Pastel e Intensos (los de antes). Cada color tiene su nombre. Los nuevos colores pastel generan automáticamente los tonos de toda la casa (fondo, iconos, rutas).
+  - **Ajustes:** cada color también se elige por pestañas, con nombre.
+  - Corregido: el botón principal de las ventanas tenía el texto descentrado, y las pestañas se aplastaban en pantallas pequeñas.
+  - Probado todo de nuevo, sin errores. `sw.js`: caché `home-cache-v4-2026-10-24`.
+
+- **(2026-10-24) [V3] Fondo, marrones, tonos del logo y más muebles:**
+  - **Ajustes renovados:** arriba, 4 **temas rápidos** que cambian todo de un toque: «Tonos del logo», «Marrón pastel», «Miel y naranja» y «Lavanda (original)». Debajo, cada color por separado: al tocar una línea se abre la paleta.
+  - **Muchos más colores**, agrupados: 10 marrones (de crema a tostado), 6 amarillos, 6 naranjas, 6 tonos del logo (amarillo del fondo, terracota del sillón y verde oliva) y pastel. Para la letra hay marrones oscuros (chocolate, café, nogal, cuero, canela, terracota) y otros tonos. Sigue el círculo para elegir cualquier color.
+  - **Nuevo: color de fondo de la app.** Se quitan los tonos lilas del fondo, que ahora toma el color elegido (también arriba, en la zona de la hora, y en la lista de casas).
+  - **Nuevo: color del botón ⚙️ Ajustes.**
+  - **Versión siempre visible:** «V3» va dentro del pie, junto al copyright, y se ve también con la app instalada en la pantalla de inicio. El pie tiene el mismo color que el fondo (sin franja), y el botón CASAS tiene más espacio por debajo.
+  - **13 iconos de muebles nuevos:** estantería de pared, estantería IKEA (cubos), sofá dos plazas, sillón, cama de matrimonio, cama individual, cama con cajones, cama con mueble, ventana, armario empotrado, armario sin empotrar, mueble comedor y armario de 3 puertas correderas (37 en total). Al escribir el nombre gana la coincidencia más precisa («Armario empotrado» pone el empotrado, no el armario normal).
+  - Probado todo de nuevo, sin errores. `sw.js`: caché `home-cache-v3-2026-10-24`.
+
 - **(2026-10-24) [V2] Ajustes de colores, iconos de muebles y arreglos:**
   - **⚙️ Ajustes** (botón redondo junto a CASAS, en la agenda). Permite cambiar los colores de la agenda, el botón CASAS, el color de la letra, el título «Home», los botones «＋ Sitio» y «＋ Cosa», los botones Guardar/Añadir y el resto de botones (volver, deshacer, cancelar…). Cada opción tiene 10 colores pastel y un círculo para elegir cualquier otro. El cambio se ve al momento y se guarda. Hay un botón para volver a los colores originales. Los ajustes también van dentro de «Exportar copia».
   - **Arreglado: casa nueva que no aparecía.** Al guardar, la app refrescaba la agenda en lugar de la lista de casas: la casa se creaba pero no se veía. Ahora aparece al momento y sale el aviso «Casa creada».
