@@ -1,9 +1,8 @@
-const CACHE_NAME = 'home-cache-v11';
+const CACHE_NAME = 'home-cache-v1-2026-10-24';
 const urlsToCache = [
   './',
   './index.html',
   './manifest.json',
-  './icon.png',
   './iconocalcu.png',
   './logo.png',
   './logo_elibi.jpg'

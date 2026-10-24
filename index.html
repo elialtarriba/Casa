@@ -623,6 +623,207 @@ body.edit-mode .calc-key:active::after, body.edit-mode .calc-mini-key:active::af
   padding: calc(16px + env(safe-area-inset-top)) 16px calc(16px + env(safe-area-inset-bottom)) 16px !important;
 }
 
+
+/* ===== V1 · Arreglos de layout iPhone ===== */
+body{height:100vh;height:100dvh}
+#app{height:auto!important;flex:1 1 auto;min-height:0}
+.app-footer{flex-shrink:0;text-align:center;padding:6px 10px calc(6px + env(safe-area-inset-bottom,0px));font-size:12px;opacity:.6;cursor:pointer;color:inherit}
+#home-calendar-container{margin-bottom:12px}
+#home-fab{position:relative!important;bottom:auto!important;left:auto;transform:none;align-self:center;margin:0 auto 8px;flex-shrink:0;height:46px;padding:0 30px;border-radius:16px;font-size:15px;font-weight:950;letter-spacing:.02em;color:#704020;border:2px solid rgba(255,255,255,.8);background:linear-gradient(180deg,#fffdf7,#f4d8c4 72%,#e8b995);box-shadow:0 5px 0 rgba(118,68,34,.24),0 10px 18px rgba(80,40,10,.14),inset 0 2px 0 rgba(255,255,255,.9)}
+.ver-badge{flex-shrink:0;margin-left:8px;padding:2px 8px;border-radius:8px;background:rgba(200,88,40,.12);color:#b05030;font-size:13px;font-weight:900;line-height:1.4}
+.ver-corner{position:fixed;bottom:calc(10px + env(safe-area-inset-bottom,0px));right:12px;font-size:11px;font-weight:800;color:rgba(80,40,10,.35);pointer-events:none;z-index:9000}
+
+/* ===== V1 · Mi casa: Zona › Subzona › Ubicación ===== */
+.pl-wrap{padding:6px 12px 28px;display:flex;flex-direction:column;gap:14px}
+.pb{border-radius:16px;padding:3px;border:1.5px solid rgba(255,255,255,.75);background:rgba(255,255,255,.3)}
+.pb .pb{margin:2px 0 0 12px}
+.pb-l0{background:var(--hp-s2)}
+.pb-l1{background:var(--hp-s1)}
+.pb-l2,.pb-l3,.pb-l4{background:rgba(255,255,255,.92)}
+.pb-head{width:100%;display:flex;align-items:center;gap:8px;min-height:38px;padding:4px 8px;border:none;background:transparent;color:var(--hp-text);font:inherit;text-align:left;cursor:pointer;border-radius:12px;box-shadow:none!important}
+.pb-ico{width:26px;height:26px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.pb-ico img{width:22px;height:22px;object-fit:contain;border-radius:5px}
+.pb-name{flex:1;min-width:0;font-size:14px;font-weight:850;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pb-kind{font-size:11px;font-weight:800;opacity:.6;flex-shrink:0}
+.pb-cur{border-color:var(--hp-ac);box-shadow:0 0 0 2px var(--hp-ac)}
+.pb-cur>.pb-head .pb-name{font-size:17px;font-weight:950}
+.pl-section{display:flex;flex-direction:column;gap:8px}
+.pl-sec-title{font-size:15px;font-weight:900;color:var(--hp-text);padding:2px 4px}
+.pl-row{display:flex;align-items:center;gap:10px;min-height:60px;padding:8px 8px 8px 10px;background:linear-gradient(180deg,rgba(255,255,255,.95),rgba(255,255,255,.72));border:1.5px solid rgba(255,255,255,.9);border-radius:14px;box-shadow:0 3px 0 color-mix(in srgb,var(--hp-ac),transparent 50%);cursor:pointer;animation:popIn .18s ease both}
+.pl-row:active{transform:translateY(3px);box-shadow:none}
+.pl-ico{width:42px;height:42px;border-radius:12px;background:var(--hp-s1);display:flex;align-items:center;justify-content:center;font-size:23px;flex-shrink:0}
+.pl-ico img{width:34px;height:34px;object-fit:contain;border-radius:8px}
+.pl-txt{flex:1;min-width:0}
+.pl-name{font-size:15px;font-weight:900;color:var(--hp-text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pl-meta{font-size:12px;font-weight:700;color:var(--hp-text);opacity:.6;margin-top:2px}
+.pl-btn{width:36px;height:36px;border-radius:10px;border:1.5px solid rgba(255,255,255,.85);background:var(--hp-s0);color:var(--hp-text);font-size:14px;font-weight:900;flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.pl-del{background:#fbe6e2;color:#b03a2e}
+.pl-chev{font-size:24px;font-weight:700;color:var(--hp-text);opacity:.4;padding:0 2px 0 0}
+.pl-add{min-height:50px;border-radius:14px;border:2px dashed color-mix(in srgb,var(--hp-ac),#fff 20%);background:rgba(255,255,255,.55);color:var(--hp-text);font-size:15px;font-weight:900;cursor:pointer}
+.pl-empty{font-size:13px;font-weight:650;color:var(--hp-text);opacity:.65;padding:2px 4px}
+.pl-cover{display:flex;justify-content:center}
+.pl-cover .photo-pan-wrap{height:auto;min-height:150px;aspect-ratio:16/9;background:#fff;touch-action:pan-y}
+.pl-cover .photo-pan-wrap img{object-fit:contain}
+.pl-cover .cover-placeholder{width:100%;max-width:260px}
+.tarea.pl-items{margin:0}
+.pl-items .tlist{max-height:none}
+.pl-items-title{flex:1;font-size:15px;font-weight:900;color:var(--hp-text)}
+.pl-items .atrow{border-top:none;border-bottom:1px solid rgba(255,255,255,.45)}
+.pl-items-empty{padding:14px 12px;font-size:13px;font-weight:650;text-align:center;color:var(--hp-text);opacity:.55}
+.tmove{width:26px;height:26px;background:rgba(255,255,255,.65);border:none;border-radius:7px;font-size:13px;font-weight:900;color:var(--hp-text,#503020);cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.move-ov{position:fixed;inset:0;z-index:330;background:rgba(60,30,10,.25);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);display:flex;align-items:flex-end;justify-content:center}
+.move-card{width:100%;max-width:520px;max-height:80dvh;background:#fffaf3;border-radius:22px 22px 0 0;padding:16px 14px calc(16px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:10px;box-shadow:0 -10px 30px rgba(60,30,10,.18)}
+.move-card h3{font-size:17px;font-weight:900;color:#3a2810}
+.move-list{overflow-y:auto;display:flex;flex-direction:column;gap:6px;-webkit-overflow-scrolling:touch}
+.move-opt{text-align:left;padding:10px 12px;border-radius:12px;border:1.5px solid rgba(120,80,40,.15);background:#fff;font:inherit;cursor:pointer}
+.move-opt b{display:block;font-size:15px;color:#3a2810}
+.move-opt span{font-size:12px;color:#8a6a52}
+.move-cancel{height:46px;border:none;border-radius:12px;background:#efe3d4;color:#5a3a24;font-size:15px;font-weight:900;cursor:pointer}
+
+/* ===== V1 · Buscador «¿Dónde está?» ===== */
+.pl-content{display:flex;flex-direction:column;gap:14px}
+.pl-search{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:8px;height:54px;padding:0 6px 0 14px;background:#fff;border-radius:16px;border:2px solid color-mix(in srgb,var(--hp-ac),#fff 25%);box-shadow:0 4px 0 color-mix(in srgb,var(--hp-ac),transparent 55%),0 8px 18px rgba(60,30,10,.08)}
+.pl-search-ico{font-size:20px;flex-shrink:0}
+.pl-search input{flex:1;min-width:0;height:100%;border:none;outline:none;background:transparent;font:inherit;font-size:17px;font-weight:800;color:#2a1a0a;-webkit-appearance:none;appearance:none}
+.pl-search input::placeholder{color:rgba(60,30,10,.4);font-weight:700}
+.pl-search input::-webkit-search-cancel-button{display:none}
+.pl-q-clear{width:40px;height:40px;border:none;border-radius:12px;background:var(--hp-s0);color:var(--hp-text);font-size:16px;font-weight:900;cursor:pointer;flex-shrink:0}
+.sr-list{display:flex;flex-direction:column;gap:8px}
+.sr-list:empty{display:none}
+.sr-count{font-size:14px;font-weight:900;color:var(--hp-text);padding:0 4px}
+.sr-item{display:block;width:100%;text-align:left;padding:12px 12px 11px;background:#fff;border:1.5px solid rgba(255,255,255,.9);border-radius:14px;box-shadow:0 3px 0 color-mix(in srgb,var(--hp-ac),transparent 55%);font:inherit;cursor:pointer}
+.sr-item:active{transform:translateY(3px);box-shadow:none}
+.sr-name{font-size:16px;font-weight:900;color:#2a1a0a;line-height:1.3}
+.sr-name small{font-size:12px;opacity:.55}
+.sr-where{font-size:12px;font-weight:800;color:var(--hp-text);opacity:.6;margin-top:6px}
+.sr-path{display:flex;flex-wrap:wrap;align-items:center;gap:4px;margin-top:4px}
+.sr-step{display:inline-flex;align-items:center;gap:4px;font-size:13px;font-weight:850;padding:4px 9px;border-radius:9px;background:var(--hp-s1);color:var(--hp-text)}
+.sr-step:last-child{background:var(--hp-text);color:#fff}
+.sr-step img{width:16px;height:16px;object-fit:contain;border-radius:4px}
+.sr-sep{font-weight:900;color:var(--hp-text);opacity:.5}
+.sr-empty{padding:16px 12px;background:rgba(255,255,255,.7);border-radius:14px;font-size:14px;font-weight:700;color:var(--hp-text);line-height:1.45}
+@keyframes foundFlash{0%,55%{background:rgba(255,210,80,.8)}100%{background:transparent}}
+.trow.found-flash{animation:foundFlash 2.6s ease}
+
+/* ══════════ HOME V1 · TEMA PASTEL ══════════ */
+:root{--ink:#4a3f57;--ink-soft:#7a6d86;--paper:#fbf7f3;--rose:#f6d3de;--rose-d:#c7728f;--mint:#cdebdc;--mint-d:#5b9c7d;--lav:#e1daf5;--lav-d:#8a76c7;--peach:#fcdcc9;--butter:#fbefc4}
+body{font-family:ui-rounded,"SF Pro Rounded",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--paper);color:var(--ink)}
+.debug-panel{display:none!important}
+#s-home{background:var(--paper)}
+#s-home::before{background:radial-gradient(ellipse at 12% 6%,rgba(246,211,222,.55) 0%,transparent 45%),radial-gradient(ellipse at 90% 92%,rgba(205,235,220,.55) 0%,transparent 42%),radial-gradient(ellipse at 95% 20%,rgba(225,218,245,.5) 0%,transparent 40%)}
+.home-title{background:linear-gradient(135deg,#b0577a,#6f5cb5);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.ver-badge{background:var(--lav);color:#6a58a8}
+.ver-corner{color:rgba(74,63,87,.35)}
+.app-footer{color:var(--ink-soft)}
+
+/* Agenda */
+#home-calendar-container{background:rgba(255,255,255,.72);border:none;border-bottom:none;box-shadow:0 2px 0 rgba(74,63,87,.05),0 14px 34px rgba(138,118,199,.14)}
+.cal-title,.cal-title-btn{color:var(--ink)}
+.cal-btn{background:var(--lav);color:#5a4a8a}
+.cal-day{background:#fff;color:var(--ink);box-shadow:inset 0 0 0 1px rgba(225,218,245,.9)}
+.cal-day.weekend{background:#f4f0fb;color:var(--ink-soft)}
+.cal-day.today{outline:2.5px solid var(--rose-d);background:#fff;color:var(--rose-d)}
+
+/* Botón CASAS */
+#home-fab{background:var(--mint);color:#2f5e49;border:none;box-shadow:0 5px 0 #a9d3bf,0 12px 22px rgba(91,156,125,.22);height:54px;padding:0 38px;border-radius:18px;font-size:17px}
+#home-fab:active{transform:translateY(4px);box-shadow:0 1px 0 #a9d3bf!important}
+
+/* Mis casas */
+#s-houses-list{background:var(--paper)}
+.hl-head{display:flex;align-items:center;gap:12px}
+.hl-back{height:44px;padding:0 16px;border:none;border-radius:14px;background:var(--lav);color:#5a4a8a;font:inherit;font-size:15px;font-weight:900;cursor:pointer}
+.hl-title{font-size:28px;font-weight:950;color:var(--ink)}
+#houses-grid{display:flex!important;flex-direction:column;gap:12px;padding:10px 16px 20px!important}
+#houses-fab{display:none!important}
+#s-houses-list .home-bottom-tools{position:static!important;padding:6px 12px 8px!important;gap:8px}
+#s-houses-list .sync-btn{width:auto;height:34px;padding:0 12px;border:none;border-radius:12px;background:#fff;color:var(--ink-soft);font-size:12px;font-weight:800;box-shadow:0 2px 8px rgba(74,63,87,.08)}
+.hl-card{display:flex;align-items:center;gap:14px;padding:12px 6px 12px 12px;border-radius:22px;background:var(--hc-bg);cursor:pointer;box-shadow:0 4px 0 rgba(74,63,87,.06),0 10px 24px rgba(74,63,87,.08);animation:popIn .25s ease both}
+.hl-card:active{transform:translateY(3px)}
+.hl-pic{width:72px;height:72px;border-radius:18px;background:var(--hc-soft);display:flex;align-items:center;justify-content:center;font-size:38px;overflow:hidden;flex-shrink:0}
+.hl-pic img{width:100%;height:100%;object-fit:cover}
+.hl-txt{flex:1;min-width:0}
+.hl-name{font-size:20px;font-weight:950;color:var(--hc-ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hl-meta{font-size:13px;font-weight:750;color:var(--hc-ink);opacity:.7;margin-top:3px}
+.hl-add{min-height:60px;border-radius:22px;border:2.5px dashed #cfc4ea;background:rgba(255,255,255,.6);color:#6a58a8;font:inherit;font-size:17px;font-weight:900;cursor:pointer}
+
+/* Dentro de una casa */
+.house-header{gap:10px}
+.back-btn{width:44px;height:44px;border-radius:14px;font-size:24px;background:rgba(255,255,255,.85);border:none;color:var(--ink)}
+.house-hname{font-size:22px;font-weight:950;color:var(--ink)}
+.house-hname img{width:30px;height:30px}
+.hp-undo{height:38px!important;padding:0 12px!important;border-radius:12px!important;font-size:13px!important;font-weight:850!important;background:rgba(255,255,255,.85)!important;border:none!important;color:var(--ink)!important}
+.hp-wrap{padding:4px 14px 20px;display:flex;flex-direction:column;gap:12px}
+.hp-content{display:flex;flex-direction:column;gap:9px}
+.pl-search{border:none;border-radius:18px;box-shadow:0 2px 0 rgba(74,63,87,.05),0 8px 22px rgba(74,63,87,.1)}
+.pl-search input{color:var(--ink)}
+.pl-q-clear{background:#f1edf7;color:var(--ink)}
+.hp-path{display:flex;flex-wrap:wrap;align-items:center;gap:4px}
+.hp-chip{display:inline-flex;align-items:center;gap:5px;border:none;font:inherit;font-size:13px;font-weight:850;padding:6px 10px;border-radius:11px;background:rgba(255,255,255,.75);color:var(--hp-text,var(--ink));cursor:pointer;max-width:100%}
+.hp-chip.cur{background:var(--hp-text,var(--ink));color:#fff}
+.hp-chip img{width:16px;height:16px;object-fit:contain;border-radius:4px}
+.hp-sep{font-weight:900;color:var(--hp-text,var(--ink));opacity:.45}
+.hp-sec{font-size:14px;font-weight:900;color:var(--hp-text);opacity:.75;margin:6px 4px 0}
+.hp-row{display:flex;align-items:center;gap:12px;padding:8px 2px 8px 10px;border-radius:18px;background:#fff;cursor:pointer;box-shadow:0 2px 0 rgba(74,63,87,.04),0 6px 16px rgba(74,63,87,.06);animation:popIn .18s ease both}
+.hp-row:active{transform:translateY(2px)}
+.hp-row.site{min-height:66px}
+.hp-row.thing{min-height:56px;background:rgba(255,255,255,.82)}
+.hp-ico{width:46px;height:46px;border-radius:14px;background:var(--hp-s1);display:flex;align-items:center;justify-content:center;font-size:25px;flex-shrink:0}
+.hp-ico img{width:36px;height:36px;object-fit:contain;border-radius:8px}
+.hp-thumb{width:40px;height:40px;border-radius:12px;background:var(--hp-s0);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0}
+.hp-thumb img{width:100%;height:100%;object-fit:cover}
+.hp-dot{width:10px;height:10px;border-radius:50%;background:var(--hp-ac)}
+.hp-txt{flex:1;min-width:0}
+.hp-name{font-size:16px;font-weight:850;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hp-meta{font-size:12.5px;font-weight:700;color:var(--ink-soft);margin-top:2px}
+.hp-more{width:44px;height:44px;border:none;background:transparent;font-size:22px;font-weight:900;color:var(--ink-soft);border-radius:12px;cursor:pointer;flex-shrink:0;box-shadow:none!important}
+.hp-more:active{background:rgba(0,0,0,.05)}
+.hp-chev{font-size:22px;color:var(--ink-soft);opacity:.5;margin:0 6px 0 -6px}
+.hp-empty{padding:22px 16px;text-align:center;background:rgba(255,255,255,.65);border-radius:18px;font-size:15px;font-weight:700;color:var(--ink-soft);line-height:1.55}
+.hp-empty b{color:var(--ink)}
+.hp-attach{display:flex;gap:8px;overflow-x:auto}
+.hp-addbar{flex-shrink:0;display:flex;gap:10px;padding:10px 14px 6px}
+.hp-add{flex:1;height:56px;border:none;border-radius:18px;font:inherit;font-size:18px;font-weight:950;cursor:pointer;color:var(--ink)}
+.hp-add.site{background:var(--lav);box-shadow:0 4px 0 #c9bfe8}
+.hp-add.thing{background:var(--mint);box-shadow:0 4px 0 #a9d3bf}
+.hp-add:active{transform:translateY(3px);box-shadow:none!important}
+.sr-item{display:flex;flex-direction:column;gap:6px;width:100%;text-align:left;padding:12px;background:#fff;border:none;border-radius:18px;box-shadow:0 2px 0 rgba(74,63,87,.04),0 6px 16px rgba(74,63,87,.07);font:inherit;cursor:pointer}
+.sr-top{display:flex;align-items:center;gap:10px}
+.sr-ph{width:40px;height:40px;border-radius:10px;object-fit:cover}
+.sr-name{font-size:17px;font-weight:900;color:var(--ink)}
+.sr-name small{font-size:12px;color:var(--ink-soft)}
+@keyframes foundFlash2{0%,55%{background:var(--butter);box-shadow:0 0 0 3px #f3d777}100%{}}
+.hp-row.found-flash{animation:foundFlash2 2.6s ease}
+
+/* Hojas (menús desde abajo) */
+@keyframes sheetUp{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
+.sheet-ov{position:fixed;inset:0;z-index:420;background:rgba(74,63,87,.22);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:flex;align-items:flex-end;justify-content:center}
+.sheet{width:100%;max-width:520px;max-height:86dvh;overflow-y:auto;background:var(--paper);border-radius:26px 26px 0 0;padding:10px 16px calc(18px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:9px;animation:sheetUp .22s ease;box-shadow:0 -10px 30px rgba(74,63,87,.15)}
+.sheet-grip{width:42px;height:5px;border-radius:3px;background:rgba(74,63,87,.18);align-self:center;margin-bottom:4px}
+.sheet h3{font-size:19px;font-weight:950;color:var(--ink);margin:0 2px 4px;overflow-wrap:anywhere;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.sheet h3 img{width:24px;height:24px;object-fit:contain;border-radius:6px}
+.sh-opt{display:flex;align-items:center;gap:12px;min-height:54px;padding:0 16px;border:none;border-radius:16px;background:#fff;font:inherit;font-size:16px;font-weight:850;color:var(--ink);cursor:pointer;text-align:left;box-shadow:0 2px 8px rgba(74,63,87,.05)}
+.sh-opt.danger{color:#b3364a;background:#fdeef1}
+.sh-btn{min-height:52px;border:none;border-radius:16px;font:inherit;font-size:16px;font-weight:900;cursor:pointer;background:#efe9f7;color:var(--ink);flex:1}
+.sh-btn.main{background:var(--mint);color:#2f5e49}
+.sh-row{display:flex;gap:8px}
+.sh-input{height:54px;border-radius:16px;border:2px solid #e4dcef;padding:0 14px;font:inherit;font-size:17px;font-weight:750;outline:none;background:#fff;color:var(--ink);width:100%}
+.sh-input:focus{border-color:#b9a7e6}
+.sh-hint{font-size:13px;font-weight:650;color:var(--ink-soft);padding:0 4px}
+.sh-where{font-size:12.5px;font-weight:800;color:var(--ink-soft)}
+.sh-photos{display:flex;gap:8px;overflow-x:auto}
+.sh-ph{position:relative;width:78px;height:78px;border-radius:14px;overflow:hidden;flex-shrink:0;background:#fff}
+.sh-ph img{width:100%;height:100%;object-fit:cover;cursor:zoom-in}
+.sh-ph button{position:absolute;top:4px;right:4px;width:24px;height:24px;border:none;border-radius:8px;background:rgba(255,255,255,.92);color:#b3364a;font-size:12px;font-weight:900;cursor:pointer}
+.move-list{display:flex;flex-direction:column;gap:6px}
+.move-opt{border:none;background:#fff;box-shadow:0 2px 8px rgba(74,63,87,.05);border-radius:14px}
+.move-opt b{color:var(--ink);display:flex;align-items:center;gap:6px}
+.move-opt b img{width:18px;height:18px;object-fit:contain}
+.move-opt span{color:var(--ink-soft)}
+
+/* Ventanas existentes en pastel */
+.mod{background:var(--paper)!important}
+.bok{background:var(--mint)!important;color:#2f5e49!important}
+#conf-ov .cyes{background:#f3c2cc;color:#8a2a3e}
 </style>
   <link rel="manifest" href="manifest.json">
 </head>
@@ -655,6 +856,7 @@ body.edit-mode .calc-key:active::after, body.edit-mode .calc-mini-key:active::af
             onblur="saveAppTitle(this.textContent.trim())"
             onkeydown="if(event.key==='Enter'){event.preventDefault();this.blur()}"
             title="Toca para editar el título">Home</div>
+          <span class="ver-badge">V1</span>
         </div>
         <button class="brand-flip" style="perspective:none; grid-column: 3; align-self: center;" type="button" onclick="openCalc()" title="Calculadora">
           <span class="brand-flip-inner" style="transition: transform 0.1s;">
@@ -665,15 +867,15 @@ body.edit-mode .calc-key:active::after, body.edit-mode .calc-mini-key:active::af
       <div class="app-error" id="app-error"></div>
     </div>
     <div class="houses-grid" id="home-calendar-container"></div>
-    <button class="home-fab" id="home-fab" onclick="showHousesListScreen()" style="bottom: 30px;">CASAS</button>
+    <button class="home-fab" id="home-fab" onclick="showHousesListScreen()">🏡 CASAS</button>
   </div>
 
   <!-- SCREEN 1.5: HOUSES LIST -->
   <div class="screen" id="s-houses-list">
     <div class="home-top">
-      <div style="display:flex; justify-content:space-between; align-items:center;">
-        <button onclick="showHomeScreen()" style="height:44px; padding:0 20px; background:rgba(255,255,255,0.7); border:1.5px solid rgba(160,100,50,0.2); border-radius:22px; font-size:14px; font-weight:800; color:rgba(80,40,10,0.6); box-shadow:0 4px 14px rgba(160,90,40,0.14); backdrop-filter:blur(8px); cursor:pointer; display:flex; align-items:center; justify-content:center; white-space:nowrap;">INICIO</button>
-        <div class="home-title" style="margin:0; text-align:right; font-size:28px; line-height:44px; height:44px;">Mis Casas</div>
+      <div class="hl-head">
+        <button class="hl-back" onclick="showHomeScreen()">‹ Agenda</button>
+        <div class="hl-title">Mis casas</div>
       </div>
     </div>
     <div class="houses-grid" id="houses-grid"></div>
@@ -688,26 +890,9 @@ body.edit-mode .calc-key:active::after, body.edit-mode .calc-mini-key:active::af
   <!-- SCREEN 2: INSIDE HOUSE -->
   <div class="screen" id="s-house">
     <div class="house-header">
-      <div class="back-btn" onclick="goHome()">‹</div>
+      <button class="back-btn" onclick="houseBack()" aria-label="Volver">‹</button>
       <div class="house-hname" id="house-hname">Casa</div>
-      <button class="tb calc-open-btn" onclick="openCalc()" style="flex-shrink:0" title="Calculadora">🧮</button>
-      <button class="tb" onclick="editCurrentHouse()" style="flex-shrink:0">✏️</button>
-    </div>
-    <div class="toolbar">
-      <button class="tb home-btn-3d" onclick="goHome()">🏠 Inicio</button>
-      <div class="tsep"></div>
-      <button class="tb" id="bprev" onclick="navPrev()">‹</button>
-      <button class="tb" id="bnext" onclick="navNext()">›</button>
-      <div class="tsep"></div>
-      <button class="tb red" id="bdel" onclick="askDelete()">🗑</button>
-      <div class="tsep"></div>
-      <button class="tb" id="bundo" onclick="undo()">↩</button>
-      <button class="tb" id="bredo" onclick="redo()">↪</button>
-      <div class="tsp"></div>
-      <button class="tb" id="bsearch" onclick="openHouseSearch()" title="Buscar en esta casa">🔎 Buscar</button>
-      <button class="tb" id="battach" onclick="toggleAttachPhotos()" title="Mostrar/ocultar fotos de listas">📎</button>
-      <button class="tb" id="bphoto" onclick="toggleCoverPhoto()" title="Mostrar/ocultar foto">🖼️</button>
-      <button class="tb" id="beye" onclick="toggleDone()">👁</button>
+      <button class="tb hp-undo" id="bundo" onclick="undo()" title="Deshacer el último cambio">↩ Deshacer</button>
     </div>
     <div class="search-panel" id="search-panel">
       <div class="search-card">
@@ -722,6 +907,7 @@ body.edit-mode .calc-key:active::after, body.edit-mode .calc-mini-key:active::af
       </div>
     </div>
     <div class="main" id="main"></div>
+    <div class="hp-addbar" id="hp-addbar"></div>
   </div>
 </div>
 
@@ -900,8 +1086,8 @@ body.edit-mode .calc-key:active::after, body.edit-mode .calc-mini-key:active::af
 <div class="mov" id="rmov" onclick="if(event.target.id==='rmov')event.target.classList.remove('open')">
   <div class="mod">
     <div class="mhnd"></div>
-    <h3 id="rmod-title">Nueva zona</h3>
-    <input class="minp" id="rminp" placeholder="Nombre de la zona..."
+    <h3 id="rmod-title">Nuevo sitio</h3>
+    <input class="minp" id="rminp" placeholder="Nombre del sitio..."
       oninput="autoEmojiFromName(this.value)"
       onkeydown="if(event.key==='Enter')saveRoom()">
     <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
@@ -1569,10 +1755,10 @@ function showToast(msg){
   const toast=document.createElement('div');
   toast.id='app-toast';
   toast.style.position='fixed';
-  toast.style.bottom='90px';
+  toast.style.top='calc(14px + env(safe-area-inset-top,0px))';
   toast.style.left='50%';
   toast.style.transform='translateX(-50%)';
-  toast.style.background='rgba(74,48,32,0.92)';
+  toast.style.background='rgba(74,63,87,0.94)';toast.style.zIndex='99999';
   toast.style.color='#fffcf7';
   toast.style.padding='10px 18px';
   toast.style.borderRadius='20px';
@@ -1602,7 +1788,7 @@ function removePhoto(key){
   try{lsRemove('ph_'+key);}catch(e){}
   lsSet('h_updated',String(Date.now()));scheduleCloudSave();
   updateStorageInfo();
-  if(CURRENT_HOUSE)renderHouseMain();else renderHomeGrid();
+  refreshAfterPhoto();
 }
 function handlePhotoUpload(e){
   const files=[...e.target.files];if(!files.length)return;
@@ -1663,7 +1849,7 @@ function handlePhotoUpload(e){
       
       if(isCalendar){
         renderCalList();
-      }else if(CURRENT_HOUSE)renderHouseMain();else renderHomeGrid();
+      }else refreshAfterPhoto();
     };
     img.src=ev.target.result;
   };
@@ -1719,7 +1905,7 @@ function showHousesListScreen(){
 function houseIconHtml(house){return house?.iconImage?`<img src="${house.iconImage}" alt="">`:esc(house?.emoji||'🏠');}
 function showHouseScreen(hid){
   if(!hid)return;
-  CURRENT_HOUSE=hid;SEL_LEVELS=[];saveSel();
+  CURRENT_HOUSE=hid;SEL_LEVELS=[];PL_QUERY='';saveSel();
   const pal=housePal(hid);
   document.body.style.background=pal.bg;
   document.getElementById('s-house').style.background=pal.bg;
@@ -1807,56 +1993,6 @@ function renderHomeGrid(){
   logApp('RENDER HOME GRID done',{});
 }
 
-function renderHousesList(){
-  const grid=document.getElementById('houses-grid');
-  if(!grid) return;
-  const fab=document.getElementById('houses-fab');
-  if(!Array.isArray(HOUSES))HOUSES=[];
-  if(fab)fab.style.display=HOUSES.length<5?'flex':'none';
-  let html='';
-  if(!HOUSES.length){
-    html=`<div class="empty" style="grid-column:1/-1">
-      <div class="ei">🏡</div>
-      <h2>Aún no hay casas</h2>
-      <p>Crea una casa para empezar.</p>
-      <button class="bok" style="margin-top:12px;width:100%" onclick="openHouseModal()">Nueva casa</button>
-    </div>`;
-  }
-  HOUSES.forEach((h,i)=>{
-    const pal=PALETTES[h.color||'verde']||PALETTES.verde;
-    const photo=getPhoto('house_'+h.id);
-    const photoCount=countHousePhotos(h.id);
-    html+=`<div class="hcard" data-house-id="${h.id}" draggable="true" ondragstart="DRAG_HOUSE_ID='${h.id}';this.classList.add('dragging')" ondragend="this.classList.remove('dragging');DRAG_HOUSE_ID=null" ondragover="event.preventDefault()" ondrop="event.preventDefault();moveHouseIntoHouse(DRAG_HOUSE_ID,'${h.id}')" style="animation-delay:${i*.06}s;background:${pal.bg}">
-      <div class="hcard-photo-count" title="Fotos incrustadas en esta casa">📷 ${photoCount}</div>
-      <div class="hcard-title" style="background:${pal.shades[1]}"><div class="hcard-name" style="color:${pal.text}" contenteditable="true"
-        onblur="renameHouse('${h.id}',this.textContent.trim())"
-        onkeydown="if(event.key==='Enter'){event.preventDefault();this.blur()}"
-        onclick="event.stopPropagation()">${esc(h.name)}</div></div>`;
-    if(photo){
-      html+=`<div class="hcard-photo-fixed" onclick="showHouseScreen('${h.id}')">
-        <img class="hcard-photo" src="${photo}" alt="">
-        <button class="hcard-photo-remove" onclick="event.stopPropagation();removePhoto('house_${h.id}')" title="Quitar foto">✕</button>
-      </div>`;
-    } else {
-      html+=`<div class="hcard-placeholder" style="background:${pal.shades[1]};cursor:pointer" onclick="showHouseScreen('${h.id}')">${houseIconHtml(h)}</div>`;
-    }
-    html+=`<div class="hcard-footer" style="background:${pal.shades[1]}">
-      <div class="hcard-actions">
-        <button class="hcard-btn" onclick="showHouseScreen('${h.id}')" title="Entrar" style="font-size:14px">›</button>
-        <button class="hcard-btn edit" onclick="openHouseModal('${h.id}')" title="Color e icono">
-          <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" fill="${pal.ac}" opacity=".8"/><circle cx="7" cy="7" r="2.5" fill="white"/></svg>
-        </button>
-        <button class="hcard-btn edit" onclick="triggerPhoto('house_${h.id}')" title="Foto">
-          <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><rect x="1" y="3" width="12" height="9" rx="2" stroke="${pal.text}" stroke-width="1.3" fill="none"/><circle cx="7" cy="7.5" r="2.2" stroke="${pal.text}" stroke-width="1.3" fill="none"/><rect x="4.5" y="1.5" width="5" height="2" rx="1" fill="${pal.text}" opacity=".5"/></svg>
-        </button>
-        <button class="hcard-btn del" onclick="delHouse('${h.id}')" title="Borrar">
-          <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2 3.5h10M5.5 6v4M8.5 6v4" stroke="#c03030" stroke-width="1.3" stroke-linecap="round"/><rect x="3" y="3.5" width="8" height="8" rx="1" stroke="#c03030" stroke-width="1.3" fill="none"/><path d="M5 3.5V2.5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v1" stroke="#c03030" stroke-width="1.3"/></svg>
-        </button>
-      </div>
-    </div></div>`;
-  });
-  grid.innerHTML=html;
-}
 
 function countHousePhotos(houseId){
   let total=getPhoto('house_'+houseId)?1:0;
@@ -2297,22 +2433,22 @@ async function delHouse(id){
     HOUSES=HOUSES.filter(h=>h.id!==id);
     if(CURRENT_HOUSE===id){CURRENT_HOUSE=null;SEL_LEVELS=[];}
     saveLoc();saveSel();
-    showHomeScreen();
+    showHousesListScreen();
   });
 }
 
 // ── ROOMS ──
-async function addRoom(name,emoji,level){
+async function addRoom(name,emoji,level,iconImage){
   snap();
   const id=gid(),houseId=CURRENT_HOUSE;
   const parentId=level===0?null:(SEL_LEVELS[level-1]||null);
   const order=sibs(houseId,parentId).length;
   const room={name,emoji,houseId,parentId,level,order,tasks:{}};
+  if(iconImage)room.iconImage=iconImage;
   DATA[id]=room;
   if(db){const{tasks,...rd}=room;await db.collection('rooms').doc(id).set(rd);}
-  saveLoc();
-  SEL_LEVELS=SEL_LEVELS.slice(0,level);SEL_LEVELS[level]=id;
-  saveSel();renderHouseMain();
+  saveLoc();saveSel();renderHouseMain();
+  return id;
 }
 async function updateRoom(id,name,emoji,iconImage){
   const room=DATA[id];if(!room)return;
@@ -2324,7 +2460,12 @@ async function updateRoom(id,name,emoji,iconImage){
 }
 async function doDelRoom(id){
   function col(rid){return[rid,...Object.entries(DATA).filter(([,r])=>r.parentId===rid).flatMap(([i])=>col(i))];}
-  for(const rid of col(id)){Object.values(DATA[rid]?.tasks||{}).forEach(t=>taskPhotoIds(t).forEach(photoId=>lsRemove('ph_task_'+photoId)));if(db){const ts=await db.collection('rooms').doc(rid).collection('tasks').get();for(const t of ts.docs)await t.ref.delete();await db.collection('rooms').doc(rid).delete();}delete DATA[rid];}
+  for(const rid of col(id)){
+    Object.values(DATA[rid]?.tasks||{}).forEach(t=>taskPhotoIds(t).forEach(photoId=>lsRemove('ph_task_'+photoId)));
+    try{getRoomPhotos(rid).forEach(pid=>lsRemove('ph_attach_'+pid));lsRemove(roomPhotoListKey(rid));}catch(e){}
+    if(db){const ts=await db.collection('rooms').doc(rid).collection('tasks').get();for(const t of ts.docs)await t.ref.delete();await db.collection('rooms').doc(rid).delete();}
+    delete DATA[rid];
+  }
 }
 function roomHasWrittenRows(id){
   const room=DATA[id];if(!room)return false;
@@ -2352,15 +2493,21 @@ function askDelete(){
 function delPill(id,e){
   e&&e.stopPropagation();
   const r=DATA[id];if(!r)return;
-  if(blockRoomDeleteIfProtected(id))return;
-  showConf('Borrar',`¿Eliminar "${r.emoji} ${r.name}"?`,async()=>{
-    snap();await doDelRoom(id);SEL_LEVELS=SEL_LEVELS.filter(s=>s!==id);saveLoc();saveSel();renderHouseMain();
+  const c=placeCounts(id);
+  const parts=[];
+  if(c.places)parts.push(c.places+(c.places===1?' sitio':' sitios'));
+  if(c.items)parts.push(c.items+(c.items===1?' cosa':' cosas'));
+  const msg=parts.length?`Dentro de "${r.name}" hay ${parts.join(' y ')}. Se borrará todo, también sus fotos.`:`¿Eliminar "${r.name}"?`;
+  showConf('Borrar sitio',msg,async()=>{
+    snap();await doDelRoom(id);
+    const i=SEL_LEVELS.indexOf(id);if(i>=0)SEL_LEVELS=SEL_LEVELS.slice(0,i);
+    saveLoc();saveSel();renderHouseMain();
   });
 }
 function editPill(id,e){
   e&&e.stopPropagation();
   const room=DATA[id];if(!room)return;
-  openRoomModal(room.level||0,id);
+  openRoomModal(placeDepth(id),id);
 }
 
 // ── TASKS ──
@@ -2375,7 +2522,8 @@ async function addTaskText(text,photoData=[]){
   const rid=SEL_LEVELS[SEL_LEVELS.length-1];if(!rid)return;
   snap();const id=gid();
   if(!DATA[rid].tasks)DATA[rid].tasks={};
-  const task={text,done:false,order:Object.keys(DATA[rid].tasks).length,color:TASK_COLOR||'tema'};
+  const orders=Object.values(DATA[rid].tasks).map(x=>x.order||0);
+  const task={text,done:false,order:orders.length?Math.min(...orders)-1:0,color:TASK_COLOR||'tema'};
   if(photoData.length){task.photoIds=photoData.map(data=>{const photoId=gid();lsSet('ph_task_'+photoId,data);return photoId;});updateStorageInfo();}
   DATA[rid].tasks[id]=task;
   if(db)await db.collection('rooms').doc(rid).collection('tasks').doc(id).set(task);
@@ -2639,119 +2787,325 @@ function pillStyle(pal,lvl,delay){
   return `--pc:${pal.ac};--pill-strong:${strong};--pill-mid:${mid};--pill-soft:${soft};--pill-fade:rgba(255,255,255,.72);animation-delay:${delay}s`;
 }
 
-// ── RENDER HOUSE ──
+// ══════════════════════════════════════════════
+// HOME V1 · CASAS › SITIOS › COSAS
+// Un sitio puede tener dentro otros sitios y cosas, sin límite.
+// (Internamente: sitio = room de DATA, cosa = task del room.)
+// ══════════════════════════════════════════════
+function placeDepth(id){return Math.max(0,roomPathIds(id).length-1);}
+function placeLabel(){return 'Sitio';}
+function plural(n,a,b){return n+' '+(n===1?a:b);}
+function placeCounts(id){
+  let places=0,items=0;
+  (function walk(rid){
+    items+=Object.keys(DATA[rid]?.tasks||{}).length;
+    Object.entries(DATA).forEach(([cid,c])=>{if(c.parentId===rid){places++;walk(cid);}});
+  })(id);
+  return {places,items};
+}
+function placeMeta(id){
+  const kids=sibs(CURRENT_HOUSE,id).length;
+  const items=Object.keys(DATA[id]?.tasks||{}).length;
+  const parts=[];
+  if(kids)parts.push(plural(kids,'sitio','sitios'));
+  if(items)parts.push(plural(items,'cosa','cosas'));
+  return parts.join(' · ')||'Vacío';
+}
+function goPlaceDepth(n){
+  SEL_LEVELS=SEL_LEVELS.slice(0,Math.max(0,n));saveSel();renderHouseMain();
+  const m=document.getElementById('main');if(m)m.scrollTop=0;
+}
+function openPlace(id){
+  if(!DATA[id])return;
+  SEL_LEVELS=roomPathIds(id);saveSel();renderHouseMain();
+  const m=document.getElementById('main');if(m)m.scrollTop=0;
+}
+function houseBack(){
+  if(SEL_LEVELS.length)goPlaceDepth(SEL_LEVELS.length-1);
+  else showHousesListScreen();
+}
+function pathChips(ids){
+  const house=HOUSES.find(h=>h.id===CURRENT_HOUSE);
+  const chips=[`<button class="hp-chip" onclick="goPlaceDepth(0)">${houseIconHtml(house)} ${esc(house?.name||'Casa')}</button>`];
+  ids.forEach((id,i)=>chips.push(`<button class="hp-chip ${i===ids.length-1?'cur':''}" onclick="goPlaceDepth(${i+1})">${roomIconHtml(DATA[id])} ${esc(DATA[id].name)}</button>`));
+  return chips.join('<span class="hp-sep">›</span>');
+}
+function pathSpans(rid){
+  return roomPathIds(rid).map((id,i,all)=>`<span class="hp-chip ${i===all.length-1?'cur':''}">${roomIconHtml(DATA[id])} ${esc(DATA[id].name)}</span>`).join('<span class="hp-sep">›</span>');
+}
+function thingPhotos(t){return taskPhotoIds(t).map(pid=>({pid,src:lsGet('ph_task_'+pid)})).filter(p=>p.src);}
+
+function siteRow(id,r){
+  return `<div class="hp-row site" onclick="openPlace('${id}')">
+    <div class="hp-ico">${roomIconHtml(r)}</div>
+    <div class="hp-txt"><div class="hp-name">${esc(r.name)}</div><div class="hp-meta">${placeMeta(id)}</div></div>
+    <button class="hp-more" onclick="event.stopPropagation();openSiteMenu('${id}')" aria-label="Opciones de ${esc(r.name)}">⋯</button>
+    <span class="hp-chev">›</span>
+  </div>`;
+}
+function thingRow(rid,tid,t){
+  const ph=thingPhotos(t);
+  const name=t.text?esc(t.text):'Foto';
+  return `<div class="hp-row thing" id="tk-${tid}" onclick="openThingMenu('${rid}','${tid}')">
+    <div class="hp-thumb">${ph.length?`<img src="${ph[0].src}" alt="" onclick="event.stopPropagation();openImagePop(this.src)">`:'<span class="hp-dot"></span>'}</div>
+    <div class="hp-txt"><div class="hp-name">${name}</div>${ph.length>1?`<div class="hp-meta">${ph.length} fotos</div>`:''}</div>
+    <button class="hp-more" onclick="event.stopPropagation();openThingMenu('${rid}','${tid}')" aria-label="Opciones">⋯</button>
+  </div>`;
+}
 function renderHouseMain(){
-  const hid=CURRENT_HOUSE;
+  const hid=CURRENT_HOUSE;if(!hid)return;
   const pal=housePal(hid);
+  const house=HOUSES.find(h=>h.id===hid);
   document.body.style.background=pal.bg;
   document.getElementById('s-house').style.background=pal.bg;
-
-  // toolbar
-  const deepId=SEL_LEVELS[SEL_LEVELS.length-1];
-  const deepR=deepId&&DATA[deepId];
-  const whereEl=document.getElementById('where');
-  if(whereEl)whereEl.textContent=deepR?(deepR.emoji+' '+deepR.name.toUpperCase()):'INICIO';
-  const bdelEl=document.getElementById('bdel');
-  if(bdelEl)bdelEl.disabled=!SEL_LEVELS.length;
-  const bundoEl=document.getElementById('bundo');
-  if(bundoEl)bundoEl.disabled=!HIST.length;
-  const bredoEl=document.getElementById('bredo');
-  if(bredoEl)bredoEl.disabled=!REDO.length;
-  const lvl=SEL_LEVELS.length-1;
-  const bprev=document.getElementById('bprev');
-  const bnext=document.getElementById('bnext');
-  if(lvl>=0){
-    const par=lvl===0?null:SEL_LEVELS[lvl-1];
-    const s=sibs(hid,par);const i=s.findIndex(([x])=>x===SEL_LEVELS[lvl]);
-    if(bprev)bprev.disabled=i<=0;
-    if(bnext)bnext.disabled=i>=s.length-1;
-  } else {if(bprev)bprev.disabled=true;if(bnext)bnext.disabled=true;}
-
+  const last=SEL_LEVELS[SEL_LEVELS.length-1];
+  SEL_LEVELS=(last&&DATA[last]&&DATA[last].houseId===hid)?roomPathIds(last):[];
+  const depth=SEL_LEVELS.length;
+  const curId=SEL_LEVELS[depth-1]||null;
+  const cur=curId?DATA[curId]:null;
+  const bundo=document.getElementById('bundo');if(bundo)bundo.disabled=!HIST.length;
+  document.getElementById('house-hname').innerHTML=cur?`${roomIconHtml(cur)} <span>${esc(cur.name)}</span>`:`${houseIconHtml(house)} <span>${esc(house?.name||'Casa')}</span>`;
+  const vars=`--hp-text:${pal.text};--hp-ac:${pal.ac};--hp-s0:${pal.shades[0]};--hp-s1:${pal.shades[1]};--hp-s2:${pal.shades[2]}`;
   const main=document.getElementById('main');
-
-  if(!SEL_LEVELS.length){
-    // Show house cover + room pills
-    const photo=getPhoto('house_'+hid);
-    const houseRooms=sibs(hid,null);
-    const house=HOUSES.find(h=>h.id===hid);
-
-    let html=`<div class="house-cover">`;
-    if(photo&&SHOW_PHOTO){
-      const pan=getPan('house_'+hid);
-      html+=`<div style="position:relative;max-width:260px;width:100%">
-        <div class="photo-pan-wrap" id="cover-pan-wrap" style="border-radius:18px;box-shadow:0 6px 24px rgba(0,0,0,.18);border:3px solid rgba(255,255,255,.6)">
-          <img src="${photo}" id="cover-pan-img" data-photo-key="house_${hid}" style="--px:${pan.x}px;--py:${pan.y}px;--pz:${pan.z}" alt="">
-          <div class="photo-tools cover-photo-tools">
-            <button class="photo-tool" onclick="zoomPhoto('house_${hid}',-.12,event)" title="Alejar">−</button>
-            <button class="photo-tool" onclick="resetPhotoView('house_${hid}',event)" title="Centrar">⌖</button>
-            <button class="photo-tool" onclick="zoomPhoto('house_${hid}',.12,event)" title="Acercar">＋</button>
-          </div>
-        </div>
-        <div style="position:absolute;bottom:10px;right:10px;display:flex;gap:6px">
-          <button onclick="triggerPhoto('house_${hid}')" style="height:28px;padding:0 10px;background:rgba(255,255,255,.85);border:none;border-radius:8px;font-size:12px;font-weight:700;color:rgba(60,30,10,.7);cursor:pointer">📷 Cambiar</button>
-          <button onclick="removePhoto('house_${hid}')" style="height:28px;padding:0 10px;background:rgba(255,100,100,.75);border:none;border-radius:8px;font-size:12px;font-weight:700;color:white;cursor:pointer">✕</button>
-        </div>
-      </div>`;
-    } else if(photo&&!SHOW_PHOTO){
-      html+=`<div onclick="toggleCoverPhoto()" style="opacity:.45;font-size:12px;font-weight:700;color:rgba(60,30,10,.4);cursor:pointer;padding:4px 12px;background:rgba(255,255,255,.3);border-radius:20px">🙈 Foto oculta · toca para mostrar</div>`;
-    } else {
-      html+=`<div class="cover-placeholder" onclick="triggerPhoto('house_${hid}')"><div class="cpi">📷</div><p>Toca para añadir foto</p></div>`;
-    }
-
-    html+=`<div class="zone-panel">
-      <div class="shdr">
-        <div class="slvl" style="background:rgba(255,255,255,.4);color:${pal.text}">1</div>
-        <div class="slbl" style="color:${pal.text}">Zonas</div>
-      </div>
-      <div class="zone-grid">`;
-    html+=`<button class="zone-search-btn" onclick="openHouseSearch()">🔎 Buscar</button>`;
-    houseRooms.forEach(([id,r],idx)=>{
-      html+=`<div class="pill zone-pill" onclick="selectAt(0,'${id}')" style="${pillStyle(pal,0,idx*.03)}">
-        <div class="pemi">${roomIconHtml(r)}</div>
-        <div class="pname" style="color:${pal.text}">${esc(r.name)}</div>
-        <div class="pill-actions"><button class="pedit" onclick="editPill('${id}',event)" title="Editar nombre e icono">✎</button><button class="px" onclick="delPill('${id}',event)" title="Borrar">✕</button></div>
-      </div>`;
-    });
-    html+=`<div class="add-pill-btn" style="--pc:${pal.ac};color:${pal.text}" onclick="openRoomModal(0)">＋ Zona</div>`;
-    html+=`</div></div>`;
-    main.innerHTML=html;
-    if(getPhoto('house_'+hid))attachCoverPan('house_'+hid);
-    return;
+  main.style.cssText=vars;
+  const kids=sibs(hid,curId);
+  const things=cur?Object.entries(cur.tasks||{}).sort((a,b)=>(a[1].order||0)-(b[1].order||0)):[];
+  let h=`<div class="hp-wrap">
+    <div class="pl-search"><span class="pl-search-ico">🔎</span>
+      <input id="pl-q" type="search" autocomplete="off" enterkeyhint="search" placeholder="¿Dónde está…? Ej.: llaves bici" value="${esc(PL_QUERY).replace(/"/g,'&quot;')}" oninput="plSearch(this.value)" onkeydown="if(event.key==='Escape')clearPlaceSearch()">
+      <button class="pl-q-clear" id="pl-q-clear" onclick="clearPlaceSearch()" aria-label="Borrar búsqueda" style="visibility:${PL_QUERY?'visible':'hidden'}">✕</button>
+    </div>
+    <div class="sr-list" id="pl-results"></div>
+    <div class="hp-content" id="pl-content">`;
+  if(depth)h+=`<div class="hp-path">${pathChips(SEL_LEVELS)}</div>`;
+  if(curId){
+    const att=getRoomPhotos(curId).map(pid=>({pid,src:lsGet('ph_attach_'+pid)})).filter(p=>p.src);
+    if(att.length)h+=`<div class="hp-attach">${att.map(p=>`<div class="sh-ph"><img src="${p.src}" alt="" onclick="openImagePop(this.src)"><button onclick="delRoomPhoto('${curId}','${p.pid}')" aria-label="Quitar foto">✕</button></div>`).join('')}</div>`;
   }
-
-  // Strips
-  let html='<div style="padding:3px 0 20px">';
-  for(let lvl=0;lvl<MAX_LVL;lvl++){
-    const par=lvl===0?null:(SEL_LEVELS[lvl-1]||null);
-    if(lvl>0&&!SEL_LEVELS[lvl-1])break;
-    const rooms=sibs(hid,par);
-    html+=`<div class="strip" style="animation-delay:${lvl*.05}s">
-      <div class="shdr">
-        <div class="slvl" style="background:rgba(255,255,255,.4);color:${pal.text}">${lvl+1}</div>
-        <div class="slbl" style="color:${pal.text}">${LVL_LABELS[lvl]}</div>
-      </div>
-      <div class="pill-row">`;
-    rooms.forEach(([id,r],idx)=>{
-      const on=SEL_LEVELS[lvl]===id;
-      html+=`<div class="pill ${lvl===0?'zone-pill':'subzone-pill'} ${on?'active':''}" onclick="selectAt(${lvl},'${id}')" style="${pillStyle(pal,lvl,idx*.03)}">
-        <div class="pemi">${roomIconHtml(r)}</div>
-        <div class="pname" style="color:${pal.text}">${esc(r.name)}</div>
-        <div class="pill-actions"><button class="pedit" onclick="editPill('${id}',event)" title="Editar nombre e icono">✎</button><button class="px" onclick="delPill('${id}',event)" title="Borrar">✕</button></div>
-      </div>`;
-    });
-    const lblAdd=lvl===0?'＋ Zona':'＋ Subzona';
-    html+=`<div class="add-pill-btn" style="--pc:${pal.ac};color:${pal.text}" onclick="openRoomModal(${lvl})">${lblAdd}</div>`;
-    html+=`</div></div>`;
-    if(lvl<MAX_LVL-1)html+=`<div class="ssep"></div>`;
-    if(SEL_LEVELS[lvl]&&!COLLAPSED_ROOM_LISTS.has(SEL_LEVELS[lvl]))html+=`<div id="tw${lvl}"></div>`;
-    if(!SEL_LEVELS[lvl])break;
+  if(!kids.length&&!things.length){
+    h+=`<div class="hp-empty">${depth
+      ?`Aquí no hay nada todavía.<br>Añade una <b>cosa</b> que guardes aquí, o un <b>sitio</b> de dentro (un cajón, una caja…).`
+      :`Empieza creando los sitios de tu casa:<br>cocina, habitación, trastero…`}</div>`;
   }
-  html+='</div>';
-  main.innerHTML=html;
-  if(SEL_LEVELS.length&&!COLLAPSED_ROOM_LISTS.has(SEL_LEVELS[SEL_LEVELS.length-1]))renderTasksAt(SEL_LEVELS.length-1);
+  if(kids.length){
+    if(things.length)h+=`<div class="hp-sec">Sitios</div>`;
+    kids.forEach(([id,r])=>h+=siteRow(id,r));
+  }
+  if(things.length){
+    h+=`<div class="hp-sec">Cosas</div>`;
+    things.forEach(([tid,t])=>h+=thingRow(curId,tid,t));
+  }
+  h+=`</div></div>`;
+  main.innerHTML=h;
+  const bar=document.getElementById('hp-addbar');
+  if(bar){
+    bar.style.cssText=vars;
+    bar.innerHTML=depth
+      ?`<button class="hp-add site" onclick="openRoomModal(${depth})">＋ Sitio</button><button class="hp-add thing" onclick="openAddThing()">＋ Cosa</button>`
+      :`<button class="hp-add site" onclick="openRoomModal(0)">＋ Sitio</button>`;
+  }
+  if(PL_QUERY)plSearch(PL_QUERY);
+}
+function renderTasks(refocus){
+  if(!CURRENT_HOUSE)return;
+  renderHouseMain();
+  if(refocus)setTimeout(()=>{const i=document.getElementById('task-inp');if(i)i.focus({preventScroll:true});},0);
 }
 
-function renderTasks(refocus){if(SEL_LEVELS.length)renderTasksAt(SEL_LEVELS.length-1,refocus);}
+// ── HOJAS (menús que salen desde abajo) ──
+function openSheet(titleHtml,bodyHtml){
+  closeSheet();
+  const ov=document.createElement('div');
+  ov.className='sheet-ov';ov.id='sheet-ov';
+  ov.onclick=e=>{if(e.target===ov)closeSheet();};
+  ov.innerHTML=`<div class="sheet" role="dialog"><div class="sheet-grip"></div><h3>${titleHtml}</h3>${bodyHtml}</div>`;
+  document.body.appendChild(ov);
+  return ov;
+}
+function closeSheet(){const ov=document.getElementById('sheet-ov');if(ov)ov.remove();}
+function openSiteMenu(id){
+  const r=DATA[id];if(!r)return;
+  openSheet(`${roomIconHtml(r)} ${esc(r.name)}`,`
+    <button class="sh-opt" onclick="closeSheet();editPill('${id}')">✏️ Cambiar nombre o icono</button>
+    <button class="sh-opt" onclick="openMoveSheet('site','${id}')">↔️ Mover a otro sitio</button>
+    <button class="sh-opt" onclick="closeSheet();triggerPhoto('attach_${id}')">📷 Añadir foto del sitio</button>
+    <button class="sh-opt" onclick="closeSheet();exportZonePDF('${id}',null)">📄 Guardar lista en PDF</button>
+    <button class="sh-opt danger" onclick="closeSheet();delPill('${id}')">🗑️ Borrar sitio</button>
+    <button class="sh-btn" onclick="closeSheet()">Cancelar</button>`);
+}
+function openThingMenu(rid,tid){
+  const t=DATA[rid]?.tasks?.[tid];if(!t)return;
+  const ph=thingPhotos(t);
+  openSheet(esc(t.text||'Foto'),`
+    <div class="sh-where">Está en:</div><div class="hp-path">${pathSpans(rid)}</div>
+    ${ph.length?`<div class="sh-photos">${ph.map(p=>`<div class="sh-ph"><img src="${p.src}" alt="" onclick="openImagePop(this.src)"><button onclick="deleteTaskPhoto('${rid}','${tid}','${p.pid}');openThingMenu('${rid}','${tid}')" aria-label="Quitar foto">✕</button></div>`).join('')}</div>`:''}
+    <button class="sh-opt" onclick="openRenameThing('${rid}','${tid}')">✏️ Cambiar nombre</button>
+    <button class="sh-opt" onclick="closeSheet();chooseTaskPhotos('${rid}','${tid}')">📷 Añadir foto</button>
+    <button class="sh-opt" onclick="openMoveSheet('thing','${rid}','${tid}')">↔️ Mover a otro sitio</button>
+    <button class="sh-opt danger" onclick="closeSheet();askDelThing('${rid}','${tid}')">🗑️ Borrar</button>
+    <button class="sh-btn" onclick="closeSheet()">Cancelar</button>`);
+}
+function askDelThing(rid,tid){
+  const t=DATA[rid]?.tasks?.[tid];if(!t)return;
+  showConf('Borrar',`¿Borrar "${t.text||'esta foto'}"?`,()=>delTask(rid,tid));
+}
+function openRenameThing(rid,tid){
+  const t=DATA[rid]?.tasks?.[tid];if(!t)return;
+  openSheet('Cambiar nombre',`
+    <input class="sh-input" id="sh-rename" value="${esc(t.text).replace(/"/g,'&quot;')}" enterkeyhint="done" onkeydown="if(event.key==='Enter')saveRenameThing('${rid}','${tid}')">
+    <div class="sh-row"><button class="sh-btn" onclick="closeSheet()">Cancelar</button><button class="sh-btn main" onclick="saveRenameThing('${rid}','${tid}')">Guardar</button></div>`);
+  setTimeout(()=>{const i=document.getElementById('sh-rename');if(i){i.focus();i.select();}},80);
+}
+async function saveRenameThing(rid,tid){
+  const v=(document.getElementById('sh-rename')?.value||'').trim();
+  if(!v)return;
+  snap();await renTask(rid,tid,v);closeSheet();renderHouseMain();
+}
+function openAddThing(){
+  const curId=SEL_LEVELS[SEL_LEVELS.length-1];if(!curId)return;
+  TASK_PENDING_PHOTOS=[];
+  openSheet(`Añadir a ${esc(DATA[curId].name)}`,`
+    <input class="sh-input" id="task-inp" placeholder="Ej.: Llaves de la bici" enterkeyhint="done" autocomplete="off" onkeydown="if(event.key==='Enter')addThingFromSheet()" onpaste="pasteTaskPhoto(event)">
+    <div class="sh-hint">Escribe y pulsa «Añadir». Puedes añadir varias seguidas.</div>
+    <div class="sh-row"><button class="sh-btn" onclick="chooseTaskPhotos()">📷 Con foto</button><button class="sh-btn main" onclick="addThingFromSheet()">Añadir</button></div>
+    <button class="sh-btn" onclick="closeSheet()">Listo</button>`);
+  setTimeout(()=>{const i=document.getElementById('task-inp');if(i)i.focus();},80);
+}
+async function addThingFromSheet(){
+  const inp=document.getElementById('task-inp');if(!inp)return;
+  const text=inp.value.trim();if(!text)return;
+  await addTaskText(text);
+  inp.value='';renderHouseMain();inp.focus();
+  showToast('Guardado: '+text);
+}
+// ── MOVER ──
+function siteTargets(excludeSubtreeOf){
+  const banned=new Set();
+  if(excludeSubtreeOf)(function walk(id){banned.add(id);Object.entries(DATA).forEach(([c,r])=>{if(r.parentId===id)walk(c);});})(excludeSubtreeOf);
+  return Object.keys(DATA).filter(id=>DATA[id].houseId===CURRENT_HOUSE&&!banned.has(id))
+    .map(id=>({id,name:DATA[id].name,icon:roomIconHtml(DATA[id]),path:roomPathIds(id).slice(0,-1).map(x=>DATA[x].name).join(' › ')}))
+    .sort((a,b)=>(a.path+' '+a.name).localeCompare(b.path+' '+b.name,'es'));
+}
+function openMoveSheet(kind,a,b){
+  const isSite=kind==='site';
+  const title=isSite?esc(DATA[a]?.name||''):esc(DATA[a]?.tasks?.[b]?.text||'Foto');
+  const curParent=isSite?(DATA[a]?.parentId||null):a;
+  const list=siteTargets(isSite?a:null).filter(x=>x.id!==curParent);
+  const house=HOUSES.find(h=>h.id===CURRENT_HOUSE);
+  let opts='';
+  if(isSite&&curParent)opts+=`<button class="move-opt" onclick="moveSiteTo('${a}',null)"><b>${houseIconHtml(house)} ${esc(house?.name||'Casa')}</b><span>Directamente en la casa</span></button>`;
+  opts+=list.map(x=>`<button class="move-opt" onclick="${isSite?`moveSiteTo('${a}','${x.id}')`:`moveItemTo('${a}','${b}','${x.id}')`}"><b>${x.icon} ${esc(x.name)}</b>${x.path?`<span>${esc(x.path)}</span>`:''}</button>`).join('');
+  openSheet(`Mover «${title}» a…`,`<div class="move-list">${opts||'<div class="sh-hint">No hay otros sitios todavía.</div>'}</div><button class="sh-btn" onclick="closeSheet()">Cancelar</button>`);
+}
+function moveItemTo(rid,tid,toId){
+  const t=DATA[rid]?.tasks?.[tid];if(!t||!DATA[toId])return;
+  snap();
+  delete DATA[rid].tasks[tid];
+  if(!DATA[toId].tasks)DATA[toId].tasks={};
+  const orders=Object.values(DATA[toId].tasks).map(x=>x.order||0);
+  t.order=orders.length?Math.min(...orders)-1:0;
+  DATA[toId].tasks[tid]=t;
+  saveLoc();closeSheet();renderHouseMain();
+  showToast('Movido a '+DATA[toId].name);
+}
+function moveSiteTo(id,toId){
+  if(!DATA[id])return;
+  snap();
+  DATA[id].parentId=toId||null;
+  DATA[id].order=sibs(CURRENT_HOUSE,toId||null).filter(([x])=>x!==id).length;
+  (function relevel(rid){DATA[rid].level=placeDepth(rid);Object.entries(DATA).forEach(([c,r])=>{if(r.parentId===rid)relevel(c);});})(id);
+  saveLoc();closeSheet();renderHouseMain();
+  showToast('Movido a '+(toId?DATA[toId].name:'la casa'));
+}
+
+// ── BUSCADOR «¿DÓNDE ESTÁ?» ──
+let PL_QUERY='';
+const SEARCH_STOP=new Set(['de','del','la','las','el','los','en','mi','mis','y','a','al','un','una','unos','unas','les','els','i','d','l','per','para','con','amb']);
+function searchWords(q){
+  return normSearch(q).replace(/[^a-z0-9\s]/g,' ').split(/\s+/)
+    .filter(w=>w&&!SEARCH_STOP.has(w))
+    .map(w=>w.length>3&&w.endsWith('s')?w.slice(0,-1):w);
+}
+function clearPlaceSearch(){
+  const i=document.getElementById('pl-q');if(i){i.value='';i.focus();}
+  plSearch('');
+}
+function plSearch(q){
+  PL_QUERY=q||'';
+  const res=document.getElementById('pl-results'),content=document.getElementById('pl-content');
+  if(!res||!content)return;
+  const clr=document.getElementById('pl-q-clear');if(clr)clr.style.visibility=PL_QUERY?'visible':'hidden';
+  const words=searchWords(PL_QUERY);
+  if(!words.length){res.innerHTML='';content.style.display='';return;}
+  content.style.display='none';
+  const out=[];
+  Object.entries(DATA).forEach(([rid,r])=>{
+    if(r.houseId!==CURRENT_HOUSE)return;
+    const pathTxt=normSearch(roomPathIds(rid).map(id=>DATA[id].name).join(' '));
+    if(words.every(w=>normSearch(r.name).includes(w)))out.push({type:'place',rid,score:2});
+    Object.entries(r.tasks||{}).forEach(([tid,t])=>{
+      const own=normSearch(t.text);
+      if(!words.every(w=>(own+' '+pathTxt).includes(w)))return;
+      const inOwn=words.filter(w=>own.includes(w)).length;
+      if(!inOwn)return;
+      out.push({type:'item',rid,tid,t,score:inOwn===words.length?0:1});
+    });
+  });
+  out.sort((a,b)=>a.score-b.score);
+  if(!out.length){
+    res.innerHTML=`<div class="hp-empty">No encuentro «${esc(PL_QUERY)}» en esta casa.<br>Prueba con una sola palabra, por ejemplo «${esc(words[0])}».</div>`;
+    return;
+  }
+  res.innerHTML=`<div class="hp-sec">${plural(out.length,'resultado','resultados')}</div>`+out.slice(0,80).map(o=>{
+    if(o.type==='place')return `<button class="sr-item" onclick="goFound('${o.rid}','')"><div class="sr-name">${roomIconHtml(DATA[o.rid])} ${esc(DATA[o.rid].name)} <small>(sitio)</small></div><div class="hp-path">${pathSpans(o.rid)}</div></button>`;
+    const ph=thingPhotos(o.t);
+    return `<button class="sr-item" onclick="goFound('${o.rid}','${o.tid}')">
+      <div class="sr-top">${ph.length?`<img class="sr-ph" src="${ph[0].src}" alt="">`:''}<div class="sr-name">${o.t.text?esc(o.t.text):'Foto'}</div></div>
+      <div class="sh-where">Está en:</div><div class="hp-path">${pathSpans(o.rid)}</div></button>`;
+  }).join('');
+}
+function goFound(rid,tid){
+  PL_QUERY='';
+  openPlace(rid);
+  if(tid)setTimeout(()=>{
+    const el=document.getElementById('tk-'+tid);if(!el)return;
+    el.scrollIntoView({block:'center',behavior:'smooth'});
+    el.classList.add('found-flash');
+  },60);
+}
+
+// ── LISTA DE CASAS ──
+function renderHousesList(){
+  const grid=document.getElementById('houses-grid');if(!grid)return;
+  if(!Array.isArray(HOUSES))HOUSES=[];
+  let html=HOUSES.map(h=>{
+    const pal=PALETTES[h.color||'verde']||PALETTES.verde;
+    const photo=getPhoto('house_'+h.id);
+    const rooms=Object.values(DATA).filter(r=>r.houseId===h.id);
+    const things=rooms.reduce((n,r)=>n+Object.keys(r.tasks||{}).length,0);
+    return `<div class="hl-card" style="--hc-bg:${pal.shades[1]};--hc-soft:${pal.shades[0]};--hc-ink:${pal.text}" onclick="showHouseScreen('${h.id}')">
+      <div class="hl-pic">${photo?`<img src="${photo}" alt="">`:houseIconHtml(h)}</div>
+      <div class="hl-txt"><div class="hl-name">${esc(h.name)}</div><div class="hl-meta">${plural(rooms.length,'sitio','sitios')} · ${plural(things,'cosa','cosas')}</div></div>
+      <button class="hp-more" onclick="event.stopPropagation();openHouseMenu('${h.id}')" aria-label="Opciones de ${esc(h.name)}">⋯</button>
+    </div>`;
+  }).join('');
+  html+=`<button class="hl-add" onclick="openHouseModal()">＋ Nueva casa</button>`;
+  grid.innerHTML=html;
+}
+function openHouseMenu(id){
+  const h=HOUSES.find(x=>x.id===id);if(!h)return;
+  openSheet(`${houseIconHtml(h)} ${esc(h.name)}`,`
+    <button class="sh-opt" onclick="closeSheet();openHouseModal('${id}')">✏️ Nombre, color e icono</button>
+    <button class="sh-opt" onclick="closeSheet();triggerPhoto('house_${id}')">📷 ${getPhoto('house_'+id)?'Cambiar':'Poner'} foto de la casa</button>
+    ${getPhoto('house_'+id)?`<button class="sh-opt" onclick="closeSheet();removePhoto('house_${id}')">🚫 Quitar foto</button>`:''}
+    <button class="sh-opt danger" onclick="closeSheet();delHouse('${id}')">🗑️ Borrar casa</button>
+    <button class="sh-btn" onclick="closeSheet()">Cancelar</button>`);
+}
+function refreshAfterPhoto(){
+  if(CURRENT_HOUSE)renderHouseMain();
+  else if(document.getElementById('s-houses-list')?.classList.contains('active'))renderHousesList();
+  else renderHomeGrid();
+}
 function roomPhotoListKey(rid){return 'ph_list_'+rid;}
 function getRoomPhotos(rid){try{return JSON.parse(lsGet(roomPhotoListKey(rid))||'[]');}catch(e){return[];}}
 function setRoomPhotos(rid,ids){lsSet(roomPhotoListKey(rid),JSON.stringify(ids));lsSet('h_updated',String(Date.now()));scheduleCloudSave();updateStorageInfo();}
@@ -2867,6 +3221,7 @@ function tRow(id,t,rId,color,idx){
       onpaste="pasteTaskPhoto(event,'${rId}','${id}')"
       onkeydown="if(event.key==='Enter'){event.preventDefault();this.blur()}">${esc(t.text)}</div>
     <button class="task-photo-btn" onclick="event.stopPropagation();chooseTaskPhotos('${rId}','${id}')" title="Insertar una o varias fotos">📷</button>
+    <button class="tmove" onclick="event.stopPropagation();openMoveItem('${rId}','${id}')" title="Mover a otra ubicación">⇄</button>
     <button class="tdel" onclick="event.stopPropagation();delTask('${rId}','${id}')">✕</button>
   </div>`;
 }
@@ -4342,8 +4697,8 @@ function openRoomModal(lvl,editId=null){
   MODAL_LVL_VAL=lvl;ROOM_EDIT_ID=editId;EMOJI_MANUAL=!!editId;
   const room=editId?DATA[editId]:null;
   SEL_EMO=room?.emoji||'🏷️';ROOM_ICON_IMAGE=room?.iconImage||null;
-  const type=lvl===0?'zona':'subzona';
-  document.getElementById('rmod-title').textContent=room?`Editar ${type}`:`Nueva ${type}`;
+  document.getElementById('rmod-title').textContent=room?'Editar sitio':'Nuevo sitio';
+  document.getElementById('rminp').placeholder=lvl===0?'Ej.: Cocina, Habitación, Trastero…':'Ej.: Armario, Cajón de arriba, Caja azul…';
   document.getElementById('room-save-btn').textContent=room?'Guardar cambios':'Crear ✨';
   document.getElementById('rminp').value=room?.name||'';
   document.getElementById('esearch').value='';
@@ -4383,11 +4738,7 @@ async function saveRoom(){
   document.getElementById('rmov').classList.remove('open');
   const emoji=SEL_EMO==='🏷️'&&!ROOM_ICON_IMAGE?ALL_EMOJIS[0].e:SEL_EMO;
   if(ROOM_EDIT_ID)await updateRoom(ROOM_EDIT_ID,name,emoji,ROOM_ICON_IMAGE);
-  else await addRoom(name,emoji,MODAL_LVL_VAL);
-  if(!ROOM_EDIT_ID&&ROOM_ICON_IMAGE){
-    const id=SEL_LEVELS[MODAL_LVL_VAL];
-    if(DATA[id]){DATA[id].iconImage=ROOM_ICON_IMAGE;if(db){const{tasks,...rd}=DATA[id];await db.collection('rooms').doc(id).set(rd);}saveLoc();renderHouseMain();}
-  }
+  else await addRoom(name,emoji,MODAL_LVL_VAL,ROOM_ICON_IMAGE);
   ROOM_EDIT_ID=null;
 }
 
@@ -4520,7 +4871,7 @@ if ('serviceWorker' in navigator) {
   });
 }
 </script>
-<div style="position:fixed; bottom:12px; right:12px; text-align:right; font-size:11px; font-weight:800; color:rgba(80,40,10,0.35); pointer-events:none; z-index:9000;">V12</div>
+<div class="ver-corner">V1</div>
 
 <div id="copyrightModal" class="modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:99999; justify-content:center; align-items:center; opacity:0; transition:opacity 0.2s;">
   <div class="modal-content" style="background:var(--bg, #fdfbf7); padding:30px; border-radius:12px; max-width:600px; width:90%; max-height:85vh; overflow-y:auto; color:var(--text, #5d4037); font-family:inherit; box-shadow:0 10px 30px rgba(0,0,0,0.2); position:relative; transform:translateY(20px); transition:transform 0.2s;">
@@ -4566,7 +4917,7 @@ if ('serviceWorker' in navigator) {
   </div>
 </div>
 
-<div style="text-align:center; padding: 20px 10px; font-size:12px; opacity:0.6; cursor:pointer; color:inherit; font-family:inherit; clear:both; margin-top:auto;" onclick="openCopyright(event)">
+<div class="app-footer" onclick="openCopyright(event)">
   © 2025–Present Elisabeth Altarriba
 </div>
 
