@@ -961,6 +961,30 @@ html,body{background:var(--app-bg)}
 .calculator-shell.tool-open .calc-tool-panel{margin-top:8px;padding:9px}
 .calculator-shell.tool-open .calc-key{font-size:24px}
 .calculator-shell.tool-open .calculator-grid{gap:7px;padding-top:8px}
+
+/* V6 · temas por casa y color de la versión */
+:root{--ver-bg:#e1daf5}
+.ver-badge{background:var(--ver-bg)!important;color:color-mix(in srgb,var(--ver-bg),#000 58%)!important}
+.app-footer .ft-ver{background:var(--ver-bg)!important;color:color-mix(in srgb,var(--ver-bg),#000 58%)!important}
+.st-chip-multi{display:flex!important;align-items:center;width:auto!important;border:none!important;background:transparent!important}
+.st-chip-multi i{width:24px;height:24px;border-radius:50%;border:2px solid #fff;margin-right:-8px;box-shadow:0 1px 3px rgba(0,0,0,.15);display:block}
+.st-theme.on{outline:3px solid var(--ink);outline-offset:-3px}
+.ed-pcol{display:flex;flex-direction:column;gap:8px;min-width:0}
+.ed-pbtns{display:flex;gap:6px}
+.ed-pbtns span{font-size:12px;font-weight:900;padding:5px 10px;border-radius:10px;color:rgba(0,0,0,.55)}
+
+/* V7 · vista anual: año junto a cada mes y salto a la fecha actual */
+.mini-title .mini-year{font-weight:800;opacity:.55;margin-left:4px}
+.mini-month{scroll-margin-top:8px}
+.mini-month.mini-now .mini-title{color:color-mix(in srgb,var(--agenda),#000 50%)}
+@keyframes todayFlash{0%,60%{box-shadow:0 0 0 4px color-mix(in srgb,var(--agenda),#000 30%)}100%{box-shadow:none}}
+.cal-day.today-flash{animation:todayFlash 2.2s ease}
+
+/* V7 · en modo año, la cabecera (Año 2026 ‹ ›) y los botones de abajo se quedan fijos; solo se desplazan los meses */
+#home-calendar-container:has(.year-grid){overflow:hidden}
+.cal-card:has(.year-grid){overflow:hidden}
+.cal-card .year-grid{flex:1 1 auto;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;padding-right:2px;align-content:start}
+.cal-card:has(.year-grid) .cal-head,.cal-card:has(.year-grid) .cal-footer{flex-shrink:0}
 </style>
   <link rel="manifest" href="manifest.json">
 </head>
@@ -993,7 +1017,7 @@ html,body{background:var(--app-bg)}
             onblur="saveAppTitle(this.textContent.trim())"
             onkeydown="if(event.key==='Enter'){event.preventDefault();this.blur()}"
             title="Toca para editar el título">Home</div>
-          <span class="ver-badge">V5</span>
+          <span class="ver-badge">V7</span>
         </div>
         <button class="brand-flip" style="perspective:none; grid-column: 3; align-self: center;" type="button" onclick="openCalc()" title="Calculadora">
           <span class="brand-flip-inner" style="transition: transform 0.1s;">
@@ -2374,7 +2398,8 @@ function renderCalendar(){
     body=`<div class="year-grid">`;
     for(let mm=0;mm<12;mm++){
       const count=monthCalendarPhotos(yy,mm).length;
-      body+=`<div class="mini-month"><div class="mini-title">${calMonthOnly(yy,mm)}</div>${renderMonthGrid(yy,mm,true)}<div class="cal-photo-count" title="Fotos de este mes">📷 ${count}</div></div>`;
+      const isNow=yy===new Date().getFullYear()&&mm===new Date().getMonth();
+      body+=`<div class="mini-month ${isNow?'mini-now':''}" id="mini-month-${mm}"><div class="mini-title">${calMonthOnly(yy,mm)} <span class="mini-year">${yy}</span></div>${renderMonthGrid(yy,mm,true)}<div class="cal-photo-count" title="Fotos de este mes">📷 ${count}</div></div>`;
     }
     body+=`</div>`;
     return `<div class="cal-card">
@@ -2398,7 +2423,7 @@ function renderCalendar(){
       <button class="cal-title cal-title-btn" onclick="exportMonthPhotosPDF(${y},${m},this)" title="Crear PDF con las fotos del mes">${calMonthName(y,m)}</button>
       <button class="cal-btn" onclick="changeCalMonth(1)">›</button>
       <button class="cal-btn" onclick="toggleCalendarFullscreen()" title="Pantalla completa">⛶</button>
-      <button class="cal-btn" onclick="CAL_MODE='year';renderHomeGrid()">Año</button>
+      <button class="cal-btn" onclick="CAL_MODE='year';renderHomeGrid();scrollYearToMonth(CAL_DATE.getMonth())">Año</button>
     </div>
     ${body}
     <div class="cal-footer">
@@ -2422,6 +2447,17 @@ function changeCalYear(delta){
 function goToToday(){
   CAL_DATE=new Date();
   renderHomeGrid();
+  if(CAL_MODE==='year')scrollYearToMonth(new Date().getMonth());
+}
+function scrollYearToMonth(m){
+  setTimeout(()=>{
+    const el=document.getElementById('mini-month-'+m);if(!el)return;
+    let sc=el.parentElement;
+    while(sc&&sc!==document.body){const oy=getComputedStyle(sc).overflowY;if((oy==='auto'||oy==='scroll')&&sc.scrollHeight>sc.clientHeight+2)break;sc=sc.parentElement;}
+    if(sc&&sc!==document.body){sc.scrollTo({top:el.getBoundingClientRect().top-sc.getBoundingClientRect().top+sc.scrollTop-6,behavior:'smooth'});}
+    const t=el.querySelector('.cal-day.today');
+    if(t){t.classList.add('today-flash');setTimeout(()=>t.classList.remove('today-flash'),2200);}
+  },60);
 }
 function changeCalMonth(delta){
   CAL_DATE=new Date(CAL_DATE.getFullYear(),CAL_DATE.getMonth()+delta,1);
@@ -3004,6 +3040,8 @@ const UI_GROUPS=[
   {name:'Marrones',c:[['#f7efe6','Crema'],['#f2e6d8','Lino'],['#ead9c6','Arena'],['#e2cbb3','Galleta'],['#d9bfa3','Café con leche'],['#cfb193','Avellana'],['#c4a07f','Caramelo'],['#b08a6a','Canela'],['#9c7656','Nuez'],['#8a6448','Tostado']]},
   {name:'Amarillos',c:[['#fdf8e4','Vainilla'],['#fbf1c8','Mantequilla'],['#f9e8a8','Limón suave'],['#f5dc8c','Miel clara'],['#eecb6b','Miel'],['#e3b84e','Mostaza']]},
   {name:'Naranjas',c:[['#fdeee2','Melocotón claro'],['#fbdcc4','Melocotón'],['#f8c9a6','Albaricoque'],['#f4b48a','Mandarina'],['#eb9d6c','Naranja suave'],['#d9814f','Teja']]},
+  {name:'Verdes',c:[['#eef5e6','Verde niebla'],['#dcebd0','Pistacho claro'],['#cfe9dc','Menta'],['#c9dfc0','Salvia'],['#b5d3b0','Verde hoja'],['#9cc0a0','Eucalipto']]},
+  {name:'Azules',c:[['#eaf3fa','Azul niebla'],['#d3e6f5','Cielo'],['#c4dcef','Azul bebé'],['#b7d3e3','Azul agua'],['#a9c6e0','Azul lavanda'],['#8fb3d1','Azul vaquero']]},
   {name:'Tonos del logo',c:[['#fcf3cf','Fondo logo claro'],['#fbeeb8','Fondo logo'],['#e8c9a3','Sillón claro'],['#c4935f','Sillón'],['#c9c99e','Oliva claro'],['#8a8a50','Oliva']]},
   {name:'Pastel',c:[['#e1daf5','Lavanda'],['#f6d3de','Rosa'],['#cdebdc','Menta'],['#d3e6f5','Cielo'],['#d9efc4','Pistacho'],['#f5d6f0','Malva'],['#e8e6ea','Perla'],['#fbf7f3','Blanco roto'],['#ffffff','Blanco']]},
 ];
@@ -3011,11 +3049,11 @@ const UI_INK_GROUPS=[
   {name:'Marrones',c:[['#3b2f2a','Chocolate'],['#4a3426','Café'],['#5a3e2b','Nogal'],['#6b4a33','Cuero'],['#7a5230','Canela oscura'],['#8a4f2a','Terracota']]},
   {name:'Otros',c:[['#4f5130','Oliva oscuro'],['#4a3f57','Ciruela'],['#2f3a4a','Azul noche'],['#2f4a3d','Verde bosque'],['#6b2f45','Burdeos'],['#333333','Grafito'],['#6f5cb5','Violeta'],['#b0577a','Frambuesa']]},
 ];
-const UI_DEFAULTS={bg:'#fbf7f3',agenda:'#e1daf5',casas:'#cdebdc',gear:'#ffffff',ink:'#4a3f57',title:'grad',btnSitio:'#e1daf5',btnCosa:'#cdebdc',btnMain:'#cdebdc',btnOther:'#efe9f7'};
+const UI_DEFAULTS={ver:'#e1daf5',bg:'#fbf7f3',agenda:'#e1daf5',casas:'#cdebdc',gear:'#ffffff',ink:'#4a3f57',title:'grad',btnSitio:'#e1daf5',btnCosa:'#cdebdc',btnMain:'#cdebdc',btnOther:'#efe9f7'};
 const UI_THEMES=[
-  {name:'Tonos del logo',sw:['#fcf3cf','#c4935f','#8a8a50'],v:{bg:'#fcf3cf',agenda:'#e8c9a3',casas:'#c9c99e',gear:'#fbeeb8',ink:'#5a3e2b',title:'#c4935f',btnSitio:'#e8c9a3',btnCosa:'#c9c99e',btnMain:'#c9c99e',btnOther:'#f6e3a3'}},
-  {name:'Marrón pastel',sw:['#f2e6d8','#d9bfa3','#9c7656'],v:{bg:'#f2e6d8',agenda:'#d9bfa3',casas:'#cfb193',gear:'#ead9c6',ink:'#4a3426',title:'#7a5230',btnSitio:'#e2cbb3',btnCosa:'#d9bfa3',btnMain:'#cfb193',btnOther:'#ead9c6'}},
-  {name:'Miel y naranja',sw:['#fdf8e4','#f5dc8c','#f4b48a'],v:{bg:'#fdf8e4',agenda:'#f5dc8c',casas:'#f8c9a6',gear:'#fbf1c8',ink:'#5a3e2b',title:'#d9814f',btnSitio:'#f9e8a8',btnCosa:'#fbdcc4',btnMain:'#f8c9a6',btnOther:'#fbf1c8'}},
+  {name:'Tonos del logo',sw:['#fcf3cf','#c4935f','#8a8a50'],v:{ver:'#c9c99e',bg:'#fcf3cf',agenda:'#e8c9a3',casas:'#c9c99e',gear:'#fbeeb8',ink:'#5a3e2b',title:'#c4935f',btnSitio:'#e8c9a3',btnCosa:'#c9c99e',btnMain:'#c9c99e',btnOther:'#f6e3a3'}},
+  {name:'Marrón pastel',sw:['#f2e6d8','#d9bfa3','#9c7656'],v:{ver:'#d9bfa3',bg:'#f2e6d8',agenda:'#d9bfa3',casas:'#cfb193',gear:'#ead9c6',ink:'#4a3426',title:'#7a5230',btnSitio:'#e2cbb3',btnCosa:'#d9bfa3',btnMain:'#cfb193',btnOther:'#ead9c6'}},
+  {name:'Miel y naranja',sw:['#fdf8e4','#f5dc8c','#f4b48a'],v:{ver:'#f5dc8c',bg:'#fdf8e4',agenda:'#f5dc8c',casas:'#f8c9a6',gear:'#fbf1c8',ink:'#5a3e2b',title:'#d9814f',btnSitio:'#f9e8a8',btnCosa:'#fbdcc4',btnMain:'#f8c9a6',btnOther:'#fbf1c8'}},
   {name:'Lavanda (original)',sw:['#fbf7f3','#e1daf5','#cdebdc'],v:{...UI_DEFAULTS}},
 ];
 const UI_ROWS=[
@@ -3029,6 +3067,7 @@ const UI_ROWS=[
   {key:'btnCosa',label:'Botón «＋ Cosa»'},
   {key:'btnMain',label:'Botones Guardar / Añadir'},
   {key:'btnOther',label:'Otros botones (volver, deshacer…)'},
+  {key:'ver',label:'Cuadro de la versión'},
 ];
 let UI={...UI_DEFAULTS};
 function loadUiSettings(){
@@ -3046,6 +3085,7 @@ function applyUiSettings(){
   r.setProperty('--btn-cosa',UI.btnCosa);
   r.setProperty('--btn-main',UI.btnMain);
   r.setProperty('--btn-other',UI.btnOther);
+  r.setProperty('--ver-bg',UI.ver||'#e1daf5');
   r.setProperty('--title-fill',UI.title==='grad'?'linear-gradient(135deg,#b0577a,#6f5cb5)':`linear-gradient(${UI.title},${UI.title})`);
   if(!CURRENT_HOUSE)document.body.style.background=UI.bg;
   document.querySelectorAll('meta[name="theme-color"]').forEach(m=>m.setAttribute('content',CURRENT_HOUSE?housePal(CURRENT_HOUSE).bg:UI.bg));
@@ -3113,6 +3153,43 @@ function makePalette(hex,name){
 // Colores de casa: los mismos grupos que los ajustes + los intensos de antes
 const HOUSE_COLOR_GROUPS=UI_GROUPS.map(g=>({name:g.name,c:g.c.filter(([h])=>h!=='#ffffff').map(([h,n])=>{const k='c_'+h.slice(1);if(!PALETTES[k])PALETTES[k]=makePalette(h,n);return [k,h,n];})}));
 HOUSE_COLOR_GROUPS.push({name:'Intensos',c:PAL_KEYS.map(k=>[k,PALETTES[k].ac,String(PALETTES[k].name||k).replace(/\s*\S+$/u,m=>/\p{Extended_Pictographic}/u.test(m)?'':m)])});
+
+const HOUSE_THEMES=[
+  {name:'Marrones',color:'c_d9bfa3',sitio:'#e2cbb3',cosa:'#cfb193'},
+  {name:'Anaranjados',color:'c_f8c9a6',sitio:'#fbdcc4',cosa:'#f4b48a'},
+  {name:'Amarillos',color:'c_f5dc8c',sitio:'#f9e8a8',cosa:'#eecb6b'},
+  {name:'Verdes',color:'c_c9dfc0',sitio:'#dcebd0',cosa:'#b5d3b0'},
+  {name:'Azules',color:'c_c4dcef',sitio:'#d3e6f5',cosa:'#a9c6e0'},
+  {name:'Tonos del logo',color:'c_fbeeb8',sitio:'#e8c9a3',cosa:'#c9c99e'},
+  {name:'Rosas',color:'c_f6d3de',sitio:'#f5d6f0',cosa:'#f6d3de'},
+  {name:'Lilas',color:'c_e1daf5',sitio:'#e1daf5',cosa:'#d3e6f5'},
+];
+function houseThemeName(){
+  const t=HOUSE_THEMES.find(t=>t.color===ED.color&&t.sitio===ED.btnSitio&&t.cosa===ED.btnCosa);
+  return t?t.name:'A tu gusto';
+}
+function openHouseThemePicker(){
+  const cards=HOUSE_THEMES.map((t,i)=>{
+    const pal=PALETTES[t.color]||PALETTES.verde;
+    const on=t.color===ED.color&&t.sitio===ED.btnSitio&&t.cosa===ED.btnCosa;
+    return `<button class="st-theme ${on?'on':''}" onclick="pickHouseTheme(${i})"><span class="st-theme-sw"><i style="background:${pal.bg}"></i><i style="background:${t.sitio}"></i><i style="background:${t.cosa}"></i></span>${t.name}</button>`;
+  }).join('');
+  openSheet('Tema rápido de la casa',`<div class="sh-hint">Cambia de golpe el fondo de la casa y sus botones. Luego puedes retocar cada color.</div><div class="st-themes">${cards}</div><button class="sh-btn" onclick="renderEditor(false)">‹ Volver</button>`);
+}
+function pickHouseTheme(i){const t=HOUSE_THEMES[i];if(!t)return;ED.color=t.color;ED.btnSitio=t.sitio;ED.btnCosa=t.cosa;renderEditor(false);}
+// Botones de la casa (＋ Sitio / ＋ Cosa)
+function openHouseButtons(){
+  const line=(key,label)=>{const v=ED[key];return `<button class="st-line" onclick="openHouseBtnColor('${key}')"><i class="st-chip" style="background:${v||(key==='btnSitio'?UI.btnSitio:UI.btnCosa)}"></i><span class="st-line-txt"><b>${label}</b><small>${v?colorName(v):'Como en Ajustes'}</small></span><span class="st-chev">›</span></button>`;};
+  openSheet('Botones de la casa',`<div class="st-lines">${line('btnSitio','Botón «＋ Sitio»')}${line('btnCosa','Botón «＋ Cosa»')}</div><button class="sh-btn" onclick="renderEditor(false)">‹ Volver</button>`);
+}
+function openHouseBtnColor(key,tab){
+  const groups=UI_GROUPS;const cur=ED[key]||'';
+  if(!tab){const g=groups.find(g=>g.c.some(([h])=>h===cur));tab=g?g.name:groups[0].name;}
+  const g=groups.find(x=>x.name===tab)||groups[0];
+  const chips=groups.map(x=>`<button class="tab-chip ${x.name===tab?'on':''}" onclick="openHouseBtnColor('${key}','${x.name}')">${x.name}</button>`).join('');
+  const sw=`<button class="col-opt ${!cur?'sel':''}" onclick="ED['${key}']=null;openHouseButtons()"><i style="background:${key==='btnSitio'?UI.btnSitio:UI.btnCosa}"></i><span>Como en Ajustes</span></button>`+g.c.map(([h,n])=>`<button class="col-opt ${cur===h?'sel':''}" onclick="ED['${key}']='${h}';openHouseButtons()"><i style="background:${h}"></i><span>${n}</span></button>`).join('');
+  openSheet(key==='btnSitio'?'Botón «＋ Sitio»':'Botón «＋ Cosa»',`<div class="tab-row">${chips}</div><div class="col-grid">${sw}</div><button class="sh-btn" onclick="openHouseButtons()">‹ Volver</button>`);
+}
 function houseColorHex(k){for(const g of HOUSE_COLOR_GROUPS)for(const [key,h] of g.c)if(key===k)return h;return (PALETTES[k]||PALETTES.verde).ac;}
 function houseColorName(k){for(const g of HOUSE_COLOR_GROUPS)for(const [key,,n] of g.c)if(key===k)return n;return 'Color';}
 
@@ -3137,7 +3214,8 @@ function attrEsc(v){return esc(v).replace(/"/g,'&quot;');}
 function edIconHtml(){return ED.image?`<img src="${ED.image}" alt="">`:esc(ED.emoji||'📦');}
 function openHouseModal(eid){
   const h=eid?HOUSES.find(x=>x.id===eid):null;
-  ED={kind:'house',id:eid||null,name:h?.name||'',emoji:h?.emoji||'🏠',image:h?.iconImage||null,color:h?.color||'c_f2e6d8',manual:!!h};
+  ED={kind:'house',id:eid||null,name:h?.name||'',emoji:h?.emoji||'🏠',image:h?.iconImage||null,color:h?.color||'c_d9bfa3',btnSitio:h?.btnSitio||null,btnCosa:h?.btnCosa||null,manual:!!h};
+  if(!h){ED.btnSitio='#e2cbb3';ED.btnCosa='#cfb193';}
   if(!h){const casa=HOUSE_SVG_ICONS[0];ED.image=casa.src;}
   renderEditor(true);
 }
@@ -3155,11 +3233,14 @@ function renderEditor(focus){
   openSheet(title,`
     <div class="ed-preview" style="${isH?`background:${pal.shades[1]}`:''}">
       <div class="ed-tile" style="${isH?`background:${pal.shades[0]}`:''}">${edIconHtml()}</div>
-      <div class="ed-pname" id="ed-pname" style="${isH?`color:${pal.text}`:''}">${ED.name?esc(ED.name):'<span>Sin nombre</span>'}</div>
+      <div class="ed-pcol"><div class="ed-pname" id="ed-pname" style="${isH?`color:${pal.text}`:''}">${ED.name?esc(ED.name):'<span>Sin nombre</span>'}</div>
+      ${isH?`<div class="ed-pbtns"><span style="background:${ED.btnSitio||UI.btnSitio}">＋ Sitio</span><span style="background:${ED.btnCosa||UI.btnCosa}">＋ Cosa</span></div>`:''}</div>
     </div>
     <input class="sh-input" id="ed-name" value="${attrEsc(ED.name)}" placeholder="${ph}" oninput="edName(this.value)" enterkeyhint="done" autocomplete="off" onkeydown="if(event.key==='Enter')saveEditor()">
     <button class="st-line" onclick="openIconPicker()"><i class="st-chip ed-chip">${edIconHtml()}</i><span class="st-line-txt"><b>Icono</b><small id="ed-icon-hint">${ED.manual?'Elegido por ti · toca para cambiar':'Se pone solo según el nombre · toca para elegir'}</small></span><span class="st-chev">›</span></button>
-    ${isH?`<button class="st-line" onclick="openHouseColorPicker()"><i class="st-chip" style="background:${houseColorHex(ED.color)}"></i><span class="st-line-txt"><b>Color</b><small>${esc(houseColorName(ED.color))}</small></span><span class="st-chev">›</span></button>`:''}
+    ${isH?`<button class="st-line" onclick="openHouseThemePicker()"><span class="st-chip st-chip-multi"><i style="background:${pal.bg}"></i><i style="background:${ED.btnSitio||UI.btnSitio}"></i><i style="background:${ED.btnCosa||UI.btnCosa}"></i></span><span class="st-line-txt"><b>Tema rápido</b><small>${houseThemeName()}</small></span><span class="st-chev">›</span></button>
+    <button class="st-line" onclick="openHouseColorPicker()"><i class="st-chip" style="background:${houseColorHex(ED.color)}"></i><span class="st-line-txt"><b>Color de la casa</b><small>${esc(houseColorName(ED.color))}</small></span><span class="st-chev">›</span></button>
+    <button class="st-line" onclick="openHouseButtons()"><span class="st-chip st-chip-multi"><i style="background:${ED.btnSitio||UI.btnSitio}"></i><i style="background:${ED.btnCosa||UI.btnCosa}"></i></span><span class="st-line-txt"><b>Botones</b><small>＋ Sitio y ＋ Cosa</small></span><span class="st-chev">›</span></button>`:''}
     <div class="sh-row"><button class="sh-btn" onclick="ED=null;closeSheet()">Cancelar</button><button class="sh-btn main" onclick="saveEditor()">${ED.id?'Guardar':'Crear'}</button></div>`);
   if(focus&&!ED.id)setTimeout(()=>document.getElementById('ed-name')?.focus(),150);
 }
@@ -3260,10 +3341,11 @@ async function saveEditor(){
     snap();
     if(e.id){
       const h=HOUSES.find(x=>x.id===e.id);
-      if(h){h.name=name.toUpperCase();h.emoji=e.emoji||'🏠';h.color=e.color;if(e.image)h.iconImage=e.image;else delete h.iconImage;}
+      if(h){h.name=name.toUpperCase();h.emoji=e.emoji||'🏠';h.color=e.color;if(e.image)h.iconImage=e.image;else delete h.iconImage;
+        if(e.btnSitio)h.btnSitio=e.btnSitio;else delete h.btnSitio;if(e.btnCosa)h.btnCosa=e.btnCosa;else delete h.btnCosa;}
     }else{
       if(HOUSES.length>=10){alert('Máximo 10 casas.');return;}
-      const h={id:gid(),name:name.toUpperCase(),emoji:e.emoji||'🏠',color:e.color};if(e.image)h.iconImage=e.image;HOUSES.push(h);
+      const h={id:gid(),name:name.toUpperCase(),emoji:e.emoji||'🏠',color:e.color};if(e.image)h.iconImage=e.image;if(e.btnSitio)h.btnSitio=e.btnSitio;if(e.btnCosa)h.btnCosa=e.btnCosa;HOUSES.push(h);
     }
     saveLoc();
     if(CURRENT_HOUSE){
@@ -3375,7 +3457,9 @@ function renderHouseMain(){
   const pal=housePal(hid);
   const house=HOUSES.find(h=>h.id===hid);
   document.body.style.background=pal.bg;
-  document.getElementById('s-house').style.background=pal.bg;
+  const sh=document.getElementById('s-house');sh.style.background=pal.bg;
+  if(house?.btnSitio)sh.style.setProperty('--btn-sitio',house.btnSitio);else sh.style.removeProperty('--btn-sitio');
+  if(house?.btnCosa)sh.style.setProperty('--btn-cosa',house.btnCosa);else sh.style.removeProperty('--btn-cosa');
   const last=SEL_LEVELS[SEL_LEVELS.length-1];
   SEL_LEVELS=(last&&DATA[last]&&DATA[last].houseId===hid)?roomPathIds(last):[];
   const depth=SEL_LEVELS.length;
@@ -5442,7 +5526,7 @@ if ('serviceWorker' in navigator) {
 </div>
 
 <div class="app-footer" onclick="openCopyright(event)">
-  <span class="ft-copy">© 2025–Present Elisabeth Altarriba</span><span class="ft-ver">V5</span>
+  <span class="ft-copy">© 2025–Present Elisabeth Altarriba</span><span class="ft-ver">V7</span>
 </div>
 
 <script>

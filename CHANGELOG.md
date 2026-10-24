@@ -8,6 +8,23 @@ Este archivo mantiene un registro de todas las modificaciones y tareas pendiente
 
 ## Cambios Realizados
 
+- **(2026-10-24) [V7] Agenda en modo año más clara:**
+  - Cada mes muestra su año al lado («Enero 2026»), así se sabe a qué año pertenece aunque bajes mucho. El mes actual sale resaltado.
+  - En modo año, la cabecera («‹ Año 2026 › ⛶ Mes») y los botones de abajo («Fecha actual», ↶ ↷, «🔎 Colores») se quedan fijos. Solo se desplazan los meses.
+  - **«Fecha actual» en modo año** te lleva directamente al mes actual (aunque estés al final del año o en otro año), lo deja visible y el día de hoy parpadea un momento.
+  - Al pasar de mes a año con el botón «Año», se abre directamente en el mes que estabas mirando.
+  - Versión **V7**. `sw.js`: caché `home-cache-v7-2026-10-24`.
+
+- **(2026-10-24) [V6] Temas rápidos para cada casa y color de la versión:**
+  - **Cada casa tiene su tema rápido** (en ✏️ dentro de la casa o en ⋯ → «Nombre, color e icono»): Marrones, Anaranjados, Amarillos, Verdes, Azules, Tonos del logo, Rosas y Lilas. Un toque cambia el fondo de la casa y sus botones «＋ Sitio» y «＋ Cosa».
+  - **Y por colores, si quieres:** «Color de la casa» y «Botones» (＋ Sitio y ＋ Cosa) se pueden retocar uno a uno. Al retocar, el tema pasa a «A tu gusto». Cada botón tiene la opción «Como en Ajustes» para usar el color general.
+  - La vista previa del editor muestra los dos botones con sus colores.
+  - Cada casa puede tener colores distintos; las casas sin botones propios usan los de Ajustes.
+  - **Nuevos grupos de color:** Verdes (de verde niebla a eucalipto) y Azules (de azul niebla a vaquero), también en Ajustes.
+  - **Cuadro de la versión:** nueva opción en Ajustes para cambiar su color (el del lado de «Home» y el del pie). La letra se adapta sola. Los temas rápidos generales también lo cambian.
+  - Las casas nuevas empiezan con el tema Marrones.
+  - Probado todo de nuevo, sin errores. Versión **V6**. `sw.js`: caché `home-cache-v6-2026-10-24`.
+
 - **(2026-10-24) [V5] Calculadora: todo cabe en pantalla:**
   - Al pulsar «- % Descuento», «+ % Aumento» o «Precio sin IVA», el panel empujaba el teclado hacia abajo y la última fila (0 , ⌫ =) quedaba fuera de la pantalla.
   - Ahora el teclado ocupa siempre el espacio que queda y se encoge un poco cuando el panel está abierto. La pantalla del número y los botones de arriba también se compactan. Todo queda visible sin hacer scroll.
