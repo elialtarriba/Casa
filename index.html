@@ -1014,6 +1014,50 @@ html,body{background:var(--app-bg)}
 .dv-photos img{width:64px;height:64px;border-radius:10px;object-fit:cover}
 .dv-empty{margin:auto;padding:20px;text-align:center;font-size:15px;font-weight:700;color:var(--ink);opacity:.5}
 .dv-edit{flex-shrink:0;height:48px;border:none;border-radius:14px;background:var(--agenda);color:color-mix(in srgb,var(--agenda),#000 62%);font:inherit;font-size:16px;font-weight:900;cursor:pointer}
+
+/* V9 · ventana del día y notas */
+@keyframes popIn2{from{transform:scale(.94) translateY(8px);opacity:0}to{transform:none;opacity:1}}
+.pop-ov{position:fixed;inset:0;z-index:390;background:rgba(60,45,40,.28);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;padding:20px}
+.pop{width:100%;max-width:380px;max-height:88dvh;overflow-y:auto;display:flex;flex-direction:column;gap:10px;padding:18px 16px 16px;border-radius:28px;background:color-mix(in srgb,var(--app-bg),#fff 55%);box-shadow:0 20px 50px rgba(60,40,30,.25),0 0 0 1px rgba(255,255,255,.6) inset;animation:popIn2 .22s ease}
+.pop>*{flex-shrink:0}
+.pop-date{align-self:flex-start;padding:5px 12px;border-radius:12px;background:var(--agenda);color:color-mix(in srgb,var(--agenda),#000 62%);font-size:13px;font-weight:900}
+.pop-h{font-size:21px;font-weight:950;color:var(--ink);margin:2px 2px 4px}
+.pop-opt{display:flex;align-items:center;gap:12px;min-height:64px;padding:10px 14px;border:none;border-radius:20px;background:#fff;font:inherit;text-align:left;cursor:pointer;box-shadow:0 2px 10px rgba(60,40,30,.07)}
+.pop-opt:active{transform:scale(.98)}
+.pop-ic{width:42px;height:42px;border-radius:14px;background:color-mix(in srgb,var(--agenda),#fff 30%);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:900;color:color-mix(in srgb,var(--agenda),#000 60%);flex-shrink:0}
+.pop-tx{display:flex;flex-direction:column;gap:2px}
+.pop-tx b{font-size:16px;font-weight:900;color:var(--ink)}
+.pop-tx small{font-size:12.5px;font-weight:700;color:var(--ink);opacity:.55}
+.pop-sec{font-size:13px;font-weight:900;color:var(--ink);opacity:.6;margin:6px 4px 0}
+.pop-dots{display:flex;flex-wrap:wrap;gap:8px}
+.pop-dot{width:36px;height:36px;border-radius:50%;border:2px solid rgba(60,40,30,.12);cursor:pointer;font-size:13px;font-weight:900;color:rgba(60,40,30,.4);box-shadow:none!important;padding:0}
+.pop-dot.sel{outline:3px solid var(--ink);outline-offset:2px}
+.pop-cancel{height:48px;border:none;border-radius:16px;background:var(--btn-other);color:color-mix(in srgb,var(--btn-other),#000 60%);font:inherit;font-size:16px;font-weight:900;cursor:pointer;margin-top:4px}
+.pop-notes{display:flex;flex-direction:column;gap:6px}
+.pop-note{display:flex;align-items:center;gap:10px;min-height:52px;padding:8px 12px;border:none;border-radius:16px;background:#fff;font:inherit;text-align:left;cursor:pointer}
+.pop-note.done .pop-ntx{text-decoration:line-through;opacity:.5}
+.pop-ndot{width:12px;height:12px;border-radius:4px;flex-shrink:0}
+.pop-ntx{flex:1;min-width:0;font-size:15px;font-weight:800;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pop-ntx small{opacity:.55}
+.pop-chev{font-size:20px;opacity:.4;color:var(--ink)}
+.pop-text{width:100%;min-height:92px;border:2px solid color-mix(in srgb,var(--agenda),#fff 20%);border-radius:18px;padding:12px 14px;font:inherit;font-size:17px;font-weight:700;color:var(--ink);background:#fff;outline:none;resize:vertical}
+.pop-text:focus{border-color:color-mix(in srgb,var(--agenda),#000 25%)}
+.pop-photos{display:flex;gap:8px;overflow-x:auto;padding:2px 0}
+.pop-addph{width:78px;height:78px;flex-shrink:0;border:2px dashed color-mix(in srgb,var(--agenda),#000 15%);border-radius:14px;background:rgba(255,255,255,.6);font:inherit;font-size:22px;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;color:var(--ink);box-shadow:none!important}
+.pop-addph span{font-size:12px;font-weight:800}
+.pop-done{height:44px;border:none;border-radius:14px;background:#fff;font:inherit;font-size:15px;font-weight:850;color:var(--ink);cursor:pointer}
+.pop-done.on{background:#d9f3d8;color:#2f6b45}
+.pop-row{display:flex;gap:8px;margin-top:4px}
+.pop-btn{flex:1;height:52px;border:none;border-radius:16px;font:inherit;font-size:16px;font-weight:900;cursor:pointer;background:var(--btn-other);color:color-mix(in srgb,var(--btn-other),#000 60%)}
+.pop-btn.main{background:var(--btn-main);color:color-mix(in srgb,var(--btn-main),#000 62%)}
+.pop-btn.del{flex:0 0 52px;background:#fdeef1}
+.cal-day.selected{box-shadow:inset 0 0 0 2.5px color-mix(in srgb,var(--agenda),#000 40%)!important}
+.dv-actions{display:flex;gap:8px;flex-shrink:0}
+.dv-actions .dv-edit{flex:1}
+.dv-more{width:52px;height:48px;border:none;border-radius:14px;background:#fff;font-size:22px;font-weight:900;color:var(--ink);cursor:pointer}
+#conf-ov{z-index:400}
+
+.pop-btn.main{padding:0 12px!important;overflow:visible!important;flex:1}
 </style>
   <link rel="manifest" href="manifest.json">
 </head>
@@ -1046,7 +1090,7 @@ html,body{background:var(--app-bg)}
             onblur="saveAppTitle(this.textContent.trim())"
             onkeydown="if(event.key==='Enter'){event.preventDefault();this.blur()}"
             title="Toca para editar el título">Home</div>
-          <span class="ver-badge">V8</span>
+          <span class="ver-badge">V9</span>
         </div>
         <button class="brand-flip" style="perspective:none; grid-column: 3; align-self: center;" type="button" onclick="openCalc()" title="Calculadora">
           <span class="brand-flip-inner" style="transition: transform 0.1s;">
@@ -2382,7 +2426,7 @@ function searchCalendarColor(color){
     return `<button class="cal-search-result" onclick="openCalendarSearchResult('${key}')"><span class="cal-search-result-dot" style="background:${CAL_COLORS[color].dot}"></span><span><span class="cal-search-result-date">${date}</span><span class="cal-search-result-text">${esc(label)}${item.done?' ✓':''}</span></span></button>`;
   }).join('');
 }
-function openCalendarSearchResult(key){closeCalColorSearch();openCalNote(key);}
+function openCalendarSearchResult(key){closeCalColorSearch();openDayChooser(key);}
 function renderMonthGrid(year,month,mini){
   const today=new Date();
   const first=new Date(year,month,1);
@@ -2405,8 +2449,8 @@ function renderMonthGrid(year,month,mini){
     const color=CAL_COLORS[colorKey]||CAL_COLORS.none;
     const hasColor=colorKey!=='none';
     const style=hasColor?`style="--cal-bg:${color.bg};--cal-border:${color.border};"`:'';
-    const click=(!mini||!muted)?`onclick="openCalNote('${key}')"`:'';
-    h+=`<div class="cal-day${weekend?' weekend':''}${muted?' muted':''}${sameDay(date,today)?' today':''}${hasColor?' has-color':''}" data-cal-key="${key}" ${style} ${click}><div>${d}</div>${note?`${renderCalDayItems(key,mini)}<div class="cal-dot" style="background:${color.dot}"></div>`:''}</div>`;
+    const click=(!mini||!muted)?`onclick="openDayChooser('${key}')"`:'';
+    h+=`<div class="cal-day${weekend?' weekend':''}${muted?' muted':''}${sameDay(date,today)?' today':''}${hasColor?' has-color':''}${key===CAL_SELECTED?' selected':''}" data-cal-key="${key}" ${style} ${click}><div>${d}</div>${note?`${renderCalDayItems(key,mini)}<div class="cal-dot" style="background:${color.dot}"></div>`:''}</div>`;
   }
   return h+`</div>`;
 }
@@ -2467,6 +2511,132 @@ function renderCalendar(){
   </div>`;
 }
 
+// ══════════════════════════════════════════════
+// V9 · VARIAS NOTAS POR DÍA
+// Al tocar un día: Añadir nota · Editar una nota · Solo seleccionar el día (+ color del día)
+// Cada nota = una línea de la lista del día (texto, color, fotos, hecha).
+// ══════════════════════════════════════════════
+let CAL_SELECTED=null, NE=null;
+function calKeyDate(key){const [y,m,d]=key.split('-').map(Number);return new Date(y,m-1,d);}
+function calNiceDate(key,withYear){
+  const t=calKeyDate(key).toLocaleDateString('es-ES',withYear?{weekday:'long',day:'numeric',month:'long',year:'numeric'}:{weekday:'long',day:'numeric',month:'long'});
+  return t.charAt(0).toUpperCase()+t.slice(1);
+}
+function openPop(html){
+  closePop();
+  const ov=document.createElement('div');ov.className='pop-ov';ov.id='pop-ov';
+  ov.onclick=e=>{if(e.target===ov)cancelPop();};
+  ov.innerHTML=`<div class="pop" role="dialog">${html}</div>`;
+  document.body.appendChild(ov);
+}
+function closePop(){document.getElementById('pop-ov')?.remove();}
+function cancelPop(){if(NE)cancelNote();else closePop();}
+function writeDayItems(key,items){
+  items=items.map(it=>({...it,type:'text',text:(it.text||'').trim(),photoIds:calItemPhotoIds(it)})).filter(it=>it.text||it.photoIds.length);
+  const activeText=items.filter(it=>!it.done).map(it=>it.text).join('\n');
+  const allText=items.map(it=>(it.done?'✓ ':'')+it.text).join('\n');
+  if(items.length)lsSet(calItemsKey(key),JSON.stringify(items));else lsRemove(calItemsKey(key));
+  if(allText)lsSet('cal_'+key,activeText||allText);else lsRemove('cal_'+key);
+  lsSet('h_updated',String(Date.now()));scheduleCloudSave();updateStorageInfo();
+  saveStateToHistory();renderHomeGrid();
+}
+// ── Ventana del día ──
+let LINE_TAP_AT=0;
+function openDayChooser(key,force){
+  if(!force&&Date.now()-LINE_TAP_AT<600)return;
+  const items=getCalItems(key);
+  const dc=calColorFor(key);
+  const n=items.length;
+  const dots=CAL_COLOR_KEYS.map(k=>`<button class="pop-dot ${k===dc?'sel':''}" style="background:${k==='none'?'#fff':CAL_COLORS[k].bg};${k==='none'?'':`border-color:${CAL_COLORS[k].border}`}" onclick="setDayColor('${key}','${k}')" title="${CAL_COLORS[k].name}" aria-label="${CAL_COLORS[k].name}">${k==='none'?'✕':''}</button>`).join('');
+  openPop(`
+    <div class="pop-date">${calNiceDate(key,true)}</div>
+    <h3 class="pop-h">¿Qué quieres hacer?</h3>
+    <button class="pop-opt" onclick="openNoteEditor('${key}',null)"><span class="pop-ic">＋</span><span class="pop-tx"><b>Añadir una nota</b><small>Escribe algo nuevo para este día</small></span></button>
+    ${n?`<button class="pop-opt" onclick="openNotePicker('${key}')"><span class="pop-ic">✏️</span><span class="pop-tx"><b>Editar una nota</b><small>${n===1?'Hay 1 nota este día':`Hay ${n} notas este día`}</small></span></button>`:''}
+    <button class="pop-opt" onclick="selectDayOnly('${key}')"><span class="pop-ic">📅</span><span class="pop-tx"><b>Solo seleccionar el día</b><small>Marcarlo y verlo, sin escribir nada</small></span></button>
+    <div class="pop-sec">Color del día</div>
+    <div class="pop-dots">${dots}</div>
+    <button class="pop-cancel" onclick="closePop()">Cancelar</button>`);
+}
+function setDayColor(key,k){
+  if(k&&k!=='none')lsSet('cal_color_'+key,k);else lsRemove('cal_color_'+key);
+  lsSet('h_updated',String(Date.now()));scheduleCloudSave();
+  saveStateToHistory();renderHomeGrid();openDayChooser(key);
+}
+function selectDayOnly(key){
+  CAL_SELECTED=key;CAL_DAY=calKeyDate(key);closePop();renderHomeGrid();
+  showToast('Día seleccionado: '+calNiceDate(key,false));
+}
+function openNotePicker(key){
+  const items=getCalItems(key);
+  if(items.length===1)return openNoteEditor(key,items[0].id);
+  const list=items.map(it=>{const c=CAL_COLORS[it.color]||CAL_COLORS.none;const ph=calItemPhotoIds(it).length;
+    return `<button class="pop-note ${it.done?'done':''}" onclick="openNoteEditor('${key}','${it.id}')"><span class="pop-ndot" style="background:${it.color&&it.color!=='none'?c.dot:'color-mix(in srgb,var(--agenda),#000 25%)'}"></span><span class="pop-ntx">${it.text?esc(it.text):'<em>Foto</em>'}${ph?` <small>📷 ${ph}</small>`:''}</span><span class="pop-chev">›</span></button>`;}).join('');
+  openPop(`<div class="pop-date">${calNiceDate(key,true)}</div><h3 class="pop-h">¿Qué nota quieres editar?</h3><div class="pop-notes">${list}</div>
+    <button class="pop-cancel" onclick="openDayChooser('${key}')">‹ Volver</button>`);
+}
+// ── Editor de una nota ──
+function openNoteEditor(key,id){
+  const it=id?getCalItems(key).find(x=>x.id===id):null;
+  NE={key,id:id||null,text:it?.text||'',color:it?.color||'none',done:!!it?.done,photoIds:calItemPhotoIds(it),orig:calItemPhotoIds(it),added:[]};
+  renderNoteEditor(true);
+}
+function renderNoteEditor(focus){
+  if(!NE)return;
+  const ta=document.getElementById('ne-text');if(ta)NE.text=ta.value;
+  const dots=CAL_COLOR_KEYS.map(k=>`<button class="pop-dot ${k===NE.color?'sel':''}" style="background:${k==='none'?'#fff':CAL_COLORS[k].dot}" onclick="NE.color='${k}';renderNoteEditor(false)" title="${CAL_COLORS[k].name}" aria-label="${CAL_COLORS[k].name}">${k==='none'?'✕':''}</button>`).join('');
+  const photos=NE.photoIds.map(pid=>({pid,src:lsGet('ph_cal_'+pid)})).filter(p=>p.src);
+  openPop(`
+    <div class="pop-date">${calNiceDate(NE.key,true)}</div>
+    <h3 class="pop-h">${NE.id?'Editar nota':'Nueva nota'}</h3>
+    <textarea class="pop-text" id="ne-text" rows="3" placeholder="Ej.: Dentista a las 17h">${esc(NE.text)}</textarea>
+    <div class="pop-sec">Color de la nota</div>
+    <div class="pop-dots">${dots}</div>
+    <div class="pop-photos">${photos.map(p=>`<div class="sh-ph"><img src="${p.src}" alt="" onclick="openImagePop(this.src)"><button onclick="removeNotePhoto('${p.pid}')" aria-label="Quitar foto">✕</button></div>`).join('')}<button class="pop-addph" onclick="addNotePhoto()">📷<span>Foto</span></button></div>
+    ${NE.id?`<button class="pop-done ${NE.done?'on':''}" onclick="NE.done=!NE.done;renderNoteEditor(false)">${NE.done?'✓ Hecha':'○ Marcar como hecha'}</button>`:''}
+    <div class="pop-row">
+      ${NE.id?`<button class="pop-btn del" onclick="askDeleteNote()" aria-label="Borrar nota">🗑️</button>`:''}
+      <button class="pop-btn" onclick="cancelNote()">Cancelar</button>
+      <button class="pop-btn main" onclick="saveNote()">${NE.id?'Guardar':'Añadir'}</button>
+    </div>`);
+  if(focus)setTimeout(()=>{const t=document.getElementById('ne-text');if(t){t.focus();t.setSelectionRange(t.value.length,t.value.length);}},120);
+}
+function addNotePhoto(){
+  const ta=document.getElementById('ne-text');if(ta)NE.text=ta.value;
+  const input=document.createElement('input');input.type='file';input.accept='image/*';input.multiple=true;input.style.display='none';document.body.appendChild(input);
+  input.onchange=async()=>{try{const files=[...input.files];if(!files.length)return;const photos=await Promise.all(files.map(compressTaskPhoto));
+    photos.forEach(data=>{const pid=calLineId();lsSet('ph_cal_'+pid,data);NE.photoIds.push(pid);NE.added.push(pid);});renderNoteEditor(false);}catch(e){alert('No se ha podido añadir esta imagen.');}finally{input.remove();}};
+  input.click();
+}
+function removeNotePhoto(pid){NE.photoIds=NE.photoIds.filter(x=>x!==pid);renderNoteEditor(false);}
+function cancelNote(){
+  if(NE)NE.added.forEach(pid=>lsRemove('ph_cal_'+pid));
+  const key=NE?.key;NE=null;closePop();
+}
+function saveNote(){
+  if(!NE)return;
+  const text=(document.getElementById('ne-text')?.value||'').trim();
+  if(!text&&!NE.photoIds.length){document.getElementById('ne-text')?.focus();showToast('Escribe la nota o añade una foto');return;}
+  const items=getCalItems(NE.key);
+  if(NE.id){
+    const it=items.find(x=>x.id===NE.id);
+    if(it){it.text=text;it.color=NE.color;it.done=NE.done;it.photoIds=[...NE.photoIds];delete it.photoId;}
+  }else items.push({id:calLineId(),type:'text',text,done:false,color:NE.color,photoIds:[...NE.photoIds]});
+  NE.orig.filter(pid=>!NE.photoIds.includes(pid)).forEach(pid=>lsRemove('ph_cal_'+pid));
+  const wasNew=!NE.id,key=NE.key;NE=null;closePop();
+  writeDayItems(key,items);
+  showToast(wasNew?'Nota añadida':'Nota guardada');
+}
+function askDeleteNote(){
+  if(!NE)return;
+  const e={...NE};
+  showConf('Borrar nota','¿Seguro que quieres borrar esta nota?',()=>{
+    const items=getCalItems(e.key).filter(x=>x.id!==e.id);
+    [...e.orig,...e.added].forEach(pid=>lsRemove('ph_cal_'+pid));
+    NE=null;closePop();writeDayItems(e.key,items);showToast('Nota borrada');
+  });
+}
+
 // ── V8 · VISTA DE DÍA ──
 let CAL_DAY=new Date();
 function calModesHtml(){
@@ -2490,7 +2660,7 @@ function setCalMode(mode){
 }
 function changeCalDay(delta){CAL_DAY=new Date(CAL_DAY.getFullYear(),CAL_DAY.getMonth(),CAL_DAY.getDate()+delta);renderHomeGrid();}
 function pickCalDay(v){
-  if(!v)return;const [y,m,d]=v.split('-').map(Number);
+  if(!v)return;CAL_SELECTED=v;const [y,m,d]=v.split('-').map(Number);
   CAL_DAY=new Date(y,m-1,d);if(CAL_MODE!=='day')CAL_MODE='day';renderHomeGrid();
 }
 function openDayView(key){const [y,m,d]=key.split('-').map(Number);CAL_DAY=new Date(y,m-1,d);CAL_MODE='day';renderHomeGrid();}
@@ -2512,7 +2682,7 @@ function renderCalDayView(){
   const list=items.length?items.map(it=>{
     const c=CAL_COLORS[it.color]||CAL_COLORS.none;
     const ph=calItemPhotoIds(it).map(id=>lsGet('ph_cal_'+id)).filter(Boolean);
-    return `<div class="dv-item ${it.done?'done':''}" onclick="openCalNote('${key}')">
+    return `<div class="dv-item ${it.done?'done':''}" onclick="openNoteEditor('${key}','${it.id}')">
       <span class="dv-dot" style="background:${it.color&&it.color!=='none'?c.dot:'color-mix(in srgb,var(--agenda),#000 25%)'}"></span>
       <div class="dv-txt">${it.text?esc(it.text):'<em>Foto</em>'}${ph.length?`<div class="dv-photos">${ph.map(src=>`<img src="${src}" alt="" onclick="event.stopPropagation();openImagePop(this.src)">`).join('')}</div>`:''}</div>
     </div>`;}).join(''):`<div class="dv-empty">Nada apuntado este día.</div>`;
@@ -2525,7 +2695,7 @@ function renderCalDayView(){
     </div>
     <div class="dv-week">${week}</div>
     <div class="dv-body" ${calColorFor(key)!=='none'?`style="background:${dayCol.bg}"`:''}>${list}</div>
-    <button class="dv-edit" onclick="openCalNote('${key}')">✏️ ${items.length?'Editar este día':'Escribir en este día'}</button>
+    <div class="dv-actions"><button class="dv-edit" onclick="openNoteEditor('${key}',null)">＋ Añadir nota</button><button class="dv-more" onclick="openDayChooser('${key}')" aria-label="Opciones del día">⋯</button></div>
     <div class="cal-footer">
       <div style="display:flex;gap:5px;">
         <button class="cal-btn" onclick="goToToday()">Fecha actual</button>
@@ -4828,7 +4998,7 @@ function endCalItemDrag(e) {
   if(lastHover) lastHover.classList.remove('drag-over');
   
   if(!isDragging) {
-    if(!fromModal) openCalNote(sourceKey);
+    if(!fromModal){ LINE_TAP_AT=Date.now(); openDayChooser(sourceKey,true); }
     return;
   }
   
@@ -5625,7 +5795,7 @@ if ('serviceWorker' in navigator) {
 </div>
 
 <div class="app-footer" onclick="openCopyright(event)">
-  <span class="ft-copy">© 2025–Present Elisabeth Altarriba</span><span class="ft-ver">V8</span>
+  <span class="ft-copy">© 2025–Present Elisabeth Altarriba</span><span class="ft-ver">V9</span>
 </div>
 
 <script>

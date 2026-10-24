@@ -62,3 +62,7 @@ Aquí se apunta todo lo que Elisabeth pide o comenta sobre la app, para no perde
 
 ### Peticiones para la V8
 - Además de la vista mensual y la anual, quiere un **botoncito para la vista del día** que quiera ver. → Hecho (selector Día · Mes · Año; en la vista de día se puede elegir cualquier fecha).
+
+### Peticiones para la V9
+- No podía hacer más de una nota en un día. Tiene que poder hacer **tantas notas como quiera en un día**. → Hecho.
+- Al pulsar un día debe preguntar: **añadir una nota, editar una nota existente o seleccionar solo el día**. Con un **popup bonito, redondeado y del tema**. → Hecho.

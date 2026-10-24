@@ -8,6 +8,19 @@ Este archivo mantiene un registro de todas las modificaciones y tareas pendiente
 
 ## Cambios Realizados
 
+- **(2026-10-24) [V9] Varias notas por día y ventana para elegir:**
+  - **Puedes poner tantas notas como quieras en un mismo día.** Cada nota tiene su texto, su color, sus fotos y puede marcarse como hecha.
+  - **Al tocar un día** (en la vista de mes o de año) sale una ventana redondeada con los colores de la agenda, que pregunta qué quieres hacer:
+    - **＋ Añadir una nota**
+    - **✏️ Editar una nota** (dice cuántas hay; si hay varias, eliges cuál)
+    - **📅 Solo seleccionar el día** (lo marca sin escribir nada y queda listo para la vista «Día»)
+    - Abajo, el **color del día**, que se cambia con un toque.
+  - **Ventana de nota:** texto grande, color de la nota, fotos (añadir y quitar), «Marcar como hecha» y un botón 🗑️ para borrar solo esa nota (con confirmación). Cancelar no guarda nada, tampoco las fotos añadidas.
+  - **Vista de día:** el botón «＋ Añadir nota» y el botón «⋯» con las opciones del día. Tocar una nota la abre para editarla.
+  - La búsqueda por colores y tocar una línea dentro de un día también abren la ventana del día.
+  - Deshacer (↶) y rehacer (↷) de la agenda siguen funcionando con las notas.
+  - Versión **V9**. `sw.js`: caché `home-cache-v9-2026-10-24`.
+
 - **(2026-10-24) [V8] Vista de día en la agenda:**
   - Nuevo selector **Día · Mes · Año** arriba de la agenda (sustituye los botones «Año» y «Mes»).
   - **Vista de día:**
