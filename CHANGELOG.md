@@ -8,6 +8,18 @@ Este archivo mantiene un registro de todas las modificaciones y tareas pendiente
 
 ## Cambios Realizados
 
+- **(2026-10-24) [V2] Ajustes de colores, iconos de muebles y arreglos:**
+  - **⚙️ Ajustes** (botón redondo junto a CASAS, en la agenda). Permite cambiar los colores de la agenda, el botón CASAS, el color de la letra, el título «Home», los botones «＋ Sitio» y «＋ Cosa», los botones Guardar/Añadir y el resto de botones (volver, deshacer, cancelar…). Cada opción tiene 10 colores pastel y un círculo para elegir cualquier otro. El cambio se ve al momento y se guarda. Hay un botón para volver a los colores originales. Los ajustes también van dentro de «Exportar copia».
+  - **Arreglado: casa nueva que no aparecía.** Al guardar, la app refrescaba la agenda en lugar de la lista de casas: la casa se creaba pero no se veía. Ahora aparece al momento y sale el aviso «Casa creada».
+  - **Arreglado: cambiar el color de una casa.** Era el mismo fallo, el cambio se guardaba pero no se veía. Ahora se ve enseguida, tanto desde la lista (⋯) como desde dentro de la casa.
+  - **Nuevo lápiz ✏️ dentro de la casa:** edita lo que estás viendo. En la raíz edita la casa (nombre, color, icono); dentro de un sitio, ese sitio.
+  - **Iconos de muebles dibujados** (no existen como emoji): armario, cómoda, mesita de noche, estantería, escritorio, mesa, zapatero, mueble TV, aparador, vitrina, baúl, cajón, balda, altillo, perchero, mueble de baño, despensa, caja, caja de cartón, nevera, lavadora, cama, sofá y trastero. Se ponen solos al escribir el nombre (también en catalán: calaixera, armari, tauleta…). Si el nombre no coincide con ningún icono, se muestran todos para elegir.
+  - Máximo de casas ampliado de 5 a 10.
+  - **Exportar · © Copy · Importar** en una sola línea, pequeña y discreta.
+  - Las ventanas de crear o editar casa y sitio, en pastel.
+  - Probado: crear y editar casa, color, iconos, sitios, cosas con foto, buscar, deshacer, nota de la agenda, calculadora, exportar e importar.
+  - Versión **V2**. `sw.js`: caché `home-cache-v2-2026-10-24`.
+
 - **(2026-10-24) [V1] Rediseño completo: pastel, sencillo, «sitios y cosas»:**
   - **Colores pastel** en toda la app (rosa, lavanda, menta, mantequilla) y letra redondeada del iPhone. Se oculta el panel de depuración («APP STARTED…»).
   - **Agenda:** se mantiene como página principal, con el mismo funcionamiento y nuevos colores. Debajo, el botón **🏡 CASAS** grande y siempre visible.

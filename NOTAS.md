@@ -22,3 +22,14 @@ Aquí se apunta todo lo que Elisabeth pide o comenta sobre la app, para no perde
 - La **página principal sigue siendo la agenda** (le va bien tener agenda). Abajo tiene que **verse el botón para ir a las casas**. Al pulsarlo ve sus casas y escoge una.
 - Pidió rehacerlo todo con **colores pastel**, bonito, sencillo, fácil e intuitivo, **con el buscador**. → Hecho en V1 (rediseño «sitios y cosas»).
 - Su captura del iPhone aún mostraba **V12**: todavía no había sustituido `index.html` por la versión nueva.
+- La app se publica con **GitHub Pages** en el repositorio `elialtarriba/Casa`. Hay que borrar de allí `.DS_Store`, `icon.png` y las copias `.json` (contienen datos personales).
+- La app se usa sobre todo en su **iPhone** (también tiene que funcionar en Android).
+
+### Peticiones para la V2
+1. Un botón de **configuración** bonito: cambiar los colores de la agenda, del botón CASAS y de la letra. → Hecho (⚙️ Ajustes).
+2. Al cambiar el color de una casa no se cambiaba (después de mucho probar sí). Revisar que todas las configuraciones funcionen. → Arreglado y probado.
+3. «Exportar copia», «Copyright» e «Importar copia» en una sola línea, que se vea pero pase desapercibido. El copyright, solo «© Copy». → Hecho.
+4. No se creaba otra casa. → Arreglado.
+5. Poder cambiar el color de los botones «＋ Sitio», «＋ Cosa» y de todos los botones. → Hecho en Ajustes.
+6. Más iconos: faltaban cómoda, armario, mesita de noche… → Hecho (24 iconos de muebles dibujados).
+7. Poner **V2** y decirle qué archivos subir a GitHub. → Hecho.

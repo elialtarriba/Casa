@@ -824,6 +824,62 @@ body{font-family:ui-rounded,"SF Pro Rounded",-apple-system,BlinkMacSystemFont,"S
 .mod{background:var(--paper)!important}
 .bok{background:var(--mint)!important;color:#2f5e49!important}
 #conf-ov .cyes{background:#f3c2cc;color:#8a2a3e}
+
+/* ══════════ HOME V2 · COLORES CONFIGURABLES ══════════ */
+:root{--agenda:#e1daf5;--casas-btn:#cdebdc;--btn-sitio:#e1daf5;--btn-cosa:#cdebdc;--btn-main:#cdebdc;--btn-other:#efe9f7;--title-fill:linear-gradient(135deg,#b0577a,#6f5cb5)}
+body{color:var(--ink)}
+.home-title{background:var(--title-fill);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+/* Agenda */
+#home-calendar-container{background:color-mix(in srgb,var(--agenda),#fff 78%)}
+.cal-btn{background:var(--agenda);color:color-mix(in srgb,var(--agenda),#000 62%)}
+.cal-day{box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--agenda),#fff 35%)}
+.cal-day.weekend{background:color-mix(in srgb,var(--agenda),#fff 50%)}
+.cal-day.today{outline-color:color-mix(in srgb,var(--agenda),#000 38%);color:color-mix(in srgb,var(--agenda),#000 45%)}
+.cal-title,.cal-title-btn,.cal-day{color:var(--ink)}
+/* Botones de inicio */
+.home-actions{display:flex;align-items:center;justify-content:center;gap:12px;margin:0 auto 8px;flex-shrink:0}
+.home-actions #home-fab{margin:0}
+#home-fab{background:var(--casas-btn);color:color-mix(in srgb,var(--casas-btn),#000 62%);box-shadow:0 5px 0 color-mix(in srgb,var(--casas-btn),#000 14%),0 12px 22px rgba(74,63,87,.14)}
+#home-fab:active{box-shadow:0 1px 0 color-mix(in srgb,var(--casas-btn),#000 14%)!important}
+.home-gear{width:54px;height:54px;border-radius:18px;border:none;background:#fff;font-size:24px;cursor:pointer;box-shadow:0 5px 0 rgba(74,63,87,.1),0 12px 22px rgba(74,63,87,.1);display:flex;align-items:center;justify-content:center}
+.home-gear:active{transform:translateY(4px);box-shadow:0 1px 0 rgba(74,63,87,.1)!important}
+/* Botones de las casas */
+.hp-add.site{background:var(--btn-sitio);box-shadow:0 4px 0 color-mix(in srgb,var(--btn-sitio),#000 13%);color:color-mix(in srgb,var(--btn-sitio),#000 62%)}
+.hp-add.thing{background:var(--btn-cosa);box-shadow:0 4px 0 color-mix(in srgb,var(--btn-cosa),#000 13%);color:color-mix(in srgb,var(--btn-cosa),#000 62%)}
+.sh-btn.main,.bok{background:var(--btn-main)!important;color:color-mix(in srgb,var(--btn-main),#000 62%)!important}
+.sh-btn,.hl-back,.back-btn,.hp-undo,.hp-edit,.bcancel{background:var(--btn-other)!important;color:color-mix(in srgb,var(--btn-other),#000 60%)!important}
+.hl-add{border-color:color-mix(in srgb,var(--btn-sitio),#000 10%);color:color-mix(in srgb,var(--btn-sitio),#000 55%)}
+.hp-edit{width:44px;height:44px;border:none;border-radius:14px;font-size:18px;cursor:pointer;flex-shrink:0}
+.hp-name,.sr-name,.sheet h3,.sh-opt,.hl-title,.house-hname{color:var(--ink)}
+/* Barra discreta Exportar · Copy · Importar */
+#s-houses-list .home-bottom-tools{display:none!important}
+.hl-tools{flex-shrink:0;display:flex;align-items:center;justify-content:center;gap:4px;padding:4px 10px 2px;font-size:12px;font-weight:700;color:var(--ink-soft)}
+.hl-tools button{border:none;background:transparent;font:inherit;color:inherit;padding:6px 8px;border-radius:8px;cursor:pointer;opacity:.75;box-shadow:none!important}
+.hl-tools button:active{background:rgba(0,0,0,.05)}
+.hl-tools span{opacity:.4}
+/* Hoja de ajustes */
+.st-row{display:flex;flex-direction:column;gap:8px;padding:12px;background:#fff;border-radius:16px}
+.st-lbl{font-size:15px;font-weight:900;color:var(--ink)}
+.st-sws{display:flex;flex-wrap:wrap;gap:8px}
+.st-sw{width:36px;height:36px;border-radius:50%;border:2px solid rgba(74,63,87,.12);cursor:pointer;padding:0;position:relative;box-shadow:none!important;flex-shrink:0}
+.st-sw.sel{outline:3px solid var(--ink);outline-offset:2px}
+.st-grad{background:linear-gradient(135deg,#b0577a,#6f5cb5)}
+.st-custom{background:conic-gradient(#f6d3de,#fbefc4,#cdebdc,#d3e6f5,#e1daf5,#f6d3de);overflow:hidden;display:block}
+.st-custom input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;border:none;padding:0}
+/* Iconos de muebles en el selector */
+.fopt img{width:30px;height:30px;object-fit:contain;display:block}
+.egrid{max-height:230px}
+.eopt{background:#f4f0fb}
+.eopt.sel{border-color:#8a76c7;background:#ece6fb}
+.elbl{color:var(--ink-soft);font-size:7.5px}
+.egrid-sec{grid-column:1/-1;font-size:11px;font-weight:900;color:var(--ink-soft);padding:6px 2px 2px}
+
+/* V2 · ventanas de casa y sitio en pastel */
+.minp,.esearch,.icon-paste-input{border:2px solid #e4dcef!important;background:#fff!important;color:var(--ink)!important;border-radius:14px!important}
+.icon-paste-box{background:#fff!important;border:1.5px dashed #ddd3f2!important;border-radius:14px!important}
+.icon-file-btn{background:var(--btn-other)!important;color:color-mix(in srgb,var(--btn-other),#000 60%)!important;border:none!important;box-shadow:none!important;border-radius:12px!important}
+.mod h3{color:var(--ink)}
+#auto-emoji-preview{background:#f4f0fb!important}
 </style>
   <link rel="manifest" href="manifest.json">
 </head>
@@ -856,7 +912,7 @@ body{font-family:ui-rounded,"SF Pro Rounded",-apple-system,BlinkMacSystemFont,"S
             onblur="saveAppTitle(this.textContent.trim())"
             onkeydown="if(event.key==='Enter'){event.preventDefault();this.blur()}"
             title="Toca para editar el título">Home</div>
-          <span class="ver-badge">V1</span>
+          <span class="ver-badge">V2</span>
         </div>
         <button class="brand-flip" style="perspective:none; grid-column: 3; align-self: center;" type="button" onclick="openCalc()" title="Calculadora">
           <span class="brand-flip-inner" style="transition: transform 0.1s;">
@@ -867,7 +923,10 @@ body{font-family:ui-rounded,"SF Pro Rounded",-apple-system,BlinkMacSystemFont,"S
       <div class="app-error" id="app-error"></div>
     </div>
     <div class="houses-grid" id="home-calendar-container"></div>
-    <button class="home-fab" id="home-fab" onclick="showHousesListScreen()">🏡 CASAS</button>
+    <div class="home-actions">
+      <button class="home-gear" onclick="openSettings()" aria-label="Ajustes" title="Ajustes">⚙️</button>
+      <button class="home-fab" id="home-fab" onclick="showHousesListScreen()">🏡 CASAS</button>
+    </div>
   </div>
 
   <!-- SCREEN 1.5: HOUSES LIST -->
@@ -879,6 +938,7 @@ body{font-family:ui-rounded,"SF Pro Rounded",-apple-system,BlinkMacSystemFont,"S
       </div>
     </div>
     <div class="houses-grid" id="houses-grid"></div>
+    <div class="hl-tools"><button onclick="exportSync()">⬇ Exportar</button><span>·</span><button onclick="openCopyright(event)">© Copy</button><span>·</span><button onclick="triggerImport()">⬆ Importar</button></div>
     <button class="home-fab" id="houses-fab" onclick="openHouseModal()" style="bottom: 80px;">＋ Nueva casa</button>
     <div class="home-bottom-tools" style="position:fixed; bottom:20px; left:0; right:0; padding-bottom:env(safe-area-inset-bottom, 20px);">
       <button class="sync-btn" onclick="exportSync()">⬇ Exportar copia</button>
@@ -892,6 +952,7 @@ body{font-family:ui-rounded,"SF Pro Rounded",-apple-system,BlinkMacSystemFont,"S
     <div class="house-header">
       <button class="back-btn" onclick="houseBack()" aria-label="Volver">‹</button>
       <div class="house-hname" id="house-hname">Casa</div>
+      <button class="hp-edit" onclick="editHere()" aria-label="Editar nombre, color e icono" title="Editar">✏️</button>
       <button class="tb hp-undo" id="bundo" onclick="undo()" title="Deshacer el último cambio">↩ Deshacer</button>
     </div>
     <div class="search-panel" id="search-panel">
@@ -1588,6 +1649,7 @@ async function init(){
     return;
   }
   loadLocal();
+  loadUiSettings();
   initHistory();
   CURRENT_HOUSE=null;SEL_LEVELS=[];saveSel();
   document.getElementById('loading').style.display='none';
@@ -1663,7 +1725,8 @@ function exportSync(){
     selection:lsGet('h_sel')||'',
     photos:collectLocalKeys('ph_'),
     pans:collectLocalKeys('pan_'),
-    calendar:collectLocalKeys('cal_')
+    calendar:collectLocalKeys('cal_'),
+    ui:lsGet('home_ui')||''
   };
   const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});
   const a=document.createElement('a');
@@ -1694,6 +1757,7 @@ function handleImport(e){
       lsSet('h_d',JSON.stringify(DATA));
       if(payload.title)lsSet('app_title',payload.title);
       if(payload.selection)lsSet('h_sel',payload.selection);
+      if(payload.ui){lsSet('home_ui',payload.ui);loadUiSettings();}
       lsKeys().filter(k=>k.startsWith('ph_')||k.startsWith('pan_')||k.startsWith('cal_')).forEach(k=>lsRemove(k));
       Object.entries(payload.photos||{}).forEach(([k,v])=>lsSet(k,v));
       Object.entries(payload.pans||{}).forEach(([k,v])=>lsSet(k,v));
@@ -2414,12 +2478,17 @@ async function saveHouse(){
     if(h){h.name=name;h.emoji=SEL_HEMO;h.color=SEL_COLOR;if(HOUSE_ICON_IMAGE)h.iconImage=HOUSE_ICON_IMAGE;else delete h.iconImage;
       if(db)await db.collection('houses').doc(eid).set(h);}
   } else {
-    if(HOUSES.length>=5){alert('Máximo 5 casas.');return;}
+    if(HOUSES.length>=10){alert('Máximo 10 casas.');return;}
     const id=gid();const h={id,name,emoji:SEL_HEMO,color:SEL_COLOR};if(HOUSE_ICON_IMAGE)h.iconImage=HOUSE_ICON_IMAGE;HOUSES.push(h);
     if(db)await db.collection('houses').doc(id).set(h);
   }
   saveLoc();
-  if(CURRENT_HOUSE){showHouseScreen(CURRENT_HOUSE,false);}else{renderHomeGrid();}
+  if(CURRENT_HOUSE){
+    document.documentElement.style.setProperty('--house-dark',themeDark(CURRENT_HOUSE));
+    renderHouseMain();
+  }else if(document.getElementById('s-houses-list')?.classList.contains('active')){renderHousesList();}
+  else{renderHomeGrid();}
+  showToast(eid?'Casa guardada':'Casa creada: '+name);
 }
 async function delHouse(id){
   showConf('Borrar casa','¿Eliminar esta casa y todo su contenido?',async()=>{
@@ -2787,6 +2856,103 @@ function pillStyle(pal,lvl,delay){
   return `--pc:${pal.ac};--pill-strong:${strong};--pill-mid:${mid};--pill-soft:${soft};--pill-fade:rgba(255,255,255,.72);animation-delay:${delay}s`;
 }
 
+// ── ICONOS DE MUEBLES (dibujados, porque no existen como emoji) ──
+const FURN_STROKE='#5a4a68';
+function furnSvg(inner){
+  return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" stroke="${FURN_STROKE}" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">${inner}</svg>`);
+}
+const FURNITURE_ICONS=(()=>{const W='#f1d6bd', LAV='#ddd3f2', MINT='#cfe9dc', ROSE='#f6d1dc', SKY='#d3e6f5', BUT='#f8e8b8', K=`fill="${FURN_STROKE}" stroke="none"`;
+return [
+  {l:'Armario',k:['armario','armari','ropero','guardarropa'],svg:`<rect x="13" y="7" width="38" height="47" rx="3" fill="${W}"/><path d="M32 7v47"/><circle cx="28.5" cy="31" r="1.6" ${K}/><circle cx="35.5" cy="31" r="1.6" ${K}/><path d="M17 54v4M47 54v4"/>`},
+  {l:'Cómoda',k:['comoda','cómoda','calaixera','cajonera'],svg:`<rect x="9" y="17" width="46" height="34" rx="3" fill="${W}"/><path d="M9 28.3h46M9 39.6h46"/><path d="M28 22.6h8M28 33.9h8M28 45.3h8"/><path d="M14 51v6M50 51v6"/>`},
+  {l:'Mesita de noche',k:['mesita','mesilla','tauleta','noche','nit'],svg:`<path d="M24 6h14l4 11H20z" fill="${BUT}"/><path d="M31 17v6M26 23h10"/><rect x="15" y="27" width="34" height="25" rx="3" fill="${W}"/><path d="M15 39.5h34"/><path d="M29 33h6M29 45.5h6"/><path d="M19 52v6M45 52v6"/>`},
+  {l:'Estantería',k:['estanteria','estantería','prestatgeria','libreria','librería','biblioteca'],svg:`<rect x="12" y="6" width="40" height="52" rx="2" fill="${W}"/><path d="M12 19h40M12 32h40M12 45h40"/><rect x="16" y="10" width="5" height="9" fill="${ROSE}"/><rect x="22" y="11" width="5" height="8" fill="${SKY}"/><rect x="34" y="23" width="5" height="9" fill="${MINT}"/><rect x="40" y="24" width="5" height="8" fill="${LAV}"/><rect x="18" y="36" width="5" height="9" fill="${BUT}"/><rect x="38" y="49" width="9" height="5" rx="1" fill="${ROSE}"/>`},
+  {l:'Escritorio',k:['escritorio','escriptori','mesa de estudio','despacho'],svg:`<rect x="6" y="22" width="52" height="6" rx="2" fill="${W}"/><rect x="9" y="28" width="17" height="25" rx="2" fill="${W}"/><path d="M9 40.5h17M15 34h5M15 46.5h5M51 28v25"/><rect x="34" y="11" width="16" height="11" rx="2" fill="${SKY}"/>`},
+  {l:'Mesa',k:['mesa','taula','comedor'],svg:`<rect x="7" y="24" width="50" height="6" rx="2" fill="${W}"/><path d="M12 30v24M52 30v24M20 30v14M44 30v14"/>`},
+  {l:'Zapatero',k:['zapatero','sabater','zapatos','sabates','calzado'],svg:`<rect x="10" y="18" width="44" height="36" rx="3" fill="${W}"/><path d="M10 36h44"/><path d="M15 31c0-4 3-5 6-5l4 3h4v2z" fill="${ROSE}"/><path d="M34 31c0-4 3-5 6-5l4 3h4v2z" fill="${SKY}"/><path d="M15 49c0-4 3-5 6-5l4 3h4v2z" fill="${MINT}"/><path d="M34 49c0-4 3-5 6-5l4 3h4v2z" fill="${BUT}"/>`},
+  {l:'Mueble TV',k:['tele','tv','television','televisión','mueble tv','moble tv'],svg:`<rect x="15" y="9" width="34" height="22" rx="3" fill="${SKY}"/><path d="M28 31v5h8v-5"/><rect x="6" y="36" width="52" height="16" rx="3" fill="${W}"/><path d="M23.3 36v16M40.6 36v16"/><path d="M12 56v2M52 56v2M12 52v4M52 52v4"/>`},
+  {l:'Aparador',k:['aparador','bufe','bufé','buffet','credenza'],svg:`<rect x="7" y="20" width="50" height="30" rx="3" fill="${W}"/><path d="M7 29h50M23.6 29v21M40.3 29v21"/><path d="M28 24.5h8M20 39.5v1M27 39.5v1M37 39.5v1M44 39.5v1"/><path d="M12 50v7M52 50v7"/>`},
+  {l:'Vitrina',k:['vitrina','vitrines','cristalera','cristaleria'],svg:`<rect x="13" y="6" width="38" height="50" rx="3" fill="${W}"/><rect x="17" y="10" width="30" height="30" rx="1.5" fill="${SKY}"/><path d="M17 25h30M32 10v30"/><circle cx="24" cy="19" r="3" fill="#fff"/><circle cx="40" cy="34" r="3" fill="#fff"/><path d="M13 45h38M28 50.5h8M17 56v3M47 56v3"/>`},
+  {l:'Baúl',k:['baul','baúl','bagul','cofre'],svg:`<path d="M9 30c0-9 6-14 23-14s23 5 23 14z" fill="${W}"/><rect x="9" y="30" width="46" height="24" rx="3" fill="${W}"/><path d="M20 16.6V54M44 16.6V54"/><rect x="28" y="27" width="8" height="9" rx="1.5" fill="${BUT}"/>`},
+  {l:'Cajón',k:['cajon','cajón','calaix'],svg:`<path d="M8 26h48v22a3 3 0 0 1-3 3H11a3 3 0 0 1-3-3z" fill="${W}"/><path d="M8 26l6-8h36l6 8"/><path d="M26 38h12"/>`},
+  {l:'Balda',k:['balda','estante','prestatge','repisa','leja'],svg:`<rect x="6" y="34" width="52" height="6" rx="2" fill="${W}"/><path d="M14 40l-4 10M50 40l4 10M14 40v10M50 40v10"/><rect x="14" y="20" width="6" height="14" fill="${ROSE}"/><rect x="21" y="23" width="6" height="11" fill="${SKY}"/><circle cx="43" cy="28" r="6" fill="${MINT}"/>`},
+  {l:'Altillo',k:['altillo','altell','maletero'],svg:`<rect x="8" y="6" width="48" height="18" rx="3" fill="${LAV}"/><path d="M32 6v18M28 18h-2M38 18h-2"/><rect x="13" y="28" width="38" height="30" rx="3" fill="${W}" stroke-dasharray="3 4"/>`},
+  {l:'Perchero',k:['perchero','penjador','colgador','abrigos'],svg:`<path d="M32 8v46M22 58h20M24 54h16"/><path d="M32 14l-9 6M32 14l9 6M32 22l-8 5M32 22l8 5"/><circle cx="32" cy="8" r="2.5" fill="${BUT}"/><path d="M41 20c3 0 4 3 2 6l-3 6h-6z" fill="${ROSE}"/>`},
+  {l:'Mueble de baño',k:['baño','bany','lavabo','pica','mueble de baño'],svg:`<path d="M10 28h44a0 0 0 0 1 0 0c0 6-6 9-12 9H22c-6 0-12-3-12-9z" fill="#fff"/><path d="M32 28v-8h6"/><rect x="12" y="37" width="40" height="19" rx="3" fill="${MINT}"/><path d="M32 37v19M28 46h-2M38 46h-2"/>`},
+  {l:'Despensa',k:['despensa','rebost','alacena','armario cocina'],svg:`<rect x="13" y="6" width="38" height="52" rx="3" fill="${W}"/><path d="M13 22h38M13 38h38"/><rect x="18" y="11" width="7" height="11" rx="2" fill="${BUT}"/><rect x="28" y="13" width="7" height="9" rx="2" fill="${ROSE}"/><rect x="38" y="26" width="8" height="12" rx="2" fill="${MINT}"/><rect x="19" y="28" width="8" height="10" rx="2" fill="${SKY}"/><rect x="30" y="43" width="10" height="11" rx="2" fill="${LAV}"/>`},
+  {l:'Caja',k:['caja','caixa','contenedor','organizador'],svg:`<rect x="10" y="22" width="44" height="32" rx="3" fill="${SKY}"/><rect x="7" y="15" width="50" height="9" rx="3" fill="${LAV}"/><path d="M27 34h10"/>`},
+  {l:'Caja cartón',k:['carton','cartón','cartro','mudanza'],svg:`<path d="M10 24h44v28a2 2 0 0 1-2 2H12a2 2 0 0 1-2-2z" fill="${W}"/><path d="M10 24l6-10h32l6 10M32 14v10"/><rect x="26" y="24" width="12" height="7" fill="${BUT}"/>`},
+  {l:'Nevera',k:['nevera','frigorifico','frigorífico','frigo','congelador'],svg:`<rect x="15" y="5" width="34" height="54" rx="4" fill="#fff"/><path d="M15 24h34M20 12v6M20 30v10"/><circle cx="38" cy="15" r="2.5" fill="${MINT}"/>`},
+  {l:'Lavadora',k:['lavadora','rentadora','secadora'],svg:`<rect x="12" y="6" width="40" height="52" rx="4" fill="#fff"/><path d="M12 17h40"/><circle cx="32" cy="38" r="12" fill="${SKY}"/><path d="M24 40c4-3 8 3 16 0"/><circle cx="19" cy="11.5" r="1.8" ${K}/><path d="M38 11.5h8"/>`},
+  {l:'Cama',k:['cama','llit'],svg:`<rect x="7" y="16" width="10" height="38" rx="2" fill="${W}"/><rect x="17" y="34" width="40" height="12" rx="2" fill="${LAV}"/><rect x="19" y="27" width="12" height="7" rx="3" fill="#fff"/><path d="M17 46h40M54 46v8"/>`},
+  {l:'Sofá',k:['sofa','sofá'],svg:`<rect x="12" y="18" width="40" height="18" rx="5" fill="${ROSE}"/><rect x="6" y="28" width="12" height="20" rx="4" fill="${ROSE}"/><rect x="46" y="28" width="12" height="20" rx="4" fill="${ROSE}"/><rect x="18" y="34" width="28" height="14" fill="${ROSE}"/><path d="M10 48v6M54 48v6M32 34v14"/>`},
+  {l:'Trastero',k:['trastero','traster','garaje','garatge','sotano','sótano'],svg:`<path d="M6 28L32 10l26 18v28H6z" fill="${W}"/><rect x="16" y="32" width="32" height="24" fill="#fff"/><path d="M16 38h32M16 44h32M16 50h32"/>`},
+];})();
+FURNITURE_ICONS.forEach(f=>{f.src=furnSvg(f.svg);});
+function furnMatchByName(name){
+  const q=normSearch(name);if(!q)return null;
+  return FURNITURE_ICONS.find(f=>f.k.some(k=>q.includes(normSearch(k))))||null;
+}
+function selFurn(i){
+  const f=FURNITURE_ICONS[i];if(!f)return;
+  ROOM_ICON_IMAGE=f.src;EMOJI_MANUAL=true;updateEmojiPreview();
+  document.querySelectorAll('.fopt').forEach((el,j)=>el.classList.toggle('sel',el.dataset.i==String(i)));
+}
+
+// ── AJUSTES DE COLORES (V2) ──
+const UI_DEFAULTS={agenda:'#e1daf5',casas:'#cdebdc',ink:'#4a3f57',title:'grad',btnSitio:'#e1daf5',btnCosa:'#cdebdc',btnMain:'#cdebdc',btnOther:'#efe9f7'};
+const UI_PASTELS=[['#e1daf5','Lavanda'],['#f6d3de','Rosa'],['#cdebdc','Menta'],['#fcdcc9','Melocotón'],['#fbefc4','Mantequilla'],['#d3e6f5','Cielo'],['#d9efc4','Pistacho'],['#f3e1d0','Arena'],['#f5d6f0','Malva'],['#e8e6ea','Perla']];
+const UI_INKS=[['#4a3f57','Ciruela'],['#3b2f2a','Chocolate'],['#2f3a4a','Azul noche'],['#2f4a3d','Verde bosque'],['#6b2f45','Burdeos'],['#333333','Grafito'],['#6f5cb5','Violeta'],['#b0577a','Frambuesa']];
+const UI_ROWS=[
+  {key:'agenda',label:'Colores de la agenda',list:UI_PASTELS},
+  {key:'casas',label:'Botón CASAS',list:UI_PASTELS},
+  {key:'ink',label:'Color de la letra',list:UI_INKS},
+  {key:'title',label:'Título «Home»',list:UI_INKS,grad:true},
+  {key:'btnSitio',label:'Botón «＋ Sitio»',list:UI_PASTELS},
+  {key:'btnCosa',label:'Botón «＋ Cosa»',list:UI_PASTELS},
+  {key:'btnMain',label:'Botones Guardar / Añadir',list:UI_PASTELS},
+  {key:'btnOther',label:'Otros botones (volver, deshacer, cancelar…)',list:UI_PASTELS},
+];
+let UI={...UI_DEFAULTS};
+function loadUiSettings(){
+  try{UI={...UI_DEFAULTS,...JSON.parse(lsGet('home_ui')||'{}')};}catch(e){UI={...UI_DEFAULTS};}
+  applyUiSettings();
+}
+function applyUiSettings(){
+  const r=document.documentElement.style;
+  r.setProperty('--agenda',UI.agenda);
+  r.setProperty('--casas-btn',UI.casas);
+  r.setProperty('--ink',UI.ink);
+  r.setProperty('--btn-sitio',UI.btnSitio);
+  r.setProperty('--btn-cosa',UI.btnCosa);
+  r.setProperty('--btn-main',UI.btnMain);
+  r.setProperty('--btn-other',UI.btnOther);
+  r.setProperty('--title-fill',UI.title==='grad'?'linear-gradient(135deg,#b0577a,#6f5cb5)':`linear-gradient(${UI.title},${UI.title})`);
+}
+function setUi(key,val){
+  UI[key]=val;lsSet('home_ui',JSON.stringify(UI));applyUiSettings();
+  document.querySelectorAll(`.st-sw[data-k="${key}"]`).forEach(el=>el.classList.toggle('sel',el.dataset.v===val));
+}
+function resetUiSettings(){
+  UI={...UI_DEFAULTS};lsSet('home_ui',JSON.stringify(UI));applyUiSettings();openSettings();
+}
+function openSettings(){
+  const rows=UI_ROWS.map(row=>{
+    const cur=UI[row.key];
+    let sw='';
+    if(row.grad)sw+=`<button class="st-sw st-grad ${cur==='grad'?'sel':''}" data-k="${row.key}" data-v="grad" onclick="setUi('${row.key}','grad')" aria-label="Degradado"></button>`;
+    sw+=row.list.map(([hex,name])=>`<button class="st-sw ${cur===hex?'sel':''}" data-k="${row.key}" data-v="${hex}" style="background:${hex}" onclick="setUi('${row.key}','${hex}')" aria-label="${name}" title="${name}"></button>`).join('');
+    const custom=cur!=='grad'&&!row.list.some(([h])=>h===cur);
+    sw+=`<label class="st-sw st-custom ${custom?'sel':''}" data-k="${row.key}" data-v="${custom?cur:''}" title="Otro color"><input type="color" value="${cur==='grad'?'#6f5cb5':cur}" oninput="setUi('${row.key}',this.value)"></label>`;
+    return `<div class="st-row"><div class="st-lbl">${row.label}</div><div class="st-sws">${sw}</div></div>`;
+  }).join('');
+  openSheet('⚙️ Ajustes',`
+    <div class="sh-hint">Toca un color y verás el cambio al momento. El círculo de colores te deja elegir cualquier otro.</div>
+    ${rows}
+    <div class="sh-row"><button class="sh-btn" onclick="resetUiSettings()">Volver a los colores originales</button></div>
+    <button class="sh-btn main" onclick="closeSheet()">Listo</button>`);
+}
+
 // ══════════════════════════════════════════════
 // HOME V1 · CASAS › SITIOS › COSAS
 // Un sitio puede tener dentro otros sitios y cosas, sin límite.
@@ -2819,6 +2985,11 @@ function openPlace(id){
   if(!DATA[id])return;
   SEL_LEVELS=roomPathIds(id);saveSel();renderHouseMain();
   const m=document.getElementById('main');if(m)m.scrollTop=0;
+}
+function editHere(){
+  const curId=SEL_LEVELS[SEL_LEVELS.length-1];
+  if(curId&&DATA[curId])editPill(curId);
+  else if(CURRENT_HOUSE)openHouseModal(CURRENT_HOUSE);
 }
 function houseBack(){
   if(SEL_LEVELS.length)goPlaceDepth(SEL_LEVELS.length-1);
@@ -4663,6 +4834,9 @@ const EMOJI_MAP=[
 
 function autoEmojiFromName(name){
   if(EMOJI_MANUAL||!name||name.length<2)return;
+  const furn=furnMatchByName(name);
+  if(furn){ROOM_ICON_IMAGE=furn.src;updateEmojiPreview();filterEmojis('');return;}
+  if(ROOM_ICON_IMAGE&&FURNITURE_ICONS.some(f=>f.src===ROOM_ICON_IMAGE))ROOM_ICON_IMAGE=null;
   const q=name.toLowerCase().trim();
   // Search emoji map
   for(const {k,e} of EMOJI_MAP){
@@ -4685,7 +4859,7 @@ function updateEmojiPreview(){
   const pasted=document.getElementById('icon-paste-preview');
   if(pasted)pasted.innerHTML=ROOM_ICON_IMAGE?`<img src="${ROOM_ICON_IMAGE}" alt="">`:esc(SEL_EMO);
   // highlight in grid
-  document.querySelectorAll('.eopt').forEach(el=>el.classList.toggle('sel',el.textContent.startsWith(SEL_EMO)));
+  document.querySelectorAll('.eopt').forEach(el=>el.classList.toggle('sel',el.classList.contains('fopt')?(ROOM_ICON_IMAGE===FURNITURE_ICONS[+el.dataset.i]?.src):(!ROOM_ICON_IMAGE&&el.textContent.startsWith(SEL_EMO))));
 }
 
 function focusEmojiSearch(){
@@ -4710,11 +4884,14 @@ function openRoomModal(lvl,editId=null){
 }
 
 function filterEmojis(q){
-  const norm=q.toLowerCase().trim();
-  const filtered=norm?ALL_EMOJIS.filter(({e,l})=>l.toLowerCase().includes(norm)||e.includes(norm)):ALL_EMOJIS;
-  document.getElementById('egrid').innerHTML=filtered.map(({e,l})=>
-    `<div class="eopt ${e===SEL_EMO?'sel':''}" onclick="selEmo('${e}')">${e}<div class="elbl">${l}</div></div>`
-  ).join('');
+  const norm=normSearch(q);
+  const furn=FURNITURE_ICONS.map((f,i)=>({...f,i})).filter(f=>!norm||normSearch(f.l).includes(norm)||f.k.some(k=>normSearch(k).includes(norm)||norm.includes(normSearch(k))));
+  const filtered=norm?ALL_EMOJIS.filter(({e,l})=>normSearch(l).includes(norm)||e.includes(q.trim())):ALL_EMOJIS;
+  if(norm&&!furn.length&&!filtered.length)return filterEmojis('');
+  let html='';
+  if(furn.length)html+=`<div class="egrid-sec">Muebles</div>`+furn.map(f=>`<div class="eopt fopt ${ROOM_ICON_IMAGE===f.src?'sel':''}" data-i="${f.i}" onclick="selFurn(${f.i})"><img src="${f.src}" alt=""><div class="elbl">${f.l}</div></div>`).join('');
+  if(filtered.length)html+=`<div class="egrid-sec">Más iconos</div>`+filtered.map(({e,l})=>`<div class="eopt ${!ROOM_ICON_IMAGE&&e===SEL_EMO?'sel':''}" onclick="selEmo('${e}')">${e}<div class="elbl">${l}</div></div>`).join('');
+  document.getElementById('egrid').innerHTML=html||'<div class="egrid-sec">Sin iconos con ese nombre</div>';
 }
 function selEmo(e){
   SEL_EMO=e;ROOM_ICON_IMAGE=null;EMOJI_MANUAL=true;
@@ -4871,7 +5048,7 @@ if ('serviceWorker' in navigator) {
   });
 }
 </script>
-<div class="ver-corner">V1</div>
+<div class="ver-corner">V2</div>
 
 <div id="copyrightModal" class="modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:99999; justify-content:center; align-items:center; opacity:0; transition:opacity 0.2s;">
   <div class="modal-content" style="background:var(--bg, #fdfbf7); padding:30px; border-radius:12px; max-width:600px; width:90%; max-height:85vh; overflow-y:auto; color:var(--text, #5d4037); font-family:inherit; box-shadow:0 10px 30px rgba(0,0,0,0.2); position:relative; transform:translateY(20px); transition:transform 0.2s;">
