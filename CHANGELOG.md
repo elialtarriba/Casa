@@ -8,6 +8,15 @@ Este archivo mantiene un registro de todas las modificaciones y tareas pendiente
 
 ## Cambios Realizados
 
+- **(2026-10-25) [V11] Listas antes que sitios y navegación entre las tres partes:**
+  - Debajo de la agenda hay ahora **tres botones**: **⚙️ Ajustes**, **📝 LISTAS** y **🏡 SITIOS** (antes «CASAS»).
+  - «Mis casas» pasa a llamarse **«Mis sitios»**. Arriba a la izquierda está «‹ Agenda» y arriba a la derecha «📝 Listas».
+  - **«Mis listas»**: arriba a la izquierda «‹ Agenda» y arriba a la derecha «🏡 Sitios». Dentro de una lista, «‹ Listas» sigue volviendo a todas las listas.
+  - Cada botón tiene el color de su parte: el de Listas, el mismo en la agenda y en Mis sitios; el de Sitios, el mismo en la agenda y en Mis listas.
+  - En ⚙️ Ajustes hay una línea nueva, **«Botón LISTAS»**, y «Botón CASAS» pasa a llamarse **«Botón SITIOS»**. Los temas rápidos también cambian el botón de Listas.
+  - Comprobado que los tres botones caben en una sola línea, también en el iPhone pequeño (SE).
+  - Versión **V11**. `sw.js`: caché `home-cache-v11-2026-10-25`.
+
 - **(2026-10-24) [V9] Varias notas por día y ventana para elegir:**
   - **Puedes poner tantas notas como quieras en un mismo día.** Cada nota tiene su texto, su color, sus fotos y puede marcarse como hecha.
   - **Al tocar un día** (en la vista de mes o de año) sale una ventana redondeada con los colores de la agenda, que pregunta qué quieres hacer:

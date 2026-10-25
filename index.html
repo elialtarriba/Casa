@@ -10,7 +10,7 @@
 <title>Hogar</title>
 <link rel="icon" href="logo.png" type="image/png">
 <link rel="apple-touch-icon" href="logo.png">
-<link rel="manifest" href='data:application/manifest+json,{"name":"HOME","short_name":"HOME","start_url":"./","scope":"./","display":"standalone","background_color":"%23f5ead8","theme_color":"%23f5ead8","description":"Organizador personal offline de casas, zonas y tareas.","icons":[{"src":"logo.png","sizes":"192x192","type":"image/png","purpose":"any maskable"}]}'>
+<link rel="manifest" href="manifest.json">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;background:#f5ead8;color:#3a2810;height:100vh;display:flex;flex-direction:column;overflow:hidden;transition:background .5s}
@@ -1058,8 +1058,72 @@ html,body{background:var(--app-bg)}
 #conf-ov{z-index:400}
 
 .pop-btn.main{padding:0 12px!important;overflow:visible!important;flex:1}
+
+/* ══════════ V10 · LISTAS Y AVISOS ══════════ */
+.hl-head .hl-lists{margin-left:auto;height:44px;padding:0 16px;border:none;border-radius:14px;background:var(--btn-sitio);color:color-mix(in srgb,var(--btn-sitio),#000 60%);font:inherit;font-size:15px;font-weight:900;cursor:pointer;box-shadow:0 3px 0 color-mix(in srgb,var(--btn-sitio),#000 12%)}
+#s-lists{display:none;flex-direction:column;min-height:0;height:100%;transition:background .3s}
+#s-lists.active{display:flex}
+.ls-main{flex:1 1 auto;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.ls-wrap{display:flex;flex-direction:column;gap:12px;padding:10px 16px 20px}
+.ls-pic{font-size:24px!important;font-weight:950}
+.li-title{color:var(--li-ink,var(--ink))!important;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.li-edit{margin-left:auto}
+.li-wrap{gap:8px}
+.li-row{display:flex;align-items:center;gap:12px;min-height:56px;padding:6px 6px 6px 12px;border-radius:16px;background:var(--li-card,#fff);box-shadow:0 2px 8px rgba(60,40,30,.07);transition:opacity .25s,transform .25s}
+.li-row.li-leaving{opacity:0;transform:translateY(10px)}
+.li-chk{width:30px;height:30px;flex-shrink:0;border-radius:9px;border:2.5px solid var(--li-ink,var(--ink));background:rgba(255,255,255,.6);color:#fff;font-size:17px;font-weight:950;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;box-shadow:none!important}
+.li-row.done .li-chk{background:var(--li-ink,var(--ink))}
+.li-txt{flex:1;min-width:0;font-size:17px;font-weight:800;color:var(--li-ink,var(--ink));overflow-wrap:anywhere;cursor:text;padding:6px 0}
+.li-row.done{background:color-mix(in srgb,var(--li-card,#fff),#fff 55%);box-shadow:none}
+.li-row.done .li-txt{text-decoration:line-through;opacity:.5}
+.li-del{width:38px;height:38px;flex-shrink:0;border:none;border-radius:12px;background:transparent;color:var(--li-ink,var(--ink));opacity:.35;font-size:15px;font-weight:900;cursor:pointer;box-shadow:none!important}
+.li-sec{display:flex;align-items:center;justify-content:space-between;margin:10px 4px 0;font-size:14px;font-weight:900;color:var(--li-ink,var(--ink));opacity:.75}
+.li-sec button{border:none;background:rgba(255,255,255,.6);border-radius:10px;padding:6px 10px;font:inherit;font-size:12px;font-weight:850;color:inherit;cursor:pointer;box-shadow:none!important}
+.li-empty{padding:26px 16px;text-align:center;font-size:15px;font-weight:700;color:var(--li-ink,var(--ink));opacity:.6;line-height:1.5}
+.ls-bottom{flex-shrink:0}
+.li-add{display:flex;gap:8px;padding:10px 14px 8px}
+.li-add input{flex:1;min-width:0;height:54px;border-radius:18px;border:2px solid color-mix(in srgb,var(--li-card,#ddd),#000 10%);background:#fff;padding:0 16px;font:inherit;font-size:17px;font-weight:750;color:var(--li-ink,var(--ink));outline:none}
+.li-add button{width:54px;height:54px;flex-shrink:0;border:none;border-radius:18px;background:var(--li-card,#ddd);color:var(--li-ink,var(--ink));font-size:26px;font-weight:900;cursor:pointer;box-shadow:0 4px 0 color-mix(in srgb,var(--li-card,#ddd),#000 14%)}
+.le-preview{padding:16px;border-radius:20px}
+.le-card{padding:14px;border-radius:16px;display:flex;flex-direction:column;gap:8px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.le-card b{font-size:18px;font-weight:950}
+.le-item{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:800}
+.le-item i{width:16px;height:16px;border-radius:5px;border:2px solid;display:block}
+.le-item.done span{text-decoration:line-through;opacity:.5}
+/* Avisos */
+.ne-radd{height:46px;border:2px dashed color-mix(in srgb,var(--agenda),#000 15%);border-radius:14px;background:rgba(255,255,255,.6);font:inherit;font-size:15px;font-weight:850;color:var(--ink);cursor:pointer;box-shadow:none!important}
+.ne-remind{display:flex;align-items:center;gap:8px;padding:6px 6px 6px 12px;border-radius:16px;background:#fff}
+.ne-remind span{font-size:20px}
+.ne-remind input{flex:1;min-width:0;height:44px;border:none;background:transparent;font:inherit;font-size:16px;font-weight:800;color:var(--ink);outline:none}
+.ne-rx{width:38px;height:38px;border:none;border-radius:12px;background:#fdeef1;color:#b3364a;font-weight:900;cursor:pointer;box-shadow:none!important}
+.ne-ical{display:flex;flex-direction:column;align-items:flex-start;gap:2px;padding:10px 14px;border:none;border-radius:16px;background:color-mix(in srgb,var(--agenda),#fff 45%);font:inherit;text-align:left;cursor:pointer;box-shadow:none!important}
+.ne-ical b{font-size:14px;font-weight:900;color:var(--ink)}
+.ne-ical small{font-size:12px;font-weight:700;color:var(--ink);opacity:.6}
+.dv-rem{display:inline-block;margin-left:8px;padding:2px 8px;border-radius:8px;background:color-mix(in srgb,var(--agenda),#fff 30%);font-size:12px;font-weight:850;vertical-align:middle}
+.rem-ov{z-index:9500}
+@keyframes bell{0%,100%{transform:rotate(0)}20%{transform:rotate(-14deg)}40%{transform:rotate(12deg)}60%{transform:rotate(-8deg)}80%{transform:rotate(5deg)}}
+.rem-pop{align-items:center;text-align:center;gap:12px;padding:24px 18px 18px}
+.rem-bell{width:76px;height:76px;border-radius:50%;background:var(--agenda);display:flex;align-items:center;justify-content:center;font-size:40px;animation:bell 1.2s ease 2;box-shadow:0 0 0 10px color-mix(in srgb,var(--agenda),transparent 60%)}
+.rem-when{font-size:14px;font-weight:850;color:var(--ink);opacity:.65}
+.rem-text{font-size:22px;font-weight:950;color:var(--ink);line-height:1.25;overflow-wrap:anywhere}
+.rem-more{font-size:12px;font-weight:800;opacity:.55;color:var(--ink)}
+.rem-photos{justify-content:center}
+.rem-row{width:100%}
+.rem-ok{width:100%;flex:0 0 auto!important;height:56px!important;font-size:17px!important}
+
+.hl-head{flex-wrap:nowrap;gap:10px}
+.hl-head .hl-back,.hl-head .hl-lists{white-space:nowrap;flex-shrink:0}
+.hl-head .hl-title{white-space:nowrap;font-size:24px;min-width:0;overflow:hidden;text-overflow:ellipsis}
+
+/* V11 · tres botones bajo la agenda: Ajustes · Listas · Sitios */
+:root{--listas-btn:#f6d3de}
+.home-actions{gap:10px!important}
+.home-actions .home-fab{position:relative!important;bottom:auto!important;left:auto!important;transform:none!important;margin:0!important;height:54px;padding:0 20px!important;border:none;border-radius:18px;font-size:16px!important;font-weight:950;letter-spacing:.02em;white-space:nowrap}
+#home-lists{background:var(--listas-btn);color:color-mix(in srgb,var(--listas-btn),#000 62%);box-shadow:0 5px 0 color-mix(in srgb,var(--listas-btn),#000 14%),0 12px 22px rgba(74,63,87,.14)}
+#home-lists:active{transform:translateY(4px)!important;box-shadow:0 1px 0 color-mix(in srgb,var(--listas-btn),#000 14%)!important}
+#s-lists .hl-head .hl-lists{background:var(--casas-btn);color:color-mix(in srgb,var(--casas-btn),#000 60%);box-shadow:0 3px 0 color-mix(in srgb,var(--casas-btn),#000 12%)}
+#s-houses-list .hl-head .hl-lists{background:var(--listas-btn);color:color-mix(in srgb,var(--listas-btn),#000 60%);box-shadow:0 3px 0 color-mix(in srgb,var(--listas-btn),#000 12%)}
 </style>
-  <link rel="manifest" href="manifest.json">
 </head>
 <body>
 
@@ -1090,7 +1154,7 @@ html,body{background:var(--app-bg)}
             onblur="saveAppTitle(this.textContent.trim())"
             onkeydown="if(event.key==='Enter'){event.preventDefault();this.blur()}"
             title="Toca para editar el título">Home</div>
-          <span class="ver-badge">V9</span>
+          <span class="ver-badge">V11</span>
         </div>
         <button class="brand-flip" style="perspective:none; grid-column: 3; align-self: center;" type="button" onclick="openCalc()" title="Calculadora">
           <span class="brand-flip-inner" style="transition: transform 0.1s;">
@@ -1103,7 +1167,8 @@ html,body{background:var(--app-bg)}
     <div class="houses-grid" id="home-calendar-container"></div>
     <div class="home-actions">
       <button class="home-gear" onclick="openSettings()" aria-label="Ajustes" title="Ajustes">⚙️</button>
-      <button class="home-fab" id="home-fab" onclick="showHousesListScreen()">🏡 CASAS</button>
+      <button class="home-fab" id="home-lists" onclick="showListsScreen()">📝 LISTAS</button>
+      <button class="home-fab" id="home-fab" onclick="showHousesListScreen()">🏡 SITIOS</button>
     </div>
   </div>
 
@@ -1112,7 +1177,8 @@ html,body{background:var(--app-bg)}
     <div class="home-top">
       <div class="hl-head">
         <button class="hl-back" onclick="showHomeScreen()">‹ Agenda</button>
-        <div class="hl-title">Mis casas</div>
+        <div class="hl-title">Mis sitios</div>
+        <button class="hl-lists" onclick="showListsScreen()">📝 Listas</button>
       </div>
     </div>
     <div class="houses-grid" id="houses-grid"></div>
@@ -1126,6 +1192,12 @@ html,body{background:var(--app-bg)}
   </div>
 
   <!-- SCREEN 2: INSIDE HOUSE -->
+  <div class="screen" id="s-lists">
+    <div class="home-top"><div class="hl-head" id="ls-head"></div></div>
+    <div class="ls-main" id="ls-main"></div>
+    <div class="ls-bottom" id="ls-bottom"></div>
+  </div>
+
   <div class="screen" id="s-house">
     <div class="house-header">
       <button class="back-btn" onclick="houseBack()" aria-label="Volver">‹</button>
@@ -1828,6 +1900,8 @@ async function init(){
   }
   loadLocal();
   loadUiSettings();
+  loadLists();
+  setTimeout(checkReminders,1500);
   initHistory();
   CURRENT_HOUSE=null;SEL_LEVELS=[];saveSel();
   document.getElementById('loading').style.display='none';
@@ -1904,7 +1978,9 @@ function exportSync(){
     photos:collectLocalKeys('ph_'),
     pans:collectLocalKeys('pan_'),
     calendar:collectLocalKeys('cal_'),
-    ui:lsGet('home_ui')||''
+    ui:lsGet('home_ui')||'',
+    lists:lsGet('h_lists')||'[]',
+    extra:Object.fromEntries(['hogar_calc_history','hogar_calc_sound','hogar_calc_theme','hogar_calc_custom_themes','hogar_calc_modified_defaults'].map(k=>[k,localStorage.getItem(k)]).filter(([,v])=>v!==null))
   };
   const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});
   const a=document.createElement('a');
@@ -1936,6 +2012,8 @@ function handleImport(e){
       if(payload.title)lsSet('app_title',payload.title);
       if(payload.selection)lsSet('h_sel',payload.selection);
       if(payload.ui){lsSet('home_ui',payload.ui);loadUiSettings();}
+      if(typeof payload.lists==='string'){lsSet('h_lists',payload.lists);loadLists();}
+      Object.entries(payload.extra||{}).forEach(([k,v])=>{if(/^hogar_calc_/.test(k)&&typeof v==='string')localStorage.setItem(k,v);});
       lsKeys().filter(k=>k.startsWith('ph_')||k.startsWith('pan_')||k.startsWith('cal_')).forEach(k=>lsRemove(k));
       Object.entries(payload.photos||{}).forEach(([k,v])=>lsSet(k,v));
       Object.entries(payload.pans||{}).forEach(([k,v])=>lsSet(k,v));
@@ -1945,6 +2023,7 @@ function handleImport(e){
       loadSel();loadAppTitle();
       updateStorageInfo();
       if(CURRENT_HOUSE&&HOUSES.find(h=>h.id===CURRENT_HOUSE)){showHouseScreen(CURRENT_HOUSE);}else{showHomeScreen();}
+      showToast('Copia importada: agenda, casas y listas');
     });
   };
   reader.readAsText(file);
@@ -2231,7 +2310,7 @@ function renderHomeGrid(){
     container.innerHTML = renderCalendar();
   }
   if(!HOUSES.length){
-    showAppError('No hay casas cargadas todavía. Crea una casa desde la pestaña CASAS.');
+    showAppError('No hay casas cargadas todavía. Crea una casa desde el botón SITIOS.');
   }else{
     clearAppError();
   }
@@ -2271,7 +2350,7 @@ function getCalItems(key){
     const raw=lsGet(calItemsKey(key));
     if(raw){
       const items=JSON.parse(raw);
-      if(Array.isArray(items))return items.map(it=>({id:it.id||calLineId(),type:'text',text:it.type==='photo'?'':String(it.text||''),done:it.type==='photo'?false:!!it.done,color:CAL_COLORS[it.color]?it.color:'none',photoIds:calItemPhotoIds(it)}));
+      if(Array.isArray(items))return items.map(it=>({id:it.id||calLineId(),type:'text',text:it.type==='photo'?'':String(it.text||''),done:it.type==='photo'?false:!!it.done,color:CAL_COLORS[it.color]?it.color:'none',photoIds:calItemPhotoIds(it),...(it.remind?{remind:it.remind,remindSeen:!!it.remindSeen}:{})}));
     }
   }catch(e){}
   const legacy=(lsGet('cal_'+key)||'').split(/\n+/).map(s=>s.trim()).filter(Boolean);
@@ -2289,7 +2368,7 @@ function renderCalDayItems(key,mini){
   return `<div class="cal-note">${items.map(it=>{
     const color=CAL_COLORS[it.color]||CAL_COLORS.none;
     const photos=calItemPhotoIds(it).length;
-    return `<div class="cal-note-line ${it.done?'done':''}" data-cal-key="${key}" data-item-id="${it.id}" style="touch-action:none; cursor:grab;" onpointerdown="startCalItemDrag(event)"><span class="cal-note-box" style="background:${color.bg};border-color:${color.dot}"></span><span class="cal-note-text">${esc(it.text)||(photos?`📷 ${photos} foto${photos===1?'':'s'}`:'')}</span></div>`;
+    return `<div class="cal-note-line ${it.done?'done':''}" data-cal-key="${key}" data-item-id="${it.id}" style="touch-action:none; cursor:grab;" onpointerdown="startCalItemDrag(event)"><span class="cal-note-box" style="background:${color.bg};border-color:${color.dot}"></span><span class="cal-note-text">${it.remind&&!it.remindSeen?'⏰ ':''}${esc(it.text)||(photos?`📷 ${photos} foto${photos===1?'':'s'}`:'')}</span></div>`;
   }).join('')}</div>`;
 }
 function renderCalColorPicker(){
@@ -2571,19 +2650,20 @@ function openNotePicker(key){
   const items=getCalItems(key);
   if(items.length===1)return openNoteEditor(key,items[0].id);
   const list=items.map(it=>{const c=CAL_COLORS[it.color]||CAL_COLORS.none;const ph=calItemPhotoIds(it).length;
-    return `<button class="pop-note ${it.done?'done':''}" onclick="openNoteEditor('${key}','${it.id}')"><span class="pop-ndot" style="background:${it.color&&it.color!=='none'?c.dot:'color-mix(in srgb,var(--agenda),#000 25%)'}"></span><span class="pop-ntx">${it.text?esc(it.text):'<em>Foto</em>'}${ph?` <small>📷 ${ph}</small>`:''}</span><span class="pop-chev">›</span></button>`;}).join('');
+    return `<button class="pop-note ${it.done?'done':''}" onclick="openNoteEditor('${key}','${it.id}')"><span class="pop-ndot" style="background:${it.color&&it.color!=='none'?c.dot:'color-mix(in srgb,var(--agenda),#000 25%)'}"></span><span class="pop-ntx">${it.remind&&!it.remindSeen?'⏰ ':''}${it.text?esc(it.text):'<em>Foto</em>'}${ph?` <small>📷 ${ph}</small>`:''}</span><span class="pop-chev">›</span></button>`;}).join('');
   openPop(`<div class="pop-date">${calNiceDate(key,true)}</div><h3 class="pop-h">¿Qué nota quieres editar?</h3><div class="pop-notes">${list}</div>
     <button class="pop-cancel" onclick="openDayChooser('${key}')">‹ Volver</button>`);
 }
 // ── Editor de una nota ──
 function openNoteEditor(key,id){
   const it=id?getCalItems(key).find(x=>x.id===id):null;
-  NE={key,id:id||null,text:it?.text||'',color:it?.color||'none',done:!!it?.done,photoIds:calItemPhotoIds(it),orig:calItemPhotoIds(it),added:[]};
+  NE={key,id:id||null,text:it?.text||'',color:it?.color||'none',done:!!it?.done,photoIds:calItemPhotoIds(it),orig:calItemPhotoIds(it),added:[],remind:it?.remind&&!it?.remindSeen?it.remind:''};
   renderNoteEditor(true);
 }
 function renderNoteEditor(focus){
   if(!NE)return;
   const ta=document.getElementById('ne-text');if(ta)NE.text=ta.value;
+  const ri=document.getElementById('ne-remind');if(ri)NE.remind=ri.value;
   const dots=CAL_COLOR_KEYS.map(k=>`<button class="pop-dot ${k===NE.color?'sel':''}" style="background:${k==='none'?'#fff':CAL_COLORS[k].dot}" onclick="NE.color='${k}';renderNoteEditor(false)" title="${CAL_COLORS[k].name}" aria-label="${CAL_COLORS[k].name}">${k==='none'?'✕':''}</button>`).join('');
   const photos=NE.photoIds.map(pid=>({pid,src:lsGet('ph_cal_'+pid)})).filter(p=>p.src);
   openPop(`
@@ -2592,6 +2672,10 @@ function renderNoteEditor(focus){
     <textarea class="pop-text" id="ne-text" rows="3" placeholder="Ej.: Dentista a las 17h">${esc(NE.text)}</textarea>
     <div class="pop-sec">Color de la nota</div>
     <div class="pop-dots">${dots}</div>
+    <div class="pop-sec">Aviso</div>
+    ${NE.remind?`<div class="ne-remind"><span>⏰</span><input type="datetime-local" id="ne-remind" value="${NE.remind}" onchange="setNoteRemind(this.value)"><button class="ne-rx" onclick="NE.remind='';renderNoteEditor(false)" aria-label="Quitar aviso">✕</button></div>
+    <button class="ne-ical" onclick="addRemindToPhoneCalendar(document.getElementById('ne-text').value,document.getElementById('ne-remind').value)"><b>📅 Añadir también al Calendario del iPhone</b><small>Así te avisa aunque la app esté cerrada</small></button>`
+    :`<button class="ne-radd" onclick="NE.remind=defaultRemind(NE.key);renderNoteEditor(false)">⏰ Poner un aviso</button>`}
     <div class="pop-photos">${photos.map(p=>`<div class="sh-ph"><img src="${p.src}" alt="" onclick="openImagePop(this.src)"><button onclick="removeNotePhoto('${p.pid}')" aria-label="Quitar foto">✕</button></div>`).join('')}<button class="pop-addph" onclick="addNotePhoto()">📷<span>Foto</span></button></div>
     ${NE.id?`<button class="pop-done ${NE.done?'on':''}" onclick="NE.done=!NE.done;renderNoteEditor(false)">${NE.done?'✓ Hecha':'○ Marcar como hecha'}</button>`:''}
     <div class="pop-row">
@@ -2617,15 +2701,19 @@ function saveNote(){
   if(!NE)return;
   const text=(document.getElementById('ne-text')?.value||'').trim();
   if(!text&&!NE.photoIds.length){document.getElementById('ne-text')?.focus();showToast('Escribe la nota o añade una foto');return;}
+  const rEl=document.getElementById('ne-remind');if(rEl)NE.remind=rEl.value||'';
   const items=getCalItems(NE.key);
+  const applyRemind=it=>{if(NE.remind){if(it.remind!==NE.remind||it.remindSeen)it.remindSeen=false;it.remind=NE.remind;}else{delete it.remind;delete it.remindSeen;}};
   if(NE.id){
     const it=items.find(x=>x.id===NE.id);
-    if(it){it.text=text;it.color=NE.color;it.done=NE.done;it.photoIds=[...NE.photoIds];delete it.photoId;}
-  }else items.push({id:calLineId(),type:'text',text,done:false,color:NE.color,photoIds:[...NE.photoIds]});
+    if(it){it.text=text;it.color=NE.color;it.done=NE.done;it.photoIds=[...NE.photoIds];delete it.photoId;applyRemind(it);}
+  }else{const it={id:calLineId(),type:'text',text,done:false,color:NE.color,photoIds:[...NE.photoIds]};applyRemind(it);items.push(it);}
+  const remTxt=NE.remind?' · aviso '+remindNice(NE.remind):'';
   NE.orig.filter(pid=>!NE.photoIds.includes(pid)).forEach(pid=>lsRemove('ph_cal_'+pid));
   const wasNew=!NE.id,key=NE.key;NE=null;closePop();
   writeDayItems(key,items);
-  showToast(wasNew?'Nota añadida':'Nota guardada');
+  showToast((wasNew?'Nota añadida':'Nota guardada')+remTxt);
+  setTimeout(checkReminders,500);
 }
 function askDeleteNote(){
   if(!NE)return;
@@ -2636,6 +2724,271 @@ function askDeleteNote(){
     NE=null;closePop();writeDayItems(e.key,items);showToast('Nota borrada');
   });
 }
+
+// ══════════════════════════════════════════════
+// V10 · LISTAS
+// Cada lista: nombre, color de la lista, color del fondo y color de la letra.
+// Al marcar el cuadradito, el ítem se tacha y baja al final.
+// ══════════════════════════════════════════════
+let LISTS=[],CUR_LIST=null,LE=null,PICK=null;
+function loadLists(){try{const v=JSON.parse(lsGet('h_lists')||'[]');LISTS=Array.isArray(v)?v:[];}catch(e){LISTS=[];}}
+function saveLists(){lsSet('h_lists',JSON.stringify(LISTS));lsSet('h_updated',String(Date.now()));}
+const LIST_THEMES=[
+  {name:'Marrones',card:'#d9bfa3',bg:'#f7efe6',ink:'#4a3426'},
+  {name:'Anaranjados',card:'#f8c9a6',bg:'#fdeee2',ink:'#6b3f22'},
+  {name:'Amarillos',card:'#f5dc8c',bg:'#fdf8e4',ink:'#5a4a1e'},
+  {name:'Verdes',card:'#c9dfc0',bg:'#eef5e6',ink:'#2f4a3d'},
+  {name:'Azules',card:'#c4dcef',bg:'#eaf3fa',ink:'#2f3a4a'},
+  {name:'Tonos del logo',card:'#e8c9a3',bg:'#fcf3cf',ink:'#5a3e2b'},
+  {name:'Rosas',card:'#f6d3de',bg:'#fdf0f4',ink:'#6b2f45'},
+  {name:'Lilas',card:'#e1daf5',bg:'#f5f2fc',ink:'#4a3f57'},
+];
+function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');}
+function showListsScreen(){
+  loadLists();CUR_LIST=null;CURRENT_HOUSE=null;applyUiSettings();
+  showScreen('s-lists');document.body.style.background=UI.bg;renderLists();
+}
+function listCounts(l){const d=(l.items||[]).filter(i=>i.done).length;return {done:d,pending:(l.items||[]).length-d};}
+function renderLists(){
+  const scr=document.getElementById('s-lists');
+  if(CUR_LIST){return renderListDetail();}
+  scr.style.background='';scr.style.removeProperty('--li-ink');
+  document.body.style.background=UI.bg;
+  document.getElementById('ls-head').innerHTML=`<button class="hl-back" onclick="showHomeScreen()">‹ Agenda</button><div class="hl-title">Mis listas</div><button class="hl-lists" onclick="showHousesListScreen()">🏡 Sitios</button>`;
+  const cards=LISTS.map(l=>{const c=listCounts(l);
+    return `<div class="hl-card ls-card" style="--hc-bg:${l.card};--hc-ink:${l.ink}" onclick="openList('${l.id}')">
+      <div class="hl-pic ls-pic" style="background:${l.bg};color:${l.ink}">${c.pending?c.pending:'✓'}</div>
+      <div class="hl-txt"><div class="hl-name">${esc(l.name)}</div><div class="hl-meta">${c.pending?`${c.pending} por hacer`:'Todo hecho'}${c.done?` · ${c.done} tachado${c.done>1?'s':''}`:''}</div></div>
+      <button class="hp-more" style="color:${l.ink}" onclick="event.stopPropagation();openListMenu('${l.id}')" aria-label="Opciones">⋯</button>
+    </div>`;}).join('');
+  document.getElementById('ls-main').innerHTML=`<div class="ls-wrap">${cards||'<div class="hp-empty">Aún no tienes listas.<br>Crea la primera: compra, tareas, regalos…</div>'}<button class="hl-add" onclick="openListEditor(null)">＋ Nueva lista</button></div>`;
+  document.getElementById('ls-bottom').innerHTML='';
+}
+function openList(id){CUR_LIST=id;renderLists();const m=document.getElementById('ls-main');if(m)m.scrollTop=0;}
+function curList(){return LISTS.find(l=>l.id===CUR_LIST);}
+function renderListDetail(focus){
+  const l=curList();if(!l){CUR_LIST=null;return renderLists();}
+  const scr=document.getElementById('s-lists');
+  scr.style.background=l.bg;document.body.style.background=l.bg;
+  scr.style.setProperty('--li-ink',l.ink);scr.style.setProperty('--li-card',l.card);
+  document.getElementById('ls-head').innerHTML=`<button class="hl-back" onclick="CUR_LIST=null;renderLists()">‹ Listas</button><div class="hl-title li-title">${esc(l.name)}</div><button class="hp-edit li-edit" onclick="openListEditor('${l.id}')" aria-label="Editar lista">✏️</button>`;
+  const items=l.items||[];
+  const pend=items.filter(i=>!i.done).sort((a,b)=>(a.order||0)-(b.order||0));
+  const done=items.filter(i=>i.done).sort((a,b)=>(a.doneAt||0)-(b.doneAt||0));
+  const row=i=>`<div class="li-row ${i.done?'done':''}" id="li-${i.id}">
+      <button class="li-chk" onclick="toggleListItem('${i.id}')" aria-label="${i.done?'Desmarcar':'Marcar'}">${i.done?'✓':''}</button>
+      <div class="li-txt" onclick="renameListItem('${i.id}')">${esc(i.text)}</div>
+      <button class="li-del" onclick="delListItem('${i.id}')" aria-label="Borrar">✕</button></div>`;
+  let h=`<div class="ls-wrap li-wrap">`;
+  h+=pend.map(row).join('');
+  if(!pend.length&&!done.length)h+=`<div class="li-empty">La lista está vacía.<br>Escribe abajo lo que quieras añadir.</div>`;
+  else if(!pend.length)h+=`<div class="li-empty">¡Todo hecho! 🎉</div>`;
+  if(done.length)h+=`<div class="li-sec"><span>Tachados (${done.length})</span><button onclick="clearDoneItems()">Borrar tachados</button></div>`+done.map(row).join('');
+  h+=`</div>`;
+  document.getElementById('ls-main').innerHTML=h;
+  document.getElementById('ls-bottom').innerHTML=`<div class="li-add"><input id="li-inp" placeholder="Añadir a ${esc(l.name).replace(/"/g,'&quot;')}…" enterkeyhint="done" autocomplete="off" onkeydown="if(event.key==='Enter')addListItem()"><button onclick="addListItem()" aria-label="Añadir">＋</button></div>`;
+  if(focus)setTimeout(()=>document.getElementById('li-inp')?.focus({preventScroll:true}),30);
+}
+function addListItem(){
+  const inp=document.getElementById('li-inp');const t=(inp?.value||'').trim();if(!t)return;
+  const l=curList();if(!l)return;l.items=l.items||[];
+  const orders=l.items.filter(i=>!i.done).map(i=>i.order||0);
+  l.items.push({id:gid(),text:t,done:false,order:orders.length?Math.max(...orders)+1:0});
+  saveLists();renderListDetail(true);
+  const m=document.getElementById('ls-main');const pendRows=m.querySelectorAll('.li-row:not(.done)');pendRows[pendRows.length-1]?.scrollIntoView({block:'nearest'});
+}
+function toggleListItem(id){
+  const l=curList();const it=l?.items?.find(i=>i.id===id);if(!it)return;
+  const el=document.getElementById('li-'+id);
+  it.done=!it.done;
+  if(it.done)it.doneAt=Date.now();else{delete it.doneAt;const o=l.items.filter(i=>!i.done&&i.id!==id).map(i=>i.order||0);it.order=o.length?Math.max(...o)+1:0;}
+  saveLists();
+  if(el){el.classList.toggle('done',it.done);el.classList.add('li-leaving');setTimeout(()=>renderListDetail(),260);}else renderListDetail();
+}
+function renameListItem(id){
+  const l=curList();const it=l?.items?.find(i=>i.id===id);if(!it)return;
+  openSheet('Cambiar texto',`<input class="sh-input" id="li-ren" value="${esc(it.text).replace(/"/g,'&quot;')}" enterkeyhint="done" onkeydown="if(event.key==='Enter')saveListRename('${id}')">
+    <div class="sh-row"><button class="sh-btn" onclick="closeSheet()">Cancelar</button><button class="sh-btn main" onclick="saveListRename('${id}')">Guardar</button></div>`);
+  setTimeout(()=>{const i=document.getElementById('li-ren');if(i){i.focus();i.select();}},80);
+}
+function saveListRename(id){
+  const v=(document.getElementById('li-ren')?.value||'').trim();if(!v)return;
+  const it=curList()?.items?.find(i=>i.id===id);if(it){it.text=v;saveLists();}
+  closeSheet();renderListDetail();
+}
+function delListItem(id){
+  const l=curList();if(!l)return;
+  const it=l.items.find(i=>i.id===id);
+  l.items=l.items.filter(i=>i.id!==id);saveLists();renderListDetail();
+  if(it)showToast('Borrado: '+it.text);
+}
+function clearDoneItems(){
+  const l=curList();if(!l)return;
+  const n=l.items.filter(i=>i.done).length;
+  showConf('Borrar tachados',`¿Borrar ${n===1?'el ítem tachado':`los ${n} ítems tachados`}?`,()=>{l.items=l.items.filter(i=>!i.done);saveLists();renderListDetail();});
+}
+function openListMenu(id){
+  const l=LISTS.find(x=>x.id===id);if(!l)return;
+  openSheet(esc(l.name),`
+    <button class="sh-opt" onclick="closeSheet();openListEditor('${id}')">✏️ Nombre y colores</button>
+    <button class="sh-opt" onclick="closeSheet();moveList('${id}',-1)">⬆️ Subir en la lista</button>
+    <button class="sh-opt" onclick="closeSheet();moveList('${id}',1)">⬇️ Bajar en la lista</button>
+    <button class="sh-opt danger" onclick="closeSheet();askDelList('${id}')">🗑️ Borrar lista</button>
+    <button class="sh-btn" onclick="closeSheet()">Cancelar</button>`);
+}
+function moveList(id,d){const i=LISTS.findIndex(l=>l.id===id),j=i+d;if(i<0||j<0||j>=LISTS.length)return;[LISTS[i],LISTS[j]]=[LISTS[j],LISTS[i]];saveLists();renderLists();}
+function askDelList(id){
+  const l=LISTS.find(x=>x.id===id);if(!l)return;
+  showConf('Borrar lista',`¿Borrar la lista "${l.name}" con todo lo que tiene?`,()=>{LISTS=LISTS.filter(x=>x.id!==id);if(CUR_LIST===id)CUR_LIST=null;saveLists();renderLists();});
+}
+// ── Editor de lista (nombre + tema + colores) ──
+function openListEditor(id){
+  const l=id?LISTS.find(x=>x.id===id):null;
+  const t=LIST_THEMES[0];
+  LE={id:id||null,name:l?.name||'',card:l?.card||t.card,bg:l?.bg||t.bg,ink:l?.ink||t.ink};
+  renderListEditor(true);
+}
+function listThemeName(){const t=LIST_THEMES.find(t=>t.card===LE.card&&t.bg===LE.bg&&t.ink===LE.ink);return t?t.name:'A tu gusto';}
+function renderListEditor(focus){
+  if(!LE)return;
+  const n=document.getElementById('le-name');if(n)LE.name=n.value;
+  const line=(fn,chip,label,val)=>`<button class="st-line" onclick="${fn}">${chip}<span class="st-line-txt"><b>${label}</b><small>${val}</small></span><span class="st-chev">›</span></button>`;
+  openSheet(LE.id?'Editar lista':'Nueva lista',`
+    <div class="le-preview" style="background:${LE.bg}">
+      <div class="le-card" style="background:${LE.card};color:${LE.ink}"><b id="le-pname">${LE.name?esc(LE.name):'Mi lista'}</b>
+        <div class="le-item"><i style="border-color:${LE.ink}"></i><span>Leche</span></div>
+        <div class="le-item done"><i style="border-color:${LE.ink};background:${LE.ink}"></i><span>Pan</span></div></div>
+    </div>
+    <input class="sh-input" id="le-name" value="${esc(LE.name).replace(/"/g,'&quot;')}" placeholder="Ej.: Compra, Tareas, Regalos…" oninput="LE.name=this.value;document.getElementById('le-pname').textContent=this.value||'Mi lista'" enterkeyhint="done" autocomplete="off" onkeydown="if(event.key==='Enter')saveListEditor()">
+    ${line('openListThemes()',`<span class="st-chip st-chip-multi"><i style="background:${LE.card}"></i><i style="background:${LE.bg}"></i><i style="background:${LE.ink}"></i></span>`,'Tema rápido',listThemeName())}
+    ${line("pickListColor('card')",`<i class="st-chip" style="background:${LE.card}"></i>`,'Color de la lista',colorName(LE.card))}
+    ${line("pickListColor('bg')",`<i class="st-chip" style="background:${LE.bg}"></i>`,'Color del fondo',colorName(LE.bg))}
+    ${line("pickListColor('ink')",`<i class="st-chip" style="background:${LE.ink}"></i>`,'Color de la letra',colorName(LE.ink))}
+    <div class="sh-row"><button class="sh-btn" onclick="LE=null;closeSheet()">Cancelar</button><button class="sh-btn main" onclick="saveListEditor()">${LE.id?'Guardar':'Crear'}</button></div>`);
+  if(focus&&!LE.id)setTimeout(()=>document.getElementById('le-name')?.focus(),150);
+}
+function openListThemes(){
+  const n=document.getElementById('le-name');if(n)LE.name=n.value;
+  const cards=LIST_THEMES.map((t,i)=>`<button class="st-theme ${t.card===LE.card&&t.bg===LE.bg&&t.ink===LE.ink?'on':''}" onclick="LE.card='${t.card}';LE.bg='${t.bg}';LE.ink='${t.ink}';renderListEditor(false)"><span class="st-theme-sw"><i style="background:${t.card}"></i><i style="background:${t.bg}"></i><i style="background:${t.ink}"></i></span>${t.name}</button>`).join('');
+  openSheet('Tema rápido de la lista',`<div class="st-themes">${cards}</div><button class="sh-btn" onclick="renderListEditor(false)">‹ Volver</button>`);
+}
+function pickListColor(key){
+  const n=document.getElementById('le-name');if(n)LE.name=n.value;
+  PICK={title:{card:'Color de la lista',bg:'Color del fondo',ink:'Color de la letra'}[key],groups:key==='ink'?UI_INK_GROUPS:UI_GROUPS,cur:LE[key],apply:h=>{LE[key]=h;},back:()=>renderListEditor(false)};
+  openGenericColor();
+}
+function openGenericColor(tab){
+  if(!PICK)return;
+  const groups=PICK.groups,cur=PICK.cur;
+  if(!tab){const g=groups.find(g=>g.c.some(([h])=>h===cur));tab=g?g.name:groups[0].name;}
+  const g=groups.find(x=>x.name===tab)||groups[0];
+  const chips=groups.map(x=>`<button class="tab-chip ${x.name===tab?'on':''}" onclick="openGenericColor('${x.name}')">${x.name}</button>`).join('');
+  const sw=g.c.map(([h,n])=>`<button class="col-opt ${cur===h?'sel':''}" onclick="genericPick('${h}')"><i style="background:${h}"></i><span>${n}</span></button>`).join('')
+    +`<label class="col-opt"><i class="st-custom"><input type="color" value="${cur}" onchange="genericPick(this.value)"></i><span>Otro…</span></label>`;
+  openSheet(PICK.title,`<div class="tab-row">${chips}</div><div class="col-grid">${sw}</div><button class="sh-btn" onclick="PICK.back()">‹ Volver</button>`);
+}
+function genericPick(h){if(!PICK)return;PICK.apply(h);const b=PICK.back;PICK=null;b();}
+function saveListEditor(){
+  if(!LE)return;
+  const name=(document.getElementById('le-name')?.value||LE.name||'').trim();
+  if(!name){document.getElementById('le-name')?.focus();showToast('Escribe un nombre');return;}
+  if(LE.id){const l=LISTS.find(x=>x.id===LE.id);if(l){l.name=name;l.card=LE.card;l.bg=LE.bg;l.ink=LE.ink;}}
+  else LISTS.push({id:gid(),name,card:LE.card,bg:LE.bg,ink:LE.ink,items:[]});
+  const wasNew=!LE.id;LE=null;closeSheet();saveLists();
+  if(wasNew){CUR_LIST=LISTS[LISTS.length-1].id;renderListDetail(true);showToast('Lista creada: '+name);}
+  else renderLists();
+}
+
+// ══════════════════════════════════════════════
+// V10 · AVISOS DE LAS NOTAS
+// Cada nota puede tener un aviso (día y hora). Cuando llega la hora (o al abrir la app
+// si ya ha pasado) sale una ventana bonita con la nota. Para que avise también con la
+// app cerrada, se puede añadir el aviso al Calendario del iPhone (.ics con alarma).
+// ══════════════════════════════════════════════
+function pad2(n){return String(n).padStart(2,'0');}
+function localDT(d){return `${d.getFullYear()}-${pad2(d.getMonth()+1)}-${pad2(d.getDate())}T${pad2(d.getHours())}:${pad2(d.getMinutes())}`;}
+function remindNice(r){
+  if(!r)return '';const d=new Date(r);if(isNaN(d))return '';
+  const today=new Date(),tom=new Date();tom.setDate(today.getDate()+1);
+  const hm=`${pad2(d.getHours())}:${pad2(d.getMinutes())}`;
+  if(sameDay(d,today))return 'Hoy a las '+hm;
+  if(sameDay(d,tom))return 'Mañana a las '+hm;
+  return d.toLocaleDateString('es-ES',{weekday:'short',day:'numeric',month:'short'})+' · '+hm;
+}
+function defaultRemind(key){const d=calKeyDate(key);const now=new Date();if(sameDay(d,now)){now.setMinutes(0);now.setHours(now.getHours()+1);return localDT(now);}d.setHours(9,0,0,0);return localDT(d);}
+function setNoteRemind(v){NE.remind=v||'';}
+function icsEsc(s){return String(s||'').replace(/\\/g,'\\\\').replace(/\n/g,'\\n').replace(/,/g,'\\,').replace(/;/g,'\\;');}
+function addRemindToPhoneCalendar(text,remind){
+  if(!remind){showToast('Primero elige el día y la hora del aviso');return;}
+  const d=new Date(remind);if(isNaN(d))return;
+  const f=x=>`${x.getFullYear()}${pad2(x.getMonth()+1)}${pad2(x.getDate())}T${pad2(x.getHours())}${pad2(x.getMinutes())}00`;
+  const end=new Date(d.getTime()+30*60000),now=new Date();
+  const stamp=`${now.getUTCFullYear()}${pad2(now.getUTCMonth()+1)}${pad2(now.getUTCDate())}T${pad2(now.getUTCHours())}${pad2(now.getUTCMinutes())}00Z`;
+  const ics=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//EliBi//HOME//ES','CALSCALE:GREGORIAN','BEGIN:VEVENT',
+    'UID:home-'+Date.now()+'@elibi','DTSTAMP:'+stamp,'DTSTART:'+f(d),'DTEND:'+f(end),'SUMMARY:'+icsEsc(text||'Aviso de HOME'),'DESCRIPTION:'+icsEsc('Aviso de la agenda HOME: '+(text||'')),
+    'BEGIN:VALARM','TRIGGER:PT0M','ACTION:DISPLAY','DESCRIPTION:'+icsEsc(text||'Aviso de HOME'),'END:VALARM','END:VEVENT','END:VCALENDAR'].join('\r\n');
+  const blob=new Blob([ics],{type:'text/calendar'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');a.href=url;a.download='aviso-home.ics';document.body.appendChild(a);a.click();a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),60000);
+}
+// ── Comprobar avisos pendientes ──
+let REM_OPEN=false;
+function dueReminders(){
+  const now=Date.now(),out=[];
+  lsKeys().filter(k=>k.startsWith('cal_items_')).forEach(k=>{
+    const key=k.slice(10);
+    try{(JSON.parse(lsGet(k)||'[]')||[]).forEach(it=>{if(it&&it.remind&&!it.remindSeen){const t=new Date(it.remind).getTime();if(!isNaN(t)&&t<=now)out.push({key,id:it.id,t,it});}});}catch(e){}
+  });
+  return out.sort((a,b)=>a.t-b.t);
+}
+function checkReminders(){
+  if(REM_OPEN)return;
+  const due=dueReminders();if(!due.length)return;
+  showReminder(due[0],due.length);
+}
+function showReminder(r,total){
+  REM_OPEN=true;
+  const it=r.it;
+  const ph=calItemPhotoIds(it).map(id=>lsGet('ph_cal_'+id)).filter(Boolean);
+  const d=new Date(it.remind);
+  document.getElementById('rem-ov')?.remove();
+  const ov=document.createElement('div');ov.className='pop-ov rem-ov';ov.id='rem-ov';
+  ov.innerHTML=`<div class="pop rem-pop" role="alertdialog">
+    <div class="rem-bell">⏰</div>
+    <div class="rem-when">${calNiceDate(r.key,false)} · ${pad2(d.getHours())}:${pad2(d.getMinutes())}</div>
+    <div class="rem-text">${it.text?esc(it.text):'Tienes un aviso'}</div>
+    ${ph.length?`<div class="dv-photos rem-photos">${ph.map(s=>`<img src="${s}" alt="" onclick="openImagePop(this.src)">`).join('')}</div>`:''}
+    ${total>1?`<div class="rem-more">Tienes ${total} avisos</div>`:''}
+    <div class="pop-row rem-row">
+      <button class="pop-btn" onclick="snoozeReminder('${r.key}','${r.id}')">⏱ En 10 min</button>
+      <button class="pop-btn" onclick="closeReminder('${r.key}','${r.id}',true)">Ver el día</button>
+    </div>
+    <button class="pop-btn main rem-ok" onclick="closeReminder('${r.key}','${r.id}',false)">Leído, cerrar</button>
+  </div>`;
+  document.body.appendChild(ov);
+  try{navigator.vibrate&&navigator.vibrate([120,80,120]);}catch(e){}
+}
+function updateReminderItem(key,id,fn){
+  try{const items=JSON.parse(lsGet(calItemsKey(key))||'[]');const it=items.find(x=>x.id===id);if(it){fn(it);lsSet(calItemsKey(key),JSON.stringify(items));lsSet('h_updated',String(Date.now()));}}catch(e){}
+}
+function closeReminder(key,id,openDay){
+  updateReminderItem(key,id,it=>{it.remindSeen=true;});
+  document.getElementById('rem-ov')?.remove();REM_OPEN=false;
+  if(openDay){showHomeScreen();openDayView(key);}else if(document.getElementById('s-home')?.classList.contains('active'))renderHomeGrid();
+  setTimeout(checkReminders,400);
+}
+function snoozeReminder(key,id){
+  updateReminderItem(key,id,it=>{it.remind=localDT(new Date(Date.now()+10*60000));it.remindSeen=false;});
+  document.getElementById('rem-ov')?.remove();REM_OPEN=false;
+  showToast('Te lo recuerdo en 10 minutos');
+  if(document.getElementById('s-home')?.classList.contains('active'))renderHomeGrid();
+  setTimeout(checkReminders,400);
+}
+setInterval(checkReminders,15000);
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)setTimeout(checkReminders,300);});
+window.addEventListener('focus',()=>setTimeout(checkReminders,300));
+window.addEventListener('pageshow',()=>setTimeout(checkReminders,600));
 
 // ── V8 · VISTA DE DÍA ──
 let CAL_DAY=new Date();
@@ -2684,7 +3037,7 @@ function renderCalDayView(){
     const ph=calItemPhotoIds(it).map(id=>lsGet('ph_cal_'+id)).filter(Boolean);
     return `<div class="dv-item ${it.done?'done':''}" onclick="openNoteEditor('${key}','${it.id}')">
       <span class="dv-dot" style="background:${it.color&&it.color!=='none'?c.dot:'color-mix(in srgb,var(--agenda),#000 25%)'}"></span>
-      <div class="dv-txt">${it.text?esc(it.text):'<em>Foto</em>'}${ph.length?`<div class="dv-photos">${ph.map(src=>`<img src="${src}" alt="" onclick="event.stopPropagation();openImagePop(this.src)">`).join('')}</div>`:''}</div>
+      <div class="dv-txt">${it.text?esc(it.text):'<em>Foto</em>'}${it.remind&&!it.remindSeen?`<span class="dv-rem">⏰ ${remindNice(it.remind)}</span>`:''}${ph.length?`<div class="dv-photos">${ph.map(src=>`<img src="${src}" alt="" onclick="event.stopPropagation();openImagePop(this.src)">`).join('')}</div>`:''}</div>
     </div>`;}).join(''):`<div class="dv-empty">Nada apuntado este día.</div>`;
   return `<div class="cal-card dv-card">${calModesHtml()}
     <div class="cal-head">
@@ -3318,17 +3671,18 @@ const UI_INK_GROUPS=[
   {name:'Marrones',c:[['#3b2f2a','Chocolate'],['#4a3426','Café'],['#5a3e2b','Nogal'],['#6b4a33','Cuero'],['#7a5230','Canela oscura'],['#8a4f2a','Terracota']]},
   {name:'Otros',c:[['#4f5130','Oliva oscuro'],['#4a3f57','Ciruela'],['#2f3a4a','Azul noche'],['#2f4a3d','Verde bosque'],['#6b2f45','Burdeos'],['#333333','Grafito'],['#6f5cb5','Violeta'],['#b0577a','Frambuesa']]},
 ];
-const UI_DEFAULTS={ver:'#e1daf5',bg:'#fbf7f3',agenda:'#e1daf5',casas:'#cdebdc',gear:'#ffffff',ink:'#4a3f57',title:'grad',btnSitio:'#e1daf5',btnCosa:'#cdebdc',btnMain:'#cdebdc',btnOther:'#efe9f7'};
+const UI_DEFAULTS={listas:'#f6d3de',ver:'#e1daf5',bg:'#fbf7f3',agenda:'#e1daf5',casas:'#cdebdc',gear:'#ffffff',ink:'#4a3f57',title:'grad',btnSitio:'#e1daf5',btnCosa:'#cdebdc',btnMain:'#cdebdc',btnOther:'#efe9f7'};
 const UI_THEMES=[
-  {name:'Tonos del logo',sw:['#fcf3cf','#c4935f','#8a8a50'],v:{ver:'#c9c99e',bg:'#fcf3cf',agenda:'#e8c9a3',casas:'#c9c99e',gear:'#fbeeb8',ink:'#5a3e2b',title:'#c4935f',btnSitio:'#e8c9a3',btnCosa:'#c9c99e',btnMain:'#c9c99e',btnOther:'#f6e3a3'}},
-  {name:'Marrón pastel',sw:['#f2e6d8','#d9bfa3','#9c7656'],v:{ver:'#d9bfa3',bg:'#f2e6d8',agenda:'#d9bfa3',casas:'#cfb193',gear:'#ead9c6',ink:'#4a3426',title:'#7a5230',btnSitio:'#e2cbb3',btnCosa:'#d9bfa3',btnMain:'#cfb193',btnOther:'#ead9c6'}},
-  {name:'Miel y naranja',sw:['#fdf8e4','#f5dc8c','#f4b48a'],v:{ver:'#f5dc8c',bg:'#fdf8e4',agenda:'#f5dc8c',casas:'#f8c9a6',gear:'#fbf1c8',ink:'#5a3e2b',title:'#d9814f',btnSitio:'#f9e8a8',btnCosa:'#fbdcc4',btnMain:'#f8c9a6',btnOther:'#fbf1c8'}},
+  {name:'Tonos del logo',sw:['#fcf3cf','#c4935f','#8a8a50'],v:{listas:'#e8c9a3',ver:'#c9c99e',bg:'#fcf3cf',agenda:'#e8c9a3',casas:'#c9c99e',gear:'#fbeeb8',ink:'#5a3e2b',title:'#c4935f',btnSitio:'#e8c9a3',btnCosa:'#c9c99e',btnMain:'#c9c99e',btnOther:'#f6e3a3'}},
+  {name:'Marrón pastel',sw:['#f2e6d8','#d9bfa3','#9c7656'],v:{listas:'#e2cbb3',ver:'#d9bfa3',bg:'#f2e6d8',agenda:'#d9bfa3',casas:'#cfb193',gear:'#ead9c6',ink:'#4a3426',title:'#7a5230',btnSitio:'#e2cbb3',btnCosa:'#d9bfa3',btnMain:'#cfb193',btnOther:'#ead9c6'}},
+  {name:'Miel y naranja',sw:['#fdf8e4','#f5dc8c','#f4b48a'],v:{listas:'#f9e8a8',ver:'#f5dc8c',bg:'#fdf8e4',agenda:'#f5dc8c',casas:'#f8c9a6',gear:'#fbf1c8',ink:'#5a3e2b',title:'#d9814f',btnSitio:'#f9e8a8',btnCosa:'#fbdcc4',btnMain:'#f8c9a6',btnOther:'#fbf1c8'}},
   {name:'Lavanda (original)',sw:['#fbf7f3','#e1daf5','#cdebdc'],v:{...UI_DEFAULTS}},
 ];
 const UI_ROWS=[
   {key:'bg',label:'Fondo de la app'},
   {key:'agenda',label:'Agenda'},
-  {key:'casas',label:'Botón CASAS'},
+  {key:'listas',label:'Botón LISTAS'},
+  {key:'casas',label:'Botón SITIOS'},
   {key:'gear',label:'Botón ⚙️ Ajustes'},
   {key:'ink',label:'Color de la letra',ink:true},
   {key:'title',label:'Título «Home»',ink:true,grad:true},
@@ -3348,6 +3702,7 @@ function applyUiSettings(){
   r.setProperty('--app-bg',UI.bg);
   r.setProperty('--agenda',UI.agenda);
   r.setProperty('--casas-btn',UI.casas);
+  r.setProperty('--listas-btn',UI.listas||'#f6d3de');
   r.setProperty('--gear-btn',UI.gear);
   r.setProperty('--ink',UI.ink);
   r.setProperty('--btn-sitio',UI.btnSitio);
@@ -5795,7 +6150,7 @@ if ('serviceWorker' in navigator) {
 </div>
 
 <div class="app-footer" onclick="openCopyright(event)">
-  <span class="ft-copy">© 2025–Present Elisabeth Altarriba</span><span class="ft-ver">V9</span>
+  <span class="ft-copy">© 2025–Present Elisabeth Altarriba</span><span class="ft-ver">V11</span>
 </div>
 
 <script>

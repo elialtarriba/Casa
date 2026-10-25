@@ -66,3 +66,15 @@ Aquí se apunta todo lo que Elisabeth pide o comenta sobre la app, para no perde
 ### Peticiones para la V9
 - No podía hacer más de una nota en un día. Tiene que poder hacer **tantas notas como quiera en un día**. → Hecho.
 - Al pulsar un día debe preguntar: **añadir una nota, editar una nota existente o seleccionar solo el día**. Con un **popup bonito, redondeado y del tema**. → Hecho.
+
+### Peticiones para la V10 (2026-10-25)
+1. En la agenda, al añadir una nota, poder poner un **aviso a la hora y el día** que quiera, con un **popup bonito** con lo que pone la nota, que salga **aunque la app no esté activa** y que se pueda cerrar una vez leído. → Hecho: ventana de aviso dentro de la app, más la opción de añadirlo al Calendario del iPhone para que avise con la app cerrada. Una web no puede avisar sola con la app cerrada; se lo he explicado.
+2. En «Mis casas», a la derecha, un botón **Listas** que lleve a otra página donde añadir listas, cada una con su color de lista, color de fondo y color de letra. Al pulsar el cuadradito, el ítem se tacha y baja al final. Listas una debajo de otra, como las casas, con «＋ Nueva lista». → Hecho.
+3. **Exportar e importar todo**: agenda, casas y listas. → Hecho (también ajustes y calculadora).
+4. Que con el acceso directo en el móvil se vea todo y funcione **sin internet ni ninguna conexión**. → Hecho (hay que abrirla una vez con internet después de subir la versión).
+
+### Peticiones para la V11
+- Poner las **listas antes que las casas**: debajo del calendario, tres botones: **configuración, listas y sitios**. → Hecho.
+- Las casas ya no se llaman «Mis casas», sino **«Mis Sitios»**. → Hecho (dentro siguen siendo casas: «＋ Nueva casa»).
+- En **Listas**: a la izquierda, botón para ir a la **Agenda**; a la derecha, botón para ir a **Mis Sitios**. → Hecho.
+- En **Mis Sitios**: arriba a la izquierda, botón para ir a la **Agenda**; arriba a la derecha, botón para ir a **Mis Listas**. → Hecho.
