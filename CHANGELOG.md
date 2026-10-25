@@ -8,6 +8,28 @@ Este archivo mantiene un registro de todas las modificaciones y tareas pendiente
 
 ## Cambios Realizados
 
+- **(2026-10-25) [V14] Ir a la Agenda o a las Listas desde cualquier sitio:**
+  - En todas las pantallas de dentro de una casa (la casa y cada sitio, a cualquier nivel) hay arriba, encima del título, dos botones pequeños y discretos: **📅 Agenda** (izquierda) y **📝 Listas** (derecha).
+  - Ya no hace falta volver atrás hasta «Mis sitios» para ir a la agenda o a las listas.
+  - Si se ha elegido un color en «Letra de los botones», también se aplica a estos dos.
+  - Versión **V14**. `sw.js`: caché `home-cache-v14-2026-10-25`.
+
+- **(2026-10-25) [V13] El título de la casa o del sitio se ve entero:**
+  - El título quedaba cortado («Comoda 3 cal…») porque el lápiz ✏️ y el botón «↩ Deshacer» ocupaban mucho sitio.
+  - Ahora «Deshacer» es solo la flecha ↩ (más pequeño, en el mismo sitio) y el título puede ocupar **dos líneas**, con un tamaño de letra que se adapta a la pantalla.
+  - Los nombres normales se leen enteros. Si un nombre es larguísimo y no cabe en dos líneas, termina en «…», pero se ve completo en la ruta de debajo del buscador.
+  - Probado en iPhone pequeño (SE) y normal.
+  - Versión **V13**. `sw.js`: caché `home-cache-v13-2026-10-25`.
+
+- **(2026-10-25) [V12] Arreglos en listas y notas:**
+  - **Listas:** la casilla «Añadir a…» está ahora arriba, debajo del título, y no la tapa el teclado. Se queda fija al hacer scroll y lo último que añades aparece justo debajo. Al desmarcar un tachado, vuelve arriba.
+  - **Nueva lista:** se quita el ejemplo (Mi lista / Leche / Pan) de la ventana de crear o editar lista.
+  - **Letra de los botones:** nueva línea en ⚙️ Ajustes, «Letra de los botones», que cambia el color de las palabras de los botones (Agenda, Listas, Sitios, Fecha actual, ＋ Sitio, ＋ Cosa…). Con «Automática» se queda como antes, con la letra a juego con cada botón.
+  - **Notas: cambiar de día.** Tocando la fecha de arriba de la nota (▾) eliges otro día y la nota se mueve allí, con su color, fotos y aviso. Deshacer (↶) la devuelve en un solo paso.
+  - **Notas: más espacio para leer.** El texto ocupa casi toda la ventana. El color, el aviso, las fotos y «Hecha» van en botoncitos pequeños debajo, que se despliegan solo al tocarlos.
+  - **Colores de nota en una lista desplegable,** con nombre: Sin color, Azul celeste, Azul, Verde claro, Verde oscuro, Amarillo, Naranja, Rosa, Rojo, Marrón claro, Marrón oscuro y Caqui. Los mismos colores salen en «Color del día». Las notas antiguas con otros colores los conservan.
+  - Versión **V12**. `sw.js`: caché `home-cache-v12-2026-10-25`.
+
 - **(2026-10-25) [V11] Listas antes que sitios y navegación entre las tres partes:**
   - Debajo de la agenda hay ahora **tres botones**: **⚙️ Ajustes**, **📝 LISTAS** y **🏡 SITIOS** (antes «CASAS»).
   - «Mis casas» pasa a llamarse **«Mis sitios»**. Arriba a la izquierda está «‹ Agenda» y arriba a la derecha «📝 Listas».

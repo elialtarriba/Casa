@@ -78,3 +78,16 @@ Aquí se apunta todo lo que Elisabeth pide o comenta sobre la app, para no perde
 - Las casas ya no se llaman «Mis casas», sino **«Mis Sitios»**. → Hecho (dentro siguen siendo casas: «＋ Nueva casa»).
 - En **Listas**: a la izquierda, botón para ir a la **Agenda**; a la derecha, botón para ir a **Mis Sitios**. → Hecho.
 - En **Mis Sitios**: arriba a la izquierda, botón para ir a la **Agenda**; arriba a la derecha, botón para ir a **Mis Listas**. → Hecho.
+
+### Peticiones para la V12
+1. En las listas, la casilla de añadir se escondía debajo del teclado. Ponerla **arriba, debajo del título y los botones**, encima del primer ítem. → Hecho.
+2. Poder cambiar el **color de las palabras de los botones** (Agenda, Sitios, Listas). → Hecho (Ajustes → «Letra de los botones»).
+3. En la agenda, **cambiar el día de una nota** desde dentro de la nota, si se ha equivocado. → Hecho.
+4. El **color de la nota en una lista desplegable**, para que no se vea tanta cosa, con estos colores: azul celeste, azul, verde claro, verde oscuro, amarillo, naranja, rosa, rojo, marrón claro, marrón oscuro y caqui. Al editar una nota se tiene que **ver más espacio de la nota**. → Hecho.
+5. Al crear una lista nueva, **quitar el ejemplo** (Mi lista / Leche / Pan). → Hecho.
+
+### Peticiones para la V13
+- Dentro de un sitio, el **título no se veía** (quedaba cortado por el lápiz). Arreglarlo. → Hecho (título en dos líneas y «Deshacer» solo con la flecha ↩).
+
+### Peticiones para la V14
+- Al ir entrando en los sitios, para ir a la Agenda o a las Listas había que volver atrás hasta el inicio de Mis Sitios. Poner **dos botones (Agenda y Listas) arriba, encima del título, en cada pantalla de cada sitio**, que no sobresalgan mucho. → Hecho.

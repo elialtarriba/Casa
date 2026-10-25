@@ -1,5 +1,5 @@
 // HOME · service worker V10: funciona sin conexión
-const CACHE_NAME = 'home-cache-v11-2026-10-25';
+const CACHE_NAME = 'home-cache-v14-2026-10-25';
 const CORE = [
   './',
   './index.html',

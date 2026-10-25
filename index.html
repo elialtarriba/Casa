@@ -1123,6 +1123,48 @@ html,body{background:var(--app-bg)}
 #home-lists:active{transform:translateY(4px)!important;box-shadow:0 1px 0 color-mix(in srgb,var(--listas-btn),#000 14%)!important}
 #s-lists .hl-head .hl-lists{background:var(--casas-btn);color:color-mix(in srgb,var(--casas-btn),#000 60%);box-shadow:0 3px 0 color-mix(in srgb,var(--casas-btn),#000 12%)}
 #s-houses-list .hl-head .hl-lists{background:var(--listas-btn);color:color-mix(in srgb,var(--listas-btn),#000 60%);box-shadow:0 3px 0 color-mix(in srgb,var(--listas-btn),#000 12%)}
+
+/* ══════════ V12 ══════════ */
+/* Letra de los botones (si se elige en Ajustes) */
+.btn-ink-on #home-fab,.btn-ink-on #home-lists,.btn-ink-on .hl-back,.btn-ink-on .hl-lists,.btn-ink-on .hp-add,.btn-ink-on .cal-btn,.btn-ink-on .cal-mode,.btn-ink-on .back-btn,.btn-ink-on .hp-undo,.btn-ink-on .dv-edit{color:var(--btn-ink)!important}
+.st-auto{display:flex!important;align-items:center;justify-content:center;font-style:normal;font-weight:950;font-size:18px;background:linear-gradient(135deg,#fff,#eee);color:#777}
+.st-line .st-chip{font-style:normal}
+/* Listas: añadir arriba */
+.li-add-top{position:sticky;top:0;z-index:3;padding:4px 0 8px!important;margin:-4px 0 0;background:var(--li-bg,transparent)}
+/* Editor de nota con más espacio */
+.pop.ne-pop{max-width:440px;max-height:92dvh;gap:10px}
+.ne-top{display:flex;align-items:center;gap:8px;justify-content:space-between}
+.ne-datebtn{border:none;cursor:pointer;font:inherit;font-size:13px;font-weight:900}
+.ne-mode{font-size:13px;font-weight:850;color:var(--ink);opacity:.5}
+.ne-text{min-height:min(42dvh,320px)!important;font-size:18px!important;line-height:1.45;resize:none!important}
+.ne-chips{display:flex;flex-wrap:wrap;gap:6px}
+.ne-chip{display:inline-flex;align-items:center;gap:6px;height:38px;padding:0 12px;border:none;border-radius:19px;background:#fff;font:inherit;font-size:13.5px;font-weight:850;color:var(--ink);cursor:pointer;box-shadow:0 1px 4px rgba(60,40,30,.08)!important}
+.ne-chip i{width:16px;height:16px;border-radius:50%;border:1.5px solid rgba(60,40,30,.15);display:block}
+.ne-chip.on{background:var(--ink);color:#fff}
+.ne-chip.has{background:color-mix(in srgb,var(--agenda),#fff 20%)}
+.ne-panel{display:flex;flex-direction:column;gap:8px;padding:10px;border-radius:18px;background:rgba(255,255,255,.7);animation:popIn2 .18s ease}
+.ne-plbl{font-size:13px;font-weight:900;color:var(--ink);opacity:.6;padding:0 4px}
+.ne-colors{gap:2px;max-height:38dvh;overflow-y:auto}
+.ne-copt{display:flex;align-items:center;gap:12px;min-height:44px;padding:0 10px;border:none;border-radius:12px;background:transparent;font:inherit;font-size:15px;font-weight:800;color:var(--ink);cursor:pointer;text-align:left;box-shadow:none!important}
+.ne-copt i{width:22px;height:22px;border-radius:50%;border:1.5px solid rgba(60,40,30,.15);display:block;flex-shrink:0}
+.ne-copt span{flex:1}
+.ne-copt.sel{background:#fff}
+.ne-date{height:48px;border:2px solid color-mix(in srgb,var(--agenda),#fff 20%);border-radius:14px;padding:0 12px;font:inherit;font-size:16px;font-weight:800;color:var(--ink);background:#fff;width:100%}
+.ne-moved{font-size:13px;font-weight:750;color:var(--ink);padding:0 4px}
+
+/* V13 · el título de la casa / sitio se ve entero (hasta 2 líneas) */
+.house-header{align-items:center}
+.house-hname{flex:1 1 auto;min-width:0;white-space:normal!important;overflow:hidden;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;line-clamp:2;font-size:clamp(17px,5.2vw,21px)!important;line-height:1.15;word-break:break-word;text-overflow:clip}
+.house-hname img{width:24px!important;height:24px!important;vertical-align:-4px;margin-right:2px}
+.hp-undo{width:44px!important;min-width:44px;height:44px!important;padding:0!important;font-size:20px!important;flex-shrink:0}
+.house-header .hp-edit,.house-header .back-btn{flex-shrink:0}
+
+/* V14 · accesos rápidos a Agenda y Listas dentro de cada sitio */
+.hp-nav{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:calc(14px + env(safe-area-inset-top,0px)) 14px 0;flex-shrink:0}
+.hp-nav button{height:30px;padding:0 12px;border:none;border-radius:15px;background:rgba(255,255,255,.55);font:inherit;font-size:13px;font-weight:850;color:var(--ink);cursor:pointer;box-shadow:none!important}
+.hp-nav button:active{background:rgba(255,255,255,.85)}
+.btn-ink-on .hp-nav button{color:var(--btn-ink)!important}
+#s-house .house-header{padding-top:8px!important}
 </style>
 </head>
 <body>
@@ -1154,7 +1196,7 @@ html,body{background:var(--app-bg)}
             onblur="saveAppTitle(this.textContent.trim())"
             onkeydown="if(event.key==='Enter'){event.preventDefault();this.blur()}"
             title="Toca para editar el título">Home</div>
-          <span class="ver-badge">V11</span>
+          <span class="ver-badge">V14</span>
         </div>
         <button class="brand-flip" style="perspective:none; grid-column: 3; align-self: center;" type="button" onclick="openCalc()" title="Calculadora">
           <span class="brand-flip-inner" style="transition: transform 0.1s;">
@@ -1199,11 +1241,15 @@ html,body{background:var(--app-bg)}
   </div>
 
   <div class="screen" id="s-house">
+    <div class="hp-nav">
+      <button onclick="showHomeScreen()">📅 Agenda</button>
+      <button onclick="showListsScreen()">📝 Listas</button>
+    </div>
     <div class="house-header">
       <button class="back-btn" onclick="houseBack()" aria-label="Volver">‹</button>
       <div class="house-hname" id="house-hname">Casa</div>
       <button class="hp-edit" onclick="editHere()" aria-label="Editar nombre, color e icono" title="Editar">✏️</button>
-      <button class="tb hp-undo" id="bundo" onclick="undo()" title="Deshacer el último cambio">↩ Deshacer</button>
+      <button class="tb hp-undo" id="bundo" onclick="undo()" title="Deshacer el último cambio" aria-label="Deshacer">↩</button>
     </div>
     <div class="search-panel" id="search-panel">
       <div class="search-card">
@@ -1790,7 +1836,14 @@ const CAL_COLORS={
   verde:{name:'Verde',bg:'#d9f3d8',border:'#35a85a',dot:'#35a85a'},
   menta:{name:'Menta',bg:'#d7f4ea',border:'#30b898',dot:'#30b898'},
   azul:{name:'Azul',bg:'#d8eaff',border:'#2f80ed',dot:'#2f80ed'},
-  lila:{name:'Lila',bg:'#eadcff',border:'#8b5adf',dot:'#8b5adf'}
+  lila:{name:'Lila',bg:'#eadcff',border:'#8b5adf',dot:'#8b5adf'},
+  celeste:{name:'Azul celeste',bg:'#dff1fb',border:'#5bb8e8',dot:'#5bb8e8'},
+  verdeclaro:{name:'Verde claro',bg:'#e3f5d8',border:'#7cc35a',dot:'#7cc35a'},
+  verdeoscuro:{name:'Verde oscuro',bg:'#d3e8da',border:'#2e7d4f',dot:'#2e7d4f'},
+  rojo:{name:'Rojo',bg:'#fddcdc',border:'#d93a3a',dot:'#d93a3a'},
+  marronclaro:{name:'Marrón claro',bg:'#f1e2d1',border:'#c49a6c',dot:'#c49a6c'},
+  marronoscuro:{name:'Marrón oscuro',bg:'#e6d5c6',border:'#7a4e2d',dot:'#7a4e2d'},
+  caqui:{name:'Caqui',bg:'#ece8cf',border:'#9a9255',dot:'#9a9255'}
 };
 const CAL_COLOR_KEYS=Object.keys(CAL_COLORS);
 
@@ -2610,14 +2663,14 @@ function openPop(html){
 }
 function closePop(){document.getElementById('pop-ov')?.remove();}
 function cancelPop(){if(NE)cancelNote();else closePop();}
-function writeDayItems(key,items){
+function writeDayItems(key,items,noHistory){
   items=items.map(it=>({...it,type:'text',text:(it.text||'').trim(),photoIds:calItemPhotoIds(it)})).filter(it=>it.text||it.photoIds.length);
   const activeText=items.filter(it=>!it.done).map(it=>it.text).join('\n');
   const allText=items.map(it=>(it.done?'✓ ':'')+it.text).join('\n');
   if(items.length)lsSet(calItemsKey(key),JSON.stringify(items));else lsRemove(calItemsKey(key));
   if(allText)lsSet('cal_'+key,activeText||allText);else lsRemove('cal_'+key);
   lsSet('h_updated',String(Date.now()));scheduleCloudSave();updateStorageInfo();
-  saveStateToHistory();renderHomeGrid();
+  if(!noHistory)saveStateToHistory();renderHomeGrid();
 }
 // ── Ventana del día ──
 let LINE_TAP_AT=0;
@@ -2626,7 +2679,7 @@ function openDayChooser(key,force){
   const items=getCalItems(key);
   const dc=calColorFor(key);
   const n=items.length;
-  const dots=CAL_COLOR_KEYS.map(k=>`<button class="pop-dot ${k===dc?'sel':''}" style="background:${k==='none'?'#fff':CAL_COLORS[k].bg};${k==='none'?'':`border-color:${CAL_COLORS[k].border}`}" onclick="setDayColor('${key}','${k}')" title="${CAL_COLORS[k].name}" aria-label="${CAL_COLORS[k].name}">${k==='none'?'✕':''}</button>`).join('');
+  const dots=noteColorKeys(dc).map(k=>`<button class="pop-dot ${k===dc?'sel':''}" style="background:${k==='none'?'#fff':CAL_COLORS[k].bg};${k==='none'?'':`border-color:${CAL_COLORS[k].border}`}" onclick="setDayColor('${key}','${k}')" title="${CAL_COLORS[k].name}" aria-label="${CAL_COLORS[k].name}">${k==='none'?'✕':''}</button>`).join('');
   openPop(`
     <div class="pop-date">${calNiceDate(key,true)}</div>
     <h3 class="pop-h">¿Qué quieres hacer?</h3>
@@ -2654,65 +2707,95 @@ function openNotePicker(key){
   openPop(`<div class="pop-date">${calNiceDate(key,true)}</div><h3 class="pop-h">¿Qué nota quieres editar?</h3><div class="pop-notes">${list}</div>
     <button class="pop-cancel" onclick="openDayChooser('${key}')">‹ Volver</button>`);
 }
-// ── Editor de una nota ──
+// ── Editor de una nota (V12: más espacio para leer; opciones desplegables) ──
+const NOTE_COLOR_KEYS=['none','celeste','azul','verdeclaro','verdeoscuro','amarillo','naranja','rosa','rojo','marronclaro','marronoscuro','caqui'];
+function noteColorKeys(cur){return NOTE_COLOR_KEYS.includes(cur)||!cur?NOTE_COLOR_KEYS:[...NOTE_COLOR_KEYS,cur];}
 function openNoteEditor(key,id){
   const it=id?getCalItems(key).find(x=>x.id===id):null;
-  NE={key,id:id||null,text:it?.text||'',color:it?.color||'none',done:!!it?.done,photoIds:calItemPhotoIds(it),orig:calItemPhotoIds(it),added:[],remind:it?.remind&&!it?.remindSeen?it.remind:''};
+  NE={key,newKey:key,id:id||null,text:it?.text||'',color:it?.color||'none',done:!!it?.done,photoIds:calItemPhotoIds(it),orig:calItemPhotoIds(it),added:[],remind:it?.remind&&!it?.remindSeen?it.remind:'',panel:null};
   renderNoteEditor(true);
 }
+function nePanel(p){
+  const ta=document.getElementById('ne-text');if(ta)NE.text=ta.value;
+  const ri=document.getElementById('ne-remind');if(ri)NE.remind=ri.value;
+  NE.panel=NE.panel===p?null:p;
+  if(p==='aviso'&&NE.panel==='aviso'&&!NE.remind)NE.remind=defaultRemind(NE.newKey);
+  renderNoteEditor(false);
+}
+function neShortDate(key){const d=calKeyDate(key);const t=d.toLocaleDateString('es-ES',{weekday:'short',day:'numeric',month:'short'});return t.charAt(0).toUpperCase()+t.slice(1);}
 function renderNoteEditor(focus){
   if(!NE)return;
   const ta=document.getElementById('ne-text');if(ta)NE.text=ta.value;
   const ri=document.getElementById('ne-remind');if(ri)NE.remind=ri.value;
-  const dots=CAL_COLOR_KEYS.map(k=>`<button class="pop-dot ${k===NE.color?'sel':''}" style="background:${k==='none'?'#fff':CAL_COLORS[k].dot}" onclick="NE.color='${k}';renderNoteEditor(false)" title="${CAL_COLORS[k].name}" aria-label="${CAL_COLORS[k].name}">${k==='none'?'✕':''}</button>`).join('');
+  const col=CAL_COLORS[NE.color]||CAL_COLORS.none;
+  const dotOf=k=>k==='none'?'#fff':CAL_COLORS[k].dot;
   const photos=NE.photoIds.map(pid=>({pid,src:lsGet('ph_cal_'+pid)})).filter(p=>p.src);
+  let panel='';
+  if(NE.panel==='color'){
+    panel=`<div class="ne-panel ne-colors">${noteColorKeys(NE.color).map(k=>`<button class="ne-copt ${k===NE.color?'sel':''}" onclick="NE.color='${k}';NE.panel=null;renderNoteEditor(false)"><i style="background:${dotOf(k)}"></i><span>${CAL_COLORS[k].name}</span>${k===NE.color?'<b>✓</b>':''}</button>`).join('')}</div>`;
+  }else if(NE.panel==='dia'){
+    panel=`<div class="ne-panel"><div class="ne-plbl">Cambiar la nota de día</div><input class="ne-date" type="date" id="ne-day" value="${NE.newKey}" onchange="if(this.value){NE.newKey=this.value;NE.panel=null;renderNoteEditor(false)}">${NE.newKey!==NE.key?`<div class="ne-moved">Se moverá del ${neShortDate(NE.key)} al <b>${neShortDate(NE.newKey)}</b></div>`:''}</div>`;
+  }else if(NE.panel==='aviso'){
+    panel=`<div class="ne-panel"><div class="ne-plbl">Aviso</div>
+      <div class="ne-remind"><span>⏰</span><input type="datetime-local" id="ne-remind" value="${NE.remind}" onchange="setNoteRemind(this.value)"><button class="ne-rx" onclick="NE.remind='';NE.panel=null;renderNoteEditor(false)" aria-label="Quitar aviso">✕</button></div>
+      <button class="ne-ical" onclick="addRemindToPhoneCalendar(document.getElementById('ne-text').value,document.getElementById('ne-remind').value)"><b>📅 Añadir también al Calendario del iPhone</b><small>Así te avisa aunque la app esté cerrada</small></button></div>`;
+  }
   openPop(`
-    <div class="pop-date">${calNiceDate(NE.key,true)}</div>
-    <h3 class="pop-h">${NE.id?'Editar nota':'Nueva nota'}</h3>
-    <textarea class="pop-text" id="ne-text" rows="3" placeholder="Ej.: Dentista a las 17h">${esc(NE.text)}</textarea>
-    <div class="pop-sec">Color de la nota</div>
-    <div class="pop-dots">${dots}</div>
-    <div class="pop-sec">Aviso</div>
-    ${NE.remind?`<div class="ne-remind"><span>⏰</span><input type="datetime-local" id="ne-remind" value="${NE.remind}" onchange="setNoteRemind(this.value)"><button class="ne-rx" onclick="NE.remind='';renderNoteEditor(false)" aria-label="Quitar aviso">✕</button></div>
-    <button class="ne-ical" onclick="addRemindToPhoneCalendar(document.getElementById('ne-text').value,document.getElementById('ne-remind').value)"><b>📅 Añadir también al Calendario del iPhone</b><small>Así te avisa aunque la app esté cerrada</small></button>`
-    :`<button class="ne-radd" onclick="NE.remind=defaultRemind(NE.key);renderNoteEditor(false)">⏰ Poner un aviso</button>`}
-    <div class="pop-photos">${photos.map(p=>`<div class="sh-ph"><img src="${p.src}" alt="" onclick="openImagePop(this.src)"><button onclick="removeNotePhoto('${p.pid}')" aria-label="Quitar foto">✕</button></div>`).join('')}<button class="pop-addph" onclick="addNotePhoto()">📷<span>Foto</span></button></div>
-    ${NE.id?`<button class="pop-done ${NE.done?'on':''}" onclick="NE.done=!NE.done;renderNoteEditor(false)">${NE.done?'✓ Hecha':'○ Marcar como hecha'}</button>`:''}
+    <div class="ne-top"><button class="pop-date ne-datebtn" onclick="nePanel('dia')">${calNiceDate(NE.newKey,true)} ▾</button><span class="ne-mode">${NE.id?'Editar nota':'Nueva nota'}</span></div>
+    <textarea class="pop-text ne-text" id="ne-text" placeholder="Escribe aquí tu nota…">${esc(NE.text)}</textarea>
+    ${photos.length?`<div class="pop-photos">${photos.map(p=>`<div class="sh-ph"><img src="${p.src}" alt="" onclick="openImagePop(this.src)"><button onclick="removeNotePhoto('${p.pid}')" aria-label="Quitar foto">✕</button></div>`).join('')}</div>`:''}
+    <div class="ne-chips">
+      <button class="ne-chip ${NE.panel==='color'?'on':''}" onclick="nePanel('color')"><i style="background:${dotOf(NE.color)}"></i>${NE.color==='none'?'Color':col.name} ▾</button>
+      <button class="ne-chip ${NE.panel==='aviso'?'on':''} ${NE.remind?'has':''}" onclick="nePanel('aviso')">⏰ ${NE.remind?remindNice(NE.remind):'Aviso'}</button>
+      <button class="ne-chip" onclick="addNotePhoto()">📷 Foto</button>
+      ${NE.id?`<button class="ne-chip ${NE.done?'has':''}" onclick="const t=document.getElementById('ne-text');if(t)NE.text=t.value;NE.done=!NE.done;renderNoteEditor(false)">${NE.done?'✓ Hecha':'○ Hecha'}</button>`:''}
+    </div>
+    ${panel}
     <div class="pop-row">
       ${NE.id?`<button class="pop-btn del" onclick="askDeleteNote()" aria-label="Borrar nota">🗑️</button>`:''}
       <button class="pop-btn" onclick="cancelNote()">Cancelar</button>
       <button class="pop-btn main" onclick="saveNote()">${NE.id?'Guardar':'Añadir'}</button>
     </div>`);
+  document.querySelector('#pop-ov .pop')?.classList.add('ne-pop');
   if(focus)setTimeout(()=>{const t=document.getElementById('ne-text');if(t){t.focus();t.setSelectionRange(t.value.length,t.value.length);}},120);
 }
 function addNotePhoto(){
   const ta=document.getElementById('ne-text');if(ta)NE.text=ta.value;
+  const ri=document.getElementById('ne-remind');if(ri)NE.remind=ri.value;
   const input=document.createElement('input');input.type='file';input.accept='image/*';input.multiple=true;input.style.display='none';document.body.appendChild(input);
   input.onchange=async()=>{try{const files=[...input.files];if(!files.length)return;const photos=await Promise.all(files.map(compressTaskPhoto));
     photos.forEach(data=>{const pid=calLineId();lsSet('ph_cal_'+pid,data);NE.photoIds.push(pid);NE.added.push(pid);});renderNoteEditor(false);}catch(e){alert('No se ha podido añadir esta imagen.');}finally{input.remove();}};
   input.click();
 }
-function removeNotePhoto(pid){NE.photoIds=NE.photoIds.filter(x=>x!==pid);renderNoteEditor(false);}
+function removeNotePhoto(pid){const ta=document.getElementById('ne-text');if(ta)NE.text=ta.value;NE.photoIds=NE.photoIds.filter(x=>x!==pid);renderNoteEditor(false);}
 function cancelNote(){
   if(NE)NE.added.forEach(pid=>lsRemove('ph_cal_'+pid));
-  const key=NE?.key;NE=null;closePop();
+  NE=null;closePop();
 }
 function saveNote(){
   if(!NE)return;
   const text=(document.getElementById('ne-text')?.value||'').trim();
   if(!text&&!NE.photoIds.length){document.getElementById('ne-text')?.focus();showToast('Escribe la nota o añade una foto');return;}
   const rEl=document.getElementById('ne-remind');if(rEl)NE.remind=rEl.value||'';
-  const items=getCalItems(NE.key);
   const applyRemind=it=>{if(NE.remind){if(it.remind!==NE.remind||it.remindSeen)it.remindSeen=false;it.remind=NE.remind;}else{delete it.remind;delete it.remindSeen;}};
-  if(NE.id){
-    const it=items.find(x=>x.id===NE.id);
-    if(it){it.text=text;it.color=NE.color;it.done=NE.done;it.photoIds=[...NE.photoIds];delete it.photoId;applyRemind(it);}
-  }else{const it={id:calLineId(),type:'text',text,done:false,color:NE.color,photoIds:[...NE.photoIds]};applyRemind(it);items.push(it);}
+  const fromKey=NE.key,toKey=NE.newKey||NE.key,moved=fromKey!==toKey;
+  let note;
+  const srcItems=getCalItems(fromKey);
+  if(NE.id){note=srcItems.find(x=>x.id===NE.id);}
+  if(!note){note={id:calLineId(),type:'text'};}
+  note.text=text;note.color=NE.color;note.done=NE.id?NE.done:false;note.photoIds=[...NE.photoIds];delete note.photoId;applyRemind(note);
   const remTxt=NE.remind?' · aviso '+remindNice(NE.remind):'';
   NE.orig.filter(pid=>!NE.photoIds.includes(pid)).forEach(pid=>lsRemove('ph_cal_'+pid));
-  const wasNew=!NE.id,key=NE.key;NE=null;closePop();
-  writeDayItems(key,items);
-  showToast((wasNew?'Nota añadida':'Nota guardada')+remTxt);
+  const wasNew=!NE.id;NE=null;closePop();
+  if(moved){
+    writeDayItems(fromKey,srcItems.filter(x=>x.id!==note.id),true);
+    const dst=getCalItems(toKey);dst.push(note);writeDayItems(toKey,dst);
+    showToast('Nota movida al '+neShortDate(toKey)+remTxt);
+  }else{
+    if(wasNew)srcItems.push(note);
+    writeDayItems(fromKey,srcItems);
+    showToast((wasNew?'Nota añadida':'Nota guardada')+remTxt);
+  }
   setTimeout(checkReminders,500);
 }
 function askDeleteNote(){
@@ -2769,7 +2852,7 @@ function curList(){return LISTS.find(l=>l.id===CUR_LIST);}
 function renderListDetail(focus){
   const l=curList();if(!l){CUR_LIST=null;return renderLists();}
   const scr=document.getElementById('s-lists');
-  scr.style.background=l.bg;document.body.style.background=l.bg;
+  scr.style.background=l.bg;document.body.style.background=l.bg;scr.style.setProperty('--li-bg',l.bg);
   scr.style.setProperty('--li-ink',l.ink);scr.style.setProperty('--li-card',l.card);
   document.getElementById('ls-head').innerHTML=`<button class="hl-back" onclick="CUR_LIST=null;renderLists()">‹ Listas</button><div class="hl-title li-title">${esc(l.name)}</div><button class="hp-edit li-edit" onclick="openListEditor('${l.id}')" aria-label="Editar lista">✏️</button>`;
   const items=l.items||[];
@@ -2779,29 +2862,28 @@ function renderListDetail(focus){
       <button class="li-chk" onclick="toggleListItem('${i.id}')" aria-label="${i.done?'Desmarcar':'Marcar'}">${i.done?'✓':''}</button>
       <div class="li-txt" onclick="renameListItem('${i.id}')">${esc(i.text)}</div>
       <button class="li-del" onclick="delListItem('${i.id}')" aria-label="Borrar">✕</button></div>`;
-  let h=`<div class="ls-wrap li-wrap">`;
+  let h=`<div class="ls-wrap li-wrap"><div class="li-add li-add-top"><input id="li-inp" placeholder="Añadir a ${esc(l.name).replace(/"/g,'&quot;')}…" enterkeyhint="done" autocomplete="off" onkeydown="if(event.key==='Enter')addListItem()"><button onclick="addListItem()" aria-label="Añadir">＋</button></div>`;
   h+=pend.map(row).join('');
   if(!pend.length&&!done.length)h+=`<div class="li-empty">La lista está vacía.<br>Escribe abajo lo que quieras añadir.</div>`;
   else if(!pend.length)h+=`<div class="li-empty">¡Todo hecho! 🎉</div>`;
   if(done.length)h+=`<div class="li-sec"><span>Tachados (${done.length})</span><button onclick="clearDoneItems()">Borrar tachados</button></div>`+done.map(row).join('');
   h+=`</div>`;
   document.getElementById('ls-main').innerHTML=h;
-  document.getElementById('ls-bottom').innerHTML=`<div class="li-add"><input id="li-inp" placeholder="Añadir a ${esc(l.name).replace(/"/g,'&quot;')}…" enterkeyhint="done" autocomplete="off" onkeydown="if(event.key==='Enter')addListItem()"><button onclick="addListItem()" aria-label="Añadir">＋</button></div>`;
-  if(focus)setTimeout(()=>document.getElementById('li-inp')?.focus({preventScroll:true}),30);
+  document.getElementById('ls-bottom').innerHTML='';
+  if(focus)setTimeout(()=>{document.getElementById('ls-main').scrollTop=0;document.getElementById('li-inp')?.focus({preventScroll:true});},30);
 }
 function addListItem(){
   const inp=document.getElementById('li-inp');const t=(inp?.value||'').trim();if(!t)return;
   const l=curList();if(!l)return;l.items=l.items||[];
   const orders=l.items.filter(i=>!i.done).map(i=>i.order||0);
-  l.items.push({id:gid(),text:t,done:false,order:orders.length?Math.max(...orders)+1:0});
+  l.items.push({id:gid(),text:t,done:false,order:orders.length?Math.min(...orders)-1:0});
   saveLists();renderListDetail(true);
-  const m=document.getElementById('ls-main');const pendRows=m.querySelectorAll('.li-row:not(.done)');pendRows[pendRows.length-1]?.scrollIntoView({block:'nearest'});
 }
 function toggleListItem(id){
   const l=curList();const it=l?.items?.find(i=>i.id===id);if(!it)return;
   const el=document.getElementById('li-'+id);
   it.done=!it.done;
-  if(it.done)it.doneAt=Date.now();else{delete it.doneAt;const o=l.items.filter(i=>!i.done&&i.id!==id).map(i=>i.order||0);it.order=o.length?Math.max(...o)+1:0;}
+  if(it.done)it.doneAt=Date.now();else{delete it.doneAt;const o=l.items.filter(i=>!i.done&&i.id!==id).map(i=>i.order||0);it.order=o.length?Math.min(...o)-1:0;}
   saveLists();
   if(el){el.classList.toggle('done',it.done);el.classList.add('li-leaving');setTimeout(()=>renderListDetail(),260);}else renderListDetail();
 }
@@ -2854,12 +2936,7 @@ function renderListEditor(focus){
   const n=document.getElementById('le-name');if(n)LE.name=n.value;
   const line=(fn,chip,label,val)=>`<button class="st-line" onclick="${fn}">${chip}<span class="st-line-txt"><b>${label}</b><small>${val}</small></span><span class="st-chev">›</span></button>`;
   openSheet(LE.id?'Editar lista':'Nueva lista',`
-    <div class="le-preview" style="background:${LE.bg}">
-      <div class="le-card" style="background:${LE.card};color:${LE.ink}"><b id="le-pname">${LE.name?esc(LE.name):'Mi lista'}</b>
-        <div class="le-item"><i style="border-color:${LE.ink}"></i><span>Leche</span></div>
-        <div class="le-item done"><i style="border-color:${LE.ink};background:${LE.ink}"></i><span>Pan</span></div></div>
-    </div>
-    <input class="sh-input" id="le-name" value="${esc(LE.name).replace(/"/g,'&quot;')}" placeholder="Ej.: Compra, Tareas, Regalos…" oninput="LE.name=this.value;document.getElementById('le-pname').textContent=this.value||'Mi lista'" enterkeyhint="done" autocomplete="off" onkeydown="if(event.key==='Enter')saveListEditor()">
+    <input class="sh-input" id="le-name" value="${esc(LE.name).replace(/"/g,'&quot;')}" placeholder="Ej.: Compra, Tareas, Regalos…" oninput="LE.name=this.value" enterkeyhint="done" autocomplete="off" onkeydown="if(event.key==='Enter')saveListEditor()">
     ${line('openListThemes()',`<span class="st-chip st-chip-multi"><i style="background:${LE.card}"></i><i style="background:${LE.bg}"></i><i style="background:${LE.ink}"></i></span>`,'Tema rápido',listThemeName())}
     ${line("pickListColor('card')",`<i class="st-chip" style="background:${LE.card}"></i>`,'Color de la lista',colorName(LE.card))}
     ${line("pickListColor('bg')",`<i class="st-chip" style="background:${LE.bg}"></i>`,'Color del fondo',colorName(LE.bg))}
@@ -3671,7 +3748,7 @@ const UI_INK_GROUPS=[
   {name:'Marrones',c:[['#3b2f2a','Chocolate'],['#4a3426','Café'],['#5a3e2b','Nogal'],['#6b4a33','Cuero'],['#7a5230','Canela oscura'],['#8a4f2a','Terracota']]},
   {name:'Otros',c:[['#4f5130','Oliva oscuro'],['#4a3f57','Ciruela'],['#2f3a4a','Azul noche'],['#2f4a3d','Verde bosque'],['#6b2f45','Burdeos'],['#333333','Grafito'],['#6f5cb5','Violeta'],['#b0577a','Frambuesa']]},
 ];
-const UI_DEFAULTS={listas:'#f6d3de',ver:'#e1daf5',bg:'#fbf7f3',agenda:'#e1daf5',casas:'#cdebdc',gear:'#ffffff',ink:'#4a3f57',title:'grad',btnSitio:'#e1daf5',btnCosa:'#cdebdc',btnMain:'#cdebdc',btnOther:'#efe9f7'};
+const UI_DEFAULTS={btnInk:'auto',listas:'#f6d3de',ver:'#e1daf5',bg:'#fbf7f3',agenda:'#e1daf5',casas:'#cdebdc',gear:'#ffffff',ink:'#4a3f57',title:'grad',btnSitio:'#e1daf5',btnCosa:'#cdebdc',btnMain:'#cdebdc',btnOther:'#efe9f7'};
 const UI_THEMES=[
   {name:'Tonos del logo',sw:['#fcf3cf','#c4935f','#8a8a50'],v:{listas:'#e8c9a3',ver:'#c9c99e',bg:'#fcf3cf',agenda:'#e8c9a3',casas:'#c9c99e',gear:'#fbeeb8',ink:'#5a3e2b',title:'#c4935f',btnSitio:'#e8c9a3',btnCosa:'#c9c99e',btnMain:'#c9c99e',btnOther:'#f6e3a3'}},
   {name:'Marrón pastel',sw:['#f2e6d8','#d9bfa3','#9c7656'],v:{listas:'#e2cbb3',ver:'#d9bfa3',bg:'#f2e6d8',agenda:'#d9bfa3',casas:'#cfb193',gear:'#ead9c6',ink:'#4a3426',title:'#7a5230',btnSitio:'#e2cbb3',btnCosa:'#d9bfa3',btnMain:'#cfb193',btnOther:'#ead9c6'}},
@@ -3690,6 +3767,7 @@ const UI_ROWS=[
   {key:'btnCosa',label:'Botón «＋ Cosa»'},
   {key:'btnMain',label:'Botones Guardar / Añadir'},
   {key:'btnOther',label:'Otros botones (volver, deshacer…)'},
+  {key:'btnInk',label:'Letra de los botones',ink:true,auto:true},
   {key:'ver',label:'Cuadro de la versión'},
 ];
 let UI={...UI_DEFAULTS};
@@ -3703,6 +3781,7 @@ function applyUiSettings(){
   r.setProperty('--agenda',UI.agenda);
   r.setProperty('--casas-btn',UI.casas);
   r.setProperty('--listas-btn',UI.listas||'#f6d3de');
+  if(UI.btnInk&&UI.btnInk!=='auto'){r.setProperty('--btn-ink',UI.btnInk);document.documentElement.classList.add('btn-ink-on');}else{r.removeProperty('--btn-ink');document.documentElement.classList.remove('btn-ink-on');}
   r.setProperty('--gear-btn',UI.gear);
   r.setProperty('--ink',UI.ink);
   r.setProperty('--btn-sitio',UI.btnSitio);
@@ -3717,7 +3796,7 @@ function applyUiSettings(){
 function saveUi(){lsSet('home_ui',JSON.stringify(UI));applyUiSettings();}
 function colorName(hex){
   for(const g of [...UI_GROUPS,...UI_INK_GROUPS])for(const [h,n] of g.c)if(h.toLowerCase()===String(hex).toLowerCase())return n;
-  return hex==='grad'?'Degradado':'Personalizado';
+  return hex==='grad'?'Degradado':hex==='auto'?'Automática (según el botón)':'Personalizado';
 }
 function openSettings(){
   const themes=UI_THEMES.map((t,i)=>`<button class="st-theme" onclick="applyUiTheme(${i})"><span class="st-theme-sw">${t.sw.map(c=>`<i style="background:${c}"></i>`).join('')}</span>${t.name}</button>`).join('');
@@ -3996,6 +4075,7 @@ function openColorPicker(key,tab){
   const chips=groups.map(x=>`<button class="tab-chip ${x.name===tab?'on':''}" onclick="openColorPicker('${key}','${x.name}')">${x.name}</button>`).join('');
   let sw='';
   if(row.grad)sw+=`<button class="col-opt ${cur==='grad'?'sel':''}" data-v="grad" onclick="pickUiColor('${key}','grad')"><i class="st-grad"></i><span>Degradado</span></button>`;
+  if(row.auto)sw+=`<button class="col-opt ${cur==='auto'?'sel':''}" data-v="auto" onclick="pickUiColor('${key}','auto')"><i class="st-auto">A</i><span>Automática</span></button>`;
   sw+=g.c.map(([h,n])=>`<button class="col-opt ${cur===h?'sel':''}" data-v="${h}" onclick="pickUiColor('${key}','${h}')"><i style="background:${h}"></i><span>${n}</span></button>`).join('');
   sw+=`<label class="col-opt" title="Otro color"><i class="st-custom"><input type="color" value="${cur==='grad'?'#6f5cb5':cur}" oninput="pickUiColor('${key}',this.value)"></i><span>Otro…</span></label>`;
   openSheet(row.label,`<div class="tab-row">${chips}</div><div class="col-grid">${sw}</div>
@@ -6150,7 +6230,7 @@ if ('serviceWorker' in navigator) {
 </div>
 
 <div class="app-footer" onclick="openCopyright(event)">
-  <span class="ft-copy">© 2025–Present Elisabeth Altarriba</span><span class="ft-ver">V11</span>
+  <span class="ft-copy">© 2025–Present Elisabeth Altarriba</span><span class="ft-ver">V14</span>
 </div>
 
 <script>
