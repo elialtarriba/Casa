@@ -8,6 +8,19 @@ Este archivo mantiene un registro de todas las modificaciones y tareas pendiente
 
 ## Cambios Realizados
 
+- **(2026-10-26) [V16] Sin zoom y pasar página deslizando:**
+  - **Sin zoom:** en el navegador (Safari), al tocar rápido varias veces ‹ › la página hacía zoom. Ahora los botones, los días y la agenda no hacen zoom con toques seguidos (`touch-action: manipulation` y `user-scalable=no` en el viewport).
+  - **Pasar página deslizando el dedo** en la agenda, en las tres vistas:
+    - Deslizar de derecha a izquierda va **adelante** (día, mes o año siguiente).
+    - Deslizar de izquierda a derecha va **atrás**.
+    - Al cambiar, la agenda gira como una hoja de libro. Los botones ‹ › también lo hacen.
+  - **Para no estropear nada de lo que ya había:**
+    - Solo cuentan los gestos claramente horizontales y rápidos. Deslizar arriba y abajo sigue sirviendo para bajar en la vista Año.
+    - Arrastrar una nota de un día a otro sigue funcionando igual, porque el gesto no empieza encima de una nota.
+    - Tras deslizar no se abre por error la ventana del día.
+    - No hace nada si hay una ventana abierta.
+  - Versión **V16**. `sw.js`: caché `home-cache-v16-2026-10-26`.
+
 - **(2026-10-26) [V15] Arreglos y novedades de la prueba:**
   - **PDF (búsqueda por colores y demás PDF):** la vista previa enseña cada página **entera en la pantalla**, sin moverse arriba y abajo. Si hay varias páginas, se pasan deslizando, una a una («1 / 2»). Imprimir y Guardar siguen igual.
   - **Logo en el PDF:** junto a la firma EliBi salía un cuadrado gris porque la imagen del logo guardada en la app estaba estropeada. Ahora sale el logo de la casita.

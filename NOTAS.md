@@ -101,3 +101,7 @@ Aquí se apunta todo lo que Elisabeth pide o comenta sobre la app, para no perde
 6. En la agenda, al tocar el icono 📷 con el número de fotos, que salga una ventana con todas las fotos, poder tocar una e ir a su nota y su día, y poder cerrar la ventana. → Hecho.
 7. En cada nota, un **micrófono**: hablar y que se vaya escribiendo, y poder corregirlo. → Hecho.
 8. En la agenda, un **botón de micrófono**: decir primero la fecha («2 abril 2026») y luego la nota, y al volver a pulsar se crea la nota en esa fecha. → Hecho.
+
+### Peticiones para la V16
+- En el navegador, al pulsar para pasar de un mes a otro, **a veces se hacía zoom** y no debería. → Hecho.
+- En los modos día, mes y año, **deslizar el dedo** para pasar adelante o atrás, **como pasar la hoja de un libro**. **Sin estropear nada de lo que ya hay.** → Hecho, con cuidado de no interferir con arrastrar notas, el scroll de la vista Año ni la ventana del día.

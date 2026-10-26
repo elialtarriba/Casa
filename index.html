@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="HOME">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -1221,6 +1221,21 @@ html,body{background:var(--app-bg)}
 .vn-mic.mic-on{background:#d93a3a;animation:micPulse 1.2s infinite}
 .vn-text{min-height:120px!important;font-size:18px!important}
 .vn-preview{font-size:14px;font-weight:750;color:var(--ink);padding:0 4px;line-height:1.45}
+
+/* ══════════ V16 ══════════ */
+/* Sin zoom al tocar rápido los botones (Safari) */
+html,body,button,a,label,.cal-day,.cal-card,.dv-wd,.cal-mode,.cal-btn{touch-action:manipulation}
+/* Pasar página */
+#home-calendar-container{perspective:1600px}
+.cal-card{backface-visibility:hidden;-webkit-backface-visibility:hidden;will-change:auto}
+@keyframes flipOutNext{from{transform:rotateY(0);opacity:1}to{transform:rotateY(-75deg);opacity:.25;box-shadow:-30px 0 40px rgba(60,40,30,.25)}}
+@keyframes flipOutPrev{from{transform:rotateY(0);opacity:1}to{transform:rotateY(75deg);opacity:.25;box-shadow:30px 0 40px rgba(60,40,30,.25)}}
+@keyframes flipInNext{from{transform:rotateY(35deg);opacity:.35}to{transform:rotateY(0);opacity:1}}
+@keyframes flipInPrev{from{transform:rotateY(-35deg);opacity:.35}to{transform:rotateY(0);opacity:1}}
+.cal-card.flip-out-next{transform-origin:left center;animation:flipOutNext .19s ease-in forwards}
+.cal-card.flip-out-prev{transform-origin:right center;animation:flipOutPrev .19s ease-in forwards}
+.cal-card.flip-in-next{transform-origin:right center;animation:flipInNext .3s ease-out}
+.cal-card.flip-in-prev{transform-origin:left center;animation:flipInPrev .3s ease-out}
 </style>
 </head>
 <body>
@@ -1252,7 +1267,7 @@ html,body{background:var(--app-bg)}
             onblur="saveAppTitle(this.textContent.trim())"
             onkeydown="if(event.key==='Enter'){event.preventDefault();this.blur()}"
             title="Toca para editar el título">Home</div>
-          <span class="ver-badge">V15</span>
+          <span class="ver-badge">V16</span>
         </div>
         <button class="brand-flip" style="perspective:none; grid-column: 3; align-self: center;" type="button" onclick="openCalc()" title="Calculadora">
           <span class="brand-flip-inner" style="transition: transform 0.1s;">
@@ -2665,7 +2680,7 @@ function renderCalendar(){
     }
     body+=`</div>`;
     return `<div class="cal-card">${calModesHtml()}
-      <div class="cal-head"><button class="cal-btn" onclick="changeCalYear(-1)">‹</button><div class="cal-title">Año ${yy}</div><button class="cal-btn" onclick="changeCalYear(1)">›</button><button class="cal-btn" onclick="toggleCalendarFullscreen()" title="Pantalla completa">⛶</button></div>
+      <div class="cal-head"><button class="cal-btn" onclick="calFlip(-1,()=>changeCalYear(-1))">‹</button><div class="cal-title">Año ${yy}</div><button class="cal-btn" onclick="calFlip(1,()=>changeCalYear(1))">›</button><button class="cal-btn" onclick="toggleCalendarFullscreen()" title="Pantalla completa">⛶</button></div>
       ${body}
       <div class="cal-footer">
         <div style="display:flex;gap:5px;">
@@ -2682,9 +2697,9 @@ function renderCalendar(){
   body=renderMonthGrid(y,m,false);
   return `<div class="cal-card">${calModesHtml()}
     <div class="cal-head">
-      <button class="cal-btn" onclick="changeCalMonth(-1)">‹</button>
+      <button class="cal-btn" onclick="calFlip(-1,()=>changeCalMonth(-1))">‹</button>
       <button class="cal-title cal-title-btn" onclick="exportMonthPhotosPDF(${y},${m},this)" title="Crear PDF con las fotos del mes">${calMonthName(y,m)}</button>
-      <button class="cal-btn" onclick="changeCalMonth(1)">›</button>
+      <button class="cal-btn" onclick="calFlip(1,()=>changeCalMonth(1))">›</button>
       <button class="cal-btn" onclick="toggleCalendarFullscreen()" title="Pantalla completa">⛶</button>
     </div>
     ${body}
@@ -2732,7 +2747,7 @@ function writeDayItems(key,items,noHistory){
 // ── Ventana del día ──
 let LINE_TAP_AT=0;
 function openDayChooser(key,force){
-  if(!force&&Date.now()-LINE_TAP_AT<600)return;
+  if(!force&&(Date.now()-LINE_TAP_AT<600||Date.now()-SWIPE_AT<500))return;
   DD_RERENDER=()=>openDayChooser(key,true);
   const items=getCalItems(key);
   const dc=calColorFor(key);
@@ -3178,9 +3193,9 @@ function renderCalDayView(){
     </div>`;}).join(''):`<div class="dv-empty">Nada apuntado este día.</div>`;
   return `<div class="cal-card dv-card">${calModesHtml()}
     <div class="cal-head">
-      <button class="cal-btn" onclick="changeCalDay(-1)" aria-label="Día anterior">‹</button>
+      <button class="cal-btn" onclick="calFlip(-1,()=>changeCalDay(-1))" aria-label="Día anterior">‹</button>
       <label class="cal-title dv-title" title="Elegir otro día">${titleC}<small>${d.getFullYear()}${sameDay(d,today)?' · Hoy':''}</small><input type="date" value="${key}" onchange="pickCalDay(this.value)" aria-label="Elegir día"></label>
-      <button class="cal-btn" onclick="changeCalDay(1)" aria-label="Día siguiente">›</button>
+      <button class="cal-btn" onclick="calFlip(1,()=>changeCalDay(1))" aria-label="Día siguiente">›</button>
       <button class="cal-btn" onclick="toggleCalendarFullscreen()" title="Pantalla completa">⛶</button>
     </div>
     <div class="dv-week">${week}</div>
@@ -6451,6 +6466,50 @@ function createVoiceNote(){
   showToast('Nota creada el '+neShortDate(key));
 }
 
+
+// ══════════════════════════════════════════════
+// V16 · PASAR PÁGINA: deslizar el dedo en Día / Mes / Año
+// ══════════════════════════════════════════════
+let CAL_FLIPPING=false,SWIPE_AT=0;
+function calFlip(dir,fn){
+  const card=document.querySelector('#home-calendar-container .cal-card');
+  if(!card||CAL_FLIPPING||window.matchMedia('(prefers-reduced-motion: reduce)').matches){fn();return;}
+  CAL_FLIPPING=true;
+  card.classList.add(dir>0?'flip-out-next':'flip-out-prev');
+  setTimeout(()=>{
+    try{fn();}catch(e){}
+    const nc=document.querySelector('#home-calendar-container .cal-card');
+    if(nc){nc.classList.add(dir>0?'flip-in-next':'flip-in-prev');setTimeout(()=>{nc.classList.remove('flip-in-next','flip-in-prev');CAL_FLIPPING=false;},300);}
+    else CAL_FLIPPING=false;
+  },190);
+}
+function calSwipe(dir){
+  if(CAL_MODE==='day')calFlip(dir,()=>changeCalDay(dir));
+  else if(CAL_MODE==='year')calFlip(dir,()=>changeCalYear(dir));
+  else calFlip(dir,()=>changeCalMonth(dir));
+}
+function initCalSwipe(){
+  const el=document.getElementById('home-calendar-container');if(!el||el.dataset.swipe)return;el.dataset.swipe='1';
+  let sx=0,sy=0,st=0,track=false;
+  el.addEventListener('touchstart',e=>{
+    if(e.touches.length!==1){track=false;return;}
+    if(e.target.closest('.cal-note-line,input,textarea,select,button.cal-btn')){track=false;return;}
+    track=true;sx=e.touches[0].clientX;sy=e.touches[0].clientY;st=Date.now();
+  },{passive:true});
+  el.addEventListener('touchmove',e=>{if(track&&e.touches.length!==1)track=false;},{passive:true});
+  el.addEventListener('touchend',e=>{
+    if(!track)return;track=false;
+    if(typeof DRAG_CAL_ITEM!=='undefined'&&DRAG_CAL_ITEM)return;
+    const t=e.changedTouches[0];const dx=t.clientX-sx,dy=t.clientY-sy;
+    if(Date.now()-st>900)return;
+    if(Math.abs(dx)<55||Math.abs(dx)<Math.abs(dy)*1.4)return;
+    if(document.getElementById('pop-ov')||document.getElementById('sheet-ov'))return;
+    SWIPE_AT=Date.now();
+    calSwipe(dx<0?1:-1);
+  },{passive:true});
+}
+initCalSwipe();
+
 init().catch(err=>{
   bootStep('debug-start',false,'error');
   bootStep('debug-ui',false,'error');
@@ -6521,7 +6580,7 @@ if ('serviceWorker' in navigator) {
 </div>
 
 <div class="app-footer" onclick="openCopyright(event)">
-  <span class="ft-copy">© 2025–Present Elisabeth Altarriba</span><span class="ft-ver">V15</span>
+  <span class="ft-copy">© 2025–Present Elisabeth Altarriba</span><span class="ft-ver">V16</span>
 </div>
 
 <script>
