@@ -8,6 +8,28 @@ Este archivo mantiene un registro de todas las modificaciones y tareas pendiente
 
 ## Cambios Realizados
 
+- **(2026-10-26) [V19] La nota por voz entiende los días de la semana:**
+  - **Días sueltos:** «el lunes», «el martes», «el miércoles», «este domingo», «el próximo jueves», «el sábado que viene»; en catalán, «el dimarts», «dimecres vinent», «el proper divendres». Se toma el **próximo** día con ese nombre (si hoy es lunes, «el lunes» es el de la semana que viene).
+  - **De la semana que viene:** «el lunes de la semana que viene», «el viernes de la próxima semana»; en catalán, «el dilluns de la setmana que ve». Se toma ese día **de la semana siguiente**, aunque este fin de semana quede más cerca.
+  - **Semana sola:** «la semana que viene…» o «la setmana que ve…» guarda la nota el lunes de la semana que viene.
+  - **Días o semanas de margen:** «dentro de 3 días», «en 2 semanas», «d'aquí a 2 setmanes».
+  - Todo funciona tanto al principio como al final de la frase («comprar pan el miércoles», «reunión el lunes de la semana que viene»).
+  - Probado con distintos días de hoy (lunes, miércoles y sábado) para que los cálculos salgan bien.
+  - Versión **V19**. `sw.js`: caché `home-cache-v19-2026-10-26`.
+
+- **(2026-10-26) [V18] Nota por voz y dictado más fiables:**
+  - **Arreglado: «mañana» o «demà» no guardaban la nota.** El iPhone escribe la última frase un momento *después* de pulsar el micrófono para parar, y la app creaba la nota antes de que llegara (o la ignoraba). Con «avui» funcionaba por casualidad, porque había dado tiempo. Ahora, al parar, la app **espera a que llegue la última frase** (el micrófono parpadea mientras tanto) y luego crea la nota.
+  - **Idioma del dictado:** en la ventana de nota por voz se elige **Castellano** o **Català**. Si hablas en catalán, el iPhone entiende mucho mejor «demà», «dilluns», «gener»… La elección se recuerda y sirve también para «🎤 Dictar» dentro de las notas.
+  - **Más maneras de decir la fecha:**
+    - al principio: «mañana…», «demà…», «per demà…», «nota para mañana…»;
+    - al final: «comprar pan mañana», «comprar regalos el 20 de diciembre»;
+    - como lo escribe a veces el iPhone: «de mà», «demá»;
+    - «pasado mañana» y «demà passat».
+  - «Por la mañana» se entiende como hora, no como el día de mañana.
+  - **Cancelar** ya no crea la nota aunque hubiera texto a medias.
+  - Si no se oye nada, avisa «No he oído nada».
+  - Versión **V18**. `sw.js`: caché `home-cache-v18-2026-10-26`.
+
 - **(2026-10-26) [V17] Pasar página con hoja curvada que sigue el dedo:**
   - Sustituye el giro de la V16 por el efecto elegido en la página de prueba (opción C). La hoja se levanta en diagonal, se ve su parte de atrás **curvada en 3D** (borde, brillo y sombra), a un lado lo que queda de la página actual y al otro la siguiente.
   - **Sigue el dedo:** al arrastrar en Día, Mes o Año, la hoja va con el dedo. Si te paras, se queda quieta enseñando las dos páginas. Al soltar pasada la mitad (o con un gesto rápido), la página pasa; si no, vuelve a su sitio y no cambia nada.

@@ -110,3 +110,10 @@ Aquí se apunta todo lo que Elisabeth pide o comenta sobre la app, para no perde
 - El giro de la V16 no parecía pasar la hoja de un libro. Quiere ver **media página actual y media de la siguiente**, como en la foto que mandó (una hoja que se curva en diagonal). Pidió verlo **antes** en una prueba.
 - En la prueba: **más inclinado**, que la hoja **siga el dedo** y que **si se para, la hoja se pare**. Además, más **3D** y quitar una **sombra que no pertenecía a nada**.
 - Le ha encantado («¡Perfecto! ¡Qué bonito!»). → Puesto en la agenda en la V17.
+
+### Peticiones para la V18
+- En la nota por voz de la agenda, con «avui» funcionaba, pero con **«mañana» y «demà» no se grababa la nota**. Afinarlo o arreglarlo. → Arreglado: se perdía la última frase al parar. Añadida la elección de idioma (castellano / català) y más maneras de decir la fecha.
+- Habla en castellano y en catalán.
+
+### Peticiones para la V19
+- Que la nota por voz entienda **«el lunes de la semana que viene»**, **«el dilluns de la setmana que ve»**, «el martes», «el miércoles»… → Hecho.

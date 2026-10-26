@@ -1244,6 +1244,13 @@ html,body,button,a,label,.cal-day,.cal-card,.dv-wd,.cal-mode,.cal-btn{touch-acti
 .curl-strip{position:absolute;top:0;height:100%;transform-origin:0 0;pointer-events:none;will-change:transform}
 /* deslizar de lado lo controla la app; arriba y abajo sigue siendo scroll */
 #home-calendar-container .cal-card,#home-calendar-container .cal-card .cal-day,#home-calendar-container .year-grid,#home-calendar-container .dv-body{touch-action:pan-y}
+
+/* V18 · dictado */
+.vn-lang{display:flex;gap:6px;align-self:center;padding:4px;border-radius:14px;background:color-mix(in srgb,var(--agenda),#fff 40%)}
+.vn-lang button{height:34px;padding:0 14px;border:none;border-radius:10px;background:transparent;font:inherit;font-size:14px;font-weight:850;color:var(--ink);cursor:pointer;box-shadow:none!important}
+.vn-lang button.on{background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.1)!important}
+@keyframes micWait{0%,100%{opacity:1}50%{opacity:.45}}
+.vn-mic.mic-wait,.ne-chip.mic-wait{animation:micWait .8s infinite;background:color-mix(in srgb,var(--agenda),#000 10%)!important}
 </style>
 </head>
 <body>
@@ -1275,7 +1282,7 @@ html,body,button,a,label,.cal-day,.cal-card,.dv-wd,.cal-mode,.cal-btn{touch-acti
             onblur="saveAppTitle(this.textContent.trim())"
             onkeydown="if(event.key==='Enter'){event.preventDefault();this.blur()}"
             title="Toca para editar el título">Home</div>
-          <span class="ver-badge">V17</span>
+          <span class="ver-badge">V19</span>
         </div>
         <button class="brand-flip" style="perspective:none; grid-column: 3; align-self: center;" type="button" onclick="openCalc()" title="Calculadora">
           <span class="brand-flip-inner" style="transition: transform 0.1s;">
@@ -2805,7 +2812,7 @@ function nePanel(p){
 function neShortDate(key){const d=calKeyDate(key);const t=d.toLocaleDateString('es-ES',{weekday:'short',day:'numeric',month:'short'});return t.charAt(0).toUpperCase()+t.slice(1);}
 function renderNoteEditor(focus){
   if(!NE)return;
-  stopDictation();
+  stopDictation(true);
   const ta=document.getElementById('ne-text');if(ta)NE.text=ta.value;
   const ri=document.getElementById('ne-remind');if(ri)NE.remind=ri.value;
   const col=CAL_COLORS[NE.color]||CAL_COLORS.none;
@@ -6403,7 +6410,7 @@ function toggleNoteDictation(btn){
 const VOICE_MONTHS={enero:0,gener:0,febrero:1,febrer:1,marzo:2,marc:2,març:2,abril:3,mayo:4,maig:4,junio:5,juny:5,julio:6,juliol:6,agosto:7,agost:7,septiembre:8,setiembre:8,setembre:8,octubre:9,noviembre:10,novembre:10,diciembre:11,desembre:11};
 const VOICE_NUMS={un:1,uno:1,primero:1,u:1,dos:2,tres:3,cuatro:4,quatre:4,cinco:5,cinc:5,seis:6,sis:6,siete:7,set:7,ocho:8,vuit:8,nueve:9,nou:9,diez:10,deu:10,once:11,onze:11,doce:12,dotze:12,trece:13,tretze:13,catorce:14,catorze:14,quince:15,quinze:15,dieciseis:16,setze:16,diecisiete:17,disset:17,dieciocho:18,divuit:18,diecinueve:19,dinou:19,veinte:20,vint:20,veintiuno:21,veintidos:22,veintitres:23,veinticuatro:24,veinticinco:25,veintiseis:26,veintisiete:27,veintiocho:28,veintinueve:29,treinta:30,trenta:30,treintayuno:31};
 const VOICE_WEEK={domingo:0,diumenge:0,lunes:1,dilluns:1,martes:2,dimarts:2,miercoles:3,dimecres:3,jueves:4,dijous:4,viernes:5,divendres:5,sabado:6,dissabte:6};
-function parseVoiceDate(text){
+function parseVoiceDateStart(text){
   const raw=String(text||'').trim();
   const norm=raw.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/treinta y uno/g,'treintayuno');
   const today=new Date();today.setHours(12,0,0,0);
@@ -6625,6 +6632,186 @@ function initCalSwipe(){
   el.addEventListener('pointerup',end);el.addEventListener('pointercancel',end);
 }
 
+
+// ══════════════════════════════════════════════
+// V18 · DICTADO MÁS FIABLE
+// - Al parar, espera a que el iPhone termine de escribir la última frase (antes se perdía).
+// - Idioma: Castellano o Català.
+// - La fecha se entiende al principio o al final («comprar pan mañana», «per demà»).
+// ══════════════════════════════════════════════
+function voiceLang(){return lsGet('home_voice_lang')||'es-ES';}
+function setVoiceLang(l){lsSet('home_voice_lang',l);document.querySelectorAll('.vn-lang button').forEach(b=>b.classList.toggle('on',b.dataset.l===l));if(DICT){const d=DICT;stopDictation(true);showToast(l==='ca-ES'?'Ara en català: torna a prémer el micròfon':'Ahora en castellano: vuelve a pulsar el micrófono');}}
+function startDictation(textareaId,onChange,onStop){
+  stopDictation(true);
+  if(!SpeechRec){showToast('Tu iPhone no deja dictar aquí. Usa el micrófono 🎤 del teclado.');document.getElementById(textareaId)?.focus();return false;}
+  const ta=document.getElementById(textareaId);if(!ta)return false;
+  const rec=new SpeechRec();rec.lang=voiceLang();rec.continuous=true;rec.interimResults=true;
+  DICT={rec,taId:textareaId,base:ta.value,onChange,onStop,active:true,stopping:false};
+  rec.onresult=e=>{
+    if(!DICT||DICT.rec!==rec)return;
+    let txt='';for(let i=0;i<e.results.length;i++)txt+=e.results[i][0].transcript;
+    const t=document.getElementById(DICT.taId);if(!t)return;
+    const b=DICT.base;t.value=b+(b&&!/\s$/.test(b)&&txt?' ':'')+txt.trim();
+    if(DICT.onChange)DICT.onChange(t.value);
+  };
+  rec.onerror=e=>{
+    if(e.error==='not-allowed'||e.error==='service-not-allowed')showToast('Permite el micrófono para dictar (Ajustes del iPhone)');
+    else if(e.error==='network')showToast('El dictado necesita internet. Sin conexión usa el 🎤 del teclado.');
+    else if(e.error==='language-not-supported')showToast('Este idioma no está disponible para dictar aquí');
+    else if(e.error!=='no-speech'&&e.error!=='aborted')showToast('No he podido escuchar bien. Prueba otra vez.');
+  };
+  rec.onend=()=>{
+    if(!DICT||DICT.rec!==rec)return;
+    if(DICT.active){ // el iPhone corta tras un silencio: seguimos escuchando
+      const t=document.getElementById(DICT.taId);if(t)DICT.base=t.value;
+      try{rec.start();}catch(e){finishDictation();}
+    }else finishDictation(); // ya ha llegado la última frase
+  };
+  try{rec.start();}catch(e){DICT=null;showToast('No se ha podido usar el micrófono');return false;}
+  return true;
+}
+function finishDictation(){
+  const d=DICT;DICT=null;
+  document.querySelectorAll('.mic-on,.mic-wait').forEach(el=>el.classList.remove('mic-on','mic-wait'));
+  if(d&&d.onStop)d.onStop();
+}
+// abort=true: cancelar sin guardar (cerrar ventana, cambiar de idioma…)
+function stopDictation(abort){
+  if(!DICT)return;
+  const d=DICT;d.active=false;
+  if(abort){d.onStop=null;DICT=null;try{d.rec.abort();}catch(e){}document.querySelectorAll('.mic-on,.mic-wait').forEach(el=>el.classList.remove('mic-on','mic-wait'));return;}
+  if(d.stopping)return;d.stopping=true;
+  document.querySelectorAll('.mic-on').forEach(el=>{el.classList.remove('mic-on');el.classList.add('mic-wait');});
+  try{d.rec.stop();}catch(e){}
+  setTimeout(()=>{if(DICT===d)finishDictation();},2000); // por si el iPhone no avisa
+}
+function closePop(){document.getElementById('pop-ov')?.remove();DD_OPEN=null;stopDictation(true);}
+function toggleNoteDictation(btn){
+  if(DICT){stopDictation();return;}
+  const ok=startDictation('ne-text',v=>{if(NE)NE.text=v;},()=>{const b=document.getElementById('ne-mic');if(b){b.classList.remove('mic-on','mic-wait');b.innerHTML='🎤 Dictar';}});
+  if(ok&&btn){btn.classList.add('mic-on');btn.innerHTML='■ Parar';}
+}
+// ── Fechas habladas: al principio o al final ──
+function parseVoiceDateSmart(text){
+  const raw=String(text||'').trim();
+  const clean=s=>s.replace(/^[,.:;\-\s]+|[,.:;\-\s]+$/g,'');
+  // 1) al principio, quitando palabras de relleno («nota para mañana…», «per demà…»)
+  const FILL=/^(?:(?:apunta(?:r)?|anota(?:r)?|nota|recuerda(?:me)?|recordar|recorda(?:'m)?|para|per|el|la|dia|día|de)[\s,.:]+)+/i;
+  let r=parseVoiceDateStart2(raw);if(r.date)return {date:r.date,rest:clean(r.rest)};
+  const noFill=raw.replace(FILL,'');
+  if(noFill!==raw){r=parseVoiceDateStart2(noFill);if(r.date)return {date:r.date,rest:clean(r.rest)};}
+  // 2) al final o en medio («comprar pan mañana», «dentista el 3 de abril»), pero no «por la mañana»
+  const words=raw.split(/\s+/);
+  for(let i=1;i<words.length;i++){
+    const prev=(words[i-1]||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+    const w=(words[i]||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9\/]/g,'');
+    if((w==='manana'||w==='mati')&&/^(la|por|de|del|al|cada|esta|aquesta|el)$/.test(prev))continue; // «por la mañana» = horas
+    const tail=words.slice(i).join(' ');
+    r=parseVoiceDateStart2(tail);
+    if(r.date){
+      let before=words.slice(0,i);
+      while(before.length&&/^(para|per|el|la|de|del|dia|día|a|en)$/i.test(before[before.length-1].normalize('NFD').replace(/[\u0300-\u036f]/g,'')))before.pop();
+      return {date:r.date,rest:clean([before.join(' '),r.rest].filter(Boolean).join(' '))};
+    }
+  }
+  return {date:null,rest:raw};
+}
+// demà / de mà / demá / dema (como lo escribe a veces el iPhone) y «demà passat»
+function voicePreNormalize(t){
+  return String(t||'')
+    .replace(/(^|\s)de\s+m[aàá](?=$|[\s,.;:])/gi,'$1demà')
+    .replace(/(^|\s)dem[aàá]\s+passat(?=$|[\s,.;:])/gi,'$1pasado mañana')
+    .replace(/(^|\s)passat\s+dem[aàá](?=$|[\s,.;:])/gi,'$1pasado mañana');
+}
+function parseVoiceDate(text){return parseVoiceDateSmart(voicePreNormalize(text));}
+// ── Ventana de nota por voz con elección de idioma ──
+function openVoiceNote(){
+  NE=null;const l=voiceLang();
+  openPop(`
+    <div class="pop-date">🎤 Nota por voz</div>
+    <h3 class="pop-h">Di la fecha y después la nota</h3>
+    <div class="vn-lang"><button data-l="es-ES" class="${l==='es-ES'?'on':''}" onclick="setVoiceLang('es-ES')">Castellano</button><button data-l="ca-ES" class="${l==='ca-ES'?'on':''}" onclick="setVoiceLang('ca-ES')">Català</button></div>
+    <div class="sh-hint">Ejemplos: «mañana dentista a las cinco», «el lunes de la semana que viene reunión», «el dilluns de la setmana que ve metge», «2 de abril de 2026 cumpleaños», «comprar pan el viernes». Pulsa el micrófono para empezar y otra vez para terminar: la nota se crea sola.</div>
+    <button class="vn-mic" id="vn-mic" onclick="toggleVoiceNote()" aria-label="Empezar a hablar"><span>🎤</span></button>
+    <textarea class="pop-text vn-text" id="vn-text" placeholder="Aquí aparecerá lo que digas (también puedes escribir o usar el 🎤 del teclado)" oninput="updateVoicePreview()"></textarea>
+    <div class="vn-preview" id="vn-preview"></div>
+    <div class="pop-row"><button class="pop-btn" onclick="closePop()">Cancelar</button><button class="pop-btn main" onclick="createVoiceNote()">Crear nota</button></div>`);
+  document.querySelector('#pop-ov .pop')?.classList.add('vn-pop');
+  updateVoicePreview();
+}
+function toggleVoiceNote(){
+  const b=document.getElementById('vn-mic');
+  if(DICT){stopDictation();return;}
+  const ok=startDictation('vn-text',()=>updateVoicePreview(),()=>{
+    const bb=document.getElementById('vn-mic');if(bb)bb.classList.remove('mic-on','mic-wait');
+    const t=document.getElementById('vn-text')?.value||'';
+    if(t.trim())createVoiceNote();else showToast('No he oído nada. Prueba otra vez.');
+  });
+  if(ok&&b)b.classList.add('mic-on');
+}
+function createVoiceNote(){
+  const t=(document.getElementById('vn-text')?.value||'').trim();
+  if(!t){showToast('Di o escribe algo primero');return;}
+  if(DICT){const d=DICT;d.active=false;d.onStop=null;DICT=null;try{d.rec.abort();}catch(e){}}
+  const r=parseVoiceDate(t);
+  const d=r.date||new Date();const key=calDateKey(d);
+  const text=(r.date?r.rest:t).trim()||t;
+  const items=getCalItems(key);items.push({id:calLineId(),type:'text',text:text.charAt(0).toUpperCase()+text.slice(1),done:false,color:'none',photoIds:[]});
+  closePop();
+  CAL_DATE=new Date(d.getFullYear(),d.getMonth(),1);if(CAL_MODE==='day')CAL_DAY=d;
+  writeDayItems(key,items);
+  showToast('Nota creada el '+neShortDate(key));
+}
+
+
+// ── V19 · Días de la semana: «el lunes de la semana que viene», «el dilluns de la setmana que ve»,
+//    «el próximo martes», «este viernes», «dentro de 3 días», «d'aquí a 2 setmanes»…
+function parseWeekdayStart(text){
+  const raw=String(text||'').trim();
+  const words=raw.split(/\s+/);
+  const n=words.map(w=>w.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9']/g,''));
+  const today=new Date();today.setHours(12,0,0,0);
+  const NUMW={un:1,una:1,uno:1,dos:2,tres:3,cuatro:4,quatre:4,cinco:5,cinc:5,seis:6,sis:6,siete:7,set:7,ocho:8,vuit:8,nueve:9,nou:9,diez:10,deu:10};
+  const num=w=>{const d=parseInt(w,10);return !isNaN(d)?d:(NUMW[w]??NaN);};
+  let i=0;
+  // «dentro de 3 días», «en 2 semanas», «d'aquí a 3 dies», «d'aqui 2 setmanes»
+  {let j=0;
+    if(n[0]==='dentro'&&n[1]==='de')j=2;else if(n[0]==='en')j=1;else if(n[0]==="d'aqui"||n[0]==='daqui'){j=1;if(n[1]==='a')j=2;}
+    if(j){const k=num(n[j]);const u=n[j+1]||'';
+      if(!isNaN(k)&&/^(dia|dias|dies)$/.test(u)){const d=new Date(today);d.setDate(d.getDate()+k);return {date:d,rest:words.slice(j+2).join(' ')};}
+      if(!isNaN(k)&&/^(semana|semanas|setmana|setmanes)$/.test(u)){const d=new Date(today);d.setDate(d.getDate()+7*k);return {date:d,rest:words.slice(j+2).join(' ')};}
+    }
+  }
+  // «la semana que viene», «la setmana que ve» sola → lunes de la semana que viene
+  let next=false;
+  while(/^(el|este|esta|aquest|aquesta|l'|proximo|proxim|proxima|proper|propera|propero|que)$/.test(n[i]||''))i++;
+  const WD={lunes:1,dilluns:1,martes:2,dimarts:2,miercoles:3,dimecres:3,jueves:4,dijous:4,viernes:5,divendres:5,sabado:6,dissabte:6,domingo:0,diumenge:0};
+  const wdWord=n[i];
+  if(WD[wdWord]===undefined)return {date:null,rest:raw};
+  const wd=WD[wdWord];i++;
+  // «… de la semana que viene», «… que viene», «… de la setmana que ve», «… vinent», «… próximo»
+  const tail=n.slice(i,i+6).join(' ');
+  const m=tail.match(/^(?:(?:de\s+)?(?:la\s+)?(?:semana|setmana)\s+(?:que\s+viene|que\s+ve|proxima|vinent|seguent|siguiente)|(?:de\s+)?(?:la\s+)?(?:proxima|propera)\s+(?:semana|setmana)|que\s+viene|que\s+ve|vinent|proximo|proxim)\b/);
+  if(m){next=/semana|setmana/.test(m[0]);i+=m[0].trim().split(/\s+/).length;}
+  let d=new Date(today);
+  if(next){
+    const mon=new Date(today);mon.setDate(mon.getDate()-((mon.getDay()+6)%7)+7); // lunes de la semana que viene
+    d=new Date(mon);d.setDate(mon.getDate()+((wd+6)%7));
+  }else{
+    const diff=(wd-today.getDay()+7)%7||7;d.setDate(d.getDate()+diff);
+  }
+  return {date:d,rest:words.slice(i).join(' ')};
+}
+function parseVoiceDateStart2(text){
+  const w=parseWeekdayStart(text);if(w.date)return w;
+  const t=String(text||'').trim();
+  // «la semana que viene …» / «la setmana que ve …» sin día → lunes de esa semana
+  const nn=t.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+  const m=nn.match(/^(?:la\s+)?(?:semana|setmana)\s+(?:que\s+viene|que\s+ve|proxima|vinent)\b/)||nn.match(/^(?:la\s+)?(?:proxima|propera)\s+(?:semana|setmana)\b/);
+  if(m){const today=new Date();today.setHours(12,0,0,0);const mon=new Date(today);mon.setDate(mon.getDate()-((mon.getDay()+6)%7)+7);return {date:mon,rest:t.split(/\s+/).slice(m[0].split(/\s+/).length).join(' ')};}
+  return parseVoiceDateStart(text);
+}
+
 init().catch(err=>{
   bootStep('debug-start',false,'error');
   bootStep('debug-ui',false,'error');
@@ -6695,7 +6882,7 @@ if ('serviceWorker' in navigator) {
 </div>
 
 <div class="app-footer" onclick="openCopyright(event)">
-  <span class="ft-copy">© 2025–Present Elisabeth Altarriba</span><span class="ft-ver">V17</span>
+  <span class="ft-copy">© 2025–Present Elisabeth Altarriba</span><span class="ft-ver">V19</span>
 </div>
 
 <script>
