@@ -8,6 +8,20 @@ Este archivo mantiene un registro de todas las modificaciones y tareas pendiente
 
 ## Cambios Realizados
 
+- **(2026-10-26) [V21] Iconos marrón claro, navegación con iconos y PDF de tickets:**
+  - **Iconos menos amarillos:** el fondo crema amarillento de los iconos (casa, calculadora, tickets) pasa a **marrón claro**.
+  - **Iconos nuevos** con el mismo estilo de relieve que el de tickets: **Listas** (portapapeles con casillas), **Sitios** (marcador con una casita), **Ajustes** (engranaje), **Agenda** (calendario) y **Buscar · PDF** (documento con lupa).
+  - **Bajo la agenda:** cuatro iconos iguales, alineados y simétricos, con su nombre debajo (Ajustes · Tickets · Listas · Sitios). Sustituyen a los botones de texto.
+  - **Misma barra de iconos arriba en todas las pantallas:**
+    - Mis listas: Agenda · Tickets · Sitios.
+    - Mis sitios y dentro de cada casa: Agenda · Tickets · Listas.
+    - Tickets: Agenda · Listas · Sitios · Buscar · PDF.
+    Los botones son del mismo tamaño y quedan simétricos. Debajo, el título con su icono, centrado.
+  - **Tickets · buscar:** al pulsar «Buscar» en el teclado, el teclado se esconde solo.
+  - **Tickets · Buscar · PDF:** una ventana pregunta si buscar **por fechas** (con atajos «Mes que veo», «Este mes», «Mes pasado», «Este año» o desde/hasta) o **por nombre**. Enseña al momento cuántos tickets hay y el total. «📄 Crear PDF» hace un PDF bonito con los colores del tema de tickets: cabecera con iconos y logo, recuadros de número de tickets y total, tickets agrupados por mes con miniatura, fecha, concepto, importe y **subtotal** de cada mes, y **total** final. Se puede imprimir o guardar, y con «Salir» vuelves a Tickets.
+  - En ⚙️ Ajustes se quitan los colores de los botones Listas, Sitios y ⚙️, que ahora son iconos.
+  - Versión **V21**. `sw.js`: caché `home-cache-v21-2026-10-26` con los iconos nuevos.
+
 - **(2026-10-26) [V20] Tickets, iconos nuevos y listas más cómodas:**
   - **Tickets** (nuevo apartado, con su icono al lado de ⚙️, bajo la agenda):
     - Un calendario mensual propio. Los días con tickets enseñan la miniatura del ticket y cuántos hay. Arriba, el total de tickets e importes del mes.

@@ -1,5 +1,5 @@
 // HOME · service worker V10: funciona sin conexión
-const CACHE_NAME = 'home-cache-v20-2026-10-26';
+const CACHE_NAME = 'home-cache-v21-2026-10-26';
 const CORE = [
   './',
   './index.html',
@@ -9,7 +9,12 @@ const CORE = [
   './iconocalcu.png',
   './icono_tickets.png',
   './apple-touch-icon.png',
-  './icon-512.png'
+  './icon-512.png',
+  './icono_listas.png',
+  './icono_sitios.png',
+  './icono_ajustes.png',
+  './icono_agenda.png',
+  './icono_buscar.png'
 ];
 // Librerías para hacer PDF: se guardan también para poder usarlas sin internet
 const CDN = [

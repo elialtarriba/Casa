@@ -130,4 +130,11 @@ Aquí se apunta todo lo que Elisabeth pide o comenta sobre la app, para no perde
    - pasar de mes **como una hoja**.
    → Hecho.
 3. **Iconos nuevos** para la casa, la calculadora y el botón de tickets, con las **esquinas redondeadas** y **un poco más luminosos**. → Hecho.
-- Pendiente de aclarar: «pasar entre sitios como una hoja». ¿Se refiere a pasar de una casa a otra en Mis Sitios, o a otra cosa?
+- «Pasar entre sitios como una hoja»: aclarado, no hace falta; los sitios se quedan como están.
+
+### Peticiones para la V21
+1. Iconos: **menos amarillo y más marrón claro**. → Hecho.
+2. En tickets, al buscar, que el **teclado se esconda solo**. → Hecho.
+3. En la línea de Agenda, botones para ir a **Listas y Sitios**, **simétricos y alineados**. → Hecho (barra de iconos igual en todas las pantallas).
+4. En esa línea, un botón para **buscar por fechas o por nombre** y hacer un **PDF bonito** con precios y totales, para imprimir, y poder cerrarlo y volver a tickets. → Hecho.
+5. **Iconos de Listas y Sitios** al estilo del de tickets, para sustituir todos los botones de Listas y Sitios. Que todo quede **alineado, con diseño y simétrico**. → Hecho (además, iconos de Ajustes, Agenda y Buscar a juego).
