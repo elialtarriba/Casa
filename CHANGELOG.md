@@ -8,6 +8,19 @@ Este archivo mantiene un registro de todas las modificaciones y tareas pendiente
 
 ## Cambios Realizados
 
+- **(2026-10-26) [V15] Arreglos y novedades de la prueba:**
+  - **PDF (búsqueda por colores y demás PDF):** la vista previa enseña cada página **entera en la pantalla**, sin moverse arriba y abajo. Si hay varias páginas, se pasan deslizando, una a una («1 / 2»). Imprimir y Guardar siguen igual.
+  - **Logo en el PDF:** junto a la firma EliBi salía un cuadrado gris porque la imagen del logo guardada en la app estaba estropeada. Ahora sale el logo de la casita.
+  - **Cambiar la nota de día:** el recuadro de la fecha ya no se sale de la ventana; queda alineado.
+  - **Título «Home» y versión:** centrados entre los dos logos.
+  - **El color del título «Home» no se veía:** un fondo decorativo de la pantalla de inicio quedaba por encima del título y lo aclaraba. Corregido: ahora el color elegido se ve tal cual. Se han revisado uno a uno todos los ajustes de color (fondo, agenda, Listas, Sitios, ⚙️, letra, título, ＋ Sitio, ＋ Cosa, Guardar, otros botones, versión y letra de los botones) y todos funcionan.
+  - **Todos los colores con desplegable**, como en las notas: en ⚙️ Ajustes (los temas rápidos siguen arriba), en el editor de casa (color de la casa, botón ＋ Sitio y botón ＋ Cosa, debajo de «Tema rápido»), en el editor de lista (color de la lista, del fondo y de la letra) y en el color del día. Se toca la línea, se despliega la lista con nombres y grupos, se elige y se pliega sola. Al final hay «Elegir otro color…».
+  - **Fotos de la agenda:** el botón 📷 (con el número de fotos) abre una ventana con todas las fotos del mes (o del año en vista anual). Tocando una foto vas a su día y se abre su nota. «Cerrar» para salir sin ir a ningún sitio.
+  - **🎤 Dictar dentro de la nota:** botón «🎤 Dictar». Hablas y se va escribiendo en la nota; otro toque para parar. Luego se puede corregir.
+  - **🎤 Nota por voz en la agenda:** botón 🎤 al lado de «Día · Mes · Año». Dices la fecha y después la nota («2 de abril de 2026, dentista a las cinco»). Al volver a tocar el micrófono se crea la nota en esa fecha. Entiende «2 de abril de 2026», «2 abril», «15/11/2026», «hoy», «mañana», «pasado mañana», «el lunes…» y también en catalán («demà», «3 de gener»…). Antes de crearla enseña en qué fecha se guardará, y se puede escribir o corregir a mano.
+  - El dictado usa el reconocimiento de voz del iPhone. Si en la app instalada no está disponible, avisa y se puede usar el micrófono 🎤 del teclado.
+  - Versión **V15**. `sw.js`: caché `home-cache-v15-2026-10-26`.
+
 - **(2026-10-25) [V14] Ir a la Agenda o a las Listas desde cualquier sitio:**
   - En todas las pantallas de dentro de una casa (la casa y cada sitio, a cualquier nivel) hay arriba, encima del título, dos botones pequeños y discretos: **📅 Agenda** (izquierda) y **📝 Listas** (derecha).
   - Ya no hace falta volver atrás hasta «Mis sitios» para ir a la agenda o a las listas.

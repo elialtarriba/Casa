@@ -91,3 +91,13 @@ Aquí se apunta todo lo que Elisabeth pide o comenta sobre la app, para no perde
 
 ### Peticiones para la V14
 - Al ir entrando en los sitios, para ir a la Agenda o a las Listas había que volver atrás hasta el inicio de Mis Sitios. Poner **dos botones (Agenda y Listas) arriba, encima del título, en cada pantalla de cada sitio**, que no sobresalgan mucho. → Hecho.
+
+### Peticiones para la V15 (2026-10-26)
+1. El PDF de la búsqueda por colores no se veía entero en la pantalla: tiene que verse todo, sin moverse arriba y abajo. Al lado de EliBi no se veía el logo. → Hecho.
+2. En «Cambiar la nota de día», el recuadro de la fecha sobresalía y no estaba alineado. → Hecho.
+3. El título «Home» y la versión no estaban centrados entre los dos logos. → Hecho.
+4. El color del título «Home» se cambiaba en Ajustes pero no en la palabra. Revisar que todos los ajustes funcionen. → Hecho (todos revisados).
+5. El desplegable de colores de las notas le gusta: ponerlo **en todos los sitios donde se pida color**, debajo de los temas (los temas le encantan y no se deben quitar). → Hecho.
+6. En la agenda, al tocar el icono 📷 con el número de fotos, que salga una ventana con todas las fotos, poder tocar una e ir a su nota y su día, y poder cerrar la ventana. → Hecho.
+7. En cada nota, un **micrófono**: hablar y que se vaya escribiendo, y poder corregirlo. → Hecho.
+8. En la agenda, un **botón de micrófono**: decir primero la fecha («2 abril 2026») y luego la nota, y al volver a pulsar se crea la nota en esa fecha. → Hecho.
