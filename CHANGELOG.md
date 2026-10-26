@@ -8,6 +8,16 @@ Este archivo mantiene un registro de todas las modificaciones y tareas pendiente
 
 ## Cambios Realizados
 
+- **(2026-10-26) [V17] Pasar página con hoja curvada que sigue el dedo:**
+  - Sustituye el giro de la V16 por el efecto elegido en la página de prueba (opción C). La hoja se levanta en diagonal, se ve su parte de atrás **curvada en 3D** (borde, brillo y sombra), a un lado lo que queda de la página actual y al otro la siguiente.
+  - **Sigue el dedo:** al arrastrar en Día, Mes o Año, la hoja va con el dedo. Si te paras, se queda quieta enseñando las dos páginas. Al soltar pasada la mitad (o con un gesto rápido), la página pasa; si no, vuelve a su sitio y no cambia nada.
+  - Hacia la izquierda va adelante y hacia la derecha va atrás (la hoja se levanta desde el otro lado).
+  - Las flechas ‹ › pasan la página solas con el mismo efecto.
+  - **Sin estropear nada:** arrastrar una nota de un día a otro sigue igual (el gesto no empieza encima de una nota). Tocar un día sigue abriendo su ventana. Arriba y abajo sigue siendo scroll en la vista Año. Los botones no inician el gesto. Nada se mueve si hay una ventana abierta.
+  - La hoja usa los colores de la agenda elegidos en Ajustes.
+  - Se ha quitado la sombra recta suelta que salía en la prueba.
+  - Versión **V17**. `sw.js`: caché `home-cache-v17-2026-10-26`.
+
 - **(2026-10-26) [V16] Sin zoom y pasar página deslizando:**
   - **Sin zoom:** en el navegador (Safari), al tocar rápido varias veces ‹ › la página hacía zoom. Ahora los botones, los días y la agenda no hacen zoom con toques seguidos (`touch-action: manipulation` y `user-scalable=no` en el viewport).
   - **Pasar página deslizando el dedo** en la agenda, en las tres vistas:

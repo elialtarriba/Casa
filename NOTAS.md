@@ -105,3 +105,8 @@ Aquí se apunta todo lo que Elisabeth pide o comenta sobre la app, para no perde
 ### Peticiones para la V16
 - En el navegador, al pulsar para pasar de un mes a otro, **a veces se hacía zoom** y no debería. → Hecho.
 - En los modos día, mes y año, **deslizar el dedo** para pasar adelante o atrás, **como pasar la hoja de un libro**. **Sin estropear nada de lo que ya hay.** → Hecho, con cuidado de no interferir con arrastrar notas, el scroll de la vista Año ni la ventana del día.
+
+### Peticiones para la V17
+- El giro de la V16 no parecía pasar la hoja de un libro. Quiere ver **media página actual y media de la siguiente**, como en la foto que mandó (una hoja que se curva en diagonal). Pidió verlo **antes** en una prueba.
+- En la prueba: **más inclinado**, que la hoja **siga el dedo** y que **si se para, la hoja se pare**. Además, más **3D** y quitar una **sombra que no pertenecía a nada**.
+- Le ha encantado («¡Perfecto! ¡Qué bonito!»). → Puesto en la agenda en la V17.

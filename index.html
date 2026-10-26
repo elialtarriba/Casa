@@ -1236,6 +1236,14 @@ html,body,button,a,label,.cal-day,.cal-card,.dv-wd,.cal-mode,.cal-btn{touch-acti
 .cal-card.flip-out-prev{transform-origin:right center;animation:flipOutPrev .19s ease-in forwards}
 .cal-card.flip-in-next{transform-origin:right center;animation:flipInNext .3s ease-out}
 .cal-card.flip-in-prev{transform-origin:left center;animation:flipInPrev .3s ease-out}
+
+/* ══════════ V17 · hoja curvada ══════════ */
+.curl-wrap{position:fixed;z-index:300;overflow:hidden;pointer-events:none}
+.curl-old{position:absolute;inset:0}
+.curl-old .cal-card{box-shadow:none!important}
+.curl-strip{position:absolute;top:0;height:100%;transform-origin:0 0;pointer-events:none;will-change:transform}
+/* deslizar de lado lo controla la app; arriba y abajo sigue siendo scroll */
+#home-calendar-container .cal-card,#home-calendar-container .cal-card .cal-day,#home-calendar-container .year-grid,#home-calendar-container .dv-body{touch-action:pan-y}
 </style>
 </head>
 <body>
@@ -1267,7 +1275,7 @@ html,body,button,a,label,.cal-day,.cal-card,.dv-wd,.cal-mode,.cal-btn{touch-acti
             onblur="saveAppTitle(this.textContent.trim())"
             onkeydown="if(event.key==='Enter'){event.preventDefault();this.blur()}"
             title="Toca para editar el título">Home</div>
-          <span class="ver-badge">V16</span>
+          <span class="ver-badge">V17</span>
         </div>
         <button class="brand-flip" style="perspective:none; grid-column: 3; align-self: center;" type="button" onclick="openCalc()" title="Calculadora">
           <span class="brand-flip-inner" style="transition: transform 0.1s;">
@@ -6510,6 +6518,113 @@ function initCalSwipe(){
 }
 initCalSwipe();
 
+
+// ══════════════════════════════════════════════
+// V17 · PASAR PÁGINA CON HOJA CURVADA QUE SIGUE EL DEDO
+// (sustituye al giro de la V16; mismas reglas para no estropear nada)
+// ══════════════════════════════════════════════
+function calChangeFn(dir){return ()=>{if(CAL_MODE==='day')changeCalDay(dir);else if(CAL_MODE==='year')changeCalYear(dir);else changeCalMonth(dir);};}
+function curlBegin(dir,apply){
+  const cont=document.getElementById('home-calendar-container');
+  const card=cont&&cont.querySelector('.cal-card');
+  if(!card){apply();return null;}
+  const yg=card.querySelector('.year-grid'),ys=yg?yg.scrollTop:0;
+  const clone=card.cloneNode(true);
+  clone.querySelectorAll('[id]').forEach(n=>n.removeAttribute('id'));
+  clone.classList.remove('flip-out-next','flip-out-prev','flip-in-next','flip-in-prev');
+  apply();
+  const nc=cont.querySelector('.cal-card');if(!nc)return null;
+  const r=nc.getBoundingClientRect(),W=r.width,H=r.height;
+  const wrap=document.createElement('div');wrap.className='curl-wrap';
+  Object.assign(wrap.style,{left:r.left+'px',top:r.top+'px',width:W+'px',height:H+'px',borderRadius:getComputedStyle(nc).borderRadius});
+  const old=document.createElement('div');old.className='curl-old';
+  { const bgc=getComputedStyle(cont).backgroundColor; old.style.background=(bgc&&bgc!=='rgba(0, 0, 0, 0)'&&bgc!=='transparent')?bgc:getComputedStyle(document.body).backgroundColor; }
+  Object.assign(clone.style,{position:'absolute',inset:'0',width:'100%',height:'100%',margin:'0'});
+  old.appendChild(clone);
+  const mk=c=>{const d=document.createElement('div');d.className=c;return d;};
+  const cast=mk('curl-strip'),oldShade=mk('curl-strip'),flap=mk('curl-strip'),rim=mk('curl-strip');
+  wrap.append(cast,old,oldShade,flap,rim);document.body.appendChild(wrap);
+  if(yg){const cy=clone.querySelector('.year-grid');if(cy)cy.scrollTop=ys;}
+  const paper='color-mix(in srgb, var(--agenda), #fff 86%)',tone='var(--agenda)';
+  const X=x=>dir>0?x:W-x;
+  const strip=(node,x0,x1,w,side,bg,clip)=>{
+    const sx0=X(x0),sx1=X(x1),sd=dir>0?side:-side;
+    node.style.left=(sd<0?sx0-w:sx0)+'px';node.style.width=Math.max(0,w)+'px';
+    node.style.transform=`skewX(${Math.atan((sx1-sx0)/H)*180/Math.PI}deg)`;
+    node.style.background=bg(sd<0?'90deg':'270deg');
+    node.style.clipPath=clip?clip(sd):'none';
+  };
+  const ctx={dir,W,H,p:0,wrap};
+  ctx.render=p=>{
+    ctx.p=p;
+    const tilt=H*0.24*(0.35+0.65*Math.sin(Math.PI*Math.min(1,p*1.05)))*(p<.02?p/.02:1);
+    const fx=(W+tilt)*(1-p)-tilt*p,top=fx+tilt,bot=fx-tilt;
+    const wT=Math.max(0,W-top)*0.62,wB=Math.max(0,W-bot)*0.62,wA=(wT+wB)/2;
+    old.style.clipPath=`polygon(${X(0)}px 0,${X(top)}px 0,${X(bot)}px ${H}px,${X(0)}px ${H}px)`;
+    strip(flap,top,bot,wA,-1,deg=>`linear-gradient(${deg}, color-mix(in srgb, ${paper}, ${tone} 38%) 0%, color-mix(in srgb, ${paper}, ${tone} 14%) 7%, ${paper} 22%, #ffffff 44%, ${paper} 62%, color-mix(in srgb, ${paper}, ${tone} 16%) 84%, color-mix(in srgb, ${paper}, ${tone} 34%) 100%)`,
+      sd=>sd<0?`polygon(${wA-wT}px 0,100% 0,100% 100%,${wA-wB}px 100%)`:`polygon(0 0,${wT}px 0,${wB}px 100%,0 100%)`);
+    strip(rim,top,bot,3,-1,deg=>`linear-gradient(${deg}, rgba(0,0,0,0), color-mix(in srgb, ${tone}, #000 8%))`);
+    strip(cast,top,bot,46*(0.4+0.6*Math.sin(Math.PI*p)),1,deg=>`linear-gradient(${deg==='90deg'?'270deg':'90deg'}, rgba(0,0,0,0), rgba(60,40,30,.2))`);
+    const oT=top-wT,oB=bot-wB;
+    strip(oldShade,oT,oB,22,-1,deg=>`linear-gradient(${deg==='90deg'?'270deg':'90deg'}, rgba(60,40,30,.14), rgba(0,0,0,0))`);
+    oldShade.style.opacity=(oT<W*0.98&&p>0.01)?1:0;
+  };
+  ctx.render(0);
+  return ctx;
+}
+function curlTo(ctx,target,dur){
+  const from=ctx.p,t0=performance.now(),d=Math.max(140,dur*Math.abs(target-from));
+  const ease=t=>1-Math.pow(1-t,3);
+  CAL_FLIPPING=true;
+  function frame(now){
+    const q=Math.min(1,(now-t0)/d);ctx.render(from+(target-from)*ease(q));
+    if(q<1){requestAnimationFrame(frame);return;}
+    ctx.wrap.remove();
+    if(target<1)calChangeFn(-ctx.dir)(); // la hoja vuelve a su sitio: deshacer el cambio
+    CAL_FLIPPING=false;if(ctx.drag)SWIPE_AT=Date.now();
+  }
+  requestAnimationFrame(frame);
+}
+// Flechas ‹ ›: la hoja pasa sola
+function calFlip(dir,fn){
+  if(CAL_FLIPPING)return;
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){fn();return;}
+  const ctx=curlBegin(dir,fn);if(ctx)curlTo(ctx,1,850);
+}
+function calSwipe(dir){calFlip(dir,calChangeFn(dir));}
+// Arrastrar con el dedo: la hoja sigue al dedo y se para si te paras
+function initCalSwipe(){
+  const el=document.getElementById('home-calendar-container');if(!el||el.dataset.swipe)return;el.dataset.swipe='1';
+  let D=null;
+  el.addEventListener('pointerdown',e=>{
+    if(e.pointerType==='mouse'&&e.button!==0)return;
+    if(CAL_FLIPPING||e.target.closest('.cal-note-line,input,textarea,select,button,label,.cal-modes-row'))return;
+    if(document.getElementById('pop-ov')||document.getElementById('sheet-ov'))return;
+    D={x:e.clientX,y:e.clientY,id:e.pointerId,ctx:null,lx:e.clientX,lt:performance.now(),v:0};
+  });
+  el.addEventListener('pointermove',e=>{
+    if(!D||e.pointerId!==D.id)return;
+    const dx=e.clientX-D.x,dy=e.clientY-D.y;
+    if(!D.ctx){
+      if(Math.abs(dx)<10)return;
+      if(Math.abs(dy)>Math.abs(dx)*0.8||(typeof DRAG_CAL_ITEM!=='undefined'&&DRAG_CAL_ITEM)){D=null;return;}
+      const dir=dx<0?1:-1;SWIPE_AT=Date.now();CAL_FLIPPING=true;
+      D.ctx=curlBegin(dir,calChangeFn(dir));
+      if(!D.ctx){CAL_FLIPPING=false;D=null;return;}
+      D.ctx.drag=true;
+      try{el.setPointerCapture(e.pointerId);}catch(_){}
+    }
+    const now=performance.now();D.v=(e.clientX-D.lx)/Math.max(1,now-D.lt);D.lx=e.clientX;D.lt=now;
+    D.ctx.render(Math.max(0,Math.min(1,(D.ctx.dir>0?-dx:dx)/(D.ctx.W*0.85))));
+  });
+  const end=()=>{
+    if(!D)return;const d=D;D=null;if(!d.ctx)return;SWIPE_AT=Date.now();
+    const flick=(d.ctx.dir>0?-d.v:d.v)>0.6;
+    curlTo(d.ctx,(d.ctx.p>0.45||(flick&&d.ctx.p>0.08))?1:0,650);
+  };
+  el.addEventListener('pointerup',end);el.addEventListener('pointercancel',end);
+}
+
 init().catch(err=>{
   bootStep('debug-start',false,'error');
   bootStep('debug-ui',false,'error');
@@ -6580,7 +6695,7 @@ if ('serviceWorker' in navigator) {
 </div>
 
 <div class="app-footer" onclick="openCopyright(event)">
-  <span class="ft-copy">© 2025–Present Elisabeth Altarriba</span><span class="ft-ver">V16</span>
+  <span class="ft-copy">© 2025–Present Elisabeth Altarriba</span><span class="ft-ver">V17</span>
 </div>
 
 <script>
