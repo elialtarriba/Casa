@@ -1,5 +1,5 @@
 // HOME · service worker V10: funciona sin conexión
-const CACHE_NAME = 'home-cache-v21-2026-10-26';
+const CACHE_NAME = 'home-cache-v22-2026-10-26';
 const CORE = [
   './',
   './index.html',
@@ -25,7 +25,8 @@ const CDN = [
 self.addEventListener('install', event => {
   event.waitUntil((async () => {
     const cache = await caches.open(CACHE_NAME);
-    await cache.addAll(CORE);
+    // si falta algún archivo, el resto se guarda igual (antes fallaba todo)
+    await Promise.all(CORE.map(u=>cache.add(u).catch(()=>{})));
     await Promise.all(CDN.map(u => fetch(u, { mode: 'cors' }).catch(() => fetch(u, { mode: 'no-cors' }))
       .then(r => r && cache.put(u, r)).catch(() => {})));
   })());

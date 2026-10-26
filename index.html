@@ -1383,6 +1383,12 @@ html,body,button,a,label,.cal-day,.cal-card,.dv-wd,.cal-mode,.cal-btn{touch-acti
 .tks-count{text-align:center;font-size:15px;font-weight:750;color:var(--ink);padding:6px 0}
 .tks-count span{opacity:.6}
 #tks-go:disabled{opacity:.45}
+
+/* V22 · emoji si falta un icono */
+.icon-fb{display:inline-flex;align-items:center;justify-content:center;aspect-ratio:1;border-radius:22.5%;background:color-mix(in srgb,var(--agenda),#fff 55%);line-height:1}
+.nav-b .icon-fb{width:34px;height:34px;font-size:20px}
+.hi-btn .icon-fb{width:100%;max-width:66px;font-size:32px}
+.hl-head .icon-fb{width:34px;height:34px;font-size:20px}
 </style>
 </head>
 <body>
@@ -1414,7 +1420,7 @@ html,body,button,a,label,.cal-day,.cal-card,.dv-wd,.cal-mode,.cal-btn{touch-acti
             onblur="saveAppTitle(this.textContent.trim())"
             onkeydown="if(event.key==='Enter'){event.preventDefault();this.blur()}"
             title="Toca para editar el título">Home</div>
-          <span class="ver-badge">V21</span>
+          <span class="ver-badge">V22</span>
         </div>
         <button class="brand-flip" style="perspective:none; grid-column: 3; align-self: center;" type="button" onclick="openCalc()" title="Calculadora">
           <span class="brand-flip-inner" style="transition: transform 0.1s;">
@@ -7335,6 +7341,18 @@ async function exportTicketsPDF(btn){
 
 fillNavs();
 
+
+// ── V22 · Si un icono no se encuentra (p. ej. falta subirlo), se ve un emoji en vez de «?» ──
+const ICON_FALLBACK={icono_sitios:'🏡',icono_listas:'📝',icono_tickets:'🧾',icono_ajustes:'⚙️',icono_agenda:'📅',icono_buscar:'🔎',iconocalcu:'🧮',logo:'🏠'};
+document.addEventListener('error',e=>{
+  const img=e.target;if(!img||img.tagName!=='IMG'||img.dataset.fb)return;
+  const m=(img.getAttribute('src')||'').match(/(icono_[a-z]+|iconocalcu|logo)\.png/);if(!m)return;
+  img.dataset.fb='1';
+  const span=document.createElement('span');span.className='icon-fb '+(img.className||'');span.textContent=ICON_FALLBACK[m[1]]||'▫️';
+  span.setAttribute('role','img');span.setAttribute('aria-label',img.alt||m[1]);
+  img.replaceWith(span);
+},true);
+
 init().catch(err=>{
   bootStep('debug-start',false,'error');
   bootStep('debug-ui',false,'error');
@@ -7405,7 +7423,7 @@ if ('serviceWorker' in navigator) {
 </div>
 
 <div class="app-footer" onclick="openCopyright(event)">
-  <span class="ft-copy">© 2025–Present Elisabeth Altarriba</span><span class="ft-ver">V21</span>
+  <span class="ft-copy">© 2025–Present Elisabeth Altarriba</span><span class="ft-ver">V22</span>
 </div>
 
 <script>
