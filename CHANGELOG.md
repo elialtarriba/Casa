@@ -8,6 +8,28 @@ Este archivo mantiene un registro de todas las modificaciones y tareas pendiente
 
 ## Cambios Realizados
 
+- **(2026-10-26) [V20] Tickets, iconos nuevos y listas más cómodas:**
+  - **Tickets** (nuevo apartado, con su icono al lado de ⚙️, bajo la agenda):
+    - Un calendario mensual propio. Los días con tickets enseñan la miniatura del ticket y cuántos hay. Arriba, el total de tickets e importes del mes.
+    - **Pasar de mes como una hoja**, igual que en la agenda: arrastrando con el dedo (sigue el dedo y se para si te paras) o con ‹ ›.
+    - **«＋ Guardar ticket»:**
+      1. Una ventana pregunta el día (Hoy, Ayer o el que elijas en el calendario).
+      2. Luego eliges **📷 Hacer foto** (abre la cámara) o **🖼️ Elegir de Fotos**.
+      3. Después: qué es (tienda o compra), importe opcional y, si vale la pena, una **foto opcional de lo que es**.
+      También se puede guardar sin foto.
+    - Al tocar un ticket se ve en grande (y se amplía), con sus datos y los botones Editar y Borrar.
+    - Al tocar un día se ven solo sus tickets; si está vacío, se abre directamente «Guardar ticket» para ese día.
+    - **Buscador** por tienda, compra, importe o fecha.
+    - **Temas** (🎨): Marrón (el de entrada), Tonos del logo, Miel, Salvia, Azul, Rosa y Lavanda.
+    - **Las fotos no pesan:** se comprimen (ticket a 1600 px, que se lee bien; miniatura de 320 px). Un ticket ocupa unos 80–100 KB.
+    - **Archivo aparte:** los tickets se guardan en su propia base de datos del móvil («home_tickets», IndexedDB), con mucha más capacidad, y no ocupan la memoria del resto de la app.
+    - Funciona sin conexión.
+  - **Exportar e importar** incluyen ahora también todos los tickets con sus fotos.
+  - **Iconos nuevos** (casa, calculadora y tickets), recortados con las esquinas redondeadas y un poco más luminosos. El de la casa también es ahora el icono de la app en la pantalla de inicio (`apple-touch-icon.png`, `icon-512.png`) y el logo de los PDF.
+  - **Listas:** solo el **recuadro** tacha o destacha, y es más grande. Tocar el texto ya no hace nada, para no equivocarse al tachar en la tienda. Para cambiar el texto hay un botón **✏️** al lado de la ✕.
+  - En la agenda, los botones de abajo son ahora: ⚙️ · 🧾 Tickets · LISTAS · SITIOS (caben también en el iPhone pequeño).
+  - Versión **V20**. `sw.js`: caché `home-cache-v20-2026-10-26` y archivos nuevos en la caché.
+
 - **(2026-10-26) [V19] La nota por voz entiende los días de la semana:**
   - **Días sueltos:** «el lunes», «el martes», «el miércoles», «este domingo», «el próximo jueves», «el sábado que viene»; en catalán, «el dimarts», «dimecres vinent», «el proper divendres». Se toma el **próximo** día con ese nombre (si hoy es lunes, «el lunes» es el de la semana que viene).
   - **De la semana que viene:** «el lunes de la semana que viene», «el viernes de la próxima semana»; en catalán, «el dilluns de la setmana que ve». Se toma ese día **de la semana siguiente**, aunque este fin de semana quede más cerca.

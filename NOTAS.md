@@ -117,3 +117,17 @@ Aquí se apunta todo lo que Elisabeth pide o comenta sobre la app, para no perde
 
 ### Peticiones para la V19
 - Que la nota por voz entienda **«el lunes de la semana que viene»**, **«el dilluns de la setmana que ve»**, «el martes», «el miércoles»… → Hecho.
+
+### Peticiones para la V20
+1. En las listas, que **solo el recuadro** tache o destache, y un **botón para editar** al lado de la ✕. Así hay más espacio para tachar en la tienda con el móvil. → Hecho.
+2. Un sitio para **guardar los tickets** de todas las compras:
+   - con un **botón** propio;
+   - un **calendario de fotos** en vez de notas;
+   - una ventana que pregunta **el día**, y luego la **cámara o Fotos**;
+   - **fotos que no pesen**, guardadas en un **archivo aparte**;
+   - cada ticket, con o sin **foto de lo que es**;
+   - **fácil de encontrar**, bonito, profesional, con **temas** (que no falte el marrón);
+   - pasar de mes **como una hoja**.
+   → Hecho.
+3. **Iconos nuevos** para la casa, la calculadora y el botón de tickets, con las **esquinas redondeadas** y **un poco más luminosos**. → Hecho.
+- Pendiente de aclarar: «pasar entre sitios como una hoja». ¿Se refiere a pasar de una casa a otra en Mis Sitios, o a otra cosa?
