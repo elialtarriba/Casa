@@ -138,3 +138,11 @@ Aquí se apunta todo lo que Elisabeth pide o comenta sobre la app, para no perde
 3. En la línea de Agenda, botones para ir a **Listas y Sitios**, **simétricos y alineados**. → Hecho (barra de iconos igual en todas las pantallas).
 4. En esa línea, un botón para **buscar por fechas o por nombre** y hacer un **PDF bonito** con precios y totales, para imprimir, y poder cerrarlo y volver a tickets. → Hecho.
 5. **Iconos de Listas y Sitios** al estilo del de tickets, para sustituir todos los botones de Listas y Sitios. Que todo quede **alineado, con diseño y simétrico**. → Hecho (además, iconos de Ajustes, Agenda y Buscar a juego).
+
+### Peticiones para la V22
+- En «Mis sitios» no salía el icono, salía un interrogante. → Probablemente faltaba `icono_sitios.png` en GitHub. Añadido un plan B (emoji en lugar del «?») y la caché sin conexión ya no falla si falta un archivo.
+
+### Peticiones para la V23 (2026-10-27)
+1. En tickets, poder buscar **por fecha y por nombre a la vez**, además de por separado. → Hecho.
+2. Comprobar que **exportar e importar** guarda los tickets, sus fotos y todas las opciones. → Revisado y completado (faltaban el tema de tickets y el idioma del dictado).
+3. **Copyright:** borrar lo que había y poner la imagen que adjuntó. → Hecho.

@@ -8,6 +8,26 @@ Este archivo mantiene un registro de todas las modificaciones y tareas pendiente
 
 ## Cambios Realizados
 
+- **(2026-10-27) [V23] Buscar tickets por fecha y nombre a la vez, copia completa y nuevo copyright:**
+  - **Tickets · Buscar · PDF:** nueva pestaña **«📅+🔤 Las dos»**, para buscar entre dos fechas *y* por nombre a la vez (por ejemplo, «Mercadona» de este mes). Las búsquedas por separado («Fechas» y «Nombre») siguen igual. El PDF indica las dos cosas en la cabecera.
+  - **Copia de seguridad revisada a fondo**, llenando la app con un poco de todo, exportando, borrando y volviendo a importar. Vuelve todo:
+    - casas, sitios, cosas y sus fotos;
+    - fotos de los sitios y de la casa;
+    - notas de la agenda con fotos, colores del día y avisos;
+    - listas;
+    - tickets con sus fotos (ticket y producto);
+    - colores de Ajustes y historial de la calculadora.
+    Faltaban dos detalles, que ya están incluidos: el **tema de los tickets** y el **idioma del dictado**. A partir de ahora se guarda también cualquier ajuste nuevo.
+  - **Copyright:** la ventana muestra ahora la imagen que mandó Elisabeth (© 2026 Elisabeth Altarriba · Licencia: uso personal permitido, prohibido uso comercial · se requiere atribución al compartir esta app), con el correo debajo y el botón Cerrar. La imagen va dentro de la app, no hace falta subir ningún archivo nuevo.
+  - Los campos «Desde» y «Hasta» ya no se salen de la ventana.
+  - Versión **V23**. `sw.js`: caché `home-cache-v23-2026-10-27`.
+
+- **(2026-10-26) [V22] Si falta un icono, ya no sale «?»:**
+  - En «Mis sitios» salía un interrogante en lugar del icono. Casi seguro faltaba el archivo `icono_sitios.png` en GitHub, o se subió con otro nombre (por ejemplo, «icono_sitios 2.png»).
+  - Ahora, si un icono no se encuentra, la app pone un emoji en su lugar, con el mismo tamaño y fondo (🏡 sitios, 📝 listas, 🧾 tickets, ⚙️ ajustes, 📅 agenda, 🔎 buscar), en vez del «?».
+  - `sw.js`: antes, si faltaba un solo archivo, no se guardaba nada para usar sin conexión. Ahora se guarda todo lo demás igualmente.
+  - Versión **V22**. Caché `home-cache-v22-2026-10-26`.
+
 - **(2026-10-26) [V21] Iconos marrón claro, navegación con iconos y PDF de tickets:**
   - **Iconos menos amarillos:** el fondo crema amarillento de los iconos (casa, calculadora, tickets) pasa a **marrón claro**.
   - **Iconos nuevos** con el mismo estilo de relieve que el de tickets: **Listas** (portapapeles con casillas), **Sitios** (marcador con una casita), **Ajustes** (engranaje), **Agenda** (calendario) y **Buscar · PDF** (documento con lupa).
