@@ -8,6 +8,11 @@ Este archivo mantiene un registro de todas las modificaciones y tareas pendiente
 
 ## Cambios Realizados
 
+- **(2026-10-27) [V24] Icono nuevo del móvil:**
+  - El icono de la app en la pantalla de inicio del móvil es ahora la imagen de la casita que mandó Elisabeth. Está recortado al recuadro, con el amarillo pasado a **marrón clarito** y un poco más de luz (`apple-touch-icon.png` de 180 px e `icon-512.png`).
+  - El enlace al icono lleva `?v=24` para que el iPhone no use el antiguo guardado.
+  - Versión **V24**. `sw.js`: caché `home-cache-v24-2026-10-27`.
+
 - **(2026-10-27) [V23] Buscar tickets por fecha y nombre a la vez, copia completa y nuevo copyright:**
   - **Tickets · Buscar · PDF:** nueva pestaña **«📅+🔤 Las dos»**, para buscar entre dos fechas *y* por nombre a la vez (por ejemplo, «Mercadona» de este mes). Las búsquedas por separado («Fechas» y «Nombre») siguen igual. El PDF indica las dos cosas en la cabecera.
   - **Copia de seguridad revisada a fondo**, llenando la app con un poco de todo, exportando, borrando y volviendo a importar. Vuelve todo:

@@ -146,3 +146,7 @@ Aquí se apunta todo lo que Elisabeth pide o comenta sobre la app, para no perde
 1. En tickets, poder buscar **por fecha y por nombre a la vez**, además de por separado. → Hecho.
 2. Comprobar que **exportar e importar** guarda los tickets, sus fotos y todas las opciones. → Revisado y completado (faltaban el tema de tickets y el idioma del dictado).
 3. **Copyright:** borrar lo que había y poner la imagen que adjuntó. → Hecho.
+
+### Peticiones para la V24
+- Poner como **icono del móvil** la imagen de la casita que adjuntó, pero con **menos amarillo y más marrón clarito**. → Hecho.
+- Aviso importante que se le ha dado: en el iPhone, al borrar el icono de la pantalla de inicio se pueden borrar los datos de la app. Antes hay que hacer **Exportar** y, después de volver a añadirla, **Importar**.
