@@ -1401,6 +1401,37 @@ html,body,button,a,label,.cal-day,.cal-card,.dv-wd,.cal-mode,.cal-btn{touch-acti
 .tks-range{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important}
 .tks-range label{min-width:0}
 .tks-range input{max-width:100%;font-size:14px!important;padding:0 8px!important}
+
+/* ══════════ V25 · LISTAS ══════════ */
+.li-opts{margin-left:auto;width:46px;height:44px;flex-shrink:0;border:none;border-radius:14px;background:var(--li-card,#fff);color:var(--li-ink,var(--ink));font-size:24px;font-weight:900;line-height:1;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.li-sw{position:relative;border-radius:16px;overflow:hidden;flex-shrink:0}
+.li-sw.gone{max-height:0;transition:max-height .2s .15s ease;margin:0}
+.li-act{position:absolute;inset:0;display:flex;align-items:center;padding:0 22px;font-size:16px;font-weight:900;color:#fff;opacity:0;transition:opacity .1s}
+.li-act-ed{background:#f0962e;justify-content:flex-start}
+.li-act-del{background:#e0453b;justify-content:flex-end}
+.li-sw.show-ed .li-act-ed,.li-sw.show-del .li-act-del{opacity:1}
+.li-sw.arm .li-act{font-size:18px}
+.li-sw .li-row{position:relative;touch-action:pan-y;box-shadow:none;border-radius:16px;will-change:transform}
+.li-sw .li-row.done{background:color-mix(in srgb,var(--li-card,#fff),#fff 55%)}
+.li-star{width:42px;height:42px;flex-shrink:0;border:none;border-radius:12px;background:transparent;font-size:24px;line-height:1;color:var(--li-ink,var(--ink));opacity:.35;cursor:pointer;box-shadow:none!important}
+.li-star.on{color:#e5a91a;opacity:1;text-shadow:0 1px 2px rgba(0,0,0,.15)}
+.li-row.starred{box-shadow:inset 4px 0 0 #e5a91a!important}
+.li-hint{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:14px;background:rgba(255,255,255,.6);font-size:13px;font-weight:700;color:var(--li-ink,var(--ink));line-height:1.4}
+.li-hint button{border:none;border-radius:10px;padding:6px 10px;background:var(--li-card,#fff);font:inherit;font-size:12.5px;font-weight:900;color:inherit;cursor:pointer}
+.li-reo-bar{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-radius:14px;background:rgba(255,255,255,.65);font-size:14px;font-weight:800;color:var(--li-ink,var(--ink))}
+.li-reo-bar button{border:none;border-radius:12px;padding:9px 16px;background:var(--li-ink,var(--ink));color:#fff;font:inherit;font-size:14px;font-weight:900;cursor:pointer}
+.li-reo{gap:8px!important}
+.li-grip{font-size:20px;opacity:.4;width:20px;text-align:center}
+.li-mv{width:42px;height:42px;flex-shrink:0;border:none;border-radius:12px;background:rgba(255,255,255,.7);font-size:15px;color:var(--li-ink,var(--ink));cursor:pointer}
+.li-mv:disabled{opacity:.25}
+.sh-opt-val{justify-content:space-between}
+.sh-opt-val small{font-size:13px;font-weight:750;opacity:.55}
+.sh-opt:disabled{opacity:.4}
+.sh-opt.sh-on{box-shadow:inset 0 0 0 2px var(--ink)!important}
+.undo-toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:99999;display:flex;align-items:center;gap:14px;max-width:calc(100% - 32px);padding:10px 10px 10px 16px;border-radius:16px;background:rgba(58,44,36,.95);color:#fff;font-size:14px;font-weight:750;box-shadow:0 10px 26px rgba(0,0,0,.25);animation:popIn2 .2s ease}
+.undo-toast span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.undo-toast button{border:none;border-radius:11px;padding:9px 14px;background:#f0962e;color:#fff;font:inherit;font-size:14px;font-weight:900;cursor:pointer;flex-shrink:0}
+.undo-toast.out{opacity:0;transition:opacity .3s}
 </style>
 </head>
 <body>
@@ -1432,7 +1463,7 @@ html,body,button,a,label,.cal-day,.cal-card,.dv-wd,.cal-mode,.cal-btn{touch-acti
             onblur="saveAppTitle(this.textContent.trim())"
             onkeydown="if(event.key==='Enter'){event.preventDefault();this.blur()}"
             title="Toca para editar el título">Home</div>
-          <span class="ver-badge">V24</span>
+          <span class="ver-badge">V25</span>
         </div>
         <button class="brand-flip" style="perspective:none; grid-column: 3; align-self: center;" type="button" onclick="openCalc()" title="Calculadora">
           <span class="brand-flip-inner" style="transition: transform 0.1s;">
@@ -7370,6 +7401,199 @@ document.addEventListener('error',e=>{
   img.replaceWith(span);
 },true);
 
+
+// ══════════════════════════════════════════════
+// V25 · LISTAS: deslizar (borrar / editar), estrella, opciones, ordenar, PDF y enviar
+// ══════════════════════════════════════════════
+let LI_REORDER=false,LI_UNDO=null;
+const LI_SORTS={manual:'Como yo las ponga',az:'Alfabético (A-Z)',za:'Alfabético (Z-A)',new:'Lo último añadido primero',old:'Lo primero añadido primero'};
+function liPending(l){
+  const p=(l.items||[]).filter(i=>!i.done);
+  const mode=l.sort||'manual';
+  const cmp={
+    manual:(a,b)=>(a.order||0)-(b.order||0),
+    az:(a,b)=>a.text.localeCompare(b.text,'es',{sensitivity:'base'}),
+    za:(a,b)=>b.text.localeCompare(a.text,'es',{sensitivity:'base'}),
+    new:(a,b)=>(b.added||0)-(a.added||0)||(a.order||0)-(b.order||0),
+    old:(a,b)=>(a.added||0)-(b.added||0)||(b.order||0)-(a.order||0),
+  }[mode]||((a,b)=>(a.order||0)-(b.order||0));
+  // las que tienen ⭐ siempre las primeras
+  return p.sort((a,b)=>(b.star?1:0)-(a.star?1:0)||cmp(a,b));
+}
+function renderListDetail(focus){
+  const l=curList();if(!l){CUR_LIST=null;return renderLists();}
+  const scr=document.getElementById('s-lists');
+  scr.style.background=l.bg;document.body.style.background=l.bg;scr.style.setProperty('--li-bg',l.bg);
+  scr.style.setProperty('--li-ink',l.ink);scr.style.setProperty('--li-card',l.card);
+  const head=document.getElementById('ls-head');head.classList.remove('hl-center');
+  head.innerHTML=`<button class="hl-back" onclick="LI_REORDER=false;CUR_LIST=null;renderLists()">‹ Listas</button><div class="hl-title li-title">${esc(l.name)}</div><button class="li-opts" onclick="openListOptions()" aria-label="Opciones de la lista">⋯</button>`;
+  const pend=liPending(l);
+  const done=(l.items||[]).filter(i=>i.done).sort((a,b)=>(a.doneAt||0)-(b.doneAt||0));
+  const row=(i,idx,arr)=>LI_REORDER&&!i.done?`<div class="li-row li-reo" id="li-${i.id}">
+      <span class="li-grip">≡</span><div class="li-txt">${esc(i.text)}</div>
+      <button class="li-mv" onclick="liMove('${i.id}',-1)" ${idx===0||!!arr[idx-1].star!==!!i.star?'disabled':''} aria-label="Subir">▲</button>
+      <button class="li-mv" onclick="liMove('${i.id}',1)" ${idx===arr.length-1||!!arr[idx+1].star!==!!i.star?'disabled':''} aria-label="Bajar">▼</button></div>`
+    :`<div class="li-sw" id="sw-${i.id}" data-id="${i.id}">
+      <div class="li-act li-act-ed">✏️ Editar</div><div class="li-act li-act-del">Eliminar 🗑️</div>
+      <div class="li-row ${i.done?'done':''} ${i.star&&!i.done?'starred':''}" id="li-${i.id}">
+        <button class="li-chk" onclick="toggleListItem('${i.id}')" aria-label="${i.done?'Desmarcar':'Marcar'}">${i.done?'✓':''}</button>
+        <div class="li-txt">${esc(i.text)}</div>
+        ${i.done?'':`<button class="li-star ${i.star?'on':''}" onclick="toggleListStar('${i.id}')" aria-label="${i.star?'Quitar estrella':'Poner el primero'}">${i.star?'★':'☆'}</button>`}
+      </div></div>`;
+  let h=`<div class="ls-wrap li-wrap">`;
+  if(LI_REORDER){
+    h+=`<div class="li-reo-bar"><span>Mueve los puntos con ▲ ▼</span><button onclick="LI_REORDER=false;renderListDetail()">Hecho</button></div>`;
+  }else{
+    h+=`<div class="li-add li-add-top"><input id="li-inp" placeholder="Añadir a ${esc(l.name).replace(/"/g,'&quot;')}…" enterkeyhint="done" autocomplete="off" onkeydown="if(event.key==='Enter')addListItem()"><button onclick="addListItem()" aria-label="Añadir">＋</button></div>`;
+    if(pend.length&&!lsGet('home_li_hint'))h+=`<div class="li-hint"><span>👉 Desliza un punto a la <b>izquierda</b> para eliminarlo y a la <b>derecha</b> para editarlo. La ☆ lo pone el primero.</span><button onclick="lsSet('home_li_hint','1');this.parentElement.remove()">Entendido</button></div>`;
+  }
+  h+=pend.map(row).join('');
+  if(!pend.length&&!done.length)h+=`<div class="li-empty">La lista está vacía.<br>Escribe arriba lo que quieras añadir.</div>`;
+  else if(!pend.length)h+=`<div class="li-empty">¡Todo hecho! 🎉</div>`;
+  if(done.length&&!LI_REORDER)h+=`<div class="li-sec"><span>Tachados (${done.length})</span><button onclick="clearDoneItems()">Borrar tachados</button></div>`+done.map(row).join('');
+  h+=`</div>`;
+  document.getElementById('ls-main').innerHTML=h;
+  document.getElementById('ls-bottom').innerHTML='';
+  initListSwipes();
+  if(focus)setTimeout(()=>{document.getElementById('ls-main').scrollTop=0;document.getElementById('li-inp')?.focus({preventScroll:true});},30);
+}
+function addListItem(){
+  const inp=document.getElementById('li-inp');const t=(inp?.value||'').trim();if(!t)return;
+  const l=curList();if(!l)return;l.items=l.items||[];
+  const orders=l.items.filter(i=>!i.done).map(i=>i.order||0);
+  l.items.push({id:gid(),text:t,done:false,added:Date.now(),order:orders.length?Math.min(...orders)-1:0});
+  saveLists();renderListDetail(true);
+}
+function toggleListStar(id){
+  const l=curList();const it=l?.items?.find(i=>i.id===id);if(!it)return;
+  it.star=!it.star;saveLists();renderListDetail();
+  if(it.star)showToast('⭐ '+it.text+' va el primero');
+}
+// ── Deslizar: izquierda = eliminar (rojo) · derecha = editar (naranja) ──
+function initListSwipes(){
+  document.querySelectorAll('#ls-main .li-sw').forEach(sw=>{
+    const row=sw.querySelector('.li-row');const id=sw.dataset.id;
+    let D=null;
+    row.addEventListener('pointerdown',e=>{if(e.target.closest('button'))return;D={x:e.clientX,y:e.clientY,id:e.pointerId,on:false,dx:0};});
+    row.addEventListener('pointermove',e=>{
+      if(!D||e.pointerId!==D.id)return;const dx=e.clientX-D.x,dy=e.clientY-D.y;
+      if(!D.on){if(Math.abs(dx)<8)return;if(Math.abs(dy)>Math.abs(dx)){D=null;return;}D.on=true;try{row.setPointerCapture(e.pointerId);}catch(_){}row.style.transition='none';}
+      D.dx=dx;row.style.transform=`translateX(${dx}px)`;
+      sw.classList.toggle('show-del',dx<0);sw.classList.toggle('show-ed',dx>0);
+      sw.classList.toggle('arm',Math.abs(dx)>Math.min(110,sw.clientWidth*0.3));
+    });
+    const end=()=>{
+      if(!D)return;const d=D;D=null;if(!d.on)return;
+      const W=sw.clientWidth,lim=Math.min(110,W*0.3);
+      row.style.transition='transform .22s ease';
+      if(d.dx<-lim){row.style.transform=`translateX(${-W}px)`;sw.classList.add('gone');setTimeout(()=>delListItem(id),220);}
+      else if(d.dx>lim){row.style.transform='translateX(0)';setTimeout(()=>{sw.classList.remove('show-ed','arm');renameListItem(id);},180);}
+      else{row.style.transform='translateX(0)';setTimeout(()=>sw.classList.remove('show-del','show-ed','arm'),220);}
+    };
+    row.addEventListener('pointerup',end);row.addEventListener('pointercancel',end);
+  });
+}
+// Eliminar con opción de deshacer
+function delListItem(id){
+  const l=curList();if(!l)return;
+  const idx=l.items.findIndex(i=>i.id===id);if(idx<0)return;
+  const it=l.items[idx];l.items.splice(idx,1);saveLists();renderListDetail();
+  LI_UNDO={list:l.id,item:it,idx};
+  undoToast('Eliminado: '+it.text,()=>{const L=LISTS.find(x=>x.id===LI_UNDO?.list);if(!L||!LI_UNDO)return;L.items.splice(Math.min(LI_UNDO.idx,L.items.length),0,LI_UNDO.item);LI_UNDO=null;saveLists();if(CUR_LIST===L.id)renderListDetail();});
+}
+function undoToast(msg,onUndo){
+  document.getElementById('undo-toast')?.remove();
+  const t=document.createElement('div');t.id='undo-toast';t.className='undo-toast';
+  t.innerHTML=`<span>${esc(msg)}</span><button>Deshacer</button>`;
+  t.querySelector('button').onclick=()=>{t.remove();onUndo();};
+  document.body.appendChild(t);
+  setTimeout(()=>{if(t.isConnected){t.classList.add('out');setTimeout(()=>t.remove(),300);}},4500);
+}
+// ── Reordenar con ▲ ▼ ──
+function liMove(id,d){
+  const l=curList();if(!l)return;
+  const pend=liPending(l);const i=pend.findIndex(x=>x.id===id),j=i+d;if(i<0||j<0||j>=pend.length)return;
+  if(!!pend[j].star!==!!pend[i].star){showToast('Las de ⭐ van siempre arriba');return;}
+  [pend[i],pend[j]]=[pend[j],pend[i]];
+  pend.forEach((it,k)=>{it.order=k;});
+  l.sort='manual';saveLists();renderListDetail();
+}
+// ── Opciones de la lista ──
+function openListOptions(){
+  const l=curList();if(!l)return;
+  const doneN=(l.items||[]).filter(i=>i.done).length;
+  openSheet('Opciones de lista',`
+    <button class="sh-opt" onclick="closeSheet();renameList()">✏️ Cambiar el nombre</button>
+    <button class="sh-opt sh-opt-val" onclick="openListSort()"><span>⇅ Ordenar</span><small>${LI_SORTS[l.sort||'manual']}</small></button>
+    <button class="sh-opt" onclick="closeSheet();LI_REORDER=true;renderListDetail()">↕️ Reordenar los puntos</button>
+    <button class="sh-opt" onclick="closeSheet();openListEditor('${l.id}')">🎨 Cambiar tema y fondo</button>
+    <button class="sh-opt" onclick="closeSheet();listPdf(false)">🖨️ Imprimir esta lista</button>
+    <button class="sh-opt" onclick="closeSheet();listPdf(true)">📄 Hacer PDF para guardar o enviar</button>
+    <button class="sh-opt" onclick="closeSheet();shareListText()">📤 Enviar una copia (texto)</button>
+    <button class="sh-opt" ${doneN?'':'disabled'} onclick="closeSheet();clearDoneItems()">🧹 Borrar los completados${doneN?` (${doneN})`:''}</button>
+    <button class="sh-opt" onclick="closeSheet();openListEditor(null)">＋ Nueva lista</button>
+    <button class="sh-opt danger" onclick="closeSheet();askDelList('${l.id}')">🗑️ Borrar esta lista</button>
+    <button class="sh-btn main" onclick="closeSheet()">Listo</button>`);
+}
+function openListSort(){
+  const l=curList();if(!l)return;const cur=l.sort||'manual';
+  openSheet('Ordenar la lista',`<div class="sh-hint">Las que tienen ⭐ van siempre las primeras.</div>${Object.entries(LI_SORTS).map(([k,v])=>`<button class="sh-opt ${k===cur?'sh-on':''}" onclick="liSetSort('${k}')">${k===cur?'✓ ':''}${v}</button>`).join('')}<button class="sh-btn" onclick="openListOptions()">‹ Volver</button>`);
+}
+function liSetSort(k){const l=curList();if(!l)return;l.sort=k;saveLists();renderListDetail();openListOptions();}
+function renameList(){
+  const l=curList();if(!l)return;
+  openSheet('Cambiar el nombre',`<input class="sh-input" id="ln-ren" value="${esc(l.name).replace(/"/g,'&quot;')}" enterkeyhint="done" onkeydown="if(event.key==='Enter')saveListName()">
+    <div class="sh-row"><button class="sh-btn" onclick="closeSheet()">Cancelar</button><button class="sh-btn main" onclick="saveListName()">Guardar</button></div>`);
+  setTimeout(()=>{const i=document.getElementById('ln-ren');if(i){i.focus();i.select();}},80);
+}
+function saveListName(){const v=(document.getElementById('ln-ren')?.value||'').trim();if(!v)return;const l=curList();if(l){l.name=v;saveLists();}closeSheet();renderListDetail();}
+function listAsText(l){
+  const pend=liPending(l),done=(l.items||[]).filter(i=>i.done);
+  return `${l.name}\n\n`+pend.map(i=>`☐ ${i.star?'⭐ ':''}${i.text}`).join('\n')+(done.length?`\n\nHecho:\n`+done.map(i=>`☑ ${i.text}`).join('\n'):'');
+}
+async function shareListText(){
+  const l=curList();if(!l)return;const text=listAsText(l);
+  try{if(navigator.share){await navigator.share({title:l.name,text});return;}}catch(e){if(e&&e.name==='AbortError')return;}
+  try{await navigator.clipboard.writeText(text);showToast('Lista copiada: pégala donde quieras');}catch(e){showToast('No se ha podido compartir');}
+}
+// ── PDF de la lista ──
+function listPdfStage(l){
+  const pend=liPending(l),done=(l.items||[]).filter(i=>i.done);
+  const st=document.createElement('div');
+  Object.assign(st.style,{position:'absolute',left:'-10000px',top:'0',width:'794px',minHeight:'1123px',padding:'46px 52px',background:`linear-gradient(180deg,#ffffff,${l.bg})`,color:l.ink,fontFamily:'Arial, Helvetica, sans-serif'});
+  const item=(i,isDone)=>`<div style="display:flex;align-items:center;gap:16px;padding:13px 16px;margin-bottom:9px;border-radius:14px;background:${isDone?'rgba(255,255,255,.55)':l.card}">
+      <div style="width:26px;height:26px;border-radius:8px;border:3px solid ${l.ink};${isDone?`background:${l.ink};`:''}flex-shrink:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:17px;font-weight:900">${isDone?'✓':''}</div>
+      <div style="flex:1;font-size:19px;font-weight:700;${isDone?'text-decoration:line-through;opacity:.5;':''}">${esc(i.text)}</div>
+      ${i.star&&!isDone?'<div style="font-size:20px">⭐</div>':''}</div>`;
+  st.innerHTML=`
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:20px;padding-bottom:18px;border-bottom:4px solid ${l.ink}">
+      <div style="display:flex;align-items:center;gap:16px"><img src="icono_listas.png" style="width:66px;height:66px;border-radius:15px">
+        <div><div style="font-size:32px;font-weight:900;line-height:1.1">${esc(l.name)}</div>
+        <div style="margin-top:6px;font-size:14px;font-weight:700;opacity:.7">${new Date().toLocaleDateString('es-ES',{weekday:'long',day:'numeric',month:'long',year:'numeric'})} · ${pend.length} por hacer${done.length?` · ${done.length} hecho${done.length>1?'s':''}`:''}</div></div></div>
+      <div style="display:flex;align-items:center;gap:10px"><img src="${PDF_SEARCH_LOGO}" style="width:54px;height:54px;border-radius:13px;object-fit:cover"><img src="${PDF_SEARCH_SIGNATURE}" style="width:92px;height:44px;object-fit:contain;background:#fff;border-radius:10px;padding:4px"></div>
+    </div>
+    <div style="margin-top:24px">${pend.map(i=>item(i,false)).join('')||'<div style="font-size:17px;opacity:.6">No queda nada por hacer.</div>'}</div>
+    ${done.length?`<div style="margin:26px 0 10px;font-size:15px;font-weight:900;opacity:.7">HECHO</div>${done.map(i=>item(i,true)).join('')}`:''}
+    <div style="margin-top:30px;text-align:center;font-size:11px;font-weight:700;opacity:.5">HOME · Listas</div>`;
+  return st;
+}
+async function listPdf(forSend){
+  const l=curList();if(!l)return;let stage=null;
+  showToast('Creando PDF…');
+  try{
+    await ensurePdfLibraries();stage=listPdfStage(l);document.body.appendChild(stage);
+    await new Promise(requestAnimationFrame);await waitForPdfImages(stage);
+    const canvas=await html2canvas(stage,{useCORS:true,scale:2,backgroundColor:'#ffffff'});
+    const {jsPDF}=window.jspdf;const pdf=new jsPDF('p','mm','a4');addCanvasPages(pdf,canvas,.9);
+    const blob=pdf.output('blob'),name=pdfSafeName('lista-'+l.name)+'.pdf';
+    if(forSend&&navigator.canShare){
+      try{const file=new File([blob],name,{type:'application/pdf'});if(navigator.canShare({files:[file]})){await navigator.share({files:[file],title:l.name});return;}}catch(e){if(e&&e.name==='AbortError')return;}
+    }
+    showPdfReady(URL.createObjectURL(blob),name);
+  }catch(e){logAppError('No he podido crear el PDF de la lista.',e);}
+  finally{if(stage)stage.remove();}
+}
+
 init().catch(err=>{
   bootStep('debug-start',false,'error');
   bootStep('debug-ui',false,'error');
@@ -7406,7 +7630,7 @@ if ('serviceWorker' in navigator) {
 </div>
 
 <div class="app-footer" onclick="openCopyright(event)">
-  <span class="ft-copy">© 2025–Present Elisabeth Altarriba</span><span class="ft-ver">V24</span>
+  <span class="ft-copy">© 2025–Present Elisabeth Altarriba</span><span class="ft-ver">V25</span>
 </div>
 
 <script>
