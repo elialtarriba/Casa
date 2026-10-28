@@ -1432,6 +1432,22 @@ html,body,button,a,label,.cal-day,.cal-card,.dv-wd,.cal-mode,.cal-btn{touch-acti
 .undo-toast span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .undo-toast button{border:none;border-radius:11px;padding:9px 14px;background:#f0962e;color:#fff;font:inherit;font-size:14px;font-weight:900;cursor:pointer;flex-shrink:0}
 .undo-toast.out{opacity:0;transition:opacity .3s}
+
+/* ══════════ V26 · temas de listas ══════════ */
+.lt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.lt-card{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:7px;min-height:96px;padding:10px 6px 9px;border:2px solid rgba(0,0,0,.06);border-radius:16px;font:inherit;cursor:pointer;background-size:cover;background-position:center;box-shadow:0 2px 8px rgba(60,40,30,.07)}
+.lt-card b{font-size:12.5px;font-weight:900;line-height:1.15;text-align:center}
+.lt-card.on{border-color:var(--ink);box-shadow:0 0 0 2px var(--ink)}
+.lt-prev{display:flex;flex-direction:column;gap:4px;width:70%}
+.lt-prev i{display:block;height:12px;border-radius:5px}
+.lt-prev i:first-child{border-left:4px solid}
+.lt-photo{background:linear-gradient(135deg,#fff,#f1e6da);color:#4a3426}
+.lt-photo .lt-prev{font-size:30px;width:auto}
+.lt-photo[style*="url"] b{background:rgba(255,255,255,.88);padding:3px 7px;border-radius:8px}
+.ls-pic-ph{color:#fff!important;text-shadow:0 1px 4px rgba(0,0,0,.6)}
+.li-has-photo .li-add-top{background:transparent!important}
+.li-has-photo .li-sec,.li-has-photo .li-empty,.li-has-photo .li-hint{background:rgba(255,255,255,.82);border-radius:14px;padding:8px 12px}
+.li-has-photo .li-sw{box-shadow:0 3px 12px rgba(0,0,0,.14)}
 </style>
 </head>
 <body>
@@ -1463,7 +1479,7 @@ html,body,button,a,label,.cal-day,.cal-card,.dv-wd,.cal-mode,.cal-btn{touch-acti
             onblur="saveAppTitle(this.textContent.trim())"
             onkeydown="if(event.key==='Enter'){event.preventDefault();this.blur()}"
             title="Toca para editar el título">Home</div>
-          <span class="ver-badge">V25</span>
+          <span class="ver-badge">V26</span>
         </div>
         <button class="brand-flip" style="perspective:none; grid-column: 3; align-self: center;" type="button" onclick="openCalc()" title="Calculadora">
           <span class="brand-flip-inner" style="transition: transform 0.1s;">
@@ -3116,12 +3132,12 @@ function listCounts(l){const d=(l.items||[]).filter(i=>i.done).length;return {do
 function renderLists(){
   const scr=document.getElementById('s-lists');
   if(CUR_LIST){return renderListDetail();}
-  scr.style.background='';scr.style.removeProperty('--li-ink');
+  scr.style.background='';scr.classList.remove('li-has-photo');scr.style.removeProperty('--li-ink');
   document.body.style.background=UI.bg;
   document.getElementById('ls-head').innerHTML=`<img class="hl-ic" src="icono_listas.png" alt=""><div class="hl-title">Mis listas</div>`;document.getElementById('ls-head').classList.add('hl-center');
   const cards=LISTS.map(l=>{const c=listCounts(l);
     return `<div class="hl-card ls-card" style="--hc-bg:${l.card};--hc-ink:${l.ink}" onclick="openList('${l.id}')">
-      <div class="hl-pic ls-pic" style="background:${l.bg};color:${l.ink}">${c.pending?c.pending:'✓'}</div>
+      <div class="hl-pic ls-pic ${listPhoto(l)?'ls-pic-ph':''}" style="background:${listPhoto(l)?`url('${listPhoto(l)}') center/cover`:l.bg};color:${l.ink}">${c.pending?c.pending:'✓'}</div>
       <div class="hl-txt"><div class="hl-name">${esc(l.name)}</div><div class="hl-meta">${c.pending?`${c.pending} por hacer`:'Todo hecho'}${c.done?` · ${c.done} tachado${c.done>1?'s':''}`:''}</div></div>
       <button class="hp-more" style="color:${l.ink}" onclick="event.stopPropagation();openListMenu('${l.id}')" aria-label="Opciones">⋯</button>
     </div>`;}).join('');
@@ -3133,7 +3149,7 @@ function curList(){return LISTS.find(l=>l.id===CUR_LIST);}
 function renderListDetail(focus){
   const l=curList();if(!l){CUR_LIST=null;return renderLists();}
   const scr=document.getElementById('s-lists');
-  scr.style.background=l.bg;document.body.style.background=l.bg;scr.style.setProperty('--li-bg',l.bg);
+  listApplyBg(l,scr);scr.style.setProperty('--li-bg',l.bg);
   scr.style.setProperty('--li-ink',l.ink);scr.style.setProperty('--li-card',l.card);
   document.getElementById('ls-head').classList.remove('hl-center');
   document.getElementById('ls-head').innerHTML=`<button class="hl-back" onclick="CUR_LIST=null;renderLists()">‹ Listas</button><div class="hl-title li-title">${esc(l.name)}</div><button class="hp-edit li-edit" onclick="openListEditor('${l.id}')" aria-label="Editar lista">✏️</button>`;
@@ -7423,7 +7439,7 @@ function liPending(l){
 function renderListDetail(focus){
   const l=curList();if(!l){CUR_LIST=null;return renderLists();}
   const scr=document.getElementById('s-lists');
-  scr.style.background=l.bg;document.body.style.background=l.bg;scr.style.setProperty('--li-bg',l.bg);
+  listApplyBg(l,scr);scr.style.setProperty('--li-bg',l.bg);
   scr.style.setProperty('--li-ink',l.ink);scr.style.setProperty('--li-card',l.card);
   const head=document.getElementById('ls-head');head.classList.remove('hl-center');
   head.innerHTML=`<button class="hl-back" onclick="LI_REORDER=false;CUR_LIST=null;renderLists()">‹ Listas</button><div class="hl-title li-title">${esc(l.name)}</div><button class="li-opts" onclick="openListOptions()" aria-label="Opciones de la lista">⋯</button>`;
@@ -7594,6 +7610,108 @@ async function listPdf(forSend){
   finally{if(stage)stage.remove();}
 }
 
+
+// ══════════════════════════════════════════════
+// V26 · LISTAS: más temas de color y tema con una foto propia de fondo
+// ══════════════════════════════════════════════
+LIST_THEMES.splice(0,LIST_THEMES.length,
+  {name:'Rosa',card:'#f6d3de',bg:'#fdf0f4',ink:'#6b2f45'},
+  {name:'Rosa chicle',card:'#f9c4d8',bg:'#fff1f6',ink:'#7a2148'},
+  {name:'Amarillo',card:'#f9e8a8',bg:'#fffbe8',ink:'#5a4a1e'},
+  {name:'Miel',card:'#f5dc8c',bg:'#fdf6e0',ink:'#5a4214'},
+  {name:'Azul',card:'#c4dcef',bg:'#eef5fb',ink:'#2f3a4a'},
+  {name:'Azul cielo',card:'#cfe8f7',bg:'#f2f9fe',ink:'#24506b'},
+  {name:'Naranja',card:'#f8c9a6',bg:'#fdf0e6',ink:'#6b3f22'},
+  {name:'Melocotón',card:'#fbd9c4',bg:'#fff4ec',ink:'#7a4430'},
+  {name:'Marrón claro',card:'#e2cbb3',bg:'#f7efe6',ink:'#4a3426'},
+  {name:'Café con leche',card:'#d9bfa3',bg:'#f2e6d8',ink:'#3b2a1e'},
+  {name:'Verde menta',card:'#cfe9dc',bg:'#f0f8f4',ink:'#2f4a3d'},
+  {name:'Verde salvia',card:'#c9dfc0',bg:'#eef5e6',ink:'#2f4a2a'},
+  {name:'Turquesa',card:'#bfe6e2',bg:'#eefaf8',ink:'#1f4f4b'},
+  {name:'Lila',card:'#e1daf5',bg:'#f5f2fc',ink:'#4a3f57'},
+  {name:'Lavanda',card:'#d9d0f0',bg:'#f3f0fb',ink:'#3e3370'},
+  {name:'Rojo coral',card:'#f6c1b8',bg:'#fff1ee',ink:'#7a2a1f'},
+  {name:'Gris perla',card:'#e3e1e6',bg:'#f6f5f7',ink:'#3a3940'},
+  {name:'Tonos del logo',card:'#e8c9a3',bg:'#fcf3cf',ink:'#5a3e2b'}
+);
+const listPhotoKey=id=>'ph_listbg_'+id;
+function listPhoto(l){return l&&l.hasPhoto?lsGet(listPhotoKey(l.id)):null;}
+function listApplyBg(l,scr){
+  const ph=listPhoto(l);
+  if(ph){
+    scr.style.background=`linear-gradient(${l.bg}55,${l.bg}88), url("${ph}") center/cover no-repeat fixed`;
+    scr.classList.add('li-has-photo');
+  }else{scr.style.background=l.bg;scr.classList.remove('li-has-photo');}
+  document.body.style.background=l.bg;
+}
+function openListEditor(id){
+  const l=id?LISTS.find(x=>x.id===id):null;
+  const t=LIST_THEMES.find(x=>x.name==='Marrón claro')||LIST_THEMES[0];
+  LE={id:id||null,name:l?.name||'',card:l?.card||t.card,bg:l?.bg||t.bg,ink:l?.ink||t.ink,photo:listPhoto(l),photoChanged:false};
+  renderListEditor(true);
+}
+function listThemeName(){
+  if(LE.photo)return 'Mi foto';
+  const t=LIST_THEMES.find(t=>t.card===LE.card&&t.bg===LE.bg&&t.ink===LE.ink);return t?t.name:'A tu gusto';
+}
+function renderListEditor(focus){
+  if(!LE)return;
+  DD_RERENDER=()=>{const n=document.getElementById('le-name');if(n&&LE)LE.name=n.value;renderListEditor(false);};
+  const n=document.getElementById('le-name');if(n)LE.name=n.value;
+  const chip=LE.photo?`<i class="st-chip" style="background:url('${LE.photo}') center/cover"></i>`:`<span class="st-chip st-chip-multi"><i style="background:${LE.card}"></i><i style="background:${LE.bg}"></i><i style="background:${LE.ink}"></i></span>`;
+  openSheet(LE.id?'Editar lista':'Nueva lista',`
+    <input class="sh-input" id="le-name" value="${esc(LE.name).replace(/"/g,'&quot;')}" placeholder="Ej.: Compra, Tareas, Regalos…" oninput="LE.name=this.value" enterkeyhint="done" autocomplete="off" onkeydown="if(event.key==='Enter')saveListEditor()">
+    <button class="st-line" onclick="openListThemes()">${chip}<span class="st-line-txt"><b>Tema</b><small>${listThemeName()}</small></span><span class="st-chev">›</span></button>
+    ${ddHtml('l-card','Color de la lista',LE.card,uiGroupsDD(UI_GROUPS),v=>{LE.card=v;},{custom:true})}
+    ${ddHtml('l-bg','Color del fondo',LE.bg,uiGroupsDD(UI_GROUPS),v=>{LE.bg=v;},{custom:true})}
+    ${ddHtml('l-ink','Color de la letra',LE.ink,uiGroupsDD(UI_INK_GROUPS),v=>{LE.ink=v;},{custom:true})}
+    <div class="sh-row"><button class="sh-btn" onclick="LE=null;closeSheet()">Cancelar</button><button class="sh-btn main" onclick="saveListEditor()">${LE.id?'Guardar':'Crear'}</button></div>`);
+  if(focus&&!LE.id)setTimeout(()=>document.getElementById('le-name')?.focus(),150);
+}
+function openListThemes(){
+  const n=document.getElementById('le-name');if(n)LE.name=n.value;
+  const on=t=>!LE.photo&&t.card===LE.card&&t.bg===LE.bg&&t.ink===LE.ink;
+  const photoCard=`<button class="lt-card lt-photo ${LE.photo?'on':''}" onclick="pickListPhoto()" style="${LE.photo?`background-image:url('${LE.photo}')`:''}">
+      <span class="lt-prev">${LE.photo?'':'📷'}</span><b>${LE.photo?'Mi foto · cambiar':'Mi foto'}</b></button>`;
+  const cards=LIST_THEMES.map((t,i)=>`<button class="lt-card ${on(t)?'on':''}" onclick="LE.photo=null;LE.photoChanged=true;LE.card='${t.card}';LE.bg='${t.bg}';LE.ink='${t.ink}';renderListEditor(false)" style="background:${t.bg};color:${t.ink}">
+      <span class="lt-prev"><i style="background:${t.card};border-color:${t.ink}"></i><i style="background:${t.card}"></i></span><b>${t.name}</b></button>`).join('');
+  openSheet('Elige un tema',`<div class="lt-grid">${photoCard}${cards}</div>
+    ${LE.photo?`<button class="sh-opt danger" onclick="LE.photo=null;LE.photoChanged=true;openListThemes()">🚫 Quitar mi foto</button>`:''}
+    <div class="sh-hint">Con «Mi foto» la foto queda de fondo y los puntos se ven encima con el color de la lista.</div>
+    <button class="sh-btn" onclick="renderListEditor(false)">‹ Volver</button>`);
+}
+async function pickListPhoto(){
+  const n=document.getElementById('le-name');if(n)LE.name=n.value;
+  const r=await tkPick(false);if(!r||!LE)return;
+  try{
+    // foto de fondo más ligera (1200 px)
+    LE.photo=await new Promise((res,rej)=>{const img=new Image();img.onload=()=>{const s=Math.min(1,1200/Math.max(img.width,img.height));const c=document.createElement('canvas');c.width=Math.round(img.width*s);c.height=Math.round(img.height*s);c.getContext('2d').drawImage(img,0,0,c.width,c.height);res(c.toDataURL('image/jpeg',.7));};img.onerror=rej;img.src=r.full;});
+    LE.photoChanged=true;
+    // con foto, tarjetas claras y letra oscura para que se lea bien
+    if(!LIST_THEMES.some(t=>t.card===LE.card&&t.ink===LE.ink)){LE.card='#ffffff';LE.ink='#3b2a1e';}
+    renderListEditor(false);showToast('Foto puesta de fondo');
+  }catch(e){showToast('No se ha podido usar esta foto');}
+}
+function saveListEditor(){
+  if(!LE)return;
+  const name=(document.getElementById('le-name')?.value||LE.name||'').trim();
+  if(!name){document.getElementById('le-name')?.focus();showToast('Escribe un nombre');return;}
+  let l;
+  if(LE.id){l=LISTS.find(x=>x.id===LE.id);if(l){l.name=name;l.card=LE.card;l.bg=LE.bg;l.ink=LE.ink;}}
+  else{l={id:gid(),name,card:LE.card,bg:LE.bg,ink:LE.ink,items:[]};LISTS.push(l);}
+  if(l&&LE.photoChanged){
+    if(LE.photo){try{lsSet(listPhotoKey(l.id),LE.photo);l.hasPhoto=true;}catch(e){showToast('La foto es demasiado grande para guardarla');l.hasPhoto=false;}}
+    else{lsRemove(listPhotoKey(l.id));l.hasPhoto=false;}
+  }
+  const wasNew=!LE.id;LE=null;closeSheet();saveLists();
+  if(wasNew){CUR_LIST=l.id;renderListDetail(true);showToast('Lista creada: '+name);}
+  else if(CUR_LIST===l.id)renderListDetail();else renderLists();
+}
+function askDelList(id){
+  const l=LISTS.find(x=>x.id===id);if(!l)return;
+  showConf('Borrar lista',`¿Borrar la lista "${l.name}" con todo lo que tiene?`,()=>{lsRemove(listPhotoKey(id));LISTS=LISTS.filter(x=>x.id!==id);if(CUR_LIST===id)CUR_LIST=null;saveLists();renderLists();});
+}
+
 init().catch(err=>{
   bootStep('debug-start',false,'error');
   bootStep('debug-ui',false,'error');
@@ -7630,7 +7748,7 @@ if ('serviceWorker' in navigator) {
 </div>
 
 <div class="app-footer" onclick="openCopyright(event)">
-  <span class="ft-copy">© 2025–Present Elisabeth Altarriba</span><span class="ft-ver">V25</span>
+  <span class="ft-copy">© 2025–Present Elisabeth Altarriba</span><span class="ft-ver">V26</span>
 </div>
 
 <script>
